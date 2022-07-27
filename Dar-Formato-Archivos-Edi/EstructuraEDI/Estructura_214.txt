@@ -1,0 +1,676 @@
+﻿DECLARE
+					@psEstatusEdi VARCHAR(10) = '@EventoReplace', 
+					@pnClienteEdiConfiguracionId INT = @ClienteEdiConfiguracionIdReplace, 
+					@pdLatitud DECIMAL(18,8) = @LatitudReplace, 
+					@pdLongitud DECIMAL(18,8) = @LongitudReplace, 
+					@pnClienteEdiPedidoId INT = @ClienteEdiPedidoIdReplace, 
+					@pnFechaEvento DateTime = '@FechaEventoReplace'
+
+				DECLARE 
+						@CodeStatusEdi VARCHAR(100) = @psEstatusEdi,
+						@CodeEdiCliente VARCHAR(100) = 'HGT9312179LA', -- Se cambio el valor del CARRIER ID encontrado en el segmento GS del 204
+						@FechaProcesa VARCHAR(8)= '', 
+						@HoraProcesa VARCHAR(5)= '', 
+						@ambiente char(1)= '',
+
+						@sShipment VARCHAR(100) = '', 
+						@SCAC VARCHAR(15) = '',
+
+						@ll_id_pedido int,
+						@ll_Consecutivo int,
+						@ls_Consecutivo varchar(15),
+
+						@ls_ISA_Qualifier varchar(2),
+						@ls_SeparadorSegmento varchar(1),
+						@ls_SeparadorElemento varchar(1),
+
+						@ls_Equipo varchar(10),
+
+						@ls_FinSegAd varchar(10),
+
+						@ls_RFC varchar(15),
+
+						@ls_ISA5 varchar(3),
+						@ls_ISA6 varchar(25),
+						@ls_ISA7 varchar(3),
+						@ls_ISA8 varchar(25),
+
+						@ls_L1101_01 varchar(3) = '01',
+						@ls_L1101_02 varchar(3) = '',
+
+						@ls_MS1_01 varchar(30) = '';
+
+
+	
+					-- ClienteEdiConfiguracionConsecutivo: Numero consecutivo que estara enviando en el archivo edi
+					SELECT  @ll_Consecutivo = Consecutivo + 1, 
+							@ls_Consecutivo = Right(Formato + Convert( Varchar(15),consecutivo + 1 ),LEN(Formato))
+					FROM ClienteEdiConfiguracionConsecutivo WITH (NOLOCK)
+					WHERE ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId and Isa = '214'
+
+					-- ClienteEdiPedidoHG: Se relacionan los pedidos
+					SELECT @ll_id_pedido = ISNULL(id_pedido, 12345)
+					FROM ClienteEdiPedidoHG WITH (NOLOCK)
+					WHERE ClienteEdiPedidoId = @pnClienteEdiPedidoId
+
+					SET @ll_id_pedido = ISNULL(@ll_id_pedido,12345)
+
+					-- ClienteEdiPedido
+					SELECT	@sShipment	= cep.Shipment,
+							@SCAC		= cep.CodeSCAC,
+							@ls_ISA_Qualifier = '01',
+							@ls_Equipo = cep.Equipo
+					FROM	clienteEdiPedido cep WITH(NOLOCK)
+					WHERE	cep.ClienteEdiPedidoId = @pnClienteEdiPedidoId
+	
+					-- ClienteEdiConfiguracion
+					SELECT	@SCAC = CodeSCAC,
+							@ls_SeparadorSegmento = Segmento,
+							@ls_SeparadorElemento = Elemento,
+							@ambiente = CASE WHEN EsCompilarEnProduccion = 1 THEN 'P' ELSE 'T' END, -- Se envia letra que representa el ambiente en el que se esta generando el edi 'P' (Produccion) y 'T' (Test)
+							@ls_RFC = RFC,
+							@ls_ISA5 = ISA5,
+							@ls_ISA6 = ISA6,
+							@ls_ISA7 = ISA7,
+							@ls_ISA8 = ISA8
+					FROM	ClienteEdiConfiguracion WITH (NOLOCK) 
+					WHERE	ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+
+					SELECT @FechaProcesa = CONVERT(VARCHAR(8),@pnFechaEvento,112)
+					SELECT @HoraProcesa = substring(CONVERT(VARCHAR(5),@pnFechaEvento,108),1,2) + substring(CONVERT(VARCHAR(5),@pnFechaEvento,108),4,2)
+
+					-- Variables para validar segmentos y el orden
+					DECLARE @li_segmento INT = 0,
+							@li_Orden INT = 0
+	
+					DECLARE @tbl_edi214 TABLE(id INT IDENTITY(1,1), texto varchar(255), Orden INT, Grupo DECIMAL(18,2))
+
+
+					-- CASO TRANSPLACE --
+					IF (@pnClienteEdiConfiguracionId = 5)
+					BEGIN
+
+							-- Obtener el tipo de servicio
+
+							DECLARE @ls_TipoServ varchar(1) = '';
+
+							Select 
+									@ls_TipoServ = tipo_serv
+							From	ClienteEdiPedidoHG
+							Where	ClienteEdiPedidoid = @pnClienteEdiPedidoId
+
+							select	@ls_MS1_01 = SUBSTRING (dpu.posicion,CHARINDEX(')',dpu.posicion) +1, 20)
+							from	[hgdb_lis].[dbo].desp_posicion_unidad dpu 
+							where	id_pedido = @ll_id_pedido
+									and dpu.posdate = @pnFechaEvento
+				
+			
+							------------------------------------------
+							--SET @ls_TipoServ = 'E'
+							------------------------------------------
+
+							-- Obtener el origen y destino (204)
+
+							DECLARE @ls_Estado_Origen varchar(5) = '',
+									@ls_Estado_Destino varchar(5) = '';
+
+							Select	
+									@ls_Estado_Origen = Estado
+							From	ClienteEdiPedidoDireccion
+							Where	ClienteEdiPedidoId = @pnClienteEdiPedidoId And TipoDireccionId = 1 -- Remitente
+
+							Select	
+									@ls_Estado_Destino = Estado
+							From	ClienteEdiPedidoDireccion
+							Where	ClienteEdiPedidoId = @pnClienteEdiPedidoId And TipoDireccionId = 2 -- Destinatario
+
+							/*=========================== IMPORTACION ===========================*/
+							IF (@ls_TipoServ = 'I')
+							BEGIN
+
+									-- Obtener valor para el L1101_01
+									SELECT 
+										@ls_L1101_01 = CASE
+											WHEN @ls_Estado_Origen = 'TX' THEN 1
+											WHEN @ls_Estado_Origen = 'TM' THEN 2
+											END
+									-- Obtener valor para el L1101_02
+									SELECT 
+										@ls_L1101_02 = CASE
+											WHEN @ls_Estado_Destino = 'TM' THEN 2
+											WHEN @ls_Estado_Destino = 'NL' THEN 99
+											END
+							END
+
+							IF (@ls_TipoServ = 'E' OR @ls_TipoServ = 'C')
+							BEGIN
+
+									-- Obtener valor para el L1101_01
+									SELECT 
+										@ls_L1101_01 = CASE
+											WHEN @ls_Estado_Origen = 'NL' THEN 1
+											WHEN @ls_Estado_Origen = 'TM' THEN 2
+											END
+									-- Obtener valor para el L1101_02
+									SELECT 
+										@ls_L1101_02 = CASE
+											WHEN @ls_Estado_Destino = 'TM' THEN 2
+											WHEN @ls_Estado_Destino = 'TX' THEN 99
+											END
+							END
+
+							-- Para no afectar a los demas clientes que lleguen a utilizar el segmento
+							-- Se envia la parada de origen cuando los eventos son en el punto de recoleccion (Revisar X6)
+							IF (@CodeStatusEdi IN ('X3', 'AF', 'X6') )
+							BEGIN
+								SET @ls_L1101_02 = @ls_L1101_01
+							END
+
+
+					END -- FIN (@pnClienteEdiConfiguracionId = 5)
+
+					--========================================================
+					--	ISA: Encabezado de control de intercambio 
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2 --214
+							AND CA.ClienteEdiSegmentoId = 1 --ISA
+
+					IF (@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'ISA' + @ls_SeparadorElemento + '00' + @ls_SeparadorElemento + 
+								LEFT('' + SPACE(10),10) + @ls_SeparadorElemento + '00' + @ls_SeparadorElemento + 
+								LEFT('' + SPACE(10),10) + @ls_SeparadorElemento + @ls_ISA5 + @ls_SeparadorElemento + 
+								LEFT(@ls_ISA6 + space(15),15) + @ls_SeparadorElemento + @ls_ISA7 + @ls_SeparadorElemento + 
+								LEFT(@ls_ISA8 + SPACE(15),15) + @ls_SeparadorElemento + 
+								--@sShipment + @ls_SeparadorElemento +
+								RIGHT(@FechaProcesa,6) + @ls_SeparadorElemento 
+								+ @HoraProcesa + @ls_SeparadorElemento + 'U' + @ls_SeparadorElemento + '00401' + @ls_SeparadorElemento 
+								+ @ls_Consecutivo + @ls_SeparadorElemento + '0' + @ls_SeparadorElemento
+								+ @ambiente +'' + @ls_SeparadorElemento + @ls_FinSegAd + @ls_SeparadorSegmento
+								, @li_Orden 
+								, 1 --Grupo
+					END
+					--========================================================
+					--	GS: Encabezado de grupo funcional
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 2
+
+					IF (@li_segmento = 1)
+					BEGIN
+	
+						INSERT INTO @tbl_edi214
+						SELECT 'GS' + @ls_SeparadorElemento + 'GF' + @ls_SeparadorElemento + @ls_ISA6 + @ls_SeparadorElemento + RTRIM(LTRIM(@ls_ISA8)) + @ls_SeparadorElemento + @FechaProcesa + @ls_SeparadorElemento + @HoraProcesa + @ls_SeparadorElemento + CONVERT(varchar, @ll_Consecutivo) + @ls_SeparadorElemento + 'X' + @ls_SeparadorElemento + '004010' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 1--Grupo
+				   END
+					--========================================================
+					--ST: Encabezado Conjunto de Transacciones
+					--========================================================
+
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 3
+
+					IF(@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'ST' + @ls_SeparadorElemento + '214' + @ls_SeparadorElemento + @ls_Consecutivo + @ls_SeparadorSegmento
+						, @li_Orden
+						, 1--Grupo
+				   END
+					--========================================================
+					--B10: Segmento inicial para Transportista Mensaje de estado del envío
+				  -- ========================================================
+				  SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 7
+
+					IF(@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'B10' + @ls_SeparadorElemento + CONVERT(VARCHAR, @ll_id_pedido) + @ls_SeparadorElemento + @sShipment + @ls_SeparadorElemento + @SCAC + '' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 1--Grupo
+				   END
+					--========================================================
+					--L11: Instrucciones comerciales y número de referencia
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 8
+
+					IF(@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'L11' + @ls_SeparadorElemento + @sShipment + @ls_SeparadorElemento + 'LO' + @ls_SeparadorSegmento, @li_Orden, 1--Grupo
+					   UNION ALL
+					   SELECT 'L11' + @ls_SeparadorElemento + @ls_L1101_01 + @ls_SeparadorElemento + 'QN' + @ls_SeparadorSegmento, @li_Orden, 1--Grupo
+				  END
+					--========================================================
+					--N1, N3, N4: Nombre, Informacion de Direccion, Localizacion Geografica
+					--========================================================
+
+	
+					--declare @tableSegmentosN table (ClienteEdiPedidoDireccionId int, Segmento varchar(150))
+
+					--insert into @tableSegmentosN
+					--SELECT ClienteEdiPedidoDireccionId, Segmento_N1 from ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId
+					--union all
+					--SELECT ClienteEdiPedidoDireccionId, Segmento_N3 from ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId
+					--union all
+					--SELECT ClienteEdiPedidoDireccionId, Segmento_N4 from ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId
+					--ORDER BY ClienteEdiPedidoDireccionId
+	
+					--INSERT INTO @tbl_edi214
+					--select Segmento, 0 from @tableSegmentosN
+	
+
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 33
+
+					IF(@li_segmento = 1)
+					BEGIN
+						DECLARE @Segmento1 VARCHAR(150),
+								@Segmento3 VARCHAR(150),
+								@Segmento4 VARCHAR(150),
+								@Grupo DECIMAL(18,2) = 2
+
+						DECLARE C_cursor CURSOR
+						FOR SELECT Segmento_N1, Segmento_N3, Segmento_N4 from ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId Order by ClienteEdiPedidoDireccionId
+
+						OPEN C_Cursor;
+
+								FETCH NEXT FROM C_Cursor INTO @Segmento1, @Segmento3, @Segmento4
+
+						WHILE @@FETCH_STATUS = 0
+						BEGIN
+
+							SET @Grupo = @Grupo + 0.1
+
+							INSERT INTO @tbl_edi214
+							SELECT @Segmento1, 6, @Grupo
+							UNION ALL
+							SELECT @Segmento3, 6, @Grupo + 0.01
+							UNION ALL
+							SELECT @Segmento4, 6, @Grupo + 0.02
+
+							FETCH NEXT FROM C_Cursor INTO @Segmento1, @Segmento3, @Segmento4
+						END
+
+						Close C_Cursor
+						DEALLOCATE C_Cursor
+					END
+
+					--========================================================
+					--MS3: Informacion interlinea
+					--========================================================
+
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 15
+
+					IF(@li_segmento = 1)
+					BEGIN
+
+						DECLARE @ls_CityNameMS3 VARCHAR(50)
+						SELECT TOP 1
+									@ls_CityNameMS3 = Ciudad
+						FROM ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId
+
+						INSERT INTO @tbl_edi214
+						SELECT 'MS3' + @ls_SeparadorElemento + @SCAC + @ls_SeparadorElemento + 'B' + @ls_SeparadorElemento + 'M' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 3-- Grupo
+
+				   END
+					--========================================================
+					--LX: Numero Asignado
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 23
+
+					IF(@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'LX' + @ls_SeparadorElemento + '1' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 4--Grupo
+				   END
+					--========================================================
+					--AT7: Detalles del estado del envio
+				  -- ========================================================
+				  SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 26
+
+					IF(@li_segmento = 1)
+					BEGIN
+						DECLARE @fecha_status varchar(8), @hora_status varchar(8),
+						@CodeReason CHAR(2), @TimeZone char(2)
+
+
+						SELECT @fecha_status = CONVERT(char(8), max(@pnFechaEvento), 112)
+						SELECT @hora_status = substring(CONVERT(VARCHAR(5), max(@pnFechaEvento), 108), 1, 2) + substring(CONVERT(VARCHAR(5), max(@pnFechaEvento), 108), 4, 2)
+						SELECT @CodeReason = isnull(@CodeReason, 'NS')
+						SELECT @TimeZone = 'CT'
+
+						INSERT INTO @tbl_edi214
+						SELECT 'AT7' + @ls_SeparadorElemento + @CodeStatusEdi + @ls_SeparadorElemento + @CodeReason + @ls_SeparadorElemento + '' + @ls_SeparadorElemento + '' + @ls_SeparadorElemento + @fecha_status + @ls_SeparadorElemento + @hora_status + @ls_SeparadorElemento + @timezone + '' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 5-- Grupo
+					END
+					--========================================================
+					--MS1: Equipo, envio o Ubicación de ls propiedad real
+				   -- ========================================================
+				   SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 27
+
+					IF(@li_segmento = 1)
+					BEGIN
+						DECLARE @ll_pdLatitud DECIMAL(18,8) = @pdLatitud,
+								@ll_pdLongitud DECIMAL(18,8) = @pdLongitud
+
+						IF(@ll_pdLatitud < 0)
+						BEGIN
+							SET @ll_pdLatitud = @ll_pdLatitud * -1
+						END
+
+						IF(@ll_pdLongitud < 0)
+						BEGIN
+							SET @ll_pdLongitud = @ll_pdLongitud * -1
+						END
+
+
+						DECLARE @nLatitud VARCHAR(7) = CONVERT(VARCHAR, @ll_pdLatitud), 
+								@nLongitud VARCHAR(7) = CONVERT(VARCHAR, @ll_pdLongitud), 
+						--DECLARE @nLatitud VARCHAR(7) = CONVERT(VARCHAR, @pdLatitud), 
+						--@nLongitud VARCHAR(7) = CONVERT(VARCHAR, @pdLongitud), 
+								@nLatitudDirection VARCHAR(1) = '', 
+								@nLongitudDirection VARCHAR(1)= '', 
+								@nLatitudDecimal DECIMAL(18,6)= @pdLatitud,
+								@nLongitudDecimal DECIMAL(18,6)= @pdLongitud,
+
+								@ls_CityName VARCHAR(30) = '',
+								@ls_StateCode VARCHAR(2) = '',
+								@ls_CountryCode VARCHAR(3) = ''
+
+							--IF(@psEstatusEdi = 'X1')
+							--BEGIN
+							--  SELECT TOP 1
+							--  @ls_CityName = Ciudad,
+								--@ls_StateCode = Estado,
+								--@ls_CountryCode = Pais
+								--  FROM ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId
+								--  ORDER BY ClienteEdiPedidODireccionId DESC
+								--END
+
+								--ELSE
+								--BEGIN
+								--  SELECT TOP 1
+								--  @ls_CityName = Ciudad,
+								--@ls_StateCode = Estado,
+								--@ls_CountryCode = Pais
+								--  FROM ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId
+								--END
+
+								IF(@psEstatusEdi = 'X1' OR @psEstatusEdi = 'CD')
+								BEGIN
+									SELECT TOP 1
+									@ls_CityName = Ciudad,
+									@ls_StateCode = Estado,
+									@ls_CountryCode = Pais
+									FROM ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId
+									ORDER BY ClienteEdiPedidODireccionId DESC
+								END
+
+								ELSE
+								BEGIN
+									SELECT TOP 1
+									@ls_CityName = Ciudad,
+									@ls_StateCode = Estado,
+									@ls_CountryCode = Pais
+									FROM ClienteEdiPedidoDireccion WITH(NOLOCK) where ClienteEdiPedidoId = @pnClienteEdiPedidoId
+								END
+
+							IF @nLongitud IS NULL
+								SET @nLongitud = ''
+
+							IF @nLatitud IS NULL
+								SET @nLatitud = ''
+
+							IF @nLatitudDecimal  > 0.00
+							BEGIN
+								SET @nLatitudDirection = 'N'
+							END
+							ELSE IF convert(decimal(18,6),@nLatitudDecimal) < 0.00
+							BEGIN
+								SET @nLatitudDirection = 'S'
+							END
+							ELSE
+							BEGIN
+								SET @nLatitudDirection = ''
+							END
+
+							IF  @nLongitudDecimal > 0.00
+							BEGIN
+								SET @nLongitudDirection = 'E'
+							END
+							ELSE IF @nLongitudDecimal< 0.00
+							BEGIN
+								SET @nLongitudDirection = 'W'
+							END
+							ELSE
+							BEGIN
+								SET @nLongitudDirection = ''
+							END
+
+						INSERT INTO @tbl_edi214
+						SELECT CASE
+						WHEN @psEstatusEdi = 'X6'
+							THEN 'MS1' + @ls_SeparadorElemento + @ls_MS1_01 + @ls_SeparadorElemento + '' + @ls_SeparadorElemento + '' + @ls_SeparadorElemento + @nLongitud + @ls_SeparadorElemento + @nLatitud + @ls_SeparadorElemento + @nLongitudDirection + @ls_SeparadorElemento + @nLatitudDirection + '' + @ls_SeparadorSegmento
+						ELSE
+								 'MS1' + @ls_SeparadorElemento + @ls_CityName + @ls_SeparadorElemento + @ls_StateCode + @ls_SeparadorElemento + @ls_CountryCode + @ls_SeparadorSegmento
+						END
+						, @li_Orden
+						, 7--Grupo
+				   END
+					--@SCAC
+					--ZZ
+
+					-- ========================================================
+					--MS2: Equipo o contenedor Propietario y tipo
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 28
+
+					IF(@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'MS2' + @ls_SeparadorElemento + @SCAC + @ls_SeparadorElemento + @ls_Equipo + @ls_SeparadorSegmento
+						, @li_Orden
+						, 8--Grupo
+				   END
+
+					--========================================================
+					--L11: LOOP 0200: Instrucciones comerciales y número de referencia
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 53
+
+					IF(@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'L11' + @ls_SeparadorElemento + @ls_L1101_02 + @ls_SeparadorElemento + 'QN' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 9--Grupo
+				   END
+
+
+
+					--========================================================
+					--SE: Conjunto de Transacciones
+				   -- ========================================================
+				   SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 50
+
+					IF(@li_segmento = 1)
+					BEGIN
+						DECLARE @nCount VARCHAR(5) = ''
+						SELECT @nCount = CONVERT(VARCHAR(2), (SELECT COUNT(@ls_SeparadorElemento) FROM @tbl_edi214))-1
+
+						INSERT INTO @tbl_edi214
+						SELECT 'SE' + @ls_SeparadorElemento + @nCount + @ls_SeparadorElemento + @ls_Consecutivo + '' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 10--Grupo
+				   END
+					--========================================================
+					--GE: Encabezado de grupo funcional final
+				   -- ========================================================
+				   SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 51
+
+					IF(@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'GE' + @ls_SeparadorElemento + '1' + @ls_SeparadorElemento + CONVERT(varchar, @ll_Consecutivo) + '' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 11--Grupo
+				   END
+					--========================================================
+					--IEA: Encabezado de control de intercambio Final
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT @li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 52
+
+					IF(@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'IEA' + @ls_SeparadorElemento + '1' + @ls_SeparadorElemento + @ls_Consecutivo + '' + @ls_SeparadorSegmento
+						, @li_Orden
+						, 12--Grupo
+				   END
+					--========================================================
+					DECLARE @i int , @row int, @rows int, @texto varchar(255), @resultado VARCHAR(5000), @final VARCHAR(4000)
+					SELECT @resultado = ''
+					SELECT @row = 1
+					SELECT @rows = 0
+					SELECT @rows = count(*) FROM @tbl_edi214
+
+					WHILE @row <= @rows
+					BEGIN
+						SELECT @texto = texto FROM @tbl_edi214 WHERE id = @row Order by Grupo, Orden
+						SELECT @resultado = @resultado + @texto
+						SELECT @row = @row + 1
+					END
+
+					-- Actualizamos el consecutivo del Isa 214
+					--update ClienteEdiConfiguracionConsecutivo set Consecutivo = @ll_Consecutivo where ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId and Isa = '214'
+
+					SELECT @final = @resultado
+
+
+					SELECT @final edi
+					--Select * From @tbl_edi214

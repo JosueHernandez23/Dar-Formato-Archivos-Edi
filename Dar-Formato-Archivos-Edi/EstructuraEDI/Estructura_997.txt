@@ -1,0 +1,312 @@
+﻿DECLARE @pnClienteEdiPedidoId INT = @ClienteEdiPedidoIdReplace, 
+							@pnClienteEdiConfiguracionId INT = @ClienteEdiConfiguracionIdReplace
+
+
+					DECLARE @ll_Consecutivo int,
+							@ls_Formato varchar(15),
+
+							@sShipment VARCHAR(100) = '',
+							@SCAC VARCHAR(15) = '',
+
+							@ls_SeparadorSegmento varchar(1),
+							@ls_SeparadorElemento varchar(1),
+							@li_Estatus INT = 0,
+							@ls_Aceptacion varchar(1),
+							@li_TipoAceptacion INT = 0,
+
+							@ls_FinSegAd varchar(10),
+							@ls_ISA5 varchar(3),
+							@ls_ISA6 varchar(25),
+							@ls_ISA7 varchar(3),
+							@ls_ISA8 varchar(25),
+							@ls_TextoFormatoFecha varchar(30),
+							@ls_FormatoHora varchar(25)
+
+
+					SELECT  @ll_Consecutivo = Consecutivo + 1, 
+							@ls_Formato = Right(Formato + Convert( Varchar(15),consecutivo + 1 ),LEN(Formato))
+					FROM ClienteEdiConfiguracionConsecutivo WITH(NOLOCK)
+					WHERE ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId and Isa = '990'
+	
+					SELECT	@sShipment	= cep.Shipment,
+							@SCAC		= cep.CodeSCAC,
+							@li_Estatus = cep.ClienteEdiEstatusId
+					FROM	clienteEdiPedido cep WITH(NOLOCK)
+					WHERE	cep.ClienteEdiPedidoId = @pnClienteEdiPedidoId
+
+					SELECT	@ls_SeparadorSegmento = Segmento,
+							@ls_SeparadorElemento = Elemento,
+							@li_TipoAceptacion = Tipo_Aceptacion,
+							@ls_ISA5 = ISA5,
+							@ls_ISA6 = ISA6,
+							@ls_ISA7 = ISA7,
+							@ls_ISA8 = ISA8
+					FROM	ClienteEdiConfiguracion WITH (NOLOCK) 
+					WHERE	ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+
+					DECLARE
+					@CodeStatusEdi VARCHAR(100) = 'X3', 
+					@FechaProcesa VARCHAR(8)= '', 
+					@HoraProcesa VARCHAR(5)= '', 
+					@ambiente char(1)= 'P'
+
+					SELECT @FechaProcesa = CONVERT(VARCHAR(8),getdate(),112)
+					SELECT @HoraProcesa = substring(CONVERT(VARCHAR(5),getdate(),108),1,2) + substring(CONVERT(VARCHAR(5),getdate(),108),4,2)
+
+					-- Variables de los segmentos del 990
+					DECLARE @li_segmento INT = 0,
+							@li_Orden INT = 0
+
+					-- Se revisa los nodos que se van a enviar en el 990
+
+	
+					DECLARE @tbl_edi997 TABLE(id INT IDENTITY(1,1), texto varchar(255), Orden INT)
+
+					-- Estatus para enviar aceptacion o cancelacion segun sea el caso
+					IF (@li_Estatus = 1 OR @li_Estatus = 8)
+					BEGIN
+						SET @ls_Aceptacion = 'A'	
+					END
+
+					ELSE
+					BEGIN
+						SET @ls_Aceptacion = 'D'	
+					END
+
+					--========================================================
+					--	ISA 
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 1
+
+					IF (@li_segmento = 1) -- ISA
+					BEGIN
+						INSERT INTO @tbl_edi997
+						SELECT 'ISA' + @ls_SeparadorElemento + '00' + @ls_SeparadorElemento + 
+								LEFT('' + SPACE(10),10) + @ls_SeparadorElemento + '00' + @ls_SeparadorElemento + 
+								LEFT('' + SPACE(10),10) + @ls_SeparadorElemento + @ls_ISA5 + @ls_SeparadorElemento + 
+								LEFT(@ls_ISA6 + space(15),15) + @ls_SeparadorElemento + @ls_ISA7 + @ls_SeparadorElemento + 
+								LEFT(@ls_ISA8 + SPACE(15),15) + @ls_SeparadorElemento + 
+								--@sShipment + @ls_SeparadorElemento +
+								RIGHT(@FechaProcesa,6) + @ls_SeparadorElemento 
+								+ @HoraProcesa + @ls_SeparadorElemento + 'U' + @ls_SeparadorElemento + '00401' + @ls_SeparadorElemento + '' 
+								+ @ls_Formato + @ls_SeparadorElemento + '0' + @ls_SeparadorElemento + ''
+								+ @ambiente +'' + @ls_SeparadorElemento + '|' + @ls_SeparadorSegmento
+							, @li_Orden
+					END
+					--========================================================
+					--	GS
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 2
+					IF ( @li_segmento = 1) -- GS
+					BEGIN
+						INSERT INTO @tbl_edi997
+						SELECT 'GS' + @ls_SeparadorElemento + 'GF' + @ls_SeparadorElemento + @ls_ISA6 + @ls_SeparadorElemento + RTRIM(LTRIM(@ls_ISA8)) + @ls_SeparadorElemento + @FechaProcesa + @ls_SeparadorElemento + @HoraProcesa + @ls_SeparadorElemento + CONVERT(varchar,@ll_Consecutivo) + @ls_SeparadorElemento + 'X' + @ls_SeparadorElemento + '004010' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+					--========================================================
+					--	ST
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 3
+
+					IF (@li_segmento = 1)
+					BEGIN
+						DECLARE @sConsecutivoEdi VARCHAR(4) = '1500'
+						SET @sConsecutivoEdi = RIGHT('00000' + Ltrim(Rtrim(@sConsecutivoEdi)),4)
+
+						INSERT INTO @tbl_edi997
+						SELECT 'ST' + @ls_SeparadorElemento + '997' + @ls_SeparadorElemento + @ls_Formato + '' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+	
+					--========================================================
+					-- AK1
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 16
+
+					IF (@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi997
+						SELECT 'AK1' + @ls_SeparadorElemento + 'SM' + @ls_SeparadorElemento + '20' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+					--========================================================
+					-- AK2
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 43
+
+					IF (@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi997
+						SELECT 'AK2' + @ls_SeparadorElemento + '204' + @ls_SeparadorElemento + '0020' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+
+					--========================================================
+					-- AK5
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 44
+
+					IF (@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi997
+						SELECT 'AK5' + @ls_SeparadorElemento + 'A' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+					--========================================================
+					-- AK9
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+						SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 48
+
+					IF (@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi997
+						SELECT 'AK9' + @ls_SeparadorElemento + 'A' + @ls_SeparadorElemento + '1' + @ls_SeparadorElemento + '1' + @ls_SeparadorElemento + '1' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+					--========================================================
+					-- SE
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 50
+
+					IF (@li_segmento = 1)
+					BEGIN
+						DECLARE @nCount VARCHAR(5) = ''
+						SELECT @nCount = CONVERT(VARCHAR(2),(SELECT COUNT(@ls_SeparadorElemento) FROM @tbl_edi997 ))-1
+
+						INSERT INTO @tbl_edi997
+						SELECT 'SE' + @ls_SeparadorElemento + @nCount + @ls_SeparadorElemento + @ls_Formato + '' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+
+					--========================================================
+					-- GE
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 51
+
+					IF (@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi997
+						SELECT 'GE' + @ls_SeparadorElemento + '1' + @ls_SeparadorElemento + CONVERT(varchar, @ll_Consecutivo) + '' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+					--========================================================
+					-- IEA
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CASE WHEN @li_TipoAceptacion = 1 THEN CA.Estatus_C1 ELSE CASE WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 1 THEN CA.Estatus_C1	WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 8 THEN CA.Estatus_C1 WHEN @li_TipoAceptacion = 2 AND @li_Estatus = 9 THEN CA.Estatus_C2 ELSE 0 END END,
+							@li_Orden = CA.Orden,
+							@ls_FinSegAd = CA.FinSegAd
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 3
+							AND CA.ClienteEdiSegmentoId = 52
+
+					IF (@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi997
+						SELECT 'IEA' + @ls_SeparadorElemento + '1' + @ls_SeparadorElemento + @ls_Formato + '' + @ls_SeparadorSegmento
+						, @li_Orden
+					END
+					--========================================================
+					DECLARE @i int , @row int, @rows int, @texto varchar(255), @resultado VARCHAR(5000), @final VARCHAR(4000)
+					SELECT @resultado = ''
+					SELECT @row = 1
+					SELECT @rows = 0
+					SELECT @rows = count(*) FROM @tbl_edi997
+
+					WHILE @row <= @rows
+					BEGIN
+						SELECT @texto = texto FROM @tbl_edi997 WHERE id = @row Order By Orden ASC
+						SELECT @resultado = @resultado + @texto
+						SELECT @row = @row + 1
+					END
+
+					-- Actualizamos el consecutivo del Isa 990
+					--update ClienteEdiConfiguracionConsecutivo WITH(ROWLOCK) set Consecutivo = @ll_Consecutivo where ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId and Isa = '997'
+
+					SELECT @final =@resultado	
+
+					SELECT @final edi
