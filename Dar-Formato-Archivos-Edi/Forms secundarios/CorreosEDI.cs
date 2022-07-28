@@ -25,7 +25,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             //outlookNS.Logon("1", "1", null, true);
             mails = outlookNS.GetDefaultFolder(OlDefaultFolders.olFolderInbox);
 
-            ObtenerCorreosEdi();
+            //ObtenerCorreosEdi();
 
             listado_correos = ObtenerCorreosEdi();
             listbox_Emails.DataSource = listado_correos.Select(vl => vl.Email_Subject + " - " + vl.ReceivedTime.ToString() + " - " + vl.List_Documents.Count.ToString()).ToList();
@@ -142,29 +142,31 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         private void listbox_Emails_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listbox_EmailDetalles.Items.Clear();
+            DTG_EmailDetalles.DataSource = null;
 
-            for (int i = 0; i < listado_correos[listbox_Emails.SelectedIndex].List_Documents.Count ; i++)
-            {
-                string Id = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Id;
-                string DocumentType = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].DocumentType;
-                string ControlNumber = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].GS_Control_Number;
-                string ErrorCode = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Error_Code;
-                string ErrorDescription = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Error_Description;
-                string Shipment = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Reference;
-                string StatusCode = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Status_Code;
+            DTG_EmailDetalles.DataSource = listado_correos[listbox_Emails.SelectedIndex].List_Documents;
 
-                string Formato_Correo = $@"
-                    {Id} 
-                    {DocumentType}
-                    {ControlNumber}
-                    {ErrorCode}
-                    {ErrorDescription}
-                    {Shipment}
-                    {StatusCode}";
+            //for (int i = 0; i < listado_correos[listbox_Emails.SelectedIndex].List_Documents.Count ; i++)
+            //{
+            //    string Id = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Id;
+            //    string DocumentType = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].DocumentType;
+            //    string ControlNumber = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].GS_Control_Number;
+            //    string ErrorCode = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Error_Code;
+            //    string ErrorDescription = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Error_Description;
+            //    string Shipment = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Reference;
+            //    string StatusCode = listado_correos[listbox_Emails.SelectedIndex].List_Documents[i].Status_Code;
 
-                listbox_EmailDetalles.Items.Add(Formato_Correo);
-            }
+            //    string Formato_Correo = $@"
+            //        {Id} 
+            //        {DocumentType}
+            //        {ControlNumber}
+            //        {ErrorCode}
+            //        {ErrorDescription}
+            //        {Shipment}
+            //        {StatusCode}";
+
+            //    listbox_EmailDetalles.Items.Add(Formato_Correo);
+            //}
         }
     }
 }

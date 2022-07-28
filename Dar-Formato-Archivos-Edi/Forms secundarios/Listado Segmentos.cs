@@ -13,7 +13,7 @@ using Dar_Formato_Archivos_Edi.Clases.ClienteEdiTipoArchivo;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiConfiguracionArchivo_Segmentos;
 using Dar_Formato_Archivos_Edi.DataAccess;
 
-namespace Dar_Formato_Archivos_Edi
+namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
     public partial class Listado_Segmentos : Form
     {

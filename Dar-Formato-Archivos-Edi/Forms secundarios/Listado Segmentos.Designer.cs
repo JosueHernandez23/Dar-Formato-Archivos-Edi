@@ -1,4 +1,4 @@
-﻿namespace Dar_Formato_Archivos_Edi
+﻿namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
     partial class Listado_Segmentos
     {

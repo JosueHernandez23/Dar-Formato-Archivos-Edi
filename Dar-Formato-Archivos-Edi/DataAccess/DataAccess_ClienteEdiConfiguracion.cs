@@ -19,7 +19,7 @@ namespace Dar_Formato_Archivos_Edi.Controllers
             using (var connection = new SqlConnection(con.connectionString))
             {
                 connection.Open();
-                string query = "Select ClienteEdiConfiguracionId, descripcion From ClienteEdiConfiguracion";
+                string query = "Select ClienteEdiConfiguracionId, descripcion, SFTPServerPRD, SFTPUsuarioPRD, SFTPPasswordPRD, SFTPFolderTo214PRD as FolderDestino From ClienteEdiConfiguracion";
 
                 List<ClienteEdiConfiguracion> EdiConfiguracionClientes = connection.Query<ClienteEdiConfiguracion>(query).ToList();
 

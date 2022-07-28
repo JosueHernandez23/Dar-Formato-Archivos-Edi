@@ -30,7 +30,8 @@
         {
             this.listbox_Emails = new System.Windows.Forms.ListBox();
             this.lblDetalles = new System.Windows.Forms.Label();
-            this.listbox_EmailDetalles = new System.Windows.Forms.ListBox();
+            this.DTG_EmailDetalles = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DTG_EmailDetalles)).BeginInit();
             this.SuspendLayout();
             // 
             // listbox_Emails
@@ -38,7 +39,7 @@
             this.listbox_Emails.FormattingEnabled = true;
             this.listbox_Emails.Location = new System.Drawing.Point(33, 23);
             this.listbox_Emails.Name = "listbox_Emails";
-            this.listbox_Emails.Size = new System.Drawing.Size(581, 251);
+            this.listbox_Emails.Size = new System.Drawing.Size(764, 251);
             this.listbox_Emails.TabIndex = 0;
             this.listbox_Emails.SelectedIndexChanged += new System.EventHandler(this.listbox_Emails_SelectedIndexChanged);
             // 
@@ -53,24 +54,25 @@
             this.lblDetalles.TabIndex = 2;
             this.lblDetalles.Text = "Detalles";
             // 
-            // listbox_EmailDetalles
+            // DTG_EmailDetalles
             // 
-            this.listbox_EmailDetalles.FormattingEnabled = true;
-            this.listbox_EmailDetalles.Location = new System.Drawing.Point(33, 336);
-            this.listbox_EmailDetalles.Name = "listbox_EmailDetalles";
-            this.listbox_EmailDetalles.Size = new System.Drawing.Size(778, 160);
-            this.listbox_EmailDetalles.TabIndex = 3;
+            this.DTG_EmailDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DTG_EmailDetalles.Location = new System.Drawing.Point(33, 349);
+            this.DTG_EmailDetalles.Name = "DTG_EmailDetalles";
+            this.DTG_EmailDetalles.Size = new System.Drawing.Size(764, 183);
+            this.DTG_EmailDetalles.TabIndex = 3;
             // 
             // CorreosEDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 508);
-            this.Controls.Add(this.listbox_EmailDetalles);
+            this.ClientSize = new System.Drawing.Size(841, 580);
+            this.Controls.Add(this.DTG_EmailDetalles);
             this.Controls.Add(this.lblDetalles);
             this.Controls.Add(this.listbox_Emails);
             this.Name = "CorreosEDI";
             this.Text = "CorreosEDI";
+            ((System.ComponentModel.ISupportInitialize)(this.DTG_EmailDetalles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,6 +82,6 @@
 
         private System.Windows.Forms.ListBox listbox_Emails;
         private System.Windows.Forms.Label lblDetalles;
-        private System.Windows.Forms.ListBox listbox_EmailDetalles;
+        private System.Windows.Forms.DataGridView DTG_EmailDetalles;
     }
 }
