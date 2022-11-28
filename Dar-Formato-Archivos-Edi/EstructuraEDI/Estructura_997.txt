@@ -20,19 +20,20 @@
 							@ls_ISA7 varchar(3),
 							@ls_ISA8 varchar(25),
 							@ls_TextoFormatoFecha varchar(30),
-							@ls_FormatoHora varchar(25)
-
-
-					SELECT  @ll_Consecutivo = Consecutivo + 1, 
-							@ls_Formato = Right(Formato + Convert( Varchar(15),consecutivo + 1 ),LEN(Formato))
-					FROM ClienteEdiConfiguracionConsecutivo WITH(NOLOCK)
-					WHERE ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId and Isa = '990'
+							@ls_FormatoHora varchar(25),
+							@ls_ControlNumber204 int
 	
 					SELECT	@sShipment	= cep.Shipment,
 							@SCAC		= cep.CodeSCAC,
-							@li_Estatus = cep.ClienteEdiEstatusId
+							@li_Estatus = cep.ClienteEdiEstatusId,
+							@ls_ControlNumber204 = ControlNumber_204
 					FROM	clienteEdiPedido cep WITH(NOLOCK)
 					WHERE	cep.ClienteEdiPedidoId = @pnClienteEdiPedidoId
+
+					SELECT  @ll_Consecutivo = @ls_ControlNumber204, 
+							@ls_Formato = Right(Formato + Convert( Varchar(15),@ls_ControlNumber204 ),LEN(Formato))
+					FROM ClienteEdiConfiguracionConsecutivo WITH(NOLOCK)
+					WHERE ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId and Isa = '997'
 
 					SELECT	@ls_SeparadorSegmento = Segmento,
 							@ls_SeparadorElemento = Elemento,
@@ -304,9 +305,9 @@
 						SELECT @row = @row + 1
 					END
 
-					-- Actualizamos el consecutivo del Isa 990
+					-- Actualizamos el consecutivo del Isa 997
 					--update ClienteEdiConfiguracionConsecutivo WITH(ROWLOCK) set Consecutivo = @ll_Consecutivo where ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId and Isa = '997'
 
 					SELECT @final =@resultado	
 
-					SELECT @final edi
+					SELECT @final edi990 

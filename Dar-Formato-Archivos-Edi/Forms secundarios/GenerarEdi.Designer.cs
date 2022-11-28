@@ -45,6 +45,10 @@
             this.CboClienteEdiConfiguracionId = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblTipoConexion = new System.Windows.Forms.Label();
+            this.cboTipoConexion = new System.Windows.Forms.ComboBox();
+            this.txtFolderDestino = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.btnEnviarArchivo = new System.Windows.Forms.Button();
             this.lblNombreArchivo = new System.Windows.Forms.Label();
             this.btnSelecArchivo = new System.Windows.Forms.Button();
@@ -56,29 +60,27 @@
             this.label9 = new System.Windows.Forms.Label();
             this.CboClienteEdiConfiguracionId_EnviarArchivo = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtFolderDestino = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // TxtLongitud
             // 
-            this.TxtLongitud.Location = new System.Drawing.Point(176, 159);
+            this.TxtLongitud.Location = new System.Drawing.Point(253, 212);
             this.TxtLongitud.Name = "TxtLongitud";
             this.TxtLongitud.Size = new System.Drawing.Size(100, 20);
             this.TxtLongitud.TabIndex = 1;
             // 
             // TxtLatitud
             // 
-            this.TxtLatitud.Location = new System.Drawing.Point(39, 159);
+            this.TxtLatitud.Location = new System.Drawing.Point(86, 212);
             this.TxtLatitud.Name = "TxtLatitud";
             this.TxtLatitud.Size = new System.Drawing.Size(100, 20);
             this.TxtLatitud.TabIndex = 2;
             // 
             // TxtClienteEdiPedidoId
             // 
-            this.TxtClienteEdiPedidoId.Location = new System.Drawing.Point(323, 91);
+            this.TxtClienteEdiPedidoId.Location = new System.Drawing.Point(479, 99);
             this.TxtClienteEdiPedidoId.Name = "TxtClienteEdiPedidoId";
             this.TxtClienteEdiPedidoId.Size = new System.Drawing.Size(100, 20);
             this.TxtClienteEdiPedidoId.TabIndex = 3;
@@ -86,7 +88,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 62);
+            this.label1.Location = new System.Drawing.Point(98, 62);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 5;
@@ -95,7 +97,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(161, 62);
+            this.label2.Location = new System.Drawing.Point(250, 62);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 13);
             this.label2.TabIndex = 6;
@@ -104,7 +106,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(327, 62);
+            this.label3.Location = new System.Drawing.Point(483, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 13);
             this.label3.TabIndex = 7;
@@ -113,7 +115,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(62, 133);
+            this.label4.Location = new System.Drawing.Point(110, 175);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 8;
@@ -122,7 +124,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(205, 133);
+            this.label5.Location = new System.Drawing.Point(274, 175);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 9;
@@ -130,7 +132,7 @@
             // 
             // DtpFechaEvento
             // 
-            this.DtpFechaEvento.Location = new System.Drawing.Point(323, 156);
+            this.DtpFechaEvento.Location = new System.Drawing.Point(458, 209);
             this.DtpFechaEvento.MinDate = new System.DateTime(2022, 1, 1, 0, 0, 0, 0);
             this.DtpFechaEvento.Name = "DtpFechaEvento";
             this.DtpFechaEvento.Size = new System.Drawing.Size(200, 20);
@@ -140,7 +142,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(345, 133);
+            this.label6.Location = new System.Drawing.Point(505, 175);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 13);
             this.label6.TabIndex = 11;
@@ -149,7 +151,7 @@
             // BtnGenerarArchivoEdi
             // 
             this.BtnGenerarArchivoEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGenerarArchivoEdi.Location = new System.Drawing.Point(221, 224);
+            this.BtnGenerarArchivoEdi.Location = new System.Drawing.Point(348, 258);
             this.BtnGenerarArchivoEdi.Name = "BtnGenerarArchivoEdi";
             this.BtnGenerarArchivoEdi.Size = new System.Drawing.Size(155, 40);
             this.BtnGenerarArchivoEdi.TabIndex = 12;
@@ -161,7 +163,7 @@
             // 
             this.CboTipoArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CboTipoArchivo.FormattingEnabled = true;
-            this.CboTipoArchivo.Location = new System.Drawing.Point(455, 91);
+            this.CboTipoArchivo.Location = new System.Drawing.Point(652, 97);
             this.CboTipoArchivo.Name = "CboTipoArchivo";
             this.CboTipoArchivo.Size = new System.Drawing.Size(121, 24);
             this.CboTipoArchivo.TabIndex = 13;
@@ -169,7 +171,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(483, 62);
+            this.label7.Location = new System.Drawing.Point(676, 62);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(67, 13);
             this.label7.TabIndex = 14;
@@ -179,7 +181,7 @@
             // 
             this.CboEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CboEvento.FormattingEnabled = true;
-            this.CboEvento.Location = new System.Drawing.Point(28, 89);
+            this.CboEvento.Location = new System.Drawing.Point(65, 95);
             this.CboEvento.Name = "CboEvento";
             this.CboEvento.Size = new System.Drawing.Size(121, 24);
             this.CboEvento.TabIndex = 15;
@@ -188,9 +190,9 @@
             // 
             this.CboClienteEdiConfiguracionId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CboClienteEdiConfiguracionId.FormattingEnabled = true;
-            this.CboClienteEdiConfiguracionId.Location = new System.Drawing.Point(168, 89);
+            this.CboClienteEdiConfiguracionId.Location = new System.Drawing.Point(253, 95);
             this.CboClienteEdiConfiguracionId.Name = "CboClienteEdiConfiguracionId";
-            this.CboClienteEdiConfiguracionId.Size = new System.Drawing.Size(121, 24);
+            this.CboClienteEdiConfiguracionId.Size = new System.Drawing.Size(170, 24);
             this.CboClienteEdiConfiguracionId.TabIndex = 16;
             // 
             // groupBox1
@@ -212,13 +214,15 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(94, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(595, 308);
+            this.groupBox1.Size = new System.Drawing.Size(783, 320);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Generar Archivo Edi";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblTipoConexion);
+            this.groupBox2.Controls.Add(this.cboTipoConexion);
             this.groupBox2.Controls.Add(this.txtFolderDestino);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.btnEnviarArchivo);
@@ -234,14 +238,47 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Location = new System.Drawing.Point(41, 391);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(836, 261);
+            this.groupBox2.Size = new System.Drawing.Size(836, 346);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Enviar Archivo";
             // 
+            // lblTipoConexion
+            // 
+            this.lblTipoConexion.AutoSize = true;
+            this.lblTipoConexion.Location = new System.Drawing.Point(41, 145);
+            this.lblTipoConexion.Name = "lblTipoConexion";
+            this.lblTipoConexion.Size = new System.Drawing.Size(77, 13);
+            this.lblTipoConexion.TabIndex = 29;
+            this.lblTipoConexion.Text = "Tipo conexion:";
+            // 
+            // cboTipoConexion
+            // 
+            this.cboTipoConexion.FormattingEnabled = true;
+            this.cboTipoConexion.Location = new System.Drawing.Point(166, 137);
+            this.cboTipoConexion.Name = "cboTipoConexion";
+            this.cboTipoConexion.Size = new System.Drawing.Size(121, 21);
+            this.cboTipoConexion.TabIndex = 28;
+            // 
+            // txtFolderDestino
+            // 
+            this.txtFolderDestino.Location = new System.Drawing.Point(672, 82);
+            this.txtFolderDestino.Name = "txtFolderDestino";
+            this.txtFolderDestino.Size = new System.Drawing.Size(146, 20);
+            this.txtFolderDestino.TabIndex = 25;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(702, 51);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(75, 13);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Folder Destino";
+            // 
             // btnEnviarArchivo
             // 
-            this.btnEnviarArchivo.Location = new System.Drawing.Point(241, 211);
+            this.btnEnviarArchivo.Location = new System.Drawing.Point(684, 218);
             this.btnEnviarArchivo.Name = "btnEnviarArchivo";
             this.btnEnviarArchivo.Size = new System.Drawing.Size(112, 34);
             this.btnEnviarArchivo.TabIndex = 27;
@@ -252,7 +289,7 @@
             // lblNombreArchivo
             // 
             this.lblNombreArchivo.AutoSize = true;
-            this.lblNombreArchivo.Location = new System.Drawing.Point(204, 141);
+            this.lblNombreArchivo.Location = new System.Drawing.Point(153, 239);
             this.lblNombreArchivo.Name = "lblNombreArchivo";
             this.lblNombreArchivo.Size = new System.Drawing.Size(49, 13);
             this.lblNombreArchivo.TabIndex = 26;
@@ -260,7 +297,7 @@
             // 
             // btnSelecArchivo
             // 
-            this.btnSelecArchivo.Location = new System.Drawing.Point(28, 131);
+            this.btnSelecArchivo.Location = new System.Drawing.Point(6, 229);
             this.btnSelecArchivo.Name = "btnSelecArchivo";
             this.btnSelecArchivo.Size = new System.Drawing.Size(129, 33);
             this.btnSelecArchivo.TabIndex = 25;
@@ -335,27 +372,12 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "ClienteEdiConfiguracionId";
             // 
-            // txtFolderDestino
-            // 
-            this.txtFolderDestino.Location = new System.Drawing.Point(672, 82);
-            this.txtFolderDestino.Name = "txtFolderDestino";
-            this.txtFolderDestino.Size = new System.Drawing.Size(146, 20);
-            this.txtFolderDestino.TabIndex = 25;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(702, 51);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(75, 13);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "Folder Destino";
-            // 
             // GenerarEdi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 664);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(904, 749);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "GenerarEdi";
@@ -399,5 +421,7 @@
         private System.Windows.Forms.Label lblNombreArchivo;
         private System.Windows.Forms.TextBox txtFolderDestino;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cboTipoConexion;
+        private System.Windows.Forms.Label lblTipoConexion;
     }
 }

@@ -39,11 +39,12 @@
             // 
             // cboClientes
             // 
+            this.cboClientes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cboClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboClientes.FormattingEnabled = true;
             this.cboClientes.Location = new System.Drawing.Point(371, 30);
             this.cboClientes.Name = "cboClientes";
-            this.cboClientes.Size = new System.Drawing.Size(121, 24);
+            this.cboClientes.Size = new System.Drawing.Size(158, 24);
             this.cboClientes.TabIndex = 0;
             // 
             // LblCliente

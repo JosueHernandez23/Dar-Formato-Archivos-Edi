@@ -119,14 +119,24 @@
     <Compile Include="Clases\ClienteEdiConfiguracionArchivo\ClienteEdiConfiguracionArchivo.cs" />
     <Compile Include="Clases\ClienteEdiConfiguracionArchivo_Segmentos\ClienteEdiArchivoConfiguracion_Segmentos.cs" />
     <Compile Include="Clases\ClienteEdiConfiguracion\ClienteEdiConfiguracion.cs" />
+    <Compile Include="Clases\ClienteEdiEstatusSeguimiento\ClienteEdiPedidoEstatusSeguimiento.cs" />
     <Compile Include="Clases\ClienteEdiEvento\ClienteEdiEvento.cs" />
+    <Compile Include="Clases\ClienteEdiNotificaEvento\ClienteEdiNotificaEvento.cs" />
+    <Compile Include="Clases\ClienteEdiPedidoDireccion\ClienteEdiPedidoDireccion.cs" />
+    <Compile Include="Clases\ClienteEdiPedido\ClienteEdiPedido.cs" />
     <Compile Include="Clases\ClienteEdiSegmentos\ClienteEdiSegmentos.cs" />
     <Compile Include="Clases\ClienteEdiTipoArchivo\ClienteEdiTipoArchivo.cs" />
     <Compile Include="Clases\ClienteEdiTipoArchivo\EdiTipoArchivoFormatos.cs" />
+    <Compile Include="Clases\ClienteLis\ClienteLis.cs" />
+    <Compile Include="Clases\PedidoRelacionado\PedidoRelacionado.cs" />
+    <Compile Include="Clases\TipoConexion\TipoConexion.cs" />
     <Compile Include="Conexion\SqlCnx.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteEdiConfiguracion.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteEdiEvento.cs" />
+    <Compile Include="DataAccess\DataAccess_ClienteEdiPedido.cs" />
+    <Compile Include="DataAccess\DataAccess_ClienteLis.cs" />
     <Compile Include="DataAccess\DataAccess_Form_ListadoSegmentos.cs" />
+    <Compile Include="DataAccess\DataAccess_PedidoRelacionado.cs" />
     <Compile Include="DataAccess\DataAccess_TipoArchivo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -139,6 +149,12 @@
     </Compile>
     <Compile Include="Forms secundarios\CorreosEDI.Designer.cs">
       <DependentUpon>CorreosEDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms secundarios\EdiPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms secundarios\EdiPedidos.Designer.cs">
+      <DependentUpon>EdiPedidos.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms secundarios\GenerarEdi.cs">
       <SubType>Form</SubType>
@@ -159,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\CorreosEDI.resx">
       <DependentUpon>CorreosEDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms secundarios\EdiPedidos.resx">
+      <DependentUpon>EdiPedidos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\GenerarEdi.resx">
       <DependentUpon>GenerarEdi.cs</DependentUpon>
@@ -194,6 +213,7 @@
     <Content Include="EstructuraEDI\Estructura_214.txt" />
     <Content Include="EstructuraEDI\Estructura_990.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.4\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.4\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -35,7 +35,9 @@
 						@ls_ISA7 varchar(3),
 						@ls_ISA8 varchar(25),
 
-						@ls_L1101_01 varchar(3) = '01',
+						--Ryder: Enviar un 2 cuando es X1 para indicar que es la ultima parada
+						@ls_L1101_01 varchar(3) = CASE WHEN @psEstatusEdi IN ('X1', 'AB', 'D1') THEN'02' ELSE '01' End,
+						@ls_L1102_01 varchar(3) = 'LO',
 						@ls_L1101_02 varchar(3) = '',
 
 						@ls_MS1_01 varchar(30) = '';
@@ -86,7 +88,15 @@
 					DECLARE @tbl_edi214 TABLE(id INT IDENTITY(1,1), texto varchar(255), Orden INT, Grupo DECIMAL(18,2))
 
 
-					-- CASO TRANSPLACE --
+					/* ========== CASO Penske-Whip ==========*/
+					IF (@pnClienteEdiConfiguracionId = 4)
+					BEGIN
+						SET @ls_L1101_02 = CASE WHEN @psEstatusEdi IN ('X1', 'AB', 'D1') THEN'2' ELSE '1' End
+						SET @sShipment = 'WHRLLP-IB'
+						SET @ls_L1102_01 = '11'
+					END
+
+					/* ========== CASO TRANSPLACE ==========*/
 					IF (@pnClienteEdiConfiguracionId = 5)
 					BEGIN
 
@@ -262,25 +272,42 @@
 						, 1--Grupo
 				   END
 					--========================================================
-					--L11: Instrucciones comerciales y número de referencia
+					--	L11: Instrucciones comerciales y número de referencia 
 					--========================================================
 					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
 
-					SELECT @li_segmento = CA.Estatus_C1,
+					SELECT	@li_segmento = CA.Estatus_C1,
 							@li_Orden = CA.Orden
-					FROM ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
-					WHERE CA.ClienteEdiSegmentoId = CS.IdSegmento
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
 							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
 							AND CA.ClienteEdiTipoArchivoId = 2
 							AND CA.ClienteEdiSegmentoId = 8
 
-					IF(@li_segmento = 1)
+					IF (@li_segmento = 1)
 					BEGIN
 						INSERT INTO @tbl_edi214
-						SELECT 'L11' + @ls_SeparadorElemento + @sShipment + @ls_SeparadorElemento + 'LO' + @ls_SeparadorSegmento, @li_Orden, 1--Grupo
-					   UNION ALL
-					   SELECT 'L11' + @ls_SeparadorElemento + @ls_L1101_01 + @ls_SeparadorElemento + 'QN' + @ls_SeparadorSegmento, @li_Orden, 1--Grupo
-				  END
+						SELECT 'L11' + @ls_SeparadorElemento + @sShipment + @ls_SeparadorElemento + @ls_L1102_01 + @ls_SeparadorSegmento, @li_Orden, 1 --Grupo
+					END
+
+					--========================================================
+					--	L11: Instrucciones comerciales y número de referencia CABECERA_2
+					--========================================================
+					SET @li_segmento = 0 SET @li_Orden = 0 SET @ls_FinSegAd = ''
+
+					SELECT	@li_segmento = CA.Estatus_C1,
+							@li_Orden = CA.Orden
+					FROM	ClienteEdiConfiguracionArchivo CA WITH(NoLock), ClienteEdiSegmentos CS WITH(NoLock)
+					WHERE	CA.ClienteEdiSegmentoId = CS.IdSegmento
+							AND CA.ClienteEdiConfiguracionId = @pnClienteEdiConfiguracionId
+							AND CA.ClienteEdiTipoArchivoId = 2
+							AND CA.ClienteEdiSegmentoId = 54
+
+					IF (@li_segmento = 1)
+					BEGIN
+						INSERT INTO @tbl_edi214
+						SELECT 'L11' + @ls_SeparadorElemento + @ls_L1101_01 + @ls_SeparadorElemento + 'QN' + @ls_SeparadorSegmento, @li_Orden, 1 --Grupo
+					END
 					--========================================================
 					--N1, N3, N4: Nombre, Informacion de Direccion, Localizacion Geografica
 					--========================================================

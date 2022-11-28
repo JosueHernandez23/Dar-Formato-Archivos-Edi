@@ -45,6 +45,8 @@
             this.btnListadoSegmentos = new System.Windows.Forms.Button();
             this.btnGenerarEdi = new System.Windows.Forms.Button();
             this.btnCorreosEdi = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnEdiPedidos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +77,7 @@
             // 
             // btnCargarArchivo
             // 
+            this.btnCargarArchivo.AllowDrop = true;
             this.btnCargarArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCargarArchivo.Location = new System.Drawing.Point(14, 82);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
@@ -87,7 +90,7 @@
             // txtSegmento
             // 
             this.txtSegmento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSegmento.Location = new System.Drawing.Point(289, 89);
+            this.txtSegmento.Location = new System.Drawing.Point(335, 89);
             this.txtSegmento.MaxLength = 1;
             this.txtSegmento.Name = "txtSegmento";
             this.txtSegmento.Size = new System.Drawing.Size(100, 23);
@@ -96,7 +99,7 @@
             // txtElemento
             // 
             this.txtElemento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtElemento.Location = new System.Drawing.Point(492, 89);
+            this.txtElemento.Location = new System.Drawing.Point(538, 89);
             this.txtElemento.MaxLength = 1;
             this.txtElemento.Name = "txtElemento";
             this.txtElemento.Size = new System.Drawing.Size(100, 23);
@@ -106,7 +109,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(203, 92);
+            this.label3.Location = new System.Drawing.Point(249, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 17);
             this.label3.TabIndex = 5;
@@ -116,7 +119,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(411, 92);
+            this.label4.Location = new System.Drawing.Point(457, 92);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 17);
             this.label4.TabIndex = 6;
@@ -127,7 +130,7 @@
             this.groupBox1.Controls.Add(this.rbDeshabilitar);
             this.groupBox1.Controls.Add(this.rbHabilitar);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(613, 42);
+            this.groupBox1.Location = new System.Drawing.Point(689, 42);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(175, 108);
             this.groupBox1.TabIndex = 7;
@@ -161,7 +164,7 @@
             this.TxtFormatoTexto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtFormatoTexto.Location = new System.Drawing.Point(14, 196);
             this.TxtFormatoTexto.Name = "TxtFormatoTexto";
-            this.TxtFormatoTexto.Size = new System.Drawing.Size(844, 361);
+            this.TxtFormatoTexto.Size = new System.Drawing.Size(944, 414);
             this.TxtFormatoTexto.TabIndex = 8;
             this.TxtFormatoTexto.Text = "";
             // 
@@ -180,7 +183,7 @@
             // 
             this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
             this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnListadoSegmentos.Location = new System.Drawing.Point(794, 12);
+            this.btnListadoSegmentos.Location = new System.Drawing.Point(886, 62);
             this.btnListadoSegmentos.Name = "btnListadoSegmentos";
             this.btnListadoSegmentos.Size = new System.Drawing.Size(64, 67);
             this.btnListadoSegmentos.TabIndex = 10;
@@ -191,7 +194,7 @@
             // 
             this.btnGenerarEdi.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGenerarEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerarEdi.Location = new System.Drawing.Point(761, 166);
+            this.btnGenerarEdi.Location = new System.Drawing.Point(764, 166);
             this.btnGenerarEdi.Name = "btnGenerarEdi";
             this.btnGenerarEdi.Size = new System.Drawing.Size(87, 24);
             this.btnGenerarEdi.TabIndex = 11;
@@ -203,7 +206,7 @@
             // 
             this.btnCorreosEdi.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCorreosEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCorreosEdi.Location = new System.Drawing.Point(656, 166);
+            this.btnCorreosEdi.Location = new System.Drawing.Point(659, 166);
             this.btnCorreosEdi.Name = "btnCorreosEdi";
             this.btnCorreosEdi.Size = new System.Drawing.Size(87, 24);
             this.btnCorreosEdi.TabIndex = 12;
@@ -211,11 +214,37 @@
             this.btnCorreosEdi.UseVisualStyleBackColor = true;
             this.btnCorreosEdi.Click += new System.EventHandler(this.btnCorreosEdi_Click);
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(560, 166);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 13;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnEdiPedidos
+            // 
+            this.btnEdiPedidos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdiPedidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdiPedidos.Location = new System.Drawing.Point(874, 165);
+            this.btnEdiPedidos.Name = "btnEdiPedidos";
+            this.btnEdiPedidos.Size = new System.Drawing.Size(81, 24);
+            this.btnEdiPedidos.TabIndex = 15;
+            this.btnEdiPedidos.Text = "Edi Pedidos";
+            this.btnEdiPedidos.UseVisualStyleBackColor = true;
+            this.btnEdiPedidos.Click += new System.EventHandler(this.btnEdiPedidos_Click);
+            // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 593);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(973, 634);
+            this.Controls.Add(this.btnEdiPedidos);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnCorreosEdi);
             this.Controls.Add(this.btnGenerarEdi);
             this.Controls.Add(this.btnListadoSegmentos);
@@ -229,8 +258,12 @@
             this.Controls.Add(this.btnCargarArchivo);
             this.Controls.Add(this.txtNombreArchivo);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Formato Edi";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.Form1_DragOver);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -257,6 +290,8 @@
         private System.Windows.Forms.Button btnListadoSegmentos;
         private System.Windows.Forms.Button btnGenerarEdi;
         private System.Windows.Forms.Button btnCorreosEdi;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnEdiPedidos;
     }
 }
 

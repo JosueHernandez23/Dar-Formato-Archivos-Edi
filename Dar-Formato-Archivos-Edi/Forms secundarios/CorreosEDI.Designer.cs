@@ -31,6 +31,8 @@
             this.listbox_Emails = new System.Windows.Forms.ListBox();
             this.lblDetalles = new System.Windows.Forms.Label();
             this.DTG_EmailDetalles = new System.Windows.Forms.DataGridView();
+            this.lbl_total = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DTG_EmailDetalles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,11 +64,31 @@
             this.DTG_EmailDetalles.Size = new System.Drawing.Size(764, 183);
             this.DTG_EmailDetalles.TabIndex = 3;
             // 
+            // lbl_total
+            // 
+            this.lbl_total.AutoSize = true;
+            this.lbl_total.Location = new System.Drawing.Point(33, 4);
+            this.lbl_total.Name = "lbl_total";
+            this.lbl_total.Size = new System.Drawing.Size(37, 13);
+            this.lbl_total.TabIndex = 4;
+            this.lbl_total.Text = "Total: ";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(77, 4);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(13, 13);
+            this.lblTotal.TabIndex = 5;
+            this.lblTotal.Text = "0";
+            // 
             // CorreosEDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(841, 580);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.lbl_total);
             this.Controls.Add(this.DTG_EmailDetalles);
             this.Controls.Add(this.lblDetalles);
             this.Controls.Add(this.listbox_Emails);
@@ -83,5 +105,7 @@
         private System.Windows.Forms.ListBox listbox_Emails;
         private System.Windows.Forms.Label lblDetalles;
         private System.Windows.Forms.DataGridView DTG_EmailDetalles;
+        private System.Windows.Forms.Label lbl_total;
+        private System.Windows.Forms.Label lblTotal;
     }
 }

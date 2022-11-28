@@ -1,10 +1,13 @@
-﻿using Microsoft.Office.Interop.Outlook;
+﻿using Outlook = Microsoft.Office.Interop.Outlook;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,22 +16,27 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
     public partial class CorreosEDI : Form
     {
-        Microsoft.Office.Interop.Outlook.Application outlookApp = new Microsoft.Office.Interop.Outlook.Application();
-        NameSpace outlookNS = null;
-        MAPIFolder mails = null;
+        Outlook.Application outlookApp = new Outlook.Application();
+        Outlook.NameSpace outlookNS = null;
+        Outlook.MAPIFolder mails = null;
         List<Document> listado_correos = new List<Document> ();
 
         public CorreosEDI()
         {
             InitializeComponent();
             outlookNS = outlookApp.GetNamespace("MAPI");
+            //outlookNS.Logoff();
             //outlookNS.Logon("1", "1", null, true);
-            mails = outlookNS.GetDefaultFolder(OlDefaultFolders.olFolderInbox);
+
+            //var app = GetApplicationObject();
+
+            mails = outlookNS.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderInbox);
 
             //ObtenerCorreosEdi();
 
-            listado_correos = ObtenerCorreosEdi();
+            listado_correos = ObtenerCorreosEdi().OrderByDescending(s => s.ReceivedTime).ToList();
             listbox_Emails.DataSource = listado_correos.Select(vl => vl.Email_Subject + " - " + vl.ReceivedTime.ToString() + " - " + vl.List_Documents.Count.ToString()).ToList();
+            lblTotal.Text = listado_correos.Count.ToString();
         }
 
         public  List<Document> ObtenerCorreosEdi()
@@ -43,7 +51,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
                 foreach (object obj in listadoEmails)
                 {
-                    MailItem Mail = obj as MailItem;
+                    Outlook.MailItem Mail = obj as Outlook.MailItem;
 
                     switch (Mail.Subject)
                     {
@@ -64,20 +72,20 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         public static Document ObtenerInformacionCorreo_ShipmentStatusErrors(object MailsObj)
         {
-            MailItem Mail = MailsObj as MailItem;
-            Mail.BodyFormat = OlBodyFormat.olFormatPlain;
+            Outlook.MailItem Mail = MailsObj as Outlook.MailItem;
+            Mail.BodyFormat = Outlook.OlBodyFormat.olFormatPlain;
 
             Document document = new Document() { ReceivedTime = Mail.ReceivedTime, Email_Subject = Mail.Subject, List_Documents = new List<Document_Ind>() };
             Document_Ind document_ind = new Document_Ind();
 
             string body = Mail.Body;
-            string[] arrDocuments = SepararDocumentosErrores(body).Where(vl => vl != "").ToArray();
+            string[] arrDocuments = SepararDocumentosErrores(body); //.Where(vl => vl != "").ToArray();
 
             for (int i = 0; i < arrDocuments.Length; i++)
             {
                 document_ind = new Document_Ind() { Id = "Document " + (i + 1).ToString() };
 
-                string[] arrDocuments_sections = arrDocuments[i].Trim().Split('\n').Where(vl => vl != "").ToArray();
+                string[] arrDocuments_sections = arrDocuments[i].Trim().Split( new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
                 for (int j = 0; j < arrDocuments_sections.Length; j++)
                 {
@@ -106,10 +114,10 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             while (ExisteDocumento)
             {
-                string Document_Titulo = "========== DOCUMENT " + cont.ToString() + " ==========";
-                if (body_info.Contains(Document_Titulo))
+                string Document_Title = "========== DOCUMENT " + cont.ToString() + " ==========";
+                if (body_info.Contains(Document_Title))
                 {
-                    body_info = body_info.Replace(Document_Titulo, "@");
+                    body_info = body_info.Replace(Document_Title, "@");
                     cont++;
                 }
                 else
@@ -118,7 +126,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 }
             }
 
-            return body_info.Split('@');
+            return body_info.Split( new[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public class Document
@@ -167,6 +175,30 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             //    listbox_EmailDetalles.Items.Add(Formato_Correo);
             //}
+        }
+
+        Outlook.Application GetApplicationObject()
+        {
+            Outlook.Application application = null;
+
+            // Check whether there is an Outlook process running.
+            if (Process.GetProcessesByName("OUTLOOK").Count() < 0)
+            {
+
+                // If so, use the GetActiveObject method to obtain the process and cast it to an Application object.
+                application = Marshal.GetActiveObject("Outlook.Application") as Outlook.Application;
+            }
+            else
+            {
+                // If not, create a new instance of Outlook and sign in to the default profile.
+                application = new Outlook.Application();
+                Outlook.NameSpace nameSpace = application.GetNamespace("MAPI");
+                nameSpace.Logon("desarrollohg03@hgtransportaciones.com", "HGapo123$", Missing.Value, true);
+                nameSpace = null;
+            }
+
+            // Return the Outlook Application object.
+            return application;
         }
     }
 }

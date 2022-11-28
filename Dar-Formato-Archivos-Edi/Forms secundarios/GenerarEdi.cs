@@ -11,6 +11,7 @@ using Dar_Formato_Archivos_Edi.Clases.ClienteEdiTipoArchivo.EdiTipoArchivoFormat
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiConfiguracion;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEvento;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiTipoArchivo;
+using Dar_Formato_Archivos_Edi.Clases.TipoConexion;
 using Dar_Formato_Archivos_Edi.DataAccess;
 using System.Windows.Forms;
 using Dar_Formato_Archivos_Edi.Controllers;
@@ -43,6 +44,10 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             CboClienteEdiConfiguracionId_EnviarArchivo.DataSource = ListadoClienteEdiConfiguracion.Select(vl => new { vl.ClienteEdiConfiguracionId, vl.descripcion }).ToList();
             CboClienteEdiConfiguracionId_EnviarArchivo.ValueMember = "ClienteEdiConfiguracionId";
             CboClienteEdiConfiguracionId_EnviarArchivo.DisplayMember = "descripcion";
+
+            cboTipoConexion.DataSource = TipoConexion.Listado_TipoConexion();
+            cboTipoConexion.ValueMember = "IdTipoConexion";
+            cboTipoConexion.DisplayMember = "Conexion";
 
         }
 
@@ -107,40 +112,29 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         private void btnEnviarArchivo_Click(object sender, EventArgs e)
         {
-            CargarArchivo_SFTP(txtServer.Text, txtUser.Text, txtPassword.Text, txtFolderDestino.Text, Path_Archivo, lblNombreArchivo.Text);
-        }
 
-        private void CargarArchivo_SFTP(string server, string user, string password, string FolderDestino, string PathArchivo, string NombreArchivo)
-        {
-
-            using (SftpClient sftp = new SftpClient(server, user, password))
+            try
             {
-                try
-                {
-                    sftp.Connect();
+                int IdTipoConexion = Convert.ToInt32(cboTipoConexion.SelectedValue);
 
-                    //Crear archivo en SFTP
-                    FileStream fs = new FileStream(Path_Archivo, FileMode.Open);
-                    sftp.BufferSize = 1024;
-                    string rutafile = Path.GetFileName(FolderDestino) + "//" + NombreArchivo;
-                    
-                    //Se carga el archivo al SFTP
-                    sftp.UploadFile(fs, rutafile);
+                if (IdTipoConexion == 1) TipoConexion.CargarArchivo_SFTP(txtServer.Text, txtUser.Text, txtPassword.Text, txtFolderDestino.Text, Path_Archivo, lblNombreArchivo.Text);
 
-                    fs.Dispose();
+                Path_Archivo = "";
+                lblNombreArchivo.Text = "";
 
-                    sftp.Disconnect();
+                //object obj = (
+                //    Nombre: "",
+                //    Apellido: "",
+                //    edad: ""
+                //    );
 
-                    Path_Archivo = "";
-                    lblNombreArchivo.Text = "";
-
-                    MessageBox.Show("Archivo enviado por SFTP");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                MessageBox.Show("Archivo enviado por SFTP");
+            }
+            catch (Exception ex)                                                                                
+            {
+                MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

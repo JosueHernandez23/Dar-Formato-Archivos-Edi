@@ -375,5 +375,77 @@ namespace Dar_Formato_Archivos_Edi
             var f = new CorreosEDI();
             f.Show();
         }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtNombreArchivo.Text = "";
+            TxtFormatoTexto.Text = "";
+        }
+
+        private void Form1_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                var archivo = (Array)e.Data.GetData(DataFormats.FileDrop);
+
+                string rutaArchivo = archivo.GetValue(0).ToString();
+
+                FileInfo fileInfo = new FileInfo(rutaArchivo);
+
+                if (fileInfo.Extension.ToUpper() == ".TXT" || fileInfo.Extension.ToUpper() == ".EDI")
+                {
+                    FileStream filestream = fileInfo.OpenRead();
+                    StreamReader streamreader = new StreamReader(filestream);
+
+                    string textoArchivo = streamreader.ReadToEnd();
+                    string segmento = txtSegmento.Text;
+                    string elemento = txtElemento.Text;
+                    txtNombreArchivo.Text = "";
+                    filestream.Close();
+                    filestream.Dispose();
+
+                    if (rbHabilitar.Checked)
+                    {
+                        segmento = ObtenerSegmento(textoArchivo);
+                        elemento = ObtenerElemento(textoArchivo);
+
+                        if (segmento == "")
+                            segmento = txtSegmento.Text;
+                        if (elemento == "")
+                            elemento = txtElemento.Text;
+                    }
+
+                    if (rbDeshabilitar.Checked)
+                    {
+                        if (segmento == "")
+                            segmento = ObtenerSegmento(textoArchivo);
+                        if (elemento == "")
+                            elemento = ObtenerElemento(textoArchivo);
+                    }
+
+                    txtNombreArchivo.Text = fileInfo.Name;
+                    TxtFormatoTexto.Text = DarFormatoTexto(textoArchivo, segmento, elemento);
+                }
+                else
+                {
+                    MessageBox.Show("No se permiten archivos con esta extension: " + fileInfo.Extension);
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Ocurrio un error: \n\n" + ex.Message);
+            }
+        }
+
+        private void btnEdiPedidos_Click(object sender, EventArgs e)
+        {
+            var f = new EdiPedidos();
+            f.Show();
+        }
     }
 }
