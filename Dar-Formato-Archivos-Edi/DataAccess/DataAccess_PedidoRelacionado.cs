@@ -37,5 +37,29 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado
                 return pedidoRelacionado;
             }
         }
+
+        public PedidoRelacionado GetDesp_pedido_edi(int ClienteEdiPedidoId, string db)
+        {
+            SqlCnx con = new SqlCnx();
+            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            {
+                connection.Open();
+
+                var query = $@"
+                   select	id_pedido,
+		                    no_viaje,
+		                    id_remitente,
+		                    id_remitente_ext,
+		                    id_destinatario,
+		                    id_destinatario_ext
+                    from	chdb_lis.dbo.desp_pedido_edi With(NoLock)
+                    where	ClienteEdiPedidoId = {ClienteEdiPedidoId}
+                ";
+
+                PedidoRelacionado pedidoRelacionado = connection.QuerySingleOrDefault<PedidoRelacionado>(query);
+
+                return pedidoRelacionado;
+            }
+        }
     }
 }

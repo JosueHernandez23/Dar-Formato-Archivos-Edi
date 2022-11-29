@@ -47,27 +47,45 @@
             this.btnCorreosEdi = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnEdiPedidos = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(29, 27);
+            this.label1.Location = new System.Drawing.Point(21, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 15);
+            this.label1.Size = new System.Drawing.Size(55, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre archivo: ";
             // 
             // txtNombreArchivo
             // 
+            this.txtNombreArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreArchivo.AutoSize = true;
             this.txtNombreArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreArchivo.Location = new System.Drawing.Point(157, 27);
+            this.txtNombreArchivo.Location = new System.Drawing.Point(101, 0);
             this.txtNombreArchivo.Name = "txtNombreArchivo";
-            this.txtNombreArchivo.Size = new System.Drawing.Size(0, 15);
+            this.txtNombreArchivo.Size = new System.Drawing.Size(78, 42);
             this.txtNombreArchivo.TabIndex = 1;
             // 
             // fileSystemWatcher1
@@ -78,10 +96,13 @@
             // btnCargarArchivo
             // 
             this.btnCargarArchivo.AllowDrop = true;
+            this.btnCargarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCargarArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCargarArchivo.Location = new System.Drawing.Point(14, 82);
+            this.btnCargarArchivo.Location = new System.Drawing.Point(3, 51);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
-            this.btnCargarArchivo.Size = new System.Drawing.Size(137, 36);
+            this.btnCargarArchivo.Size = new System.Drawing.Size(182, 42);
             this.btnCargarArchivo.TabIndex = 2;
             this.btnCargarArchivo.Text = "Cargar archivo";
             this.btnCargarArchivo.UseVisualStyleBackColor = true;
@@ -90,26 +111,26 @@
             // txtSegmento
             // 
             this.txtSegmento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSegmento.Location = new System.Drawing.Point(335, 89);
+            this.txtSegmento.Location = new System.Drawing.Point(99, 65);
             this.txtSegmento.MaxLength = 1;
             this.txtSegmento.Name = "txtSegmento";
-            this.txtSegmento.Size = new System.Drawing.Size(100, 23);
+            this.txtSegmento.Size = new System.Drawing.Size(42, 23);
             this.txtSegmento.TabIndex = 3;
             // 
             // txtElemento
             // 
             this.txtElemento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtElemento.Location = new System.Drawing.Point(538, 89);
+            this.txtElemento.Location = new System.Drawing.Point(99, 27);
             this.txtElemento.MaxLength = 1;
             this.txtElemento.Name = "txtElemento";
-            this.txtElemento.Size = new System.Drawing.Size(100, 23);
+            this.txtElemento.Size = new System.Drawing.Size(42, 23);
             this.txtElemento.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(249, 92);
+            this.label3.Location = new System.Drawing.Point(13, 65);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 17);
             this.label3.TabIndex = 5;
@@ -119,7 +140,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(457, 92);
+            this.label4.Location = new System.Drawing.Point(18, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 17);
             this.label4.TabIndex = 6;
@@ -127,12 +148,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.rbDeshabilitar);
             this.groupBox1.Controls.Add(this.rbHabilitar);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(689, 42);
+            this.groupBox1.Location = new System.Drawing.Point(162, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(175, 108);
+            this.groupBox1.Size = new System.Drawing.Size(174, 141);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deteccion automatica de caracteres: ";
@@ -140,7 +164,7 @@
             // rbDeshabilitar
             // 
             this.rbDeshabilitar.AutoSize = true;
-            this.rbDeshabilitar.Location = new System.Drawing.Point(6, 68);
+            this.rbDeshabilitar.Location = new System.Drawing.Point(29, 84);
             this.rbDeshabilitar.Name = "rbDeshabilitar";
             this.rbDeshabilitar.Size = new System.Drawing.Size(101, 21);
             this.rbDeshabilitar.TabIndex = 1;
@@ -151,7 +175,7 @@
             // 
             this.rbHabilitar.AutoSize = true;
             this.rbHabilitar.Checked = true;
-            this.rbHabilitar.Location = new System.Drawing.Point(6, 44);
+            this.rbHabilitar.Location = new System.Drawing.Point(29, 50);
             this.rbHabilitar.Name = "rbHabilitar";
             this.rbHabilitar.Size = new System.Drawing.Size(78, 21);
             this.rbHabilitar.TabIndex = 0;
@@ -161,19 +185,25 @@
             // 
             // TxtFormatoTexto
             // 
+            this.TxtFormatoTexto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtFormatoTexto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtFormatoTexto.Location = new System.Drawing.Point(14, 196);
+            this.TxtFormatoTexto.Location = new System.Drawing.Point(3, 193);
             this.TxtFormatoTexto.Name = "TxtFormatoTexto";
-            this.TxtFormatoTexto.Size = new System.Drawing.Size(944, 414);
+            this.TxtFormatoTexto.Size = new System.Drawing.Size(885, 242);
             this.TxtFormatoTexto.TabIndex = 8;
             this.TxtFormatoTexto.Text = "";
             // 
             // btnTexto
             // 
+            this.btnTexto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTexto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTexto.Location = new System.Drawing.Point(14, 134);
+            this.btnTexto.Location = new System.Drawing.Point(3, 99);
             this.btnTexto.Name = "btnTexto";
-            this.btnTexto.Size = new System.Drawing.Size(137, 36);
+            this.btnTexto.Size = new System.Drawing.Size(182, 45);
             this.btnTexto.TabIndex = 9;
             this.btnTexto.Text = "Texto";
             this.btnTexto.UseVisualStyleBackColor = true;
@@ -183,20 +213,23 @@
             // 
             this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
             this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnListadoSegmentos.Location = new System.Drawing.Point(886, 62);
+            this.btnListadoSegmentos.Location = new System.Drawing.Point(3, 3);
             this.btnListadoSegmentos.Name = "btnListadoSegmentos";
-            this.btnListadoSegmentos.Size = new System.Drawing.Size(64, 67);
+            this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
             this.btnListadoSegmentos.TabIndex = 10;
             this.btnListadoSegmentos.UseVisualStyleBackColor = true;
             this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
             // 
             // btnGenerarEdi
             // 
+            this.btnGenerarEdi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerarEdi.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGenerarEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerarEdi.Location = new System.Drawing.Point(764, 166);
+            this.btnGenerarEdi.Location = new System.Drawing.Point(243, 3);
             this.btnGenerarEdi.Name = "btnGenerarEdi";
-            this.btnGenerarEdi.Size = new System.Drawing.Size(87, 24);
+            this.btnGenerarEdi.Size = new System.Drawing.Size(94, 34);
             this.btnGenerarEdi.TabIndex = 11;
             this.btnGenerarEdi.Text = "Generar EDI";
             this.btnGenerarEdi.UseVisualStyleBackColor = true;
@@ -204,11 +237,14 @@
             // 
             // btnCorreosEdi
             // 
+            this.btnCorreosEdi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCorreosEdi.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCorreosEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCorreosEdi.Location = new System.Drawing.Point(659, 166);
+            this.btnCorreosEdi.Location = new System.Drawing.Point(143, 3);
             this.btnCorreosEdi.Name = "btnCorreosEdi";
-            this.btnCorreosEdi.Size = new System.Drawing.Size(87, 24);
+            this.btnCorreosEdi.Size = new System.Drawing.Size(94, 34);
             this.btnCorreosEdi.TabIndex = 12;
             this.btnCorreosEdi.Text = "Correos EDI";
             this.btnCorreosEdi.UseVisualStyleBackColor = true;
@@ -216,9 +252,12 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(560, 166);
+            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLimpiar.Location = new System.Drawing.Point(43, 3);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.Size = new System.Drawing.Size(94, 34);
             this.btnLimpiar.TabIndex = 13;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -226,39 +265,156 @@
             // 
             // btnEdiPedidos
             // 
+            this.btnEdiPedidos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdiPedidos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEdiPedidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdiPedidos.Location = new System.Drawing.Point(874, 165);
+            this.btnEdiPedidos.Location = new System.Drawing.Point(343, 3);
             this.btnEdiPedidos.Name = "btnEdiPedidos";
-            this.btnEdiPedidos.Size = new System.Drawing.Size(81, 24);
+            this.btnEdiPedidos.Size = new System.Drawing.Size(94, 34);
             this.btnEdiPedidos.TabIndex = 15;
             this.btnEdiPedidos.Text = "Edi Pedidos";
             this.btnEdiPedidos.UseVisualStyleBackColor = true;
             this.btnEdiPedidos.Click += new System.EventHandler(this.btnEdiPedidos_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.TxtFormatoTexto, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(14, 12);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(891, 438);
+            this.tableLayoutPanel1.TabIndex = 16;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39F));
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 43);
+            this.tableLayoutPanel2.MinimumSize = new System.Drawing.Size(0, 153);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(885, 153);
+            this.tableLayoutPanel2.TabIndex = 9;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.btnCargarArchivo, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.btnTexto, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel6, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(188, 147);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.94444F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.05556F));
+            this.tableLayoutPanel4.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.groupBox1, 1, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(197, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(339, 147);
+            this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.txtSegmento);
+            this.panel1.Controls.Add(this.txtElemento);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(153, 141);
+            this.panel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel5.ColumnCount = 6;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.btnListadoSegmentos, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnLimpiar, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnEdiPedidos, 4, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnCorreosEdi, 2, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnGenerarEdi, 3, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.MinimumSize = new System.Drawing.Size(0, 40);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(885, 40);
+            this.tableLayoutPanel5.TabIndex = 10;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.35897F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.64103F));
+            this.tableLayoutPanel6.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.txtNombreArchivo, 1, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(182, 42);
+            this.tableLayoutPanel6.TabIndex = 10;
             // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(973, 634);
-            this.Controls.Add(this.btnEdiPedidos);
-            this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.btnCorreosEdi);
-            this.Controls.Add(this.btnGenerarEdi);
-            this.Controls.Add(this.btnListadoSegmentos);
-            this.Controls.Add(this.btnTexto);
-            this.Controls.Add(this.TxtFormatoTexto);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtElemento);
-            this.Controls.Add(this.txtSegmento);
-            this.Controls.Add(this.btnCargarArchivo);
-            this.Controls.Add(this.txtNombreArchivo);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(917, 462);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.MinimumSize = new System.Drawing.Size(933, 501);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Formato Edi";
@@ -267,8 +423,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -292,6 +456,13 @@
         private System.Windows.Forms.Button btnCorreosEdi;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnEdiPedidos;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
     }
 }
 

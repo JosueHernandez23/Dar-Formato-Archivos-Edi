@@ -73,8 +73,16 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         public void SetInformacionRelacion(int ClienteEdiPedidoId, string sqldb)
         {
+            PedidoRelacionado pedidoRelacionado = new PedidoRelacionado();
             // Obtener Informacion de la relacion
-            PedidoRelacionado pedidoRelacionado = GetPedidoRelacionado(ClienteEdiPedidoId);
+            if (sqldb == "chdb_lis")
+            {
+                pedidoRelacionado = GetDesp_pedido_edi(ClienteEdiPedidoId, sqldb);
+            }
+            else 
+            {
+                pedidoRelacionado = GetPedidoRelacionado(ClienteEdiPedidoId);
+            }
 
             if (pedidoRelacionado != null)
             {
@@ -228,6 +236,13 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             DataAccess_PedidoRelacionado dataAccess_PedidoRelacionado = new DataAccess_PedidoRelacionado();
 
             return dataAccess_PedidoRelacionado.GetPedidoRelacionado(ClienteEdiPedidoId);
+        }
+
+        public PedidoRelacionado GetDesp_pedido_edi(int ClienteEdiPedidoId, string db)
+        {
+            DataAccess_PedidoRelacionado dataAccess_PedidoRelacionado = new DataAccess_PedidoRelacionado();
+
+            return dataAccess_PedidoRelacionado.GetDesp_pedido_edi(ClienteEdiPedidoId, db);
         }
 
         public List<ClienteLis> GetClienteLis(List<ClienteLis> lista_cliente, string db)

@@ -771,7 +771,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1269, 965);
+            this.ClientSize = new System.Drawing.Size(1269, 945);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dtGrid_EstatusSeguimiento);
@@ -782,6 +782,7 @@
             this.Controls.Add(this.txtClienteEdiPedidoId);
             this.Controls.Add(this.lblClienteEdiPedidoId);
             this.Name = "EdiPedidos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EdiPedidos";
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EventosReportados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EstatusSeguimiento)).EndInit();
