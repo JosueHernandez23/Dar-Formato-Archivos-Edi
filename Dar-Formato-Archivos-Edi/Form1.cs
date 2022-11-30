@@ -122,7 +122,7 @@ namespace Dar_Formato_Archivos_Edi
 
             foreach (string BloqueSegmento in SeparadorSegmento)
             {
-                textoFormato += BloqueSegmento.Replace("\n", "") + segmento + "\n";
+                textoFormato += BloqueSegmento.Replace("\r\n", "").Replace("\n", "") + segmento + "\n";
             }
 
             return textoFormato.TrimEnd();

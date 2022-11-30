@@ -57,7 +57,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        #region Setear Informacion
+        #region Set_Informacion
         public ClienteEdiPedido SetClienteEdiEstatus(int ClienteEdiPedidoId)
         {
             // Obtener Estatus Edi
@@ -222,7 +222,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         #endregion
 
-        #region Get Informacion
+        #region Get_Informacion
 
         public ClienteEdiPedido GetClienteEdiPedido(int ClienteEdiPedidoId)
         {
