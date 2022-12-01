@@ -150,12 +150,17 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     }
                 }
 
-                if (pedidoRelacionado.no_viaje != null)
+                if (pedidoRelacionado.no_viaje != null && pedidoRelacionado.no_viaje != 0)
                 {
                     // Obtener id_unidad y satelite
                     unidad cUnidad = GetUnidadSatelite(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
                     txtUnidad.Text = cUnidad.id_unidad;
                     txtSatelite.Text = cUnidad.mctNumber != null ? cUnidad.mctNumber : "";
+                }
+                else 
+                {
+                    txtUnidad.Text = " No se encontro la unidad ";
+                    txtSatelite.Text = " No se encontro la unidad ";
                 }
             }
         }
