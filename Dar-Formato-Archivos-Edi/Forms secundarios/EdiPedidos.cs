@@ -24,6 +24,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         public EdiPedidos()
         {
             InitializeComponent();
+            groupBox1.ForeColor = Color.White;
+            groupBox2.ForeColor = Color.White;
+            groupBox3.ForeColor = Color.White;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
