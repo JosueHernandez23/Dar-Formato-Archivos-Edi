@@ -76,14 +76,14 @@
             this.txtDestinatario = new System.Windows.Forms.TextBox();
             this.txtRemitente = new System.Windows.Forms.TextBox();
             this.txtRemitenteAlt = new System.Windows.Forms.TextBox();
-            this.txtSatelite = new System.Windows.Forms.TextBox();
-            this.lblSatelite = new System.Windows.Forms.Label();
-            this.txtUnidad = new System.Windows.Forms.TextBox();
-            this.lblUnidad = new System.Windows.Forms.Label();
             this.lblDestinatarioAlt = new System.Windows.Forms.Label();
             this.lblDestinatario = new System.Windows.Forms.Label();
             this.lblRemitenteAlt = new System.Windows.Forms.Label();
             this.lblRemitente = new System.Windows.Forms.Label();
+            this.txtSatelite = new System.Windows.Forms.TextBox();
+            this.lblSatelite = new System.Windows.Forms.Label();
+            this.txtUnidad = new System.Windows.Forms.TextBox();
+            this.lblUnidad = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtShipment = new System.Windows.Forms.TextBox();
             this.lblShipment = new System.Windows.Forms.Label();
@@ -96,16 +96,16 @@
             this.dgvPosicionUnidad = new System.Windows.Forms.DataGridView();
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtViaje = new System.Windows.Forms.TextBox();
-            this.lblViaje = new System.Windows.Forms.Label();
-            this.txtPedido = new System.Windows.Forms.TextBox();
-            this.lblPedido = new System.Windows.Forms.Label();
             this.txtEstatusViaje = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.txtFechaFinViaje = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.txtFechaInicioViaje = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.txtViaje = new System.Windows.Forms.TextBox();
+            this.lblViaje = new System.Windows.Forms.Label();
+            this.txtPedido = new System.Windows.Forms.TextBox();
+            this.lblPedido = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EventosReportados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EstatusSeguimiento)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -164,6 +164,7 @@
             this.dtGrid_EventosReportados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid_EventosReportados.Location = new System.Drawing.Point(35, 642);
             this.dtGrid_EventosReportados.Name = "dtGrid_EventosReportados";
+            this.dtGrid_EventosReportados.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dtGrid_EventosReportados.Size = new System.Drawing.Size(576, 121);
             this.dtGrid_EventosReportados.TabIndex = 4;
             // 
@@ -173,6 +174,7 @@
             this.dtGrid_EstatusSeguimiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid_EstatusSeguimiento.Location = new System.Drawing.Point(644, 642);
             this.dtGrid_EstatusSeguimiento.Name = "dtGrid_EstatusSeguimiento";
+            this.dtGrid_EstatusSeguimiento.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(574, 121);
             this.dtGrid_EstatusSeguimiento.TabIndex = 6;
             // 
@@ -324,6 +326,7 @@
             this.dtGrid_PedidoDireccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid_PedidoDireccion.Location = new System.Drawing.Point(632, 372);
             this.dtGrid_PedidoDireccion.Name = "dtGrid_PedidoDireccion";
+            this.dtGrid_PedidoDireccion.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dtGrid_PedidoDireccion.Size = new System.Drawing.Size(576, 121);
             this.dtGrid_PedidoDireccion.TabIndex = 9;
             // 
@@ -581,40 +584,6 @@
             this.txtRemitenteAlt.Size = new System.Drawing.Size(341, 23);
             this.txtRemitenteAlt.TabIndex = 9;
             // 
-            // txtSatelite
-            // 
-            this.txtSatelite.Enabled = false;
-            this.txtSatelite.Location = new System.Drawing.Point(251, 64);
-            this.txtSatelite.Name = "txtSatelite";
-            this.txtSatelite.Size = new System.Drawing.Size(108, 23);
-            this.txtSatelite.TabIndex = 15;
-            // 
-            // lblSatelite
-            // 
-            this.lblSatelite.AutoSize = true;
-            this.lblSatelite.Location = new System.Drawing.Point(186, 67);
-            this.lblSatelite.Name = "lblSatelite";
-            this.lblSatelite.Size = new System.Drawing.Size(59, 17);
-            this.lblSatelite.TabIndex = 14;
-            this.lblSatelite.Text = "Satelite:";
-            // 
-            // txtUnidad
-            // 
-            this.txtUnidad.Enabled = false;
-            this.txtUnidad.Location = new System.Drawing.Point(251, 33);
-            this.txtUnidad.Name = "txtUnidad";
-            this.txtUnidad.Size = new System.Drawing.Size(108, 23);
-            this.txtUnidad.TabIndex = 13;
-            // 
-            // lblUnidad
-            // 
-            this.lblUnidad.AutoSize = true;
-            this.lblUnidad.Location = new System.Drawing.Point(184, 36);
-            this.lblUnidad.Name = "lblUnidad";
-            this.lblUnidad.Size = new System.Drawing.Size(61, 17);
-            this.lblUnidad.TabIndex = 12;
-            this.lblUnidad.Text = "Unidad: ";
-            // 
             // lblDestinatarioAlt
             // 
             this.lblDestinatarioAlt.AutoSize = true;
@@ -650,6 +619,40 @@
             this.lblRemitente.Size = new System.Drawing.Size(80, 17);
             this.lblRemitente.TabIndex = 0;
             this.lblRemitente.Text = "Remitente: ";
+            // 
+            // txtSatelite
+            // 
+            this.txtSatelite.Enabled = false;
+            this.txtSatelite.Location = new System.Drawing.Point(251, 64);
+            this.txtSatelite.Name = "txtSatelite";
+            this.txtSatelite.Size = new System.Drawing.Size(108, 23);
+            this.txtSatelite.TabIndex = 15;
+            // 
+            // lblSatelite
+            // 
+            this.lblSatelite.AutoSize = true;
+            this.lblSatelite.Location = new System.Drawing.Point(186, 67);
+            this.lblSatelite.Name = "lblSatelite";
+            this.lblSatelite.Size = new System.Drawing.Size(59, 17);
+            this.lblSatelite.TabIndex = 14;
+            this.lblSatelite.Text = "Satelite:";
+            // 
+            // txtUnidad
+            // 
+            this.txtUnidad.Enabled = false;
+            this.txtUnidad.Location = new System.Drawing.Point(251, 33);
+            this.txtUnidad.Name = "txtUnidad";
+            this.txtUnidad.Size = new System.Drawing.Size(108, 23);
+            this.txtUnidad.TabIndex = 13;
+            // 
+            // lblUnidad
+            // 
+            this.lblUnidad.AutoSize = true;
+            this.lblUnidad.Location = new System.Drawing.Point(184, 36);
+            this.lblUnidad.Name = "lblUnidad";
+            this.lblUnidad.Size = new System.Drawing.Size(61, 17);
+            this.lblUnidad.TabIndex = 12;
+            this.lblUnidad.Text = "Unidad: ";
             // 
             // groupBox2
             // 
@@ -743,6 +746,7 @@
             this.dgvPosicionUnidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPosicionUnidad.Location = new System.Drawing.Point(1235, 143);
             this.dgvPosicionUnidad.Name = "dgvPosicionUnidad";
+            this.dgvPosicionUnidad.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dgvPosicionUnidad.Size = new System.Drawing.Size(159, 620);
             this.dgvPosicionUnidad.TabIndex = 9;
             // 
@@ -779,38 +783,6 @@
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Info. Edi";
-            // 
-            // txtViaje
-            // 
-            this.txtViaje.Location = new System.Drawing.Point(72, 65);
-            this.txtViaje.Name = "txtViaje";
-            this.txtViaje.Size = new System.Drawing.Size(108, 23);
-            this.txtViaje.TabIndex = 15;
-            // 
-            // lblViaje
-            // 
-            this.lblViaje.AutoSize = true;
-            this.lblViaje.Location = new System.Drawing.Point(6, 68);
-            this.lblViaje.Name = "lblViaje";
-            this.lblViaje.Size = new System.Drawing.Size(43, 17);
-            this.lblViaje.TabIndex = 14;
-            this.lblViaje.Text = "Viaje:";
-            // 
-            // txtPedido
-            // 
-            this.txtPedido.Location = new System.Drawing.Point(72, 33);
-            this.txtPedido.Name = "txtPedido";
-            this.txtPedido.Size = new System.Drawing.Size(108, 23);
-            this.txtPedido.TabIndex = 13;
-            // 
-            // lblPedido
-            // 
-            this.lblPedido.AutoSize = true;
-            this.lblPedido.Location = new System.Drawing.Point(6, 36);
-            this.lblPedido.Name = "lblPedido";
-            this.lblPedido.Size = new System.Drawing.Size(60, 17);
-            this.lblPedido.TabIndex = 12;
-            this.lblPedido.Text = "Pedido: ";
             // 
             // txtEstatusViaje
             // 
@@ -862,6 +834,38 @@
             this.label19.Size = new System.Drawing.Size(77, 17);
             this.label19.TabIndex = 57;
             this.label19.Text = "Inicio viaje:";
+            // 
+            // txtViaje
+            // 
+            this.txtViaje.Location = new System.Drawing.Point(72, 65);
+            this.txtViaje.Name = "txtViaje";
+            this.txtViaje.Size = new System.Drawing.Size(108, 23);
+            this.txtViaje.TabIndex = 15;
+            // 
+            // lblViaje
+            // 
+            this.lblViaje.AutoSize = true;
+            this.lblViaje.Location = new System.Drawing.Point(6, 68);
+            this.lblViaje.Name = "lblViaje";
+            this.lblViaje.Size = new System.Drawing.Size(43, 17);
+            this.lblViaje.TabIndex = 14;
+            this.lblViaje.Text = "Viaje:";
+            // 
+            // txtPedido
+            // 
+            this.txtPedido.Location = new System.Drawing.Point(72, 33);
+            this.txtPedido.Name = "txtPedido";
+            this.txtPedido.Size = new System.Drawing.Size(108, 23);
+            this.txtPedido.TabIndex = 13;
+            // 
+            // lblPedido
+            // 
+            this.lblPedido.AutoSize = true;
+            this.lblPedido.Location = new System.Drawing.Point(6, 36);
+            this.lblPedido.Name = "lblPedido";
+            this.lblPedido.Size = new System.Drawing.Size(60, 17);
+            this.lblPedido.TabIndex = 12;
+            this.lblPedido.Text = "Pedido: ";
             // 
             // EdiPedidos
             // 
