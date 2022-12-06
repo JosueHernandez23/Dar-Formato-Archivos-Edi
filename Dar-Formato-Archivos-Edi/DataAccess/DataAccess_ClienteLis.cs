@@ -33,22 +33,6 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 
                     switch (item.tipo_cliente)
                     {
-                        case "Remitente":
-                            query += $@"
-                                select	
-		                                'Remitente' tipo_cliente,
-		                                tc.id_cliente id_cliente,
-		                                tc.nombre nombre_cliente,
-		                                ts.tipoSitio tipositio,
-		                                CONVERT(VARCHAR(80), tc.siteid )  siteID,
-		                                ts.nombre ubicacion,
-                                        ts.descripcion
-                                from	trafico_cliente tc With(NoLock)
-		                                LEFT JOIN trafico_sitios ts With(NoLock) on tc.siteid = ts.siteID
-                                where	tc.id_cliente = {item.id_cliente}
-                            ";
-                            valor++;
-                            break;
 
                         case "Remitente Ext":
                             query += $@"
