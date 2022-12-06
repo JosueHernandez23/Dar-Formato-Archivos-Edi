@@ -97,6 +97,12 @@
             this.lblSCAC = new System.Windows.Forms.Label();
             this.txtEstatus = new System.Windows.Forms.TextBox();
             this.lblEstatus = new System.Windows.Forms.Label();
+            this.txtFechaInicioViaje = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtFechaFinViaje = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtEstatusViaje = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EventosReportados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EstatusSeguimiento)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -176,6 +182,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtEstatusViaje);
+            this.groupBox1.Controls.Add(this.label21);
+            this.groupBox1.Controls.Add(this.txtFechaFinViaje);
+            this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.Controls.Add(this.txtFechaInicioViaje);
+            this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.txtSitioDestDesc);
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.txtSitioRemDesc);
@@ -767,6 +779,57 @@
             this.lblEstatus.TabIndex = 0;
             this.lblEstatus.Text = "Estatus: ";
             // 
+            // txtFechaInicioViaje
+            // 
+            this.txtFechaInicioViaje.Enabled = false;
+            this.txtFechaInicioViaje.Location = new System.Drawing.Point(86, 233);
+            this.txtFechaInicioViaje.Name = "txtFechaInicioViaje";
+            this.txtFechaInicioViaje.Size = new System.Drawing.Size(133, 23);
+            this.txtFechaInicioViaje.TabIndex = 52;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 233);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(77, 17);
+            this.label19.TabIndex = 51;
+            this.label19.Text = "Inicio viaje:";
+            // 
+            // txtFechaFinViaje
+            // 
+            this.txtFechaFinViaje.Enabled = false;
+            this.txtFechaFinViaje.Location = new System.Drawing.Point(86, 268);
+            this.txtFechaFinViaje.Name = "txtFechaFinViaje";
+            this.txtFechaFinViaje.Size = new System.Drawing.Size(133, 23);
+            this.txtFechaFinViaje.TabIndex = 54;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(15, 271);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(64, 17);
+            this.label20.TabIndex = 53;
+            this.label20.Text = "Fin viaje:";
+            // 
+            // txtEstatusViaje
+            // 
+            this.txtEstatusViaje.Enabled = false;
+            this.txtEstatusViaje.Location = new System.Drawing.Point(110, 306);
+            this.txtEstatusViaje.Name = "txtEstatusViaje";
+            this.txtEstatusViaje.Size = new System.Drawing.Size(50, 23);
+            this.txtEstatusViaje.TabIndex = 56;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(8, 309);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(96, 17);
+            this.label21.TabIndex = 55;
+            this.label21.Text = "Estatus viaje: ";
+            // 
             // EdiPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -867,5 +930,11 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtSitioRemAltDesc;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtEstatusViaje;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtFechaFinViaje;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox txtFechaInicioViaje;
+        private System.Windows.Forms.Label label19;
     }
 }

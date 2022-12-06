@@ -109,7 +109,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
             }
         }
 
-        public unidad GetUnidad(int no_viaje, string db)
+        public unidad_Viaje GetUnidad(int no_viaje, string db)
         {
             SqlCnx con = new SqlCnx();
             using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
@@ -118,13 +118,16 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 
                 var query = $@"
                     select tv.id_unidad,
-		                    mu.mctNumber
+		                    mu.mctNumber,
+                            fecha_real_viaje,
+                            fecha_real_fin_viaje,
+                            status_viaje
                      from	trafico_viaje tv With(NoLock) 
 		                    INNER JOIN mtto_unidades mu With(NoLock) ON tv.id_unidad = mu.id_unidad
                      where	tv.no_viaje = {no_viaje}
                 ";
 
-                unidad csunidad = connection.QuerySingleOrDefault<unidad>(query);
+                unidad_Viaje csunidad = connection.QuerySingleOrDefault<unidad_Viaje>(query);
 
                 return csunidad;
             }

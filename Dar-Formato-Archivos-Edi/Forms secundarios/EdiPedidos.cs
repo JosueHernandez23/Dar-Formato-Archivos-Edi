@@ -153,14 +153,19 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (pedidoRelacionado.no_viaje != null && pedidoRelacionado.no_viaje != 0)
                 {
                     // Obtener id_unidad y satelite
-                    unidad cUnidad = GetUnidadSatelite(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
+                    unidad_Viaje cUnidad = GetUnidadSatelite(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
                     txtUnidad.Text = cUnidad.id_unidad;
                     txtSatelite.Text = cUnidad.mctNumber != null ? cUnidad.mctNumber : "";
+
+                    txtFechaInicioViaje.Text = cUnidad.fecha_real_viaje.ToString();
+                    txtFechaFinViaje.Text = cUnidad.fecha_real_fin_viaje.ToString();
+
+                    txtEstatusViaje.Text = cUnidad.status_viaje;
                 }
                 else 
                 {
-                    txtUnidad.Text = " No se encontro la unidad ";
-                    txtSatelite.Text = " No se encontro la unidad ";
+                    txtUnidad.Text = " Revisar estatus del viaje ";
+                    txtSatelite.Text = " Revisar estatus del viaje ";
                 }
             }
         }
@@ -203,7 +208,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     ClienteEdiNotificaEventoId = s.ClienteEdiNotificaEventoId,
                     Evento = s.EventoId + " - " + s.Evento,
                     FechaIngreso = s.FechaIngreso.ToString(),
-                    Texto214 = s.Texto214
+                    Texto214 = s.Texto214,
+                    PedidoDireccionId = s.ClienteEdiPedidoDireccionId
 
                 }).ToList();
             }
@@ -264,7 +270,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return clienteEdiPedido.GetClienteEdiNotificaEvento(ClienteEdiPedidoId);
         }
 
-        public unidad GetUnidadSatelite(int no_viaje, string db)
+        public unidad_Viaje GetUnidadSatelite(int no_viaje, string db)
         {
             DataAccess_ClienteLis dataAccess_ClienteLis = new DataAccess_ClienteLis();
 

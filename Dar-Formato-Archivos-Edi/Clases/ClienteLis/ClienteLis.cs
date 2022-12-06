@@ -17,9 +17,12 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
         public string descripcion { get; set; }
     }
 
-    public class unidad
+    public class unidad_Viaje
     { 
         public string id_unidad { get; set; }
         public string mctNumber { get; set; }
+        public DateTime fecha_real_viaje { get; set; }
+        public DateTime fecha_real_fin_viaje { get; set; }
+        public string status_viaje { get; set; }
     }
 }
