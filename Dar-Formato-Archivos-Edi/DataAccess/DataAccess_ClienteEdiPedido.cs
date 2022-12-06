@@ -10,6 +10,7 @@ using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEstatusSeguimiento;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiPedidoDireccion;
 using System.Data.SqlClient;
 using Dapper;
+using Dar_Formato_Archivos_Edi.Clases.ClienteLis;
 
 namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 {
@@ -130,5 +131,32 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                 return ClienteEdiPedidoDireccion;
             }
         }
+
+        public List<posicion_unidad>  GetPosicion_Unidad(int no_viaje, string db)
+        {
+            SqlCnx con = new SqlCnx();
+            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            {
+                connection.Open();
+
+                var query = $@"
+                    select ubicacion,
+		                    EventTypeDescription,
+                            posdate,
+                            id_unidad
+                     from	desp_posicion_unidad dpu With(NoLock) 
+                     where	dpu.id_viaje = {no_viaje}
+                ";
+
+                List<posicion_unidad> posicion_Unidads = connection.Query<posicion_unidad>(query).ToList();
+                connection.Close();
+
+                return posicion_Unidads;
+            }
+
+        }
+
+
+
     }
 }

@@ -36,6 +36,12 @@
             this.dtGrid_EstatusSeguimiento = new System.Windows.Forms.DataGridView();
             this.lblSeguimiento = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtEstatusViaje = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtFechaFinViaje = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtFechaInicioViaje = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.txtSitioDestDesc = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txtSitioRemDesc = new System.Windows.Forms.TextBox();
@@ -97,17 +103,14 @@
             this.lblSCAC = new System.Windows.Forms.Label();
             this.txtEstatus = new System.Windows.Forms.TextBox();
             this.lblEstatus = new System.Windows.Forms.Label();
-            this.txtFechaInicioViaje = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtFechaFinViaje = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txtEstatusViaje = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.dgvPosicionUnidad = new System.Windows.Forms.DataGridView();
+            this.label22 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EventosReportados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EstatusSeguimiento)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_PedidoDireccion)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPosicionUnidad)).BeginInit();
             this.SuspendLayout();
             // 
             // lblClienteEdiPedidoId
@@ -247,6 +250,57 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion de la relacion";
+            // 
+            // txtEstatusViaje
+            // 
+            this.txtEstatusViaje.Enabled = false;
+            this.txtEstatusViaje.Location = new System.Drawing.Point(110, 306);
+            this.txtEstatusViaje.Name = "txtEstatusViaje";
+            this.txtEstatusViaje.Size = new System.Drawing.Size(50, 23);
+            this.txtEstatusViaje.TabIndex = 56;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(8, 309);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(96, 17);
+            this.label21.TabIndex = 55;
+            this.label21.Text = "Estatus viaje: ";
+            // 
+            // txtFechaFinViaje
+            // 
+            this.txtFechaFinViaje.Enabled = false;
+            this.txtFechaFinViaje.Location = new System.Drawing.Point(86, 268);
+            this.txtFechaFinViaje.Name = "txtFechaFinViaje";
+            this.txtFechaFinViaje.Size = new System.Drawing.Size(133, 23);
+            this.txtFechaFinViaje.TabIndex = 54;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(15, 271);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(64, 17);
+            this.label20.TabIndex = 53;
+            this.label20.Text = "Fin viaje:";
+            // 
+            // txtFechaInicioViaje
+            // 
+            this.txtFechaInicioViaje.Enabled = false;
+            this.txtFechaInicioViaje.Location = new System.Drawing.Point(86, 233);
+            this.txtFechaInicioViaje.Name = "txtFechaInicioViaje";
+            this.txtFechaInicioViaje.Size = new System.Drawing.Size(133, 23);
+            this.txtFechaInicioViaje.TabIndex = 52;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 233);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(77, 17);
+            this.label19.TabIndex = 51;
+            this.label19.Text = "Inicio viaje:";
             // 
             // txtSitioDestDesc
             // 
@@ -625,7 +679,6 @@
             // 
             // txtViaje
             // 
-            this.txtViaje.Enabled = false;
             this.txtViaje.Location = new System.Drawing.Point(86, 72);
             this.txtViaje.Name = "txtViaje";
             this.txtViaje.Size = new System.Drawing.Size(108, 23);
@@ -642,7 +695,6 @@
             // 
             // txtPedido
             // 
-            this.txtPedido.Enabled = false;
             this.txtPedido.Location = new System.Drawing.Point(86, 36);
             this.txtPedido.Name = "txtPedido";
             this.txtPedido.Size = new System.Drawing.Size(108, 23);
@@ -779,62 +831,32 @@
             this.lblEstatus.TabIndex = 0;
             this.lblEstatus.Text = "Estatus: ";
             // 
-            // txtFechaInicioViaje
+            // dgvPosicionUnidad
             // 
-            this.txtFechaInicioViaje.Enabled = false;
-            this.txtFechaInicioViaje.Location = new System.Drawing.Point(86, 233);
-            this.txtFechaInicioViaje.Name = "txtFechaInicioViaje";
-            this.txtFechaInicioViaje.Size = new System.Drawing.Size(133, 23);
-            this.txtFechaInicioViaje.TabIndex = 52;
+            this.dgvPosicionUnidad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPosicionUnidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPosicionUnidad.Location = new System.Drawing.Point(1259, 202);
+            this.dgvPosicionUnidad.Name = "dgvPosicionUnidad";
+            this.dgvPosicionUnidad.Size = new System.Drawing.Size(472, 727);
+            this.dgvPosicionUnidad.TabIndex = 9;
             // 
-            // label19
+            // label22
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(8, 233);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(77, 17);
-            this.label19.TabIndex = 51;
-            this.label19.Text = "Inicio viaje:";
-            // 
-            // txtFechaFinViaje
-            // 
-            this.txtFechaFinViaje.Enabled = false;
-            this.txtFechaFinViaje.Location = new System.Drawing.Point(86, 268);
-            this.txtFechaFinViaje.Name = "txtFechaFinViaje";
-            this.txtFechaFinViaje.Size = new System.Drawing.Size(133, 23);
-            this.txtFechaFinViaje.TabIndex = 54;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(15, 271);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(64, 17);
-            this.label20.TabIndex = 53;
-            this.label20.Text = "Fin viaje:";
-            // 
-            // txtEstatusViaje
-            // 
-            this.txtEstatusViaje.Enabled = false;
-            this.txtEstatusViaje.Location = new System.Drawing.Point(110, 306);
-            this.txtEstatusViaje.Name = "txtEstatusViaje";
-            this.txtEstatusViaje.Size = new System.Drawing.Size(50, 23);
-            this.txtEstatusViaje.TabIndex = 56;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(8, 309);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(96, 17);
-            this.label21.TabIndex = 55;
-            this.label21.Text = "Estatus viaje: ";
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(1255, 179);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(163, 20);
+            this.label22.TabIndex = 42;
+            this.label22.Text = "Seguimiento de viaje: ";
             // 
             // EdiPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1269, 945);
+            this.ClientSize = new System.Drawing.Size(1743, 945);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.dgvPosicionUnidad);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dtGrid_EstatusSeguimiento);
@@ -854,6 +876,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_PedidoDireccion)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPosicionUnidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -936,5 +959,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtFechaInicioViaje;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DataGridView dgvPosicionUnidad;
+        private System.Windows.Forms.Label label22;
     }
 }

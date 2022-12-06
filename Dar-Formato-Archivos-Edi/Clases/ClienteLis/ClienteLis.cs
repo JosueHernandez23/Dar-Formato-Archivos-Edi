@@ -25,4 +25,14 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
         public DateTime fecha_real_fin_viaje { get; set; }
         public string status_viaje { get; set; }
     }
+
+    public class posicion_unidad
+    {
+        public string ubicacion { get; set; }
+        public string EventTypeDescription { get; set; }
+        public DateTime posdate { get; set; }
+        public string id_unidad { get; set; }
+
+    }
+
 }

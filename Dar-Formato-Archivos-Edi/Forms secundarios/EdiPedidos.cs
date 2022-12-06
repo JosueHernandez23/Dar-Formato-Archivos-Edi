@@ -161,6 +161,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     txtFechaFinViaje.Text = cUnidad.fecha_real_fin_viaje.ToString();
 
                     txtEstatusViaje.Text = cUnidad.status_viaje;
+                    List<posicion_unidad> posicion = GetPosicionUnidad(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
+                    dgvPosicionUnidad.DataSource = posicion;
                 }
                 else 
                 {
@@ -231,6 +233,13 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
+        public void SetDespPosicionUnidad(int ClienteEdiPedidoId) {
+            
+        
+        }
+
+
+        
         #endregion
 
         #region Get_Informacion
@@ -276,6 +285,14 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             return dataAccess_ClienteLis.GetUnidad(no_viaje, db);
         }
+
+        public List<posicion_unidad> GetPosicionUnidad(int no_viaje, string db)
+        {
+            DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
+
+            return dataAccess_ClienteEdiPedido.GetPosicion_Unidad(no_viaje,db);
+        }
+
 
         public List<ClienteEdiPedidoEstatusSeguimiento> GetClienteEdiPedidoEstatusSeguimiento(int ClienteEdiPedidoId) 
         {

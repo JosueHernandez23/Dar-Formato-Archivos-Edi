@@ -132,5 +132,9 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                 return csunidad;
             }
         }
+
+        
+
+
     }
 }
