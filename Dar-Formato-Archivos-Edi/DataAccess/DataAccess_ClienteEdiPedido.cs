@@ -142,8 +142,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                 var query = $@"
                     select ubicacion,
 		                    EventTypeDescription,
-                            posdate,
-                            id_unidad
+                            posdate
                      from	desp_posicion_unidad dpu With(NoLock) 
                      where	dpu.id_viaje = {no_viaje}
                 ";

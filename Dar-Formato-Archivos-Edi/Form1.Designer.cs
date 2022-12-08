@@ -33,6 +33,10 @@
             this.txtNombreArchivo = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSegmento = new System.Windows.Forms.TextBox();
+            this.txtElemento = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.rbDeshabilitar = new System.Windows.Forms.RadioButton();
             this.rbHabilitar = new System.Windows.Forms.RadioButton();
             this.TxtFormatoTexto = new System.Windows.Forms.RichTextBox();
@@ -50,10 +54,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSegmento = new System.Windows.Forms.TextBox();
-            this.txtElemento = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.btnReporteEventos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -106,12 +107,52 @@
             this.groupBox1.Controls.Add(this.rbDeshabilitar);
             this.groupBox1.Controls.Add(this.rbHabilitar);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(11, 3);
+            this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(635, 141);
+            this.groupBox1.Size = new System.Drawing.Size(634, 141);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deteccion automatica de caracteres: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(162, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 18);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Elemento: ";
+            // 
+            // txtSegmento
+            // 
+            this.txtSegmento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSegmento.Location = new System.Drawing.Point(243, 86);
+            this.txtSegmento.MaxLength = 1;
+            this.txtSegmento.Name = "txtSegmento";
+            this.txtSegmento.Size = new System.Drawing.Size(184, 23);
+            this.txtSegmento.TabIndex = 7;
+            // 
+            // txtElemento
+            // 
+            this.txtElemento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtElemento.Location = new System.Drawing.Point(243, 54);
+            this.txtElemento.MaxLength = 1;
+            this.txtElemento.Name = "txtElemento";
+            this.txtElemento.Size = new System.Drawing.Size(184, 23);
+            this.txtElemento.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label3.Location = new System.Drawing.Point(157, 86);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(84, 18);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Segmento: ";
             // 
             // rbDeshabilitar
             // 
@@ -278,14 +319,15 @@
             this.tableLayoutPanel3.AutoSize = true;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.btnReporteEventos, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnCargarArchivo, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.btnTexto, 0, 2);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.442177F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.57823F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.97959F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.97279F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.37415F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(231, 147);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -295,11 +337,12 @@
             this.btnCargarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCargarArchivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCargarArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCargarArchivo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnCargarArchivo.Location = new System.Drawing.Point(3, 11);
+            this.btnCargarArchivo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCargarArchivo.Location = new System.Drawing.Point(3, 49);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
-            this.btnCargarArchivo.Size = new System.Drawing.Size(225, 61);
+            this.btnCargarArchivo.Size = new System.Drawing.Size(225, 42);
             this.btnCargarArchivo.TabIndex = 2;
             this.btnCargarArchivo.Text = "Cargar archivo";
             this.btnCargarArchivo.UseVisualStyleBackColor = true;
@@ -310,11 +353,12 @@
             this.btnTexto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTexto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTexto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTexto.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnTexto.Location = new System.Drawing.Point(3, 78);
+            this.btnTexto.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnTexto.Location = new System.Drawing.Point(3, 97);
             this.btnTexto.Name = "btnTexto";
-            this.btnTexto.Size = new System.Drawing.Size(225, 66);
+            this.btnTexto.Size = new System.Drawing.Size(225, 47);
             this.btnTexto.TabIndex = 9;
             this.btnTexto.Text = "Texto";
             this.btnTexto.UseVisualStyleBackColor = true;
@@ -345,7 +389,7 @@
             this.panel1.AutoSize = true;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(2, 141);
+            this.panel1.Size = new System.Drawing.Size(3, 141);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel5
@@ -362,15 +406,16 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.Controls.Add(this.btnListadoSegmentos, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnLimpiar, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 5, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnEdiPedidos, 4, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnCorreosEdi, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnGenerarEdi, 3, 0);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 5, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel5.MinimumSize = new System.Drawing.Size(0, 40);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(901, 40);
             this.tableLayoutPanel5.TabIndex = 10;
             // 
@@ -388,45 +433,21 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 34);
             this.tableLayoutPanel6.TabIndex = 10;
             // 
-            // label4
+            // btnReporteEventos
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Location = new System.Drawing.Point(162, 54);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 18);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Elemento: ";
-            // 
-            // txtSegmento
-            // 
-            this.txtSegmento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSegmento.Location = new System.Drawing.Point(243, 86);
-            this.txtSegmento.MaxLength = 1;
-            this.txtSegmento.Name = "txtSegmento";
-            this.txtSegmento.Size = new System.Drawing.Size(184, 23);
-            this.txtSegmento.TabIndex = 7;
-            // 
-            // txtElemento
-            // 
-            this.txtElemento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtElemento.Location = new System.Drawing.Point(243, 54);
-            this.txtElemento.MaxLength = 1;
-            this.txtElemento.Name = "txtElemento";
-            this.txtElemento.Size = new System.Drawing.Size(184, 23);
-            this.txtElemento.TabIndex = 8;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(157, 86);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 18);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Segmento: ";
+            this.btnReporteEventos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReporteEventos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReporteEventos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReporteEventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReporteEventos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnReporteEventos.Location = new System.Drawing.Point(3, 3);
+            this.btnReporteEventos.Name = "btnReporteEventos";
+            this.btnReporteEventos.Size = new System.Drawing.Size(225, 40);
+            this.btnReporteEventos.TabIndex = 16;
+            this.btnReporteEventos.Text = "Reporte Eventos EDI";
+            this.btnReporteEventos.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -487,6 +508,7 @@
         private System.Windows.Forms.TextBox txtSegmento;
         private System.Windows.Forms.TextBox txtElemento;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnReporteEventos;
     }
 }
 
