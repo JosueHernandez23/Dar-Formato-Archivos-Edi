@@ -154,6 +154,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                             txtSiteIDDestAlt.Text = item.siteID == null ? "" : item.siteID.ToString();
                             txtNombreSitioDestAlt.Text = item.ubicacion == null ? "" : item.ubicacion.ToString();
                             txtSitioDestAltDesc.Text = item.descripcion;
+
                             break;
                     }
                 }
@@ -352,8 +353,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     {
                         if (subitem.AccessibilityObject.Role == AccessibleRole.Text && subitem.AccessibilityObject.Value == "" )
                             subitem.BackColor = Color.Red;
+
+                        if (subitem.Name.Contains("txtTipoSitio") && subitem.AccessibilityObject.Value == "1" || subitem.AccessibilityObject.Value == "0")
+                            subitem.BackColor = Color.Red;
                     }
                 }
+
                 else if (item.AccessibilityObject.Role == AccessibleRole.Text && item.AccessibilityObject.Value == "" && item.Name != "txtClienteEdiPedidoId")
                 {
                         item.BackColor = Color.Red;
