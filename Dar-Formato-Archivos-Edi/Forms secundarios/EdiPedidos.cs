@@ -27,6 +27,11 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             groupBox1.ForeColor = Color.White;
             groupBox2.ForeColor = Color.White;
             groupBox3.ForeColor = Color.White;
+
+            //WhiteMode();
+            //BlackMode();
+            //CustomMode(Color.White, Color.Red);
+            //CustomModeARGB(new byte[4] {255,46,51,73}, new byte[4] { 255, 255, 255, 255 }, new byte[4] { 255, 255, 255, 255 });
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -352,6 +357,118 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 else if (item.AccessibilityObject.Role == AccessibleRole.Text && item.AccessibilityObject.Value == "" && item.Name != "txtClienteEdiPedidoId")
                 {
                         item.BackColor = Color.Red;
+                }
+            }
+        }
+
+        public void WhiteMode() 
+        {
+            // Fondo del form: Blanco
+            this.BackColor = Color.White;
+
+            foreach (Control item in this.Controls)
+            {
+                switch (item.AccessibilityObject.Role)
+                {
+                    case AccessibleRole.Text:
+                        item.ForeColor = Color.Black;
+                        break;
+                    case AccessibleRole.Table:
+                        item.ForeColor = Color.Black;
+                        break;
+
+                    default:
+                        item.ForeColor = Color.Black;
+                        break;
+                }
+            }
+        }
+
+        public void BlackMode()
+        {
+            // Fondo del form: Blanco
+            this.BackColor = Color.Black;
+
+            foreach (Control item in this.Controls)
+            {
+                switch (item.AccessibilityObject.Role) 
+                {
+                    case AccessibleRole.Text:
+                        item.ForeColor = Color.Black;
+                        break;
+                    case AccessibleRole.Table:
+                        item.ForeColor = Color.Black;
+                        break;
+
+                    default: item.ForeColor = Color.White; 
+                        break;
+                }
+            }
+        }
+
+        public void CustomMode(Color Back, Color Fore)
+        {
+            // Fondo del form: Blanco
+            this.BackColor = Back;
+
+            foreach (Control item in this.Controls)
+            {
+                switch (item.AccessibilityObject.Role)
+                {
+                    case AccessibleRole.Text:
+                        item.ForeColor = Fore;
+                        break;
+                    case AccessibleRole.Table:
+                        item.ForeColor = Fore;
+                        break;
+
+                    default:
+                        item.ForeColor = Fore;
+                        break;
+                }
+            }
+        }
+
+        public void CustomModeARGB(byte[] BackArgb, byte[] BodyForeArgb, byte[] TitleContentArgb) 
+        {
+
+            List<Control> listado_Controles = new List<Control>();
+
+            foreach (Control item in Controls)
+            {
+                if (item.Controls.Count > 0)
+                {
+                    foreach (Control SubItem in item.Controls)
+                    {
+                        listado_Controles.Add(SubItem);
+                    }
+                }
+                else
+                {
+                    listado_Controles.Add(item);
+                }
+            }
+
+            // Fondo del form: Blanco
+            this.BackColor = Color.FromArgb(BackArgb[0], BackArgb[1], BackArgb[2], BackArgb[3]);
+
+            foreach (Control item in listado_Controles)
+            {
+                switch (item.GetType().Name)
+                {
+                    case "TextBox":
+                        item.ForeColor = Color.FromArgb(BodyForeArgb[0], BodyForeArgb[1], BodyForeArgb[2], BodyForeArgb[3]);
+                        break;
+                    case "DataGridView":
+                        item.ForeColor = Color.FromArgb(BodyForeArgb[0], BodyForeArgb[1], BodyForeArgb[2], BodyForeArgb[3]);
+                        break;
+                    case "Label":
+                        item.ForeColor = Color.FromArgb(BodyForeArgb[0], BodyForeArgb[1], BodyForeArgb[2], BodyForeArgb[3]);
+                        break;
+
+                    default:
+                        item.ForeColor = Color.FromArgb(BodyForeArgb[0], BodyForeArgb[1], BodyForeArgb[2], BodyForeArgb[3]);
+                        break;
                 }
             }
         }

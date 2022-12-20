@@ -33,6 +33,10 @@
             this.txtNombreArchivo = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSegmento = new System.Windows.Forms.TextBox();
+            this.txtElemento = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.rbDeshabilitar = new System.Windows.Forms.RadioButton();
             this.rbHabilitar = new System.Windows.Forms.RadioButton();
             this.TxtFormatoTexto = new System.Windows.Forms.RichTextBox();
@@ -50,10 +54,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSegmento = new System.Windows.Forms.TextBox();
-            this.txtElemento = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -106,12 +106,52 @@
             this.groupBox1.Controls.Add(this.rbDeshabilitar);
             this.groupBox1.Controls.Add(this.rbHabilitar);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(11, 3);
+            this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(635, 141);
+            this.groupBox1.Size = new System.Drawing.Size(644, 141);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deteccion automatica de caracteres: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(162, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 18);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Elemento: ";
+            // 
+            // txtSegmento
+            // 
+            this.txtSegmento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSegmento.Location = new System.Drawing.Point(243, 86);
+            this.txtSegmento.MaxLength = 1;
+            this.txtSegmento.Name = "txtSegmento";
+            this.txtSegmento.Size = new System.Drawing.Size(184, 23);
+            this.txtSegmento.TabIndex = 7;
+            // 
+            // txtElemento
+            // 
+            this.txtElemento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtElemento.Location = new System.Drawing.Point(243, 54);
+            this.txtElemento.MaxLength = 1;
+            this.txtElemento.Name = "txtElemento";
+            this.txtElemento.Size = new System.Drawing.Size(184, 23);
+            this.txtElemento.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label3.Location = new System.Drawing.Point(157, 86);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(84, 18);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Segmento: ";
             // 
             // rbDeshabilitar
             // 
@@ -147,7 +187,7 @@
             this.TxtFormatoTexto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtFormatoTexto.Location = new System.Drawing.Point(3, 193);
             this.TxtFormatoTexto.Name = "TxtFormatoTexto";
-            this.TxtFormatoTexto.Size = new System.Drawing.Size(901, 351);
+            this.TxtFormatoTexto.Size = new System.Drawing.Size(915, 380);
             this.TxtFormatoTexto.TabIndex = 8;
             this.TxtFormatoTexto.Text = "";
             // 
@@ -170,7 +210,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerarEdi.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGenerarEdi.Enabled = false;
             this.btnGenerarEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerarEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerarEdi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -188,7 +227,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCorreosEdi.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCorreosEdi.Enabled = false;
             this.btnCorreosEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCorreosEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCorreosEdi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -248,7 +286,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(907, 547);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(921, 576);
             this.tableLayoutPanel1.TabIndex = 16;
             // 
             // tableLayoutPanel2
@@ -267,7 +305,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(901, 153);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(915, 153);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
             // tableLayoutPanel3
@@ -286,7 +324,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.442177F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.57823F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.97959F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(231, 147);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(235, 147);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // btnCargarArchivo
@@ -299,7 +337,7 @@
             this.btnCargarArchivo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCargarArchivo.Location = new System.Drawing.Point(3, 11);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
-            this.btnCargarArchivo.Size = new System.Drawing.Size(225, 61);
+            this.btnCargarArchivo.Size = new System.Drawing.Size(229, 61);
             this.btnCargarArchivo.TabIndex = 2;
             this.btnCargarArchivo.Text = "Cargar archivo";
             this.btnCargarArchivo.UseVisualStyleBackColor = true;
@@ -314,7 +352,7 @@
             this.btnTexto.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnTexto.Location = new System.Drawing.Point(3, 78);
             this.btnTexto.Name = "btnTexto";
-            this.btnTexto.Size = new System.Drawing.Size(225, 66);
+            this.btnTexto.Size = new System.Drawing.Size(229, 66);
             this.btnTexto.TabIndex = 9;
             this.btnTexto.Text = "Texto";
             this.btnTexto.UseVisualStyleBackColor = true;
@@ -330,11 +368,11 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 98.61325F));
             this.tableLayoutPanel4.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.groupBox1, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(240, 3);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(244, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(649, 147);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(659, 147);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // panel1
@@ -345,7 +383,7 @@
             this.panel1.AutoSize = true;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(2, 141);
+            this.panel1.Size = new System.Drawing.Size(3, 141);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel5
@@ -371,7 +409,7 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(901, 40);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(915, 40);
             this.tableLayoutPanel5.TabIndex = 10;
             // 
             // tableLayoutPanel6
@@ -388,53 +426,13 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 34);
             this.tableLayoutPanel6.TabIndex = 10;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Location = new System.Drawing.Point(162, 54);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 18);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Elemento: ";
-            // 
-            // txtSegmento
-            // 
-            this.txtSegmento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSegmento.Location = new System.Drawing.Point(243, 86);
-            this.txtSegmento.MaxLength = 1;
-            this.txtSegmento.Name = "txtSegmento";
-            this.txtSegmento.Size = new System.Drawing.Size(184, 23);
-            this.txtSegmento.TabIndex = 7;
-            // 
-            // txtElemento
-            // 
-            this.txtElemento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtElemento.Location = new System.Drawing.Point(243, 54);
-            this.txtElemento.MaxLength = 1;
-            this.txtElemento.Name = "txtElemento";
-            this.txtElemento.Size = new System.Drawing.Size(184, 23);
-            this.txtElemento.TabIndex = 8;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(157, 86);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 18);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Segmento: ";
-            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(933, 571);
+            this.ClientSize = new System.Drawing.Size(947, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
