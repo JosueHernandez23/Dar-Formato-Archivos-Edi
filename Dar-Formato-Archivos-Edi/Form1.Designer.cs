@@ -48,13 +48,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnReporteEventos = new System.Windows.Forms.Button();
             this.btnCargarArchivo = new System.Windows.Forms.Button();
             this.btnTexto = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnReporteEventos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -109,7 +109,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(635, 141);
+            this.groupBox1.Size = new System.Drawing.Size(644, 141);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deteccion automatica de caracteres: ";
@@ -326,8 +326,24 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.97279F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.37415F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(231, 147);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(235, 147);
             this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // btnReporteEventos
+            // 
+            this.btnReporteEventos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReporteEventos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReporteEventos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReporteEventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReporteEventos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnReporteEventos.Location = new System.Drawing.Point(3, 3);
+            this.btnReporteEventos.Name = "btnReporteEventos";
+            this.btnReporteEventos.Size = new System.Drawing.Size(229, 40);
+            this.btnReporteEventos.TabIndex = 16;
+            this.btnReporteEventos.Text = "Reporte Eventos EDI";
+            this.btnReporteEventos.UseVisualStyleBackColor = true;
             // 
             // btnCargarArchivo
             // 
@@ -340,7 +356,7 @@
             this.btnCargarArchivo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCargarArchivo.Location = new System.Drawing.Point(3, 49);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
-            this.btnCargarArchivo.Size = new System.Drawing.Size(225, 42);
+            this.btnCargarArchivo.Size = new System.Drawing.Size(229, 42);
             this.btnCargarArchivo.TabIndex = 2;
             this.btnCargarArchivo.Text = "Cargar archivo";
             this.btnCargarArchivo.UseVisualStyleBackColor = true;
@@ -356,7 +372,7 @@
             this.btnTexto.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnTexto.Location = new System.Drawing.Point(3, 97);
             this.btnTexto.Name = "btnTexto";
-            this.btnTexto.Size = new System.Drawing.Size(225, 47);
+            this.btnTexto.Size = new System.Drawing.Size(229, 47);
             this.btnTexto.TabIndex = 9;
             this.btnTexto.Text = "Texto";
             this.btnTexto.UseVisualStyleBackColor = true;
@@ -414,7 +430,7 @@
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(901, 40);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(915, 40);
             this.tableLayoutPanel5.TabIndex = 10;
             // 
             // tableLayoutPanel6
@@ -430,22 +446,6 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 34);
             this.tableLayoutPanel6.TabIndex = 10;
-            // 
-            // btnReporteEventos
-            // 
-            this.btnReporteEventos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReporteEventos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReporteEventos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReporteEventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReporteEventos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnReporteEventos.Location = new System.Drawing.Point(3, 3);
-            this.btnReporteEventos.Name = "btnReporteEventos";
-            this.btnReporteEventos.Size = new System.Drawing.Size(225, 40);
-            this.btnReporteEventos.TabIndex = 16;
-            this.btnReporteEventos.Text = "Reporte Eventos EDI";
-            this.btnReporteEventos.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

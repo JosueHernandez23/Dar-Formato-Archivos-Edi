@@ -354,6 +354,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                         if (subitem.AccessibilityObject.Role == AccessibleRole.Text && subitem.AccessibilityObject.Value == "" )
                             subitem.BackColor = Color.Red;
 
+                        // Validar que el cliente tenga una geocerca relacionada en lugar de un sitio
                         if (subitem.Name.Contains("txtTipoSitio") && subitem.AccessibilityObject.Value == "1" || subitem.AccessibilityObject.Value == "0")
                             subitem.BackColor = Color.Red;
                     }
