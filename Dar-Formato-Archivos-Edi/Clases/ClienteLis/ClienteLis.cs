@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
     }
 
     public class unidad_Viaje
-    { 
+    {
         public string id_unidad { get; set; }
         public string mctNumber { get; set; }
         public DateTime fecha_real_viaje { get; set; }
@@ -33,6 +34,32 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
         public DateTime posdate { get; set; }
         //public string id_unidad { get; set; }
 
+    }
+
+    public class ReporteEventos
+    {
+        public int ClienteEdiPedidoId { get; set; }
+        public int ClienteId { get; set; }
+        public string CodeSCAC { get; set; }
+        public string descripcion { get; set; }
+        public string Estatus_EDI { get; set; }
+        public string Shipment { get; set; }
+        public string Equipo { get; set; }
+        public string ISA6 { get; set; }
+        public string FechaIngreso { get; set; }
+        public string FechaExpiracion { get; set; }
+        public string Tipo_Mov { get; set; }
+        public string Seg_TRucks { get; set; }
+        public string id_pedido { get; set; }
+        public string Estatus_204 { get; set; }
+        public int Cant { get; set; }
+        public string AA { get; set; }
+        public string X3 { get; set; }
+        public string AF { get; set; }
+        public string AB { get; set; }
+        public string X6 { get; set; }
+        public string X1 { get; set; }
+        public string D1 { get; set; }
     }
 
 }

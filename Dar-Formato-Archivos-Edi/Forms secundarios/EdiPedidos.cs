@@ -87,7 +87,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             {
                 pedidoRelacionado = GetDesp_pedido_edi(ClienteEdiPedidoId, sqldb);
             }
-            else 
+            else
             {
                 pedidoRelacionado = GetPedidoRelacionado(ClienteEdiPedidoId);
             }
@@ -173,7 +173,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     List<posicion_unidad> posicion = GetPosicionUnidad(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
                     dgvPosicionUnidad.DataSource = posicion;
                 }
-                else 
+                else
                 {
                     txtUnidad.Text = " Revisar estatus del viaje ";
                     txtSatelite.Text = " Revisar estatus del viaje ";
@@ -187,7 +187,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (list_PedidoDireccion.Count > 0)
             {
-                dtGrid_PedidoDireccion.DataSource = list_PedidoDireccion.Select(s => new {
+                dtGrid_PedidoDireccion.DataSource = list_PedidoDireccion.Select(s => new
+                {
 
                     ClienteEdiPedidoDireccionId = s.ClienteEdiPedidoDireccionId,
                     ClienteEdiTipoDireccion = s.TipoDireccionId + " - " + s.NombreClienteEdiTipoDireccion,
@@ -206,7 +207,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void SetClienteEdiNotificaEvento(int ClienteEdiPedidoId) 
+        public void SetClienteEdiNotificaEvento(int ClienteEdiPedidoId)
         {
             List<ClienteEdiNotificaEvento> listado_NotificaEvento = GetClienteEdiNotificaEvento(ClienteEdiPedidoId);
 
@@ -232,8 +233,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (list_EstatusSeguimiento.Count > 0)
             {
-                dtGrid_EstatusSeguimiento.DataSource = list_EstatusSeguimiento.Select(s => new { 
-                
+                dtGrid_EstatusSeguimiento.DataSource = list_EstatusSeguimiento.Select(s => new
+                {
+
                     ClienteEdiPedidoEstatusSeguimientoId = s.ClienteEdiPedidoEstatusSeguimientoId,
                     ClienteEdiEstatus = s.ClienteEdiEstatusId + " - " + s.NombreClienteEdiEstatus,
                     Fecha = s.Fecha.ToString()
@@ -242,13 +244,14 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void SetDespPosicionUnidad(int ClienteEdiPedidoId) {
-            
-        
+        public void SetDespPosicionUnidad(int ClienteEdiPedidoId)
+        {
+
+
         }
 
 
-        
+
         #endregion
 
         #region Get_Informacion
@@ -299,11 +302,15 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
-            return dataAccess_ClienteEdiPedido.GetPosicion_Unidad(no_viaje,db);
+            return dataAccess_ClienteEdiPedido.GetPosicion_Unidad(no_viaje, db);
         }
 
+        
 
-        public List<ClienteEdiPedidoEstatusSeguimiento> GetClienteEdiPedidoEstatusSeguimiento(int ClienteEdiPedidoId) 
+
+
+
+        public List<ClienteEdiPedidoEstatusSeguimiento> GetClienteEdiPedidoEstatusSeguimiento(int ClienteEdiPedidoId)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
@@ -336,14 +343,14 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 else if (item.AccessibilityObject.Role == AccessibleRole.Table || item.AccessibilityObject.Role == AccessibleRole.List)
                 {
                     if (item.Name != "txtClienteEdiPedidoId")
-                       item.AccessibilityObject.Value = null;
+                        item.AccessibilityObject.Value = null;
 
                     item.BackColor = Color.Empty;
                 }
             }
         }
 
-        public void MarcarInformacionInvalida() 
+        public void MarcarInformacionInvalida()
         {
             foreach (Control item in this.Controls)
             {
@@ -351,7 +358,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 {
                     foreach (Control subitem in item.Controls)
                     {
-                        if (subitem.AccessibilityObject.Role == AccessibleRole.Text && subitem.AccessibilityObject.Value == "" )
+                        if (subitem.AccessibilityObject.Role == AccessibleRole.Text && subitem.AccessibilityObject.Value == "")
                             subitem.BackColor = Color.Red;
 
                         // Validar que el cliente tenga una geocerca relacionada en lugar de un sitio
@@ -362,12 +369,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
                 else if (item.AccessibilityObject.Role == AccessibleRole.Text && item.AccessibilityObject.Value == "" && item.Name != "txtClienteEdiPedidoId")
                 {
-                        item.BackColor = Color.Red;
+                    item.BackColor = Color.Red;
                 }
             }
         }
 
-        public void WhiteMode() 
+        public void WhiteMode()
         {
             // Fondo del form: Blanco
             this.BackColor = Color.White;
@@ -397,7 +404,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             foreach (Control item in this.Controls)
             {
-                switch (item.AccessibilityObject.Role) 
+                switch (item.AccessibilityObject.Role)
                 {
                     case AccessibleRole.Text:
                         item.ForeColor = Color.Black;
@@ -406,7 +413,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                         item.ForeColor = Color.Black;
                         break;
 
-                    default: item.ForeColor = Color.White; 
+                    default:
+                        item.ForeColor = Color.White;
                         break;
                 }
             }
@@ -435,7 +443,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void CustomModeARGB(byte[] BackArgb, byte[] BodyForeArgb, byte[] TitleContentArgb) 
+        public void CustomModeARGB(byte[] BackArgb, byte[] BodyForeArgb, byte[] TitleContentArgb)
         {
 
             List<Control> listado_Controles = new List<Control>();

@@ -448,9 +448,10 @@ namespace Dar_Formato_Archivos_Edi
             f.Show();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void btnReporteEventos_Click(object sender, EventArgs e)
         {
-
+            var f = new ReporteDeEventos();
+            f.Show();
         }
     }
 }

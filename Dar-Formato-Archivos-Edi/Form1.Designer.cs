@@ -325,8 +325,8 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.97279F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.37415F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.69388F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.01361F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(235, 147);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -345,6 +345,7 @@
             this.btnReporteEventos.TabIndex = 16;
             this.btnReporteEventos.Text = "Reporte Eventos EDI";
             this.btnReporteEventos.UseVisualStyleBackColor = true;
+            this.btnReporteEventos.Click += new System.EventHandler(this.btnReporteEventos_Click);
             // 
             // btnCargarArchivo
             // 
@@ -357,7 +358,7 @@
             this.btnCargarArchivo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCargarArchivo.Location = new System.Drawing.Point(3, 49);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
-            this.btnCargarArchivo.Size = new System.Drawing.Size(229, 42);
+            this.btnCargarArchivo.Size = new System.Drawing.Size(229, 44);
             this.btnCargarArchivo.TabIndex = 2;
             this.btnCargarArchivo.Text = "Cargar archivo";
             this.btnCargarArchivo.UseVisualStyleBackColor = true;
@@ -371,9 +372,9 @@
             this.btnTexto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTexto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTexto.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnTexto.Location = new System.Drawing.Point(3, 97);
+            this.btnTexto.Location = new System.Drawing.Point(3, 99);
             this.btnTexto.Name = "btnTexto";
-            this.btnTexto.Size = new System.Drawing.Size(229, 47);
+            this.btnTexto.Size = new System.Drawing.Size(229, 45);
             this.btnTexto.TabIndex = 9;
             this.btnTexto.Text = "Texto";
             this.btnTexto.UseVisualStyleBackColor = true;
