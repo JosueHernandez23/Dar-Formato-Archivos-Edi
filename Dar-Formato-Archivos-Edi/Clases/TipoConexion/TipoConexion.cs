@@ -24,7 +24,7 @@ namespace Dar_Formato_Archivos_Edi.Clases.TipoConexion
             return Listado_TipoConexion;
         }
 
-        public static void CargarArchivo_SFTP(string server, string user, string password, string FolderDestino, string PathArchivo, string NombreArchivo)
+        public static string CargarArchivo_SFTP(string server, string user, string password, string FolderDestino, string PathArchivo, string NombreArchivo)
         {
 
             using (SftpClient sftp = new SftpClient(server, user, password))
@@ -44,10 +44,12 @@ namespace Dar_Formato_Archivos_Edi.Clases.TipoConexion
                     fs.Dispose();
 
                     sftp.Disconnect();
+
+                    return "El archivo fue cargado por SFTP con exito";
                 }
                 catch (Exception ex)
                 {
-
+                    return "Error: " + ex.Message;
                 }
             }
         }

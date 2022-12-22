@@ -117,7 +117,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             {
                 int IdTipoConexion = Convert.ToInt32(cboTipoConexion.SelectedValue);
 
-                if (IdTipoConexion == 1) TipoConexion.CargarArchivo_SFTP(txtServer.Text, txtUser.Text, txtPassword.Text, txtFolderDestino.Text, Path_Archivo, lblNombreArchivo.Text);
+                if (IdTipoConexion == 1) MessageBox.Show( TipoConexion.CargarArchivo_SFTP(txtServer.Text, txtUser.Text, txtPassword.Text, txtFolderDestino.Text, Path_Archivo, lblNombreArchivo.Text));
 
                 Path_Archivo = "";
                 lblNombreArchivo.Text = "";
@@ -127,8 +127,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 //    Apellido: "",
                 //    edad: ""
                 //    );
-
-                MessageBox.Show("Archivo enviado por SFTP");
             }
             catch (Exception ex)                                                                                
             {
