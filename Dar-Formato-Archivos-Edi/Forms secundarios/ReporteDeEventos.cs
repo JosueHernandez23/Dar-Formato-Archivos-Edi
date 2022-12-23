@@ -42,48 +42,46 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         public void procesoExcel() //Generar Excel
         {
-            //dgvEventos.SelectAll();
-            //DataObject dataObj = dgvEventos.GetClipboardContent();
-            //if (dataObj != null)
-            //    Clipboard.SetDataObject(dataObj);
-
-            
+            dgvEventos.SelectAll();
+            DataObject dataObj = dgvEventos.GetClipboardContent();
+            if (dataObj != null)
+                Clipboard.SetDataObject(dataObj);
         }
 
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
-            sfd.FileName = "Inventory_Adjustment_Export.xls";
+            sfd.FileName = "Exportación_de_ajuste_de_inventario.xls";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                // Copy DataGridView results to clipboard
+                // Copiar resultados de DataGridView al portapapeles
                 procesoExcel();
 
                 object misValue = System.Reflection.Missing.Value;
                 Excel.Application xlexcel = new Excel.Application();
 
-                xlexcel.DisplayAlerts = false; // Without this you will get two confirm overwrite prompts
+                xlexcel.DisplayAlerts = false; // Sin esto obtendrá dos mensajes de confirmación de sobrescritura
                 Excel.Workbook xlWorkBook = xlexcel.Workbooks.Add(misValue);
                 Excel.Worksheet xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
-                // Format column D as text before pasting results, this was required for my data
+                // Formatear la columna D como texto antes de pegar los resultados, esto era necesario para mis datos
                 Excel.Range rng = xlWorkSheet.get_Range("D:D").Cells;
                 rng.NumberFormat = "@";
 
-                // Paste clipboard results to worksheet range
+                // Pegar los resultados del portapapeles en el rango de la hoja de cálculo
                 Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
                 CR.Select();
                 xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
 
-                // For some reason column A is always blank in the worksheet. ¯\_(ツ)_/¯
-                // Delete blank column A and select cell A1
+                // Por alguna razón la columna A está siempre en blanco en la hoja de trabajo. 
+                // Elimina la columna A en blanco y selecciona la celda A1
                 Excel.Range delRng = xlWorkSheet.get_Range("A:A").Cells;
                 delRng.Delete(Type.Missing);
                 xlWorkSheet.get_Range("A1").Select();
 
-                // Save the excel file under the captured location from the SaveFileDialog
+                // Guarda el archivo excel en la ubicación capturada desde el SaveFileDialog
                 xlWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
                 xlexcel.DisplayAlerts = true;
                 xlWorkBook.Close(true, misValue, misValue);
@@ -93,11 +91,11 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 releaseObject(xlWorkBook);
                 releaseObject(xlexcel);
 
-                // Clear Clipboard and DataGridView selection
+                // Borrar la selección del Portapapeles y del DataGridView
                 Clipboard.Clear();
                 dgvEventos.ClearSelection();
 
-                // Open the newly saved excel file
+                // Abrir el archivo excel recién guardado
                 if (File.Exists(sfd.FileName))
                     System.Diagnostics.Process.Start(sfd.FileName);
             }
@@ -114,7 +112,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             catch (Exception ex)
             {
                 obj = null;
-                MessageBox.Show("Exception Occurred while releasing object " + ex.ToString());
+                MessageBox.Show("Se ha producido una excepción al liberar el objeto " + ex.ToString());
             }
             finally
             {
