@@ -1,32 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dar_Formato_Archivos_Edi.Clases.ClienteEdiPedido;
-using Dar_Formato_Archivos_Edi.Clases.PedidoRelacionado;
 using Dar_Formato_Archivos_Edi.Clases.ClienteLis;
-using Dar_Formato_Archivos_Edi.Clases.ClienteEdiPedidoDireccion;
-using Dar_Formato_Archivos_Edi.Clases.ClienteEdiNotificaEvento;
-using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEstatusSeguimiento;
-using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido;
-using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis;
-using System.Drawing.Text;
-using System.Diagnostics;
-using Microsoft.Office.Interop.Excel;
-using System.Collections;
 using DataTable = System.Data.DataTable;
-using Dar_Formato_Archivos_Edi.Conexion;
-using System.IO;
 using ClosedXML.Excel;
-using System.Data.SqlClient;
-using Azure;
-using DocumentFormat.OpenXml.Bibliography;
+using Excel = Microsoft.Office.Interop.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
+using System.IO;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
@@ -37,7 +18,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         public ReporteDeEventos()
         {
             InitializeComponent();
-
         }
 
         public List<ReporteEventos> GetReporte(string db)
@@ -46,14 +26,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             return dataAccess_ClienteEdiPedido.GetReporte(db);
         }
-
-        //public List<ReporteEventos> GetReporteExcel(string db)
-        //{
-        //    DataAccess_ClienteLis dataAccess_ClienteEdiPedido = new DataAccess_ClienteLis();
-
-        //    var resultado = dgvEventos.DataSource;
-        //    return dataAccess_ClienteEdiPedido.GetReporte(db);
-        //}
 
 
 
@@ -70,43 +42,84 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         public void procesoExcel() //Generar Excel
         {
-            dgvEventos.SelectAll();
-            DataObject dataObj = dgvEventos.GetClipboardContent();
-            if (dataObj != null)
-                Clipboard.SetDataObject(dataObj);
+            //dgvEventos.SelectAll();
+            //DataObject dataObj = dgvEventos.GetClipboardContent();
+            //if (dataObj != null)
+            //    Clipboard.SetDataObject(dataObj);
+
+            
         }
 
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
-            XLWorkbook wb = new XLWorkbook();
-            string esc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            SaveFileDialog file = new SaveFileDialog();
-            DataTable data = new DataTable(); //(DataTable)(dgvEventos.DataSource);
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel Documents (*.xls)|*.xls";
+            sfd.FileName = "Inventory_Adjustment_Export.xls";
 
-            dgvEventos.SelectAll();
-            DataObject dataObj = dgvEventos.GetClipboardContent();
-            DataAccess_ClienteLis da = new DataAccess_ClienteLis();
-            data = (DataTable)(dgvEventos.DataSource);
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                // Copy DataGridView results to clipboard
+                procesoExcel();
 
-            file.Filter = "Excel Files | *.xlsx";
-            //wb.Worksheets.Add((dataObj.ToString()), "Hoja1");
-            wb.SaveAs(esc + @"\Prueba.xlms");
+                object misValue = System.Reflection.Missing.Value;
+                Excel.Application xlexcel = new Excel.Application();
 
-            //if (cBoxSQL.SelectedIndex.ToString() != "")
-            //{
-            //    procesoExcel();
-            //    Microsoft.Office.Interop.Excel.Application xlexcel;
-            //    Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
-            //    Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
-            //    object misValue = System.Reflection.Missing.Value;
-            //    xlexcel = new Microsoft.Office.Interop.Excel.Application();
-            //    xlexcel.Visible = true;
-            //    xlWorkBook = xlexcel.Workbooks.Add(misValue);
-            //    xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            //    Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[1, 1];
-            //    CR.Select();
-            //    xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
-            //}
+                xlexcel.DisplayAlerts = false; // Without this you will get two confirm overwrite prompts
+                Excel.Workbook xlWorkBook = xlexcel.Workbooks.Add(misValue);
+                Excel.Worksheet xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                // Format column D as text before pasting results, this was required for my data
+                Excel.Range rng = xlWorkSheet.get_Range("D:D").Cells;
+                rng.NumberFormat = "@";
+
+                // Paste clipboard results to worksheet range
+                Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
+                CR.Select();
+                xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+
+                // For some reason column A is always blank in the worksheet. ¯\_(ツ)_/¯
+                // Delete blank column A and select cell A1
+                Excel.Range delRng = xlWorkSheet.get_Range("A:A").Cells;
+                delRng.Delete(Type.Missing);
+                xlWorkSheet.get_Range("A1").Select();
+
+                // Save the excel file under the captured location from the SaveFileDialog
+                xlWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                xlexcel.DisplayAlerts = true;
+                xlWorkBook.Close(true, misValue, misValue);
+                xlexcel.Quit();
+
+                releaseObject(xlWorkSheet);
+                releaseObject(xlWorkBook);
+                releaseObject(xlexcel);
+
+                // Clear Clipboard and DataGridView selection
+                Clipboard.Clear();
+                dgvEventos.ClearSelection();
+
+                // Open the newly saved excel file
+                if (File.Exists(sfd.FileName))
+                    System.Diagnostics.Process.Start(sfd.FileName);
+            }
+
+        }
+
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                MessageBox.Show("Exception Occurred while releasing object " + ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
+            }
         }
     }
 }
