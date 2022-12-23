@@ -32,6 +32,7 @@
             this.cBoxSQL = new System.Windows.Forms.ComboBox();
             this.lblWaiting = new System.Windows.Forms.Label();
             this.lblEspera = new System.Windows.Forms.Label();
+            this.btnExportExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,6 +82,16 @@
             this.lblEspera.Size = new System.Drawing.Size(0, 25);
             this.lblEspera.TabIndex = 3;
             // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Location = new System.Drawing.Point(1229, 10);
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.Size = new System.Drawing.Size(75, 23);
+            this.btnExportExcel.TabIndex = 4;
+            this.btnExportExcel.Text = "Excel";
+            this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
+            // 
             // ReporteDeEventos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -88,6 +99,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1316, 634);
+            this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.lblEspera);
             this.Controls.Add(this.lblWaiting);
             this.Controls.Add(this.cBoxSQL);
@@ -108,5 +120,6 @@
         private System.Windows.Forms.ComboBox cBoxSQL;
         private System.Windows.Forms.Label lblWaiting;
         private System.Windows.Forms.Label lblEspera;
+        private System.Windows.Forms.Button btnExportExcel;
     }
 }

@@ -305,11 +305,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return dataAccess_ClienteEdiPedido.GetPosicion_Unidad(no_viaje, db);
         }
 
-        
-
-
-
-
         public List<ClienteEdiPedidoEstatusSeguimiento> GetClienteEdiPedidoEstatusSeguimiento(int ClienteEdiPedidoId)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();

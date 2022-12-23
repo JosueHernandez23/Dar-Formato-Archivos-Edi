@@ -8,6 +8,8 @@ using Dapper;
 using Dar_Formato_Archivos_Edi.Clases.ClienteLis;
 using Dar_Formato_Archivos_Edi.Conexion;
 using Org.BouncyCastle.Utilities;
+using System.Data;
+using System.Data.Common;
 
 namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 {
@@ -137,12 +139,15 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
         public List<ReporteEventos> GetReporte(string db)
         {
             SqlCnx con = new SqlCnx();
+            
 
             using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
             {
                 connection.Open();
+                
 
                 var query = $@"
+
                     Declare @ll_ClienteEdiPedidoId integer,
 		                    @ll_evento int
 		
@@ -171,7 +176,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                     Where cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId And 
                           cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId And --cep.ClienteediconfiguracionId = @ll_configuracionId and
                           cec.SQL_DB In ( Select valor from general_parametros With( NoLock ) Where  nombre = 'edihgnuevodbname' ) And
-                          cep.Fecha_parada_ini >= DATEADD(DAY, -5,GETDATE())
+                          cep.Fecha_parada_ini >= DATEADD(DAY, -1,GETDATE())
 
                     Order by cep.Shipment asc 
 
@@ -301,6 +306,25 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                  ";
 
                 List<ReporteEventos> reporteEventos = connection.Query<ReporteEventos>(query).ToList();
+
+                //DataTable dt = new DataTable();
+                //dt.TableName = "#tt_edi_nuevo";
+                //DataAdapter da = (DataAdapter)connection.Query<ReporteEventos>(query);
+                //DataSet ds = new DataSet();
+
+                //da.Fill(ds);
+
+                //return new List<ReporteEventos>();
+
+                var conec = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db));
+
+                DataTable dt = new DataTable();
+                dt.TableName = "#tt_edi_nuevo";
+                conec.Open();
+                SqlDataAdapter da = new SqlDataAdapter(query, conec);
+                da.Fill(dt);
+                conec.Close();
+
                 return reporteEventos;
             }
 
