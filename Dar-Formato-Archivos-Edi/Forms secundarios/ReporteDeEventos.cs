@@ -42,6 +42,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         public void procesoExcel() //Generar Excel
         {
+            dgvEventos.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
             dgvEventos.SelectAll();
             DataObject dataObj = dgvEventos.GetClipboardContent();
             if (dataObj != null)
