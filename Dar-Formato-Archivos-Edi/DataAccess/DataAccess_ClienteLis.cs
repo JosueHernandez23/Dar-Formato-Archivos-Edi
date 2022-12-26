@@ -10,6 +10,8 @@ using Dar_Formato_Archivos_Edi.Conexion;
 using Org.BouncyCastle.Utilities;
 using System.Data;
 using System.Data.Common;
+using System.Threading;
+using iTextSharp.text;
 
 namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 {
@@ -136,7 +138,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
             }
         }
 
-        public List<ReporteEventos> GetReporte(string db)
+        public List<ReporteEventos> GetReporte(string db,int config)
         {
             SqlCnx con = new SqlCnx();
             
@@ -144,12 +146,11 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
             using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
             {
                 connection.Open();
-                
-
                 var query = $@"
 
                     Declare @ll_ClienteEdiPedidoId integer,
-		                    @ll_evento int
+		                    @ll_evento int,
+                            @ll_configuracionId int = "+ config +@"
 		
 
                     --Select * from edidb.dbo.ClienteEdiEstatus
@@ -174,9 +175,10 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                          edidb.dbo.ClienteEdiEstatus cee With( Nolock ) 
 
                     Where cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId And 
-                          cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId And --cep.ClienteediconfiguracionId = @ll_configuracionId and
+                          cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId And 
                           cec.SQL_DB In ( Select valor from general_parametros With( NoLock ) Where  nombre = 'edihgnuevodbname' ) And
-                          cep.Fecha_parada_ini >= DATEADD(DAY, -1,GETDATE())
+                          cep.ClienteediconfiguracionId = @ll_configuracionId and
+                          cep.Fecha_parada_ini >= DATEADD(DAY, -3,GETDATE())
 
                     Order by cep.Shipment asc 
 
@@ -302,17 +304,17 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 	                       , D1 
                     From #tt_edi_nuevo
                     --where Estatus_204 = '204 En tiempo'
-                     Order by ClienteEdiPedidoId DESC
+                    Order by ClienteEdiPedidoId DESC
                  ";
 
-                List<ReporteEventos> reporteEventos = connection.Query<ReporteEventos>(query).ToList();
-
+                List<ReporteEventos> reporteEventos = connection.Query<ReporteEventos>(query,commandTimeout: 3600).ToList();
                 var conec = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db));
 
                 DataTable dt = new DataTable();
                 dt.TableName = "#tt_edi_nuevo";
                 conec.Open();
                 SqlDataAdapter da = new SqlDataAdapter(query, conec);
+                da.SelectCommand.CommandTimeout = 3600;
                 da.Fill(dt);
                 conec.Close();
 

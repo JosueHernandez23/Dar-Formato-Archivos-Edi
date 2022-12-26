@@ -8,35 +8,64 @@ using ClosedXML.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.IO;
+using System.Threading;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
     public partial class ReporteDeEventos : Form
     {
-
+        
 
         public ReporteDeEventos()
         {
             InitializeComponent();
         }
 
-        public List<ReporteEventos> GetReporte(string db)
+        public List<ReporteEventos> GetReporte(string db,int config)
         {
             DataAccess_ClienteLis dataAccess_ClienteEdiPedido = new DataAccess_ClienteLis();
 
-            return dataAccess_ClienteEdiPedido.GetReporte(db);
+            return dataAccess_ClienteEdiPedido.GetReporte(db,config);
         }
-
 
 
         //Combo Box Para filtrar la base de datos siempre y cuando el campo no sea vacio
         public void cBoxSQL_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cBoxSQL.SelectedIndex.ToString() != "")
+            ThreadStart newThread = new ThreadStart(OtherThread);
+            Thread thread = new Thread(newThread);
+            thread.Start();
+
+            void OtherThread()
             {
-                MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-                dgvEventos.DataSource = GetReporte(cBoxSQL.Text);
-                MessageBox.Show("Se Completo Correctamente");
+
+                if (cBoxSQL.SelectedIndex.ToString() != "")
+                {
+                    MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
+
+                    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
+                    {
+                        dgvEventos.DataSource = GetReporte(cBoxSQL.Text, 1);
+                        MessageBox.Show("Se Cargaron Completamente los datos");
+                    }
+                    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
+                    {
+                        dgvEventos.DataSource = GetReporte(cBoxSQL.Text, 2);
+                        MessageBox.Show("Se Cargaron Completamente los datos");
+                    }
+                    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "RLDB_LIS")
+                    {
+                        dgvEventos.DataSource = GetReporte(cBoxSQL.Text, 7);
+                        MessageBox.Show("Se Cargaron Completamente los datos");
+                    }
+                    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "LINDADB")
+                    {
+                        dgvEventos.DataSource = GetReporte(cBoxSQL.Text, 8);
+                        MessageBox.Show("Se Cargaron Completamente los datos");
+                    }
+
+                    MessageBox.Show("Se Completo Correctamente");
+                }
             }
         }
 
@@ -53,7 +82,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
-            sfd.FileName = "Reporte de Eventos_" + DateTime.Now + "_.xls";
+            sfd.FileName = "Reporte de Eventos_" + DateTime.Today.Day    + "-" +
+                                                   DateTime.Today.Month  + "-" +
+                                                   DateTime.Today.Year   + "_" + 
+                                                   DateTime.Today.Hour   + "-" +
+                                                   DateTime.Today.Minute + "-" +
+                                                   DateTime.Today.Second + "_.xls";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -77,7 +111,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
 
                 // Por alguna razón la columna A está siempre en blanco en la hoja de trabajo. 
-                // Elimina la columna A en blanco y selecciona la celda A1
+                // Elimina la columna A en blanco y selecciona la celda A1 
                 Excel.Range delRng = xlWorkSheet.get_Range("A:A").Cells;
                 delRng.Delete(Type.Missing);
                 xlWorkSheet.get_Range("A1").Select();

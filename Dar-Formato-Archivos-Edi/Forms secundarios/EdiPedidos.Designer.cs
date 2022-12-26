@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EdiPedidos));
             this.lblClienteEdiPedidoId = new System.Windows.Forms.Label();
             this.txtClienteEdiPedidoId = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -36,6 +37,8 @@
             this.dtGrid_EstatusSeguimiento = new System.Windows.Forms.DataGridView();
             this.lblSeguimiento = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.txtSitioDestDesc = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txtSitioRemDesc = new System.Windows.Forms.TextBox();
@@ -106,8 +109,6 @@
             this.lblViaje = new System.Windows.Forms.Label();
             this.txtPedido = new System.Windows.Forms.TextBox();
             this.lblPedido = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EventosReportados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EstatusSeguimiento)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -245,6 +246,26 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion de la relacion";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(759, 18);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(255, 20);
+            this.label24.TabIndex = 53;
+            this.label24.Text = "Destinatario de eventos X1/D1";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(146, 19);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(240, 20);
+            this.label23.TabIndex = 52;
+            this.label23.Text = "Remitente de eventos X3/AF";
             // 
             // txtSitioDestDesc
             // 
@@ -872,26 +893,6 @@
             this.lblPedido.TabIndex = 12;
             this.lblPedido.Text = "Pedido: ";
             // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(146, 19);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(240, 20);
-            this.label23.TabIndex = 52;
-            this.label23.Text = "Remitente de eventos X3/AF";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(759, 18);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(255, 20);
-            this.label24.TabIndex = 53;
-            this.label24.Text = "Destinatario de eventos X1/D1";
-            // 
             // EdiPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -913,6 +914,7 @@
             this.Controls.Add(this.lblClienteEdiPedidoId);
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EdiPedidos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EdiPedidos";

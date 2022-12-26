@@ -51,7 +51,7 @@
             this.cboClientes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cboClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboClientes.FormattingEnabled = true;
-            this.cboClientes.Location = new System.Drawing.Point(69, 3);
+            this.cboClientes.Location = new System.Drawing.Point(68, 3);
             this.cboClientes.Name = "cboClientes";
             this.cboClientes.Size = new System.Drawing.Size(158, 24);
             this.cboClientes.TabIndex = 0;
@@ -163,7 +163,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(263, 30);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(262, 30);
             this.tableLayoutPanel3.TabIndex = 10;
             // 
             // tableLayoutPanel4
@@ -176,11 +176,11 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.54475F));
             this.tableLayoutPanel4.Controls.Add(this.lblTipoArchivo, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.cboTipoArchivo, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(442, 3);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(441, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(514, 30);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(515, 30);
             this.tableLayoutPanel4.TabIndex = 11;
             // 
             // Listado_Segmentos

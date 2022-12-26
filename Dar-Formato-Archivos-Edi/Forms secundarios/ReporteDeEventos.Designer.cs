@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReporteDeEventos));
             this.dgvEventos = new System.Windows.Forms.DataGridView();
             this.cBoxSQL = new System.Windows.Forms.ComboBox();
             this.lblWaiting = new System.Windows.Forms.Label();
@@ -38,12 +39,13 @@
             // 
             // dgvEventos
             // 
+            this.dgvEventos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvEventos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvEventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEventos.Location = new System.Drawing.Point(12, 39);
+            this.dgvEventos.Location = new System.Drawing.Point(12, 50);
             this.dgvEventos.Name = "dgvEventos";
             this.dgvEventos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            this.dgvEventos.Size = new System.Drawing.Size(1292, 583);
+            this.dgvEventos.Size = new System.Drawing.Size(1292, 592);
             this.dgvEventos.TabIndex = 0;
             // 
             // cBoxSQL
@@ -55,7 +57,7 @@
             "CHDB_LIS",
             "RLDB_LIS",
             "LINDADB"});
-            this.cBoxSQL.Location = new System.Drawing.Point(173, 12);
+            this.cBoxSQL.Location = new System.Drawing.Point(173, 15);
             this.cBoxSQL.Name = "cBoxSQL";
             this.cBoxSQL.Size = new System.Drawing.Size(121, 21);
             this.cBoxSQL.TabIndex = 1;
@@ -84,7 +86,7 @@
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Location = new System.Drawing.Point(1229, 10);
+            this.btnExportExcel.Location = new System.Drawing.Point(1229, 15);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 23);
             this.btnExportExcel.TabIndex = 4;
@@ -94,9 +96,10 @@
             // 
             // ReporteDeEventos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1316, 634);
             this.Controls.Add(this.btnExportExcel);
@@ -104,7 +107,7 @@
             this.Controls.Add(this.lblWaiting);
             this.Controls.Add(this.cBoxSQL);
             this.Controls.Add(this.dgvEventos);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ReporteDeEventos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReporteDeEventos";

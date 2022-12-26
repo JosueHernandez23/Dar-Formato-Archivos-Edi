@@ -212,6 +212,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerarEdi.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGenerarEdi.Enabled = false;
             this.btnGenerarEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerarEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerarEdi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -229,6 +230,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCorreosEdi.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCorreosEdi.Enabled = false;
             this.btnCorreosEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCorreosEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCorreosEdi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -459,6 +461,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(933, 501);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
