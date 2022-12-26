@@ -307,15 +307,6 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 
                 List<ReporteEventos> reporteEventos = connection.Query<ReporteEventos>(query).ToList();
 
-                //DataTable dt = new DataTable();
-                //dt.TableName = "#tt_edi_nuevo";
-                //DataAdapter da = (DataAdapter)connection.Query<ReporteEventos>(query);
-                //DataSet ds = new DataSet();
-
-                //da.Fill(ds);
-
-                //return new List<ReporteEventos>();
-
                 var conec = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db));
 
                 DataTable dt = new DataTable();

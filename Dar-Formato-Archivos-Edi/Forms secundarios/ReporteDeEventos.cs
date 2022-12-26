@@ -42,7 +42,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         public void procesoExcel() //Generar Excel
         {
-            dgvEventos.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+            dgvEventos.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText; //Se selec
             dgvEventos.SelectAll();
             DataObject dataObj = dgvEventos.GetClipboardContent();
             if (dataObj != null)
@@ -53,7 +53,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
-            sfd.FileName = "Exportación_de_ajuste_de_inventario.xls";
+            sfd.FileName = "Reporte de Eventos_" + DateTime.Now + "_.xls";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
