@@ -21,13 +21,11 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             InitializeComponent();
             if (cBoxSQL.SelectedIndex.ToString() == "" || dgvEventos.DataSource == null)
                 btnExportExcel.Hide();
-
         }
 
         public List<ReporteEventos> GetReporte(string db,int config)
         {
             DataAccess_ClienteLis dataAccess_ClienteEdiPedido = new DataAccess_ClienteLis();
-            
 
             return dataAccess_ClienteEdiPedido.GetReporte(db,config);
         }
@@ -43,22 +41,15 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 lblComplete.Text = "Espera a que termine de cargar los datos";
                 thread1.Start();
                 btnExportExcel.Show();
-
-            //CargaDataGrid();
-            //thread1.Suspend();
-
         }
 
         public void CargaDataGrid() {
             string db;
             object config;
 
-
             if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
             {
-
-                MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-                
+                MessageBox.Show("Favor de esperar a que termine de procesar los datos..."); 
 
                 if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
                 {
@@ -97,10 +88,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 btnExportExcel.Show();
             }
         }
-
-
-
-
 
         public void procesoExcel() //Generar Excel
         {
