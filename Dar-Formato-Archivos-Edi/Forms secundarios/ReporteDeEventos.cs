@@ -19,11 +19,15 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         public ReporteDeEventos()
         {
             InitializeComponent();
+            if (cBoxSQL.SelectedIndex.ToString() == "" || dgvEventos.DataSource == null)
+                btnExportExcel.Hide();
+
         }
 
         public List<ReporteEventos> GetReporte(string db,int config)
         {
             DataAccess_ClienteLis dataAccess_ClienteEdiPedido = new DataAccess_ClienteLis();
+            
 
             return dataAccess_ClienteEdiPedido.GetReporte(db,config);
         }
@@ -32,42 +36,68 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         //Combo Box Para filtrar la base de datos siempre y cuando el campo no sea vacio
         public void cBoxSQL_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ThreadStart newThread = new ThreadStart(OtherThread);
-            Thread thread = new Thread(newThread);
-            thread.Start();
+            CheckForIllegalCrossThreadCalls = false;
+            Thread thread1 = new Thread(new ThreadStart(CargaDataGrid));
+            if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
+                dgvEventos.ClearSelection();
+                thread1.Start();
+                CargaDataGrid();
+                thread1.Suspend();
+                
+        }
 
-            void OtherThread()
+        public void CargaDataGrid() {
+            string db;
+            object config;
+
+
+            if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
             {
 
-                if (cBoxSQL.SelectedIndex.ToString() != "")
+                MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
+                
+
+                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
                 {
-                    MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-
-                    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
-                    {
-                        dgvEventos.DataSource = GetReporte(cBoxSQL.Text, 1);
-                        MessageBox.Show("Se Cargaron Completamente los datos");
-                    }
-                    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
-                    {
-                        dgvEventos.DataSource = GetReporte(cBoxSQL.Text, 2);
-                        MessageBox.Show("Se Cargaron Completamente los datos");
-                    }
-                    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "RLDB_LIS")
-                    {
-                        dgvEventos.DataSource = GetReporte(cBoxSQL.Text, 7);
-                        MessageBox.Show("Se Cargaron Completamente los datos");
-                    }
-                    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "LINDADB")
-                    {
-                        dgvEventos.DataSource = GetReporte(cBoxSQL.Text, 8);
-                        MessageBox.Show("Se Cargaron Completamente los datos");
-                    }
-
-                    MessageBox.Show("Se Completo Correctamente");
+                    db = cBoxSQL.Text;
+                    config = 1;
+                    dgvEventos.DataSource = GetReporte(db, (int)config);
+                    MessageBox.Show("Se Cargaron Completamente los datos");
                 }
+
+                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
+                {
+                    db = cBoxSQL.Text;
+                    config = 2;
+                    dgvEventos.DataSource = GetReporte(db, (int)config);
+                    MessageBox.Show("Se Cargaron Completamente los datos");
+                }
+
+                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "RLDB_LIS")
+                {
+                    db = cBoxSQL.Text;
+                    config = 7;
+                    dgvEventos.DataSource = GetReporte(db, (int)config);
+                    MessageBox.Show("Se Cargaron Completamente los datos");
+                }
+
+                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "LINDADB")
+                {
+                    db = cBoxSQL.Text;
+                    config = 8;
+
+                    dgvEventos.DataSource = GetReporte(db, (int)config);
+                    MessageBox.Show("Se Cargaron Completamente los datos");
+                }
+                
+                lblComplete.Text = "Se Completo la carga de datos";
+                btnExportExcel.Show();
             }
         }
+
+
+
+
 
         public void procesoExcel() //Generar Excel
         {

@@ -34,6 +34,7 @@
             this.lblWaiting = new System.Windows.Forms.Label();
             this.lblEspera = new System.Windows.Forms.Label();
             this.btnExportExcel = new System.Windows.Forms.Button();
+            this.lblComplete = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,6 +95,15 @@
             this.btnExportExcel.UseVisualStyleBackColor = true;
             this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
+            // lblComplete
+            // 
+            this.lblComplete.AutoSize = true;
+            this.lblComplete.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblComplete.Location = new System.Drawing.Point(302, 18);
+            this.lblComplete.Name = "lblComplete";
+            this.lblComplete.Size = new System.Drawing.Size(0, 13);
+            this.lblComplete.TabIndex = 5;
+            // 
             // ReporteDeEventos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -102,6 +112,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1316, 634);
+            this.Controls.Add(this.lblComplete);
             this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.lblEspera);
             this.Controls.Add(this.lblWaiting);
@@ -124,5 +135,6 @@
         private System.Windows.Forms.Label lblWaiting;
         private System.Windows.Forms.Label lblEspera;
         private System.Windows.Forms.Button btnExportExcel;
+        private System.Windows.Forms.Label lblComplete;
     }
 }
