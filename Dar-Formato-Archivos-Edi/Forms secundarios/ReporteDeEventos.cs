@@ -40,10 +40,13 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             Thread thread1 = new Thread(new ThreadStart(CargaDataGrid));
             if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
                 dgvEventos.ClearSelection();
+                lblComplete.Text = "Espera a que termine de cargar los datos";
                 thread1.Start();
-                CargaDataGrid();
-                thread1.Suspend();
-                
+                btnExportExcel.Show();
+
+            //CargaDataGrid();
+            //thread1.Suspend();
+
         }
 
         public void CargaDataGrid() {
@@ -114,10 +117,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
             sfd.FileName = "Reporte de Eventos_" + DateTime.Today.Day    + "-" +
                                                    DateTime.Today.Month  + "-" +
-                                                   DateTime.Today.Year   + "_" + 
-                                                   DateTime.Today.Hour   + "-" +
-                                                   DateTime.Today.Minute + "-" +
-                                                   DateTime.Today.Second + "_.xls";
+                                                   DateTime.Today.Year   + "_" + "_.xls";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
