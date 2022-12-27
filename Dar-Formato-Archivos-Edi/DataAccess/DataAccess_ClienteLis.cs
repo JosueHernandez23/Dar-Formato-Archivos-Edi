@@ -178,7 +178,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                           cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId And 
                           cec.SQL_DB In ( Select valor from general_parametros With( NoLock ) Where  nombre = 'edihgnuevodbname' ) And
                           cep.ClienteediconfiguracionId = @ll_configuracionId and
-                          cep.Fecha_parada_ini >= DATEADD(DAY, -3,GETDATE())
+                          cep.Fecha_parada_ini >= DATEADD(DAY, -7,GETDATE())
 
                     Order by cep.Shipment asc 
 

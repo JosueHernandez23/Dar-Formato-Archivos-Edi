@@ -71,7 +71,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
                 {
                     db = cBoxSQL.Text;
-                    config = 2;
+                    config = 5;
                     dgvEventos.DataSource = GetReporte(db, (int)config);
                     MessageBox.Show("Se Cargaron Completamente los datos");
                 }
