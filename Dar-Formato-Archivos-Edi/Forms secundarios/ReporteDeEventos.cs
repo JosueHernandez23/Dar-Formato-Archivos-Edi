@@ -9,6 +9,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.IO;
 using System.Threading;
+using System.Windows.Documents;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
@@ -47,42 +48,102 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             string db;
             object config;
 
-            if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
+
+            var progressBars = new List<ProgressBar>();
+
+            foreach (var control in Controls)
             {
-                MessageBox.Show("Favor de esperar a que termine de procesar los datos..."); 
-
-                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
+                // this ensure the type is a ProgressBar, unlike name, it cant be randomly assigned
+                if (control is ProgressBar)
                 {
-                    db = cBoxSQL.Text;
-                    config = 1;
-                    dgvEventos.DataSource = GetReporte(db, (int)config);
-                    MessageBox.Show("Se Cargaron Completamente los datos");
-                }
+                    // a cast is needed here
+                    //progressBars.Add(control as ProgressBar);
 
-                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
-                {
-                    db = cBoxSQL.Text;
-                    config = 5;
-                    dgvEventos.DataSource = GetReporte(db, (int)config);
-                    MessageBox.Show("Se Cargaron Completamente los datos");
-                }
+                    
 
-                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "RLDB_LIS")
-                {
-                    db = cBoxSQL.Text;
-                    config = 7;
-                    dgvEventos.DataSource = GetReporte(db, (int)config);
-                    MessageBox.Show("Se Cargaron Completamente los datos");
-                }
+                    if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
+                    {
+                        MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
 
-                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "LINDADB")
-                {
-                    db = cBoxSQL.Text;
-                    config = 8;
+                        if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
+                        {
+                            db = cBoxSQL.Text;
+                            config = 1;
+                            dgvEventos.DataSource = GetReporte(db, (int)config);
+                            progressBars.Add(control as ProgressBar);
+                            MessageBox.Show("Se Cargaron Completamente los datos");
+                        }
 
-                    dgvEventos.DataSource = GetReporte(db, (int)config);
-                    MessageBox.Show("Se Cargaron Completamente los datos");
-                }
+                        if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
+                        {
+                            db = cBoxSQL.Text;
+                            config = 3;
+                            dgvEventos.DataSource = GetReporte(db, (int)config);
+                            progressBars.Add(control as ProgressBar);
+                            MessageBox.Show("Se Cargaron Completamente los datos");
+                        }
+
+                        if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "RLDB_LIS")
+                        {
+                            db = cBoxSQL.Text;
+                            config = 7;
+                            dgvEventos.DataSource = GetReporte(db, (int)config);
+                            progressBars.Add(control as ProgressBar);
+                            MessageBox.Show("Se Cargaron Completamente los datos");
+                        }
+
+                        if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "LINDADB")
+                        {
+                            db = cBoxSQL.Text;
+                            config = 8;
+                            dgvEventos.DataSource = GetReporte(db, (int)config);
+                            progressBars.Add(control as ProgressBar);
+                            MessageBox.Show("Se Cargaron Completamente los datos");
+                        }
+
+
+
+                    }
+            }
+            progressBars[0].Value = 100;
+
+
+            //if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
+            //{
+            //    MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
+
+            //    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
+            //    {
+            //        db = cBoxSQL.Text;
+            //        config = 1;
+            //        dgvEventos.DataSource = GetReporte(db, (int)config);
+            //        MessageBox.Show("Se Cargaron Completamente los datos");
+            //    }
+
+            //    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
+            //    {
+            //        db = cBoxSQL.Text;
+            //        config = 3;
+            //        dgvEventos.DataSource = GetReporte(db, (int)config);
+            //        MessageBox.Show("Se Cargaron Completamente los datos");
+            //    }
+
+            //    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "RLDB_LIS")
+            //    {
+            //        db = cBoxSQL.Text;
+            //        config = 7;
+            //        dgvEventos.DataSource = GetReporte(db, (int)config);
+            //        MessageBox.Show("Se Cargaron Completamente los datos");
+            //    }
+
+            //    if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "LINDADB")
+            //    {
+            //        db = cBoxSQL.Text;
+            //        config = 8;
+
+            //        dgvEventos.DataSource = GetReporte(db, (int)config);
+            //        MessageBox.Show("Se Cargaron Completamente los datos");
+            //    }
                 
                 lblComplete.Text = "Se Completo la carga de datos";
                 btnExportExcel.Show();
