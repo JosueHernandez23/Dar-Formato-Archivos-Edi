@@ -152,7 +152,6 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 		                    @ll_evento int,
                             @ll_configuracionId int = "+ config +@"
 		
-
                     --Select * from edidb.dbo.ClienteEdiEstatus
                     CREATE TABLE #tt_edi_nuevo(   ClienteEdiPedidoId Integer Null, ClienteId Integer Null, CodeSCAC Varchar(10) Null, Obs Varchar(1000) Null, Origen Varchar(500) Null, 
                         Destino Varchar(500) Null, descripcion Varchar(500) Null, Estatus_EDI Varchar(500) Null, Archivo Varchar(500) Null, Shipment Varchar(500) Null, Equipo Varchar(500) Null, 
@@ -169,6 +168,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                         Case When cephg.fecha_real_fin_viaje is null Then 'Sin Viaje' Else Case When DATEDIFF ( hh, cephg.fecha_real_fin_viaje, cep.FechaIngreso ) > 0 Then '204 Desfazado' Else '204 En tiempo' End End Estatus_204, 
                         --cephg.f_pedido, cephg.fecha_ingreso, cephg.fecha_real_viaje, cephg.fecha_real_fin_viaje
                         1 Cant, '','','','','','','','',''
+
                     From edidb.dbo.ClienteEdiPedido cep With( Nolock ) 
                          Left Outer Join edidb.dbo.ClienteEdiPedidohg cephg With( Nolock ) On ( cep.ClienteEdiPedidoId = cephg.ClienteEdiPedidoId ), 
                          edidb.dbo.ClienteEdiConfiguracion cec With( Nolock ), 
@@ -179,7 +179,6 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                           cec.SQL_DB In ( Select valor from general_parametros With( NoLock ) Where  nombre = 'edihgnuevodbname' ) And
                           cep.ClienteediconfiguracionId = @ll_configuracionId and
                           cep.Fecha_parada_ini >= DATEADD(DAY, -7,GETDATE())
-
                     Order by cep.Shipment asc 
 
                     -- Se cargan los registros del EDI en el cursos 
@@ -193,7 +192,6 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                     -- Se actualizan las unidades con los datos de las posiciones
                     While ( @@fetch_status <> -1 ) 
                     Begin 
-
                        Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
                        From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
                        Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'AA' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
@@ -296,14 +294,12 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                        Fetch Next From c_edi Into @ll_ClienteEdiPedidoId
                     End 
 
-
                     Select ClienteEdiPedidoId, ClienteId, CodeSCAC,  --Obs, Origen, Destino, 
                            descripcion, Estatus_EDI, --Archivo, 
                            Shipment, Equipo, ISA6,  FechaIngreso,FechaExpiracion,
                            Tipo_Mov ,Seg_TRucks ,id_pedido ,Estatus_204, Cant, AA, X3, AF, AB, X6, X1--, CD, AG
 	                       , D1 
                     From #tt_edi_nuevo
-                    --where Estatus_204 = '204 En tiempo'
                     Order by ClienteEdiPedidoId DESC
                  ";
 

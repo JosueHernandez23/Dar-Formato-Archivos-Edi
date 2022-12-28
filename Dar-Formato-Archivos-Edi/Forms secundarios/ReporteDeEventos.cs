@@ -92,6 +92,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 lblComplete.Text = "Se Completo la carga de datos";
                 pbCargandoDatos.Image = Resources.Complete;
                 btnExportExcel.Show();
+
             }
         }
 
