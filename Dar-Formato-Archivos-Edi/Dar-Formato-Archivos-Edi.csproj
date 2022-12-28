@@ -313,6 +313,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -333,6 +334,8 @@
     <Content Include="EstructuraEDI\Estructura_997.txt" />
     <Content Include="EstructuraEDI\Estructura_214.txt" />
     <Content Include="EstructuraEDI\Estructura_990.txt" />
+    <None Include="Resources\Complete.gif" />
+    <None Include="Resources\loading.gif" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
