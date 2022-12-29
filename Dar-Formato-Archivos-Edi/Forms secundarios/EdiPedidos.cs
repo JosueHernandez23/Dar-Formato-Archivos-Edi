@@ -154,7 +154,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                             txtSiteIDDestAlt.Text = item.siteID == null ? "" : item.siteID.ToString();
                             txtNombreSitioDestAlt.Text = item.ubicacion == null ? "" : item.ubicacion.ToString();
                             txtSitioDestAltDesc.Text = item.descripcion;
-
                             break;
                     }
                 }
