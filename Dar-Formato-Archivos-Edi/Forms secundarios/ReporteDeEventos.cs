@@ -9,6 +9,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.IO;
 using System.Threading;
+using System.Windows.Documents;
+using Dar_Formato_Archivos_Edi.Properties;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
@@ -19,15 +21,14 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         public ReporteDeEventos()
         {
             InitializeComponent();
+            pbCargandoDatos.Hide();
             if (cBoxSQL.SelectedIndex.ToString() == "" || dgvEventos.DataSource == null)
                 btnExportExcel.Hide();
-
         }
 
         public List<ReporteEventos> GetReporte(string db,int config)
         {
             DataAccess_ClienteLis dataAccess_ClienteEdiPedido = new DataAccess_ClienteLis();
-            
 
             return dataAccess_ClienteEdiPedido.GetReporte(db,config);
         }
@@ -41,24 +42,19 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
                 dgvEventos.ClearSelection();
                 lblComplete.Text = "Espera a que termine de cargar los datos";
+                pbCargandoDatos.Show();
                 thread1.Start();
                 btnExportExcel.Show();
-
-            //CargaDataGrid();
-            //thread1.Suspend();
-
         }
 
         public void CargaDataGrid() {
             string db;
             object config;
 
-
             if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
             {
-
                 MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-                
+                pbCargandoDatos.Image = Resources.loading;
 
                 if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
                 {
@@ -71,7 +67,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
                 {
                     db = cBoxSQL.Text;
-                    config = 2;
+                    config = 3;
                     dgvEventos.DataSource = GetReporte(db, (int)config);
                     MessageBox.Show("Se Cargaron Completamente los datos");
                 }
@@ -92,15 +88,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     dgvEventos.DataSource = GetReporte(db, (int)config);
                     MessageBox.Show("Se Cargaron Completamente los datos");
                 }
-                
+
                 lblComplete.Text = "Se Completo la carga de datos";
+                pbCargandoDatos.Image = Resources.Complete;
                 btnExportExcel.Show();
             }
         }
-
-
-
-
 
         public void procesoExcel() //Generar Excel
         {

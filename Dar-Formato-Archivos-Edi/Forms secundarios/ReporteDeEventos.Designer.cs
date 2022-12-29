@@ -35,7 +35,9 @@
             this.lblEspera = new System.Windows.Forms.Label();
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.lblComplete = new System.Windows.Forms.Label();
+            this.pbCargandoDatos = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCargandoDatos)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvEventos
@@ -43,10 +45,10 @@
             this.dgvEventos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvEventos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvEventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEventos.Location = new System.Drawing.Point(12, 50);
+            this.dgvEventos.Location = new System.Drawing.Point(12, 44);
             this.dgvEventos.Name = "dgvEventos";
             this.dgvEventos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            this.dgvEventos.Size = new System.Drawing.Size(1292, 592);
+            this.dgvEventos.Size = new System.Drawing.Size(1292, 519);
             this.dgvEventos.TabIndex = 0;
             // 
             // cBoxSQL
@@ -58,7 +60,7 @@
             "CHDB_LIS",
             "RLDB_LIS",
             "LINDADB"});
-            this.cBoxSQL.Location = new System.Drawing.Point(173, 15);
+            this.cBoxSQL.Location = new System.Drawing.Point(171, 12);
             this.cBoxSQL.Name = "cBoxSQL";
             this.cBoxSQL.Size = new System.Drawing.Size(121, 21);
             this.cBoxSQL.TabIndex = 1;
@@ -80,7 +82,7 @@
             this.lblEspera.AutoSize = true;
             this.lblEspera.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEspera.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblEspera.Location = new System.Drawing.Point(300, 11);
+            this.lblEspera.Location = new System.Drawing.Point(42, 568);
             this.lblEspera.Name = "lblEspera";
             this.lblEspera.Size = new System.Drawing.Size(0, 25);
             this.lblEspera.TabIndex = 3;
@@ -99,10 +101,20 @@
             // 
             this.lblComplete.AutoSize = true;
             this.lblComplete.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblComplete.Location = new System.Drawing.Point(302, 18);
+            this.lblComplete.Location = new System.Drawing.Point(44, 575);
             this.lblComplete.Name = "lblComplete";
             this.lblComplete.Size = new System.Drawing.Size(0, 13);
             this.lblComplete.TabIndex = 5;
+            // 
+            // pbCargandoDatos
+            // 
+            this.pbCargandoDatos.Image = global::Dar_Formato_Archivos_Edi.Properties.Resources.loading;
+            this.pbCargandoDatos.Location = new System.Drawing.Point(12, 569);
+            this.pbCargandoDatos.Name = "pbCargandoDatos";
+            this.pbCargandoDatos.Size = new System.Drawing.Size(26, 21);
+            this.pbCargandoDatos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbCargandoDatos.TabIndex = 6;
+            this.pbCargandoDatos.TabStop = false;
             // 
             // ReporteDeEventos
             // 
@@ -111,7 +123,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1316, 634);
+            this.ClientSize = new System.Drawing.Size(1316, 614);
+            this.Controls.Add(this.pbCargandoDatos);
             this.Controls.Add(this.lblComplete);
             this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.lblEspera);
@@ -123,6 +136,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReporteDeEventos";
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCargandoDatos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,5 +150,6 @@
         private System.Windows.Forms.Label lblEspera;
         private System.Windows.Forms.Button btnExportExcel;
         private System.Windows.Forms.Label lblComplete;
+        private System.Windows.Forms.PictureBox pbCargandoDatos;
     }
 }
