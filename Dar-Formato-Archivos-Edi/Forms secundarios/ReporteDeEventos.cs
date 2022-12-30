@@ -16,13 +16,14 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
     public partial class ReporteDeEventos : Form
     {
-        
 
         public ReporteDeEventos()
         {
             InitializeComponent();
             pbCargandoDatos.Hide();
+
             if (cBoxSQL.SelectedIndex.ToString() == "" || dgvEventos.DataSource == null)
+                dgvEventos.ClearSelection();
                 btnExportExcel.Hide();
         }
 
@@ -40,7 +41,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             CheckForIllegalCrossThreadCalls = false;
             Thread thread1 = new Thread(new ThreadStart(CargaDataGrid));
             if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
-                dgvEventos.ClearSelection();
+                
                 lblComplete.Text = "Espera a que termine de cargar los datos";
                 pbCargandoDatos.Show();
                 thread1.Start();
@@ -67,7 +68,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
                 {
                     db = cBoxSQL.Text;
-                    config = 3;
+                    config = 2;
                     dgvEventos.DataSource = GetReporte(db, (int)config);
                     MessageBox.Show("Se Cargaron Completamente los datos");
                 }
@@ -84,7 +85,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 {
                     db = cBoxSQL.Text;
                     config = 8;
-
                     dgvEventos.DataSource = GetReporte(db, (int)config);
                     MessageBox.Show("Se Cargaron Completamente los datos");
                 }
@@ -92,7 +92,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 lblComplete.Text = "Se Completo la carga de datos";
                 pbCargandoDatos.Image = Resources.Complete;
                 btnExportExcel.Show();
-
             }
         }
 
@@ -158,7 +157,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (File.Exists(sfd.FileName))
                     System.Diagnostics.Process.Start(sfd.FileName);
             }
-
         }
 
         private void releaseObject(object obj)

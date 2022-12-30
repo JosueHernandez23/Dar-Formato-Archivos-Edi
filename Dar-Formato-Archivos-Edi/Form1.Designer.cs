@@ -40,7 +40,6 @@
             this.rbDeshabilitar = new System.Windows.Forms.RadioButton();
             this.rbHabilitar = new System.Windows.Forms.RadioButton();
             this.TxtFormatoTexto = new System.Windows.Forms.RichTextBox();
-            this.btnListadoSegmentos = new System.Windows.Forms.Button();
             this.btnGenerarEdi = new System.Windows.Forms.Button();
             this.btnCorreosEdi = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -54,6 +53,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnListadoSegmentos = new System.Windows.Forms.Button();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -192,19 +192,6 @@
             this.TxtFormatoTexto.Size = new System.Drawing.Size(915, 380);
             this.TxtFormatoTexto.TabIndex = 8;
             this.TxtFormatoTexto.Text = "";
-            // 
-            // btnListadoSegmentos
-            // 
-            this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
-            this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnListadoSegmentos.Location = new System.Drawing.Point(3, 3);
-            this.btnListadoSegmentos.Name = "btnListadoSegmentos";
-            this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
-            this.btnListadoSegmentos.TabIndex = 10;
-            this.btnListadoSegmentos.UseVisualStyleBackColor = true;
-            this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
             // 
             // btnGenerarEdi
             // 
@@ -419,7 +406,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 475F));
             this.tableLayoutPanel5.Controls.Add(this.btnListadoSegmentos, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnLimpiar, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnEdiPedidos, 4, 0);
@@ -431,9 +418,22 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(915, 40);
             this.tableLayoutPanel5.TabIndex = 10;
+            // 
+            // btnListadoSegmentos
+            // 
+            this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
+            this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnListadoSegmentos.Location = new System.Drawing.Point(3, 3);
+            this.btnListadoSegmentos.Name = "btnListadoSegmentos";
+            this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
+            this.btnListadoSegmentos.TabIndex = 10;
+            this.btnListadoSegmentos.UseVisualStyleBackColor = true;
+            this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
             // 
             // tableLayoutPanel6
             // 
