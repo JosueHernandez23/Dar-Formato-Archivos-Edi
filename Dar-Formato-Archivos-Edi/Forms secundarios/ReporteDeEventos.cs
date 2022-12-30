@@ -56,6 +56,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             {
                 MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
                 pbCargandoDatos.Image = Resources.loading;
+                dgvEventos.ForeColor = System.Drawing.Color.Black;
 
                 if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "CHDB_LIS")
                 {

@@ -52,10 +52,11 @@
             this.dgvEventos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgvEventos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvEventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEventos.Location = new System.Drawing.Point(10, 44);
+            this.dgvEventos.Location = new System.Drawing.Point(6, 44);
             this.dgvEventos.Name = "dgvEventos";
             this.dgvEventos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            this.dgvEventos.Size = new System.Drawing.Size(1147, 608);
+            this.dgvEventos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvEventos.Size = new System.Drawing.Size(434, 289);
             this.dgvEventos.TabIndex = 0;
             // 
             // cBoxSQL
@@ -89,7 +90,7 @@
             this.lblEspera.AutoSize = true;
             this.lblEspera.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEspera.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblEspera.Location = new System.Drawing.Point(36, 18);
+            this.lblEspera.Location = new System.Drawing.Point(36, 20);
             this.lblEspera.Name = "lblEspera";
             this.lblEspera.Size = new System.Drawing.Size(0, 25);
             this.lblEspera.TabIndex = 3;
@@ -98,7 +99,7 @@
             // 
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportExcel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExportExcel.Location = new System.Drawing.Point(1082, 15);
+            this.btnExportExcel.Location = new System.Drawing.Point(362, 15);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 23);
             this.btnExportExcel.TabIndex = 4;
@@ -110,7 +111,7 @@
             // 
             this.lblComplete.AutoSize = true;
             this.lblComplete.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblComplete.Location = new System.Drawing.Point(38, 25);
+            this.lblComplete.Location = new System.Drawing.Point(38, 27);
             this.lblComplete.Name = "lblComplete";
             this.lblComplete.Size = new System.Drawing.Size(0, 13);
             this.lblComplete.TabIndex = 5;
@@ -127,8 +128,7 @@
             // 
             // gbReporteEventosExcel
             // 
-            this.gbReporteEventosExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbReporteEventosExcel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbReporteEventosExcel.AutoSize = true;
             this.gbReporteEventosExcel.Controls.Add(this.dgvEventos);
@@ -138,22 +138,23 @@
             this.gbReporteEventosExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gbReporteEventosExcel.Location = new System.Drawing.Point(12, 12);
             this.gbReporteEventosExcel.Name = "gbReporteEventosExcel";
-            this.gbReporteEventosExcel.Size = new System.Drawing.Size(1163, 658);
+            this.gbReporteEventosExcel.Size = new System.Drawing.Size(443, 339);
             this.gbReporteEventosExcel.TabIndex = 7;
             this.gbReporteEventosExcel.TabStop = false;
             this.gbReporteEventosExcel.Text = "Eventos Reportados";
             // 
             // gbEstatusDelReporte
             // 
-            this.gbEstatusDelReporte.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbEstatusDelReporte.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbEstatusDelReporte.AutoSize = true;
             this.gbEstatusDelReporte.Controls.Add(this.pbCargandoDatos);
             this.gbEstatusDelReporte.Controls.Add(this.lblEspera);
             this.gbEstatusDelReporte.Controls.Add(this.lblComplete);
             this.gbEstatusDelReporte.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gbEstatusDelReporte.Location = new System.Drawing.Point(12, 673);
+            this.gbEstatusDelReporte.Location = new System.Drawing.Point(12, 368);
             this.gbEstatusDelReporte.Name = "gbEstatusDelReporte";
-            this.gbEstatusDelReporte.Size = new System.Drawing.Size(1159, 59);
+            this.gbEstatusDelReporte.Size = new System.Drawing.Size(443, 61);
             this.gbEstatusDelReporte.TabIndex = 8;
             this.gbEstatusDelReporte.TabStop = false;
             this.gbEstatusDelReporte.Text = "Estatus del Reporte";
@@ -165,11 +166,13 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1181, 744);
+            this.ClientSize = new System.Drawing.Size(464, 441);
             this.Controls.Add(this.gbEstatusDelReporte);
             this.Controls.Add(this.gbReporteEventosExcel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(720, 480);
+            this.MinimumSize = new System.Drawing.Size(320, 480);
             this.Name = "ReporteDeEventos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReporteDeEventos";
