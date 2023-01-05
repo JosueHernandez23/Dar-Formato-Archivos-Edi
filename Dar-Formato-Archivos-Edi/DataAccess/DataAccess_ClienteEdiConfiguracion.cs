@@ -26,5 +26,19 @@ namespace Dar_Formato_Archivos_Edi.Controllers
                 return EdiConfiguracionClientes;
             }
         }
+
+        public List<ClienteEdiConfiguracion> ListadoClienteEdiConfiguracionFrom()
+        {
+            SqlCnx con = new SqlCnx();
+            using (var connection = new SqlConnection(con.connectionString))
+            {
+                connection.Open();
+                string query = "Select ClienteEdiConfiguracionId, descripcion + ' - ' + CONVERT(VARCHAR(4), ClienteEdiConfiguracionId) as descripcion, SFTPServerPRD, SFTPUsuarioPRD, SFTPPasswordPRD, SFTPFolderFromPRD as FolderDestino From ClienteEdiConfiguracion";
+
+                List<ClienteEdiConfiguracion> EdiConfiguracionClientes = connection.Query<ClienteEdiConfiguracion>(query).ToList();
+
+                return EdiConfiguracionClientes;
+            }
+        }
     }
 }

@@ -72,6 +72,9 @@
     <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
+    <Reference Include="FluentFTP, Version=43.0.1.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.43.0.1\lib\net472\FluentFTP.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.19.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.19.4\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -261,6 +264,12 @@
     <Compile Include="Forms secundarios\CorreosEDI.Designer.cs">
       <DependentUpon>CorreosEDI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms secundarios\Directorio_SFTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms secundarios\Directorio_SFTP.Designer.cs">
+      <DependentUpon>Directorio_SFTP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms secundarios\EdiPedidos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\CorreosEDI.resx">
       <DependentUpon>CorreosEDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms secundarios\Directorio_SFTP.resx">
+      <DependentUpon>Directorio_SFTP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\EdiPedidos.resx">
       <DependentUpon>EdiPedidos.cs</DependentUpon>

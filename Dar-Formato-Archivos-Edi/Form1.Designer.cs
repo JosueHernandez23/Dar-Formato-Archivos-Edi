@@ -40,7 +40,6 @@
             this.rbDeshabilitar = new System.Windows.Forms.RadioButton();
             this.rbHabilitar = new System.Windows.Forms.RadioButton();
             this.TxtFormatoTexto = new System.Windows.Forms.RichTextBox();
-            this.btnListadoSegmentos = new System.Windows.Forms.Button();
             this.btnGenerarEdi = new System.Windows.Forms.Button();
             this.btnCorreosEdi = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -55,6 +54,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnDirectorioSFTP = new System.Windows.Forms.Button();
+            this.btnListadoSegmentos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -71,9 +72,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(16, 9);
+            this.label1.Location = new System.Drawing.Point(103, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 15);
+            this.label1.Size = new System.Drawing.Size(97, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre archivo: ";
             // 
@@ -84,9 +85,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreArchivo.AutoSize = true;
             this.txtNombreArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreArchivo.Location = new System.Drawing.Point(135, 0);
+            this.txtNombreArchivo.Location = new System.Drawing.Point(206, 0);
             this.txtNombreArchivo.Name = "txtNombreArchivo";
-            this.txtNombreArchivo.Size = new System.Drawing.Size(331, 34);
+            this.txtNombreArchivo.Size = new System.Drawing.Size(260, 34);
             this.txtNombreArchivo.TabIndex = 1;
             this.txtNombreArchivo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -192,19 +193,6 @@
             this.TxtFormatoTexto.Size = new System.Drawing.Size(915, 380);
             this.TxtFormatoTexto.TabIndex = 8;
             this.TxtFormatoTexto.Text = "";
-            // 
-            // btnListadoSegmentos
-            // 
-            this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
-            this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnListadoSegmentos.Location = new System.Drawing.Point(3, 3);
-            this.btnListadoSegmentos.Name = "btnListadoSegmentos";
-            this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
-            this.btnListadoSegmentos.TabIndex = 10;
-            this.btnListadoSegmentos.UseVisualStyleBackColor = true;
-            this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
             // 
             // btnGenerarEdi
             // 
@@ -419,7 +407,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 475F));
             this.tableLayoutPanel5.Controls.Add(this.btnListadoSegmentos, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnLimpiar, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnEdiPedidos, 4, 0);
@@ -431,23 +419,55 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(915, 40);
             this.tableLayoutPanel5.TabIndex = 10;
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.17663F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.82336F));
-            this.tableLayoutPanel6.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.txtNombreArchivo, 1, 0);
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.18F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.82F));
+            this.tableLayoutPanel6.Controls.Add(this.btnDirectorioSFTP, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.txtNombreArchivo, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel6.Location = new System.Drawing.Point(443, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(469, 34);
             this.tableLayoutPanel6.TabIndex = 10;
+            // 
+            // btnDirectorioSFTP
+            // 
+            this.btnDirectorioSFTP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDirectorioSFTP.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDirectorioSFTP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDirectorioSFTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDirectorioSFTP.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDirectorioSFTP.Location = new System.Drawing.Point(3, 3);
+            this.btnDirectorioSFTP.Name = "btnDirectorioSFTP";
+            this.btnDirectorioSFTP.Size = new System.Drawing.Size(94, 28);
+            this.btnDirectorioSFTP.TabIndex = 16;
+            this.btnDirectorioSFTP.Text = "Directorio SFTP";
+            this.btnDirectorioSFTP.UseVisualStyleBackColor = true;
+            this.btnDirectorioSFTP.Click += new System.EventHandler(this.btnDirectorioSFTP_Click);
+            // 
+            // btnListadoSegmentos
+            // 
+            this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
+            this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnListadoSegmentos.Location = new System.Drawing.Point(3, 3);
+            this.btnListadoSegmentos.Name = "btnListadoSegmentos";
+            this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
+            this.btnListadoSegmentos.TabIndex = 10;
+            this.btnListadoSegmentos.UseVisualStyleBackColor = true;
+            this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
             // 
             // Form1
             // 
@@ -510,6 +530,7 @@
         private System.Windows.Forms.TextBox txtElemento;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnReporteEventos;
+        private System.Windows.Forms.Button btnDirectorioSFTP;
     }
 }
 

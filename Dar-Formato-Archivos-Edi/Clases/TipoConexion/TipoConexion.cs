@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FluentFTP;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,5 +55,94 @@ namespace Dar_Formato_Archivos_Edi.Clases.TipoConexion
             }
         }
 
+        public IEnumerable<Renci.SshNet.Sftp.SftpFile> ListarArchivos_SFTP(string server, string user, string password, int port, string FolderOrigen)
+        {
+            using (SftpClient sftp = new SftpClient(server, port, user, password))
+            {
+                sftp.Connect();
+
+                IEnumerable<Renci.SshNet.Sftp.SftpFile> lista_archivos = sftp.ListDirectory(FolderOrigen);
+
+                sftp.Disconnect();
+
+                return lista_archivos;
+            }
+        }
+
+        public IEnumerable<FtpListItem> ListarArchivos_FTP(string server, string user, string password, int port, string FolderOrigen)
+        {
+            using (FtpClient ftp = new FtpClient(server, user, password))
+            {
+                ftp.Connect();
+
+                FtpListItem[] lista_archivos = ftp.GetListing(FolderOrigen);
+
+                ftp.Disconnect();
+
+                return lista_archivos;
+            }
+        }
+
+        public static string RevisarContenidoArchivo_SFTP(string server, string user, string password, int port, string pahtFile)
+        {
+            using (SftpClient sftp = new SftpClient(server, port, user, password))
+            {
+                try
+                {
+                    sftp.Connect();
+
+                    string contenido = "";
+
+                    if (sftp.Exists(pahtFile))
+                    {
+                        contenido = sftp.ReadAllText(pahtFile);
+                    }
+                    else 
+                    {
+                        contenido = "El archivo ya no existe";
+                    }
+
+                    sftp.Disconnect();
+
+                    return contenido;
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+            }
+        }
+
+        public static string RevisarContenidoArchivo_FTP(string server, string user, string password, int port, string pahtFile)
+        {
+            using (FtpClient ftp = new FtpClient(server, user, password))
+            {
+                try
+                {
+                    ftp.Connect();
+
+                    string contenido = "";
+
+                    if (ftp.FileExists(pahtFile))
+                    {
+                        Stream st = ftp.OpenRead(pahtFile);
+                        StreamReader sr = new StreamReader(st);
+                        contenido = sr.ReadToEnd();
+                    }
+                    else
+                    {
+                        contenido = "El archivo ya no existe";
+                    }
+
+                    ftp.Disconnect();
+
+                    return contenido;
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+            }
+        }
     }
 }

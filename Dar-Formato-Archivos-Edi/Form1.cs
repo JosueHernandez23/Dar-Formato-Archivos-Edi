@@ -295,15 +295,15 @@ namespace Dar_Formato_Archivos_Edi
                                 segmentos = new Segmentos();
                                 string[] arrLinea = textoArchivo.Split(' ').Where(vl => vl != "").ToArray();
 
-                                segmentos.Segmento =     nSeg;
+                                segmentos.Segmento = nSeg;
                                 segmentos.Segmento_Ref = arrLinea[0];
-                                segmentos.Code =         Convert.ToInt32(arrLinea[1]);
-                                segmentos.Name =         arrLinea[2];
-                                segmentos.Req =          arrLinea[3];
-                                segmentos.Rep =          arrLinea[4];
-                                segmentos.Min =          Convert.ToInt32(arrLinea[5]);
-                                segmentos.Max =          Convert.ToInt32(arrLinea[6]);
-                                segmentos.Type =         arrLinea[7];
+                                segmentos.Code = Convert.ToInt32(arrLinea[1]);
+                                segmentos.Name = arrLinea[2];
+                                segmentos.Req = arrLinea[3];
+                                segmentos.Rep = arrLinea[4];
+                                segmentos.Min = Convert.ToInt32(arrLinea[5]);
+                                segmentos.Max = Convert.ToInt32(arrLinea[6]);
+                                segmentos.Type = arrLinea[7];
 
                                 Lista_Segmentos.Add(segmentos);
                             }
@@ -320,7 +320,7 @@ namespace Dar_Formato_Archivos_Edi
                                 {
                                     string ConcatStrArray = "";
 
-                                    while(textoArchivo != null && textoArchivo.Contains(","))
+                                    while (textoArchivo != null && textoArchivo.Contains(","))
                                     {
                                         ConcatStrArray += textoArchivo + ",";
                                         textoArchivo = reader.ReadLine();
@@ -436,7 +436,7 @@ namespace Dar_Formato_Archivos_Edi
                     MessageBox.Show("No se permiten archivos con esta extension: " + fileInfo.Extension);
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Ocurrio un error: \n\n" + ex.Message);
             }
@@ -451,6 +451,12 @@ namespace Dar_Formato_Archivos_Edi
         private void btnReporteEventos_Click(object sender, EventArgs e)
         {
             var f = new ReporteDeEventos();
+            f.Show();
+        }
+
+        private void btnDirectorioSFTP_Click(object sender, EventArgs e)
+        {
+            var f = new Directorio_SFTP(TxtFormatoTexto, txtNombreArchivo);
             f.Show();
         }
     }

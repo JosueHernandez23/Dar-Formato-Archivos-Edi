@@ -11,6 +11,9 @@ using System.IO;
 using System.Threading;
 using System.Windows.Documents;
 using Dar_Formato_Archivos_Edi.Properties;
+using System.ComponentModel;
+using System.Linq;
+using ClosedXML;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
@@ -95,86 +98,72 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void procesoExcel() //Generar Excel
-        {
-            dgvEventos.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText; //Se selec
-            dgvEventos.SelectAll();
-            DataObject dataObj = dgvEventos.GetClipboardContent();
-            if (dataObj != null)
-                Clipboard.SetDataObject(dataObj);
-        }
-
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
+            // Obtener informacion del DataGridView
+            List<ReporteEventos> lista_eventos = dgvEventos.DataSource as List<ReporteEventos>;
+            DataTable dt = new DataTable();
+
+            // Crear columnas para DataTable
+            foreach (System.Reflection.PropertyInfo item in typeof(ReporteEventos).GetProperties())
+            {
+                dt.Columns.Add(item.Name);
+            }
+
+            // Llenar el datable con la informacion obtenida del DataGridView
+            foreach (ReporteEventos item in lista_eventos.OrderByDescending(vl => vl.FechaIngreso))
+            {
+                System.Data.DataRow dr = dt.NewRow();
+
+                foreach (PropertyDescriptor subitem in TypeDescriptor.GetProperties(item))
+                {
+                    object valor = subitem.GetValue(item);
+                    dr[subitem.Name] = valor;
+                }
+
+                dt.Rows.Add(dr);
+            }
+
+            // Funcion para generar excel
+            GenerarExcel(dt);
+        }
+
+        public void GenerarExcel(DataTable dt)
+        {
+            XLWorkbook wb = new XLWorkbook();
+            IXLWorksheet worksheet = wb.Worksheets.Add(dt, "ReporteEdi");
+
+            // Cabecera de los datos
+            IXLRow firstRow = worksheet.FirstRow();
+            firstRow.Style.Font.Bold = true;
+
+            //Contenido
+            worksheet.Rows().Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            worksheet.Rows().Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+            worksheet.ExpandColumns();
+            worksheet.Columns().AdjustToContents();
+
+            GuardarExcel(wb);
+            //wb.SaveAs(@"C:\Interfaces_HG\prueba.xlsx");
+        }
+
+        public void GuardarExcel(XLWorkbook wb)
+        {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Excel Documents (*.xls)|*.xls";
-            sfd.FileName = "Reporte de Eventos_" + DateTime.Today.Day    + "-" +
-                                                   DateTime.Today.Month  + "-" +
-                                                   DateTime.Today.Year   + "_" + "_.xls";
+            sfd.Filter = "Excel Documents (*.xlsx)|*.xlsx";
+            object value = wb.Worksheet("ReporteEdi").Cell(2, 3).Value;
+
+            sfd.FileName = "Reporte de Eventos_" + value + " " + DateTime.Today.Day + "-" +
+                                                   DateTime.Today.Month + "-" +
+                                                   DateTime.Today.Year + "_.xlsx";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                // Copiar resultados de DataGridView al portapapeles
-                procesoExcel();
+                wb.SaveAs(sfd.FileName);
 
-                object misValue = System.Reflection.Missing.Value;
-                Excel.Application xlexcel = new Excel.Application();
-
-                xlexcel.DisplayAlerts = false; // Sin esto obtendrá dos mensajes de confirmación de sobrescritura
-                Excel.Workbook xlWorkBook = xlexcel.Workbooks.Add(misValue);
-                Excel.Worksheet xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
-                // Formatear la columna D como texto antes de pegar los resultados, esto era necesario para mis datos
-                Excel.Range rng = xlWorkSheet.get_Range("D:D").Cells;
-                rng.NumberFormat = "@";
-
-                // Pegar los resultados del portapapeles en el rango de la hoja de cálculo
-                Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
-                CR.Select();
-                xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
-
-                // Por alguna razón la columna A está siempre en blanco en la hoja de trabajo. 
-                // Elimina la columna A en blanco y selecciona la celda A1 
-                Excel.Range delRng = xlWorkSheet.get_Range("A:A").Cells;
-                delRng.Delete(Type.Missing);
-                xlWorkSheet.get_Range("A1").Select();
-
-                // Guarda el archivo excel en la ubicación capturada desde el SaveFileDialog
-                xlWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-                xlexcel.DisplayAlerts = true;
-                xlWorkBook.Close(true, misValue, misValue);
-                xlexcel.Quit();
-
-                releaseObject(xlWorkSheet);
-                releaseObject(xlWorkBook);
-                releaseObject(xlexcel);
-
-                // Borrar la selección del Portapapeles y del DataGridView
-                Clipboard.Clear();
-                dgvEventos.ClearSelection();
-
-                // Abrir el archivo excel recién guardado
+                // Abrir el excel que acabamos de crear
                 if (File.Exists(sfd.FileName))
                     System.Diagnostics.Process.Start(sfd.FileName);
-            }
-
-        }
-
-        private void releaseObject(object obj)
-        {
-            try
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
-                obj = null;
-            }
-            catch (Exception ex)
-            {
-                obj = null;
-                MessageBox.Show("Se ha producido una excepción al liberar el objeto " + ex.ToString());
-            }
-            finally
-            {
-                GC.Collect();
             }
         }
     }
