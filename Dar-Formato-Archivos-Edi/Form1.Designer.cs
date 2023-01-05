@@ -53,6 +53,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnListadoSegmentos = new System.Windows.Forms.Button();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.btnDirectorioSFTP = new System.Windows.Forms.Button();
             this.btnListadoSegmentos = new System.Windows.Forms.Button();
@@ -422,6 +423,19 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(915, 40);
             this.tableLayoutPanel5.TabIndex = 10;
+            // 
+            // btnListadoSegmentos
+            // 
+            this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
+            this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnListadoSegmentos.Location = new System.Drawing.Point(3, 3);
+            this.btnListadoSegmentos.Name = "btnListadoSegmentos";
+            this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
+            this.btnListadoSegmentos.TabIndex = 10;
+            this.btnListadoSegmentos.UseVisualStyleBackColor = true;
+            this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
             // 
             // tableLayoutPanel6
             // 
