@@ -151,6 +151,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                     Declare @ll_ClienteEdiPedidoId integer,
 		                    @ll_evento int,
                             @ll_configuracionId int = "+ config +@"
+
 		
                     --Select * from edidb.dbo.ClienteEdiEstatus
                     CREATE TABLE #tt_edi_nuevo(   ClienteEdiPedidoId Integer Null, ClienteId Integer Null, CodeSCAC Varchar(10) Null, Obs Varchar(1000) Null, Origen Varchar(500) Null, 
