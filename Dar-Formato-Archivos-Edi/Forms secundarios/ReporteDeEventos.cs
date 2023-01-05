@@ -166,16 +166,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (File.Exists(sfd.FileName))
                     System.Diagnostics.Process.Start(sfd.FileName);
             }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
-            }
+            
         }
     }
 }
