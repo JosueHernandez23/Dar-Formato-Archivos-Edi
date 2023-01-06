@@ -21,6 +21,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         public List<ClienteEdiConfiguracion> listado_clientes;
         public RichTextBox TxtFormatoTexto;
         public Label txtNombreArchivo;
+        public IEnumerable<Renci.SshNet.Sftp.SftpFile> DataList_SFTP;
+        public IEnumerable<FluentFTP.FtpListItem> DataList_FTP;
 
         public Directorio_SFTP(RichTextBox t, Label NombreArc)
         {
@@ -82,6 +84,19 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             btnConectar.ForeColor = Color.White;
         }
 
+        private void BtnFiltrar_MouseEnter(object sender, EventArgs e)
+        {
+            BtnFiltrar.BackColor = Color.White;
+            BtnFiltrar.ForeColor = Color.Black;
+            BtnFiltrar.Cursor = Cursors.Hand;
+        }
+
+        private void BtnFiltrar_MouseLeave(object sender, EventArgs e)
+        {
+            BtnFiltrar.BackColor = Color.FromArgb(46, 51, 73);
+            BtnFiltrar.ForeColor = Color.White;
+        }
+
         private void btnConectar_Click(object sender, EventArgs e)
         {
             btnConectar.Enabled = false;
@@ -119,6 +134,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             try
             {
                 dtgServerFiles.DataSource = null;
+                DataList_SFTP = null;
+                DataList_FTP = null;
 
                 string server = txtServidor.Text;
                 string user = txtUserName.Text;
@@ -129,17 +146,20 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 // SFTP
                 if (Convert.ToInt32(cboTipoConexion.SelectedValue) == 1)
                 {
-                    IEnumerable<Renci.SshNet.Sftp.SftpFile> lista_archivos = new TipoConexion().ListarArchivos_SFTP(server, user, password, port, path);
-                    dtgServerFiles.DataSource = lista_archivos;
+                    DataList_SFTP = new TipoConexion().ListarArchivos_SFTP(server, user, password, port, path);
+                    dtgServerFiles.DataSource = DataList_SFTP;
                     dtgServerFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 }
                 // FTP
                 if (Convert.ToInt32(cboTipoConexion.SelectedValue) == 2)
                 {
-                    IEnumerable<FluentFTP.FtpListItem> lista_archivos = new TipoConexion().ListarArchivos_FTP(server, user, password, port, path);
-                    dtgServerFiles.DataSource = lista_archivos;
-                    dtgServerFiles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    DataList_FTP = new TipoConexion().ListarArchivos_FTP(server, user, password, port, path);
+                    dtgServerFiles.DataSource = DataList_FTP;
+                    dtgServerFiles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;;
                 }
+
+                //lblContArchivos.Text = DataList_FTP.LongCount().ToString();
+                lblContArchivos.Text = dtgServerFiles.RowCount.ToString();
             }
             catch (Exception ex)
             {
@@ -164,7 +184,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        private void LeerArchivoServidor(Object Parametros) 
+        private void LeerArchivoServidor(Object Parametros)
         {
 
             int RowIndex = (int)Parametros;
@@ -237,6 +257,69 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
 
             return textoFormato.TrimEnd();
+        }
+
+        private void BtnFiltrar_Click(object sender, EventArgs e)
+        {
+            BtnFiltrar.Enabled = false;
+            pbEstatus.Visible = true;
+            pbEstatus.Image = Resources.loading;
+
+            Thread hilo_filtrarArchivos = new Thread(Filtrar_Archivos);
+            hilo_filtrarArchivos.Start();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+        }
+
+        public void Filtrar_Archivos()
+        {
+            try
+            {
+                dtgServerFiles.DataSource = null;
+                if (TxtFiltroArchivo.Text != "")
+                {
+                    // SFTP
+                    if (Convert.ToInt32(cboTipoConexion.SelectedValue) == 1)
+                    {
+                        dtgServerFiles.DataSource = DataList_SFTP.Where(vl => vl.Name == TxtFiltroArchivo.Text).ToList();
+                        dtgServerFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    }
+                    // FTP
+                    if (Convert.ToInt32(cboTipoConexion.SelectedValue) == 2)
+                    {
+                        dtgServerFiles.DataSource = DataList_FTP.Where(vl => vl.Name == TxtFiltroArchivo.Text).ToList();
+                        dtgServerFiles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    }
+                }
+                else
+                {
+                    // SFTP
+                    if (Convert.ToInt32(cboTipoConexion.SelectedValue) == 1)
+                    {
+                        dtgServerFiles.DataSource = DataList_SFTP;
+                        dtgServerFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    }
+                    // FTP
+                    if (Convert.ToInt32(cboTipoConexion.SelectedValue) == 2)
+                    {
+                        dtgServerFiles.DataSource = DataList_FTP;
+                        dtgServerFiles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    }
+                }
+                lblContArchivos.Text = dtgServerFiles.RowCount.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrio un error: " + ex.Message);
+            }
+            finally
+            {
+                BtnFiltrar.Enabled = true;
+                pbEstatus.Visible = true;
+                pbEstatus.Image = Resources.Complete;
+            }
         }
     }
 }
