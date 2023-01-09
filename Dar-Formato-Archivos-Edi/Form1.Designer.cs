@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,8 +52,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.btnListadoSegmentos = new System.Windows.Forms.Button();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.btnDirectorioSFTP = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtNombreArchivo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -63,20 +62,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(103, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre archivo: ";
             // 
             // fileSystemWatcher1
             // 
@@ -98,7 +84,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(644, 141);
+            this.groupBox1.Size = new System.Drawing.Size(663, 141);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deteccion automatica de caracteres: ";
@@ -177,7 +163,7 @@
             this.TxtFormatoTexto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtFormatoTexto.Location = new System.Drawing.Point(3, 193);
             this.TxtFormatoTexto.Name = "TxtFormatoTexto";
-            this.TxtFormatoTexto.Size = new System.Drawing.Size(915, 380);
+            this.TxtFormatoTexto.Size = new System.Drawing.Size(941, 380);
             this.TxtFormatoTexto.TabIndex = 8;
             this.TxtFormatoTexto.Text = "";
             // 
@@ -190,7 +176,7 @@
             this.btnGenerarEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerarEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerarEdi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnGenerarEdi.Location = new System.Drawing.Point(243, 3);
+            this.btnGenerarEdi.Location = new System.Drawing.Point(143, 3);
             this.btnGenerarEdi.Name = "btnGenerarEdi";
             this.btnGenerarEdi.Size = new System.Drawing.Size(94, 34);
             this.btnGenerarEdi.TabIndex = 11;
@@ -207,7 +193,7 @@
             this.btnCorreosEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCorreosEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCorreosEdi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCorreosEdi.Location = new System.Drawing.Point(143, 3);
+            this.btnCorreosEdi.Location = new System.Drawing.Point(43, 3);
             this.btnCorreosEdi.Name = "btnCorreosEdi";
             this.btnCorreosEdi.Size = new System.Drawing.Size(94, 34);
             this.btnCorreosEdi.TabIndex = 12;
@@ -221,10 +207,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLimpiar.Location = new System.Drawing.Point(43, 3);
+            this.btnLimpiar.Location = new System.Drawing.Point(3, 3);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(94, 34);
+            this.btnLimpiar.Size = new System.Drawing.Size(236, 40);
             this.btnLimpiar.TabIndex = 13;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -239,7 +226,7 @@
             this.btnEdiPedidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdiPedidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdiPedidos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEdiPedidos.Location = new System.Drawing.Point(343, 3);
+            this.btnEdiPedidos.Location = new System.Drawing.Point(243, 3);
             this.btnEdiPedidos.Name = "btnEdiPedidos";
             this.btnEdiPedidos.Size = new System.Drawing.Size(94, 34);
             this.btnEdiPedidos.TabIndex = 15;
@@ -263,7 +250,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(921, 576);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(947, 575);
             this.tableLayoutPanel1.TabIndex = 16;
             // 
             // tableLayoutPanel2
@@ -282,7 +269,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(915, 153);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(941, 153);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
             // tableLayoutPanel3
@@ -293,16 +280,16 @@
             this.tableLayoutPanel3.AutoSize = true;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.btnReporteEventos, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnCargarArchivo, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.btnTexto, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.btnLimpiar, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.97279F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.69388F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.01361F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(235, 147);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(242, 147);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // btnReporteEventos
@@ -312,11 +299,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReporteEventos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReporteEventos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReporteEventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReporteEventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReporteEventos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnReporteEventos.Location = new System.Drawing.Point(3, 3);
+            this.btnReporteEventos.Location = new System.Drawing.Point(343, 3);
             this.btnReporteEventos.Name = "btnReporteEventos";
-            this.btnReporteEventos.Size = new System.Drawing.Size(229, 40);
+            this.btnReporteEventos.Size = new System.Drawing.Size(122, 34);
             this.btnReporteEventos.TabIndex = 16;
             this.btnReporteEventos.Text = "Reporte Eventos EDI";
             this.btnReporteEventos.UseVisualStyleBackColor = true;
@@ -333,7 +320,7 @@
             this.btnCargarArchivo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnCargarArchivo.Location = new System.Drawing.Point(3, 49);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
-            this.btnCargarArchivo.Size = new System.Drawing.Size(229, 44);
+            this.btnCargarArchivo.Size = new System.Drawing.Size(236, 44);
             this.btnCargarArchivo.TabIndex = 2;
             this.btnCargarArchivo.Text = "Cargar archivo";
             this.btnCargarArchivo.UseVisualStyleBackColor = true;
@@ -349,7 +336,7 @@
             this.btnTexto.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnTexto.Location = new System.Drawing.Point(3, 99);
             this.btnTexto.Name = "btnTexto";
-            this.btnTexto.Size = new System.Drawing.Size(229, 45);
+            this.btnTexto.Size = new System.Drawing.Size(236, 45);
             this.btnTexto.TabIndex = 9;
             this.btnTexto.Text = "Texto";
             this.btnTexto.UseVisualStyleBackColor = true;
@@ -365,11 +352,11 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 98.61325F));
             this.tableLayoutPanel4.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.groupBox1, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(244, 3);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(251, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(659, 147);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(678, 147);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // panel1
@@ -388,26 +375,31 @@
             this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel5.ColumnCount = 6;
+            this.tableLayoutPanel5.ColumnCount = 9;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 475F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 256F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 44F));
+            this.tableLayoutPanel5.Controls.Add(this.txtNombreArchivo, 7, 0);
             this.tableLayoutPanel5.Controls.Add(this.btnListadoSegmentos, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnLimpiar, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnEdiPedidos, 4, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnCorreosEdi, 2, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnGenerarEdi, 3, 0);
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 5, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label1, 6, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnCorreosEdi, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnGenerarEdi, 2, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnEdiPedidos, 3, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnReporteEventos, 4, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnDirectorioSFTP, 5, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel5.MinimumSize = new System.Drawing.Size(0, 40);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(915, 40);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(941, 40);
             this.tableLayoutPanel5.TabIndex = 10;
             // 
             // btnListadoSegmentos
@@ -423,22 +415,6 @@
             this.btnListadoSegmentos.UseVisualStyleBackColor = true;
             this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
             // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.18F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.82F));
-            this.tableLayoutPanel6.Controls.Add(this.btnDirectorioSFTP, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.txtNombreArchivo, 2, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(443, 3);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 1;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(469, 34);
-            this.tableLayoutPanel6.TabIndex = 10;
-            // 
             // btnDirectorioSFTP
             // 
             this.btnDirectorioSFTP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -448,13 +424,25 @@
             this.btnDirectorioSFTP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDirectorioSFTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDirectorioSFTP.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDirectorioSFTP.Location = new System.Drawing.Point(3, 3);
+            this.btnDirectorioSFTP.Location = new System.Drawing.Point(471, 3);
             this.btnDirectorioSFTP.Name = "btnDirectorioSFTP";
-            this.btnDirectorioSFTP.Size = new System.Drawing.Size(94, 28);
+            this.btnDirectorioSFTP.Size = new System.Drawing.Size(98, 34);
             this.btnDirectorioSFTP.TabIndex = 16;
             this.btnDirectorioSFTP.Text = "Directorio SFTP";
             this.btnDirectorioSFTP.UseVisualStyleBackColor = true;
             this.btnDirectorioSFTP.Click += new System.EventHandler(this.btnDirectorioSFTP_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(575, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Nombre archivo: ";
             // 
             // txtNombreArchivo
             // 
@@ -463,10 +451,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreArchivo.AutoSize = true;
             this.txtNombreArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreArchivo.Location = new System.Drawing.Point(206, 0);
+            this.txtNombreArchivo.Location = new System.Drawing.Point(678, 0);
             this.txtNombreArchivo.Name = "txtNombreArchivo";
-            this.txtNombreArchivo.Size = new System.Drawing.Size(260, 34);
+            this.txtNombreArchivo.Size = new System.Drawing.Size(250, 40);
             this.txtNombreArchivo.TabIndex = 1;
+            this.txtNombreArchivo.Text = "_";
             this.txtNombreArchivo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
@@ -475,7 +464,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(947, 600);
+            this.ClientSize = new System.Drawing.Size(973, 599);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -495,15 +484,12 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbDeshabilitar;
@@ -518,7 +504,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btnCargarArchivo;
@@ -529,6 +514,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnReporteEventos;
         private System.Windows.Forms.Button btnDirectorioSFTP;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label txtNombreArchivo;
     }
 }

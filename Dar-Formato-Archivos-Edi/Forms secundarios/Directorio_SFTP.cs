@@ -30,6 +30,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             this.TxtFormatoTexto = t;
             this.txtNombreArchivo = NombreArc;
             InitializeComponent();
+            ConfigButtonEfects();
+
             CheckForIllegalCrossThreadCalls = false;
             pbEstatus.Visible = false;
 
@@ -71,30 +73,31 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         }
 
         // EFECTO HOVER
-        private void btnConectar_MouseEnter(object sender, EventArgs e)
+        public void ConfigButtonEfects()
         {
-            btnConectar.BackColor = Color.White;
-            btnConectar.ForeColor = Color.Black;
-            btnConectar.Cursor = Cursors.Hand;
+            //Botones para conectar y filtrar archivos sftp
+            List<Button> ArrButtons = new List<Button>() { btnConectar, BtnFiltrar };
+
+            foreach (Button btn in ArrButtons)
+            {
+                btn.MouseEnter += HoverEnter;
+                btn.MouseLeave += HoverLeave;
+            }
         }
 
-        private void btnConectar_MouseLeave(object sender, EventArgs e)
+        public static void HoverEnter(object sender, EventArgs e)
         {
-            btnConectar.BackColor = Color.FromArgb(46, 51, 73);
-            btnConectar.ForeColor = Color.White;
+            Button btn = (Button)sender;
+            btn.BackColor = Color.White;
+            btn.ForeColor = Color.Black;
+            btn.Cursor = Cursors.Hand;
         }
 
-        private void BtnFiltrar_MouseEnter(object sender, EventArgs e)
+        public static void HoverLeave(object sender, EventArgs e)
         {
-            BtnFiltrar.BackColor = Color.White;
-            BtnFiltrar.ForeColor = Color.Black;
-            BtnFiltrar.Cursor = Cursors.Hand;
-        }
-
-        private void BtnFiltrar_MouseLeave(object sender, EventArgs e)
-        {
-            BtnFiltrar.BackColor = Color.FromArgb(46, 51, 73);
-            BtnFiltrar.ForeColor = Color.White;
+            Button btn = (Button)sender;
+            btn.BackColor = Color.FromArgb(46, 51, 73);
+            btn.ForeColor = Color.White;
         }
 
         private void btnConectar_Click(object sender, EventArgs e)

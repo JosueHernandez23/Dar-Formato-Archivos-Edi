@@ -186,8 +186,6 @@
             this.btnConectar.Text = "Conectar";
             this.btnConectar.UseVisualStyleBackColor = true;
             this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
-            this.btnConectar.MouseEnter += new System.EventHandler(this.btnConectar_MouseEnter);
-            this.btnConectar.MouseLeave += new System.EventHandler(this.btnConectar_MouseLeave);
             // 
             // txtPort
             // 
@@ -352,8 +350,6 @@
             this.BtnFiltrar.Text = "Filtrar";
             this.BtnFiltrar.UseVisualStyleBackColor = true;
             this.BtnFiltrar.Click += new System.EventHandler(this.BtnFiltrar_Click);
-            this.BtnFiltrar.MouseEnter += new System.EventHandler(this.BtnFiltrar_MouseEnter);
-            this.BtnFiltrar.MouseLeave += new System.EventHandler(this.BtnFiltrar_MouseLeave);
             // 
             // label4
             // 

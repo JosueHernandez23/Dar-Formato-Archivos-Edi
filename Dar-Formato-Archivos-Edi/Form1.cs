@@ -21,6 +21,7 @@ namespace Dar_Formato_Archivos_Edi
         public Form1()
         {
             InitializeComponent();
+            ConfigButtonEfects();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -458,6 +459,39 @@ namespace Dar_Formato_Archivos_Edi
         {
             var f = new Directorio_SFTP(TxtFormatoTexto, txtNombreArchivo);
             f.Show();
+        }
+
+        public void ConfigButtonEfects()
+        {
+            //var la =  Controls.Cast<Control>().ToList().Where(vl => vl.Text == "");
+            //Button[] bb = Controls.OfType<Button>().ToArray();
+
+            //Botones del menu
+            List<Button> ArrButtons = tableLayoutPanel5.Controls.OfType<Button>().ToList();
+            //Botones para mostrar la informacion del texto
+            ArrButtons.AddRange(tableLayoutPanel3.Controls.OfType<Button>().ToList());
+
+
+            foreach (Button btn in ArrButtons)
+            {
+                btn.MouseEnter += HoverEnter;
+                btn.MouseLeave += HoverLeave;
+            }
+        }
+
+        public static void HoverEnter(object sender, EventArgs e) 
+        {
+            Button btn = (Button)sender;
+            btn.BackColor = Color.White;
+            btn.ForeColor = Color.Black;
+            btn.Cursor = Cursors.Hand;
+        }
+
+        public static void HoverLeave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackColor = Color.FromArgb(46, 51, 73);
+            btn.ForeColor = Color.White;
         }
     }
 }
