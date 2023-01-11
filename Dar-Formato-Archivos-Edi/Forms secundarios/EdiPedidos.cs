@@ -242,15 +242,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 }).ToList();
             }
         }
-
-        public void SetDespPosicionUnidad(int ClienteEdiPedidoId)
-        {
-
-
-        }
-
-
-
         #endregion
 
         #region Get_Informacion

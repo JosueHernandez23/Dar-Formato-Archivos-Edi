@@ -38,6 +38,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnConfigurarSegmentos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtDatos)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -53,7 +54,7 @@
             this.cboClientes.FormattingEnabled = true;
             this.cboClientes.Location = new System.Drawing.Point(68, 3);
             this.cboClientes.Name = "cboClientes";
-            this.cboClientes.Size = new System.Drawing.Size(158, 24);
+            this.cboClientes.Size = new System.Drawing.Size(179, 24);
             this.cboClientes.TabIndex = 0;
             // 
             // LblCliente
@@ -61,7 +62,8 @@
             this.LblCliente.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LblCliente.AutoSize = true;
             this.LblCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblCliente.Location = new System.Drawing.Point(3, 6);
+            this.LblCliente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LblCliente.Location = new System.Drawing.Point(3, 7);
             this.LblCliente.Name = "LblCliente";
             this.LblCliente.Size = new System.Drawing.Size(59, 17);
             this.LblCliente.TabIndex = 1;
@@ -72,9 +74,10 @@
             this.lblTipoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblTipoArchivo.AutoSize = true;
             this.lblTipoArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoArchivo.Location = new System.Drawing.Point(3, 6);
+            this.lblTipoArchivo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblTipoArchivo.Location = new System.Drawing.Point(3, 7);
             this.lblTipoArchivo.Name = "lblTipoArchivo";
-            this.lblTipoArchivo.Size = new System.Drawing.Size(91, 17);
+            this.lblTipoArchivo.Size = new System.Drawing.Size(95, 17);
             this.lblTipoArchivo.TabIndex = 2;
             this.lblTipoArchivo.Text = "Tipo Archivo: ";
             // 
@@ -83,9 +86,9 @@
             this.cboTipoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cboTipoArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTipoArchivo.FormattingEnabled = true;
-            this.cboTipoArchivo.Location = new System.Drawing.Point(103, 3);
+            this.cboTipoArchivo.Location = new System.Drawing.Point(104, 3);
             this.cboTipoArchivo.Name = "cboTipoArchivo";
-            this.cboTipoArchivo.Size = new System.Drawing.Size(121, 24);
+            this.cboTipoArchivo.Size = new System.Drawing.Size(133, 24);
             this.cboTipoArchivo.TabIndex = 3;
             // 
             // dtDatos
@@ -95,7 +98,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtDatos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtDatos.Location = new System.Drawing.Point(3, 45);
+            this.dtDatos.Location = new System.Drawing.Point(3, 46);
             this.dtDatos.MinimumSize = new System.Drawing.Size(965, 401);
             this.dtDatos.Name = "dtDatos";
             this.dtDatos.Size = new System.Drawing.Size(965, 401);
@@ -104,7 +107,10 @@
             // btnSelectClienteSegmento
             // 
             this.btnSelectClienteSegmento.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSelectClienteSegmento.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnSelectClienteSegmento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectClienteSegmento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelectClienteSegmento.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSelectClienteSegmento.Location = new System.Drawing.Point(16, 3);
             this.btnSelectClienteSegmento.Name = "btnSelectClienteSegmento";
             this.btnSelectClienteSegmento.Size = new System.Drawing.Size(137, 30);
@@ -127,7 +133,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.955752F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.04425F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(965, 424);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(965, 433);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // tableLayoutPanel2
@@ -135,18 +141,20 @@
             this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.7268F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.05005F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.22315F));
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.72736F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.05093F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.49115F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.73056F));
             this.tableLayoutPanel2.Controls.Add(this.btnSelectClienteSegmento, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BtnConfigurarSegmentos, 3, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(959, 36);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(959, 37);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -155,15 +163,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.09506F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.90495F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.71483F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.28517F));
             this.tableLayoutPanel3.Controls.Add(this.LblCliente, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.cboClientes, 1, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(173, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(262, 30);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(263, 31);
             this.tableLayoutPanel3.TabIndex = 10;
             // 
             // tableLayoutPanel4
@@ -172,22 +180,37 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.45525F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.54475F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.44606F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.55393F));
             this.tableLayoutPanel4.Controls.Add(this.lblTipoArchivo, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.cboTipoArchivo, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(441, 3);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(442, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(515, 30);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(343, 31);
             this.tableLayoutPanel4.TabIndex = 11;
+            // 
+            // BtnConfigurarSegmentos
+            // 
+            this.BtnConfigurarSegmentos.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BtnConfigurarSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnConfigurarSegmentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnConfigurarSegmentos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnConfigurarSegmentos.Location = new System.Drawing.Point(791, 3);
+            this.BtnConfigurarSegmentos.Name = "BtnConfigurarSegmentos";
+            this.BtnConfigurarSegmentos.Size = new System.Drawing.Size(165, 30);
+            this.BtnConfigurarSegmentos.TabIndex = 12;
+            this.BtnConfigurarSegmentos.Text = "Configurar segmentos";
+            this.BtnConfigurarSegmentos.UseVisualStyleBackColor = true;
+            this.BtnConfigurarSegmentos.Click += new System.EventHandler(this.BtnConfigurarSegmentos_Click);
             // 
             // Listado_Segmentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 472);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.ClientSize = new System.Drawing.Size(1000, 481);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(1016, 511);
             this.Name = "Listado_Segmentos";
@@ -215,5 +238,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Button BtnConfigurarSegmentos;
     }
 }

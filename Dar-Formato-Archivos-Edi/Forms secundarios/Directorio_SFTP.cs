@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiConfiguracion;
-using Dar_Formato_Archivos_Edi.Controllers;
+using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiConfiguracion;
 using Dar_Formato_Archivos_Edi.Clases.TipoConexion;
 using System.Threading;
 using Dar_Formato_Archivos_Edi.Properties;
-using Dar_Formato_Archivos_Edi;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
@@ -46,6 +46,20 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             cboTipoConexion.DataSource = ObtenerTipoConexion();
             cboTipoConexion.ValueMember = "IdTipoConexion";
             cboTipoConexion.DisplayMember = "Conexion";
+
+            Prueba();
+        }
+
+        public void Prueba() 
+        {
+            // Requires Microsoft.Toolkit.Uwp.Notifications NuGet package version 7.0 or greater
+            new ToastContentBuilder()
+                .AddArgument("action", "viewConversation")
+                .AddArgument("conversationId", 9813)
+                .AddText("Andrew sent you a picture")
+                .AddText("Check this out, The Enchantments in Washington!")
+                .Show(); 
+            // Not seeing the Show() method? Make sure you have version 7.0, and if you're using .NET 6 (or later), then your TFM must be net6.0-windows10.0.17763.0 or greater
         }
 
         public List<ClienteEdiConfiguracion> ObtenerClientesSFTP()
@@ -198,7 +212,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 string server = txtServidor.Text;
                 string user = txtUserName.Text;
                 string password = txtPassword.Text;
-                string path = txtPathOrigen.Text;
                 string nombreArchivo = "";
                 int port = ConvertToInt(txtPort.Text, 22);
 

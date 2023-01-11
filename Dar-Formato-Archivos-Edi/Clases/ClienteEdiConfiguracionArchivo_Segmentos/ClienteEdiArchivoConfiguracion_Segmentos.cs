@@ -10,12 +10,14 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteEdiConfiguracionArchivo_Segment
     {
         public int CA_ClienteEdiConfiguracionArchivoId { get; set; }
         public int CA_ClienteEdiTipoArchivoId { get; set; }
+        public int CA_ClienteEdiConfiguracionId { get; set; }
         public int CA_Orden { get; set; }
-        //public int CA_Estatus_C1 { get; set; }
-        //public int CA_Estatus_C2 { get; set; }
-        //public int CA_Columas12 { get; set; }
+        public int CA_Estatus_C1 { get; set; }
+        public int CA_Estatus_C2 { get; set; }
+        public int CA_Columnas12 { get; set; }
+        public string CA_FinSegAd { get; set; } = "";
         public int CS_IdSegmento { get; set; }
         public string CS_Nodo { get; set; }
-        public string CS_NombreSegmento { get; set; }        
+        public string CS_NombreSegmento { get; set; }
     }
 }

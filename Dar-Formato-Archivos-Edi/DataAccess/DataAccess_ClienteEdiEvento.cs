@@ -8,7 +8,7 @@ using Dapper;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEvento;
 using Dar_Formato_Archivos_Edi.Conexion;
 
-namespace Dar_Formato_Archivos_Edi.DataAccess
+namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiEvento
 {
     public class DataAccess_ClienteEdiEvento
     {

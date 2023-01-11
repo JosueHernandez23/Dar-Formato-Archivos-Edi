@@ -76,7 +76,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             Mail.BodyFormat = Outlook.OlBodyFormat.olFormatPlain;
 
             Document document = new Document() { ReceivedTime = Mail.ReceivedTime, Email_Subject = Mail.Subject, List_Documents = new List<Document_Ind>() };
-            Document_Ind document_ind = new Document_Ind();
+            Document_Ind document_ind;
 
             string body = Mail.Body;
             string[] arrDocuments = SepararDocumentosErrores(body); //.Where(vl => vl != "").ToArray();

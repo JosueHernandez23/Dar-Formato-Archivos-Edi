@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Dar_Formato_Archivos_Edi.Conexion;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiTipoArchivo;
 
-namespace Dar_Formato_Archivos_Edi.DataAccess
+namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_TipoArchivo
 {
     public class DataAccess_TipoArchivo
     {

@@ -1,4 +1,4 @@
-﻿using Dar_Formato_Archivos_Edi.DataAccess;
+﻿using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_TipoArchivo;
 using System;
 using System.Collections.Generic;
 using System.IO;

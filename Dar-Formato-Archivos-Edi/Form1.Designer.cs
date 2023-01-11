@@ -45,16 +45,16 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnReporteEventos = new System.Windows.Forms.Button();
             this.btnCargarArchivo = new System.Windows.Forms.Button();
             this.btnTexto = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnListadoSegmentos = new System.Windows.Forms.Button();
-            this.btnDirectorioSFTP = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtNombreArchivo = new System.Windows.Forms.Label();
+            this.btnListadoSegmentos = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnReporteEventos = new System.Windows.Forms.Button();
+            this.btnDirectorioSFTP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -292,23 +292,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(242, 147);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
-            // btnReporteEventos
-            // 
-            this.btnReporteEventos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReporteEventos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReporteEventos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReporteEventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReporteEventos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnReporteEventos.Location = new System.Drawing.Point(343, 3);
-            this.btnReporteEventos.Name = "btnReporteEventos";
-            this.btnReporteEventos.Size = new System.Drawing.Size(122, 34);
-            this.btnReporteEventos.TabIndex = 16;
-            this.btnReporteEventos.Text = "Reporte Eventos EDI";
-            this.btnReporteEventos.UseVisualStyleBackColor = true;
-            this.btnReporteEventos.Click += new System.EventHandler(this.btnReporteEventos_Click);
-            // 
             // btnCargarArchivo
             // 
             this.btnCargarArchivo.AllowDrop = true;
@@ -402,6 +385,20 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(941, 40);
             this.tableLayoutPanel5.TabIndex = 10;
             // 
+            // txtNombreArchivo
+            // 
+            this.txtNombreArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNombreArchivo.AutoSize = true;
+            this.txtNombreArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombreArchivo.Location = new System.Drawing.Point(678, 0);
+            this.txtNombreArchivo.Name = "txtNombreArchivo";
+            this.txtNombreArchivo.Size = new System.Drawing.Size(250, 40);
+            this.txtNombreArchivo.TabIndex = 1;
+            this.txtNombreArchivo.Text = "_";
+            this.txtNombreArchivo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // btnListadoSegmentos
             // 
             this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
@@ -414,6 +411,35 @@
             this.btnListadoSegmentos.TabIndex = 10;
             this.btnListadoSegmentos.UseVisualStyleBackColor = true;
             this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(575, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Nombre archivo: ";
+            // 
+            // btnReporteEventos
+            // 
+            this.btnReporteEventos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReporteEventos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReporteEventos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReporteEventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReporteEventos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnReporteEventos.Location = new System.Drawing.Point(343, 3);
+            this.btnReporteEventos.Name = "btnReporteEventos";
+            this.btnReporteEventos.Size = new System.Drawing.Size(122, 34);
+            this.btnReporteEventos.TabIndex = 16;
+            this.btnReporteEventos.Text = "Reporte Eventos EDI";
+            this.btnReporteEventos.UseVisualStyleBackColor = true;
+            this.btnReporteEventos.Click += new System.EventHandler(this.btnReporteEventos_Click);
             // 
             // btnDirectorioSFTP
             // 
@@ -431,32 +457,6 @@
             this.btnDirectorioSFTP.Text = "Directorio SFTP";
             this.btnDirectorioSFTP.UseVisualStyleBackColor = true;
             this.btnDirectorioSFTP.Click += new System.EventHandler(this.btnDirectorioSFTP_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(575, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre archivo: ";
-            // 
-            // txtNombreArchivo
-            // 
-            this.txtNombreArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNombreArchivo.AutoSize = true;
-            this.txtNombreArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreArchivo.Location = new System.Drawing.Point(678, 0);
-            this.txtNombreArchivo.Name = "txtNombreArchivo";
-            this.txtNombreArchivo.Size = new System.Drawing.Size(250, 40);
-            this.txtNombreArchivo.TabIndex = 1;
-            this.txtNombreArchivo.Text = "_";
-            this.txtNombreArchivo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 

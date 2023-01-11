@@ -12,9 +12,10 @@ using Dar_Formato_Archivos_Edi.Clases.ClienteEdiConfiguracion;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEvento;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiTipoArchivo;
 using Dar_Formato_Archivos_Edi.Clases.TipoConexion;
-using Dar_Formato_Archivos_Edi.DataAccess;
+using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_TipoArchivo;
+using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiEvento;
 using System.Windows.Forms;
-using Dar_Formato_Archivos_Edi.Controllers;
+using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiConfiguracion;
 using System.IO;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
