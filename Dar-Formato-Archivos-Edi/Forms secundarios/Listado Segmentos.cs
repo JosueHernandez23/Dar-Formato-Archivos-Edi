@@ -96,7 +96,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         private void BtnConfigurarSegmentos_Click(object sender, EventArgs e)
         {
             this.Close();
-            
+
             var f = new Configuracion_Segmentos();
             f.Show();
         }
