@@ -62,4 +62,19 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
         public string D1 { get; set; }
     }
 
+    public class GetEstadisticas
+    {
+        public int ClienteEdiConfiguracionId { get; set; }
+        public string CodeSCAC { get; set; }
+        public int RecibidosEdi { get; set; }
+        public int RelacionadosTrucks { get; set; }
+        public float PorcentajeRelacionados { get; set; }
+        public string FormatoPorcentaje { get; set; }
+        public int ViajesReales { get; set; }
+        public int Importacion { get; set; }
+        public int Exportacion { get; set; }
+        public int Domestico { get; set; }
+        public int Cruce { get; set; }
+    }
+
 }

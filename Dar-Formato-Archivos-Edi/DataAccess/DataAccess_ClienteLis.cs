@@ -12,6 +12,8 @@ using System.Data;
 using System.Data.Common;
 using System.Threading;
 using iTextSharp.text;
+using static Org.BouncyCastle.Math.EC.ECCurve;
+using Dar_Formato_Archivos_Edi.Forms_secundarios;
 
 namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 {
@@ -179,7 +181,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                           cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId And 
                           cec.SQL_DB In ( Select valor from general_parametros With( NoLock ) Where  nombre = 'edihgnuevodbname' ) And
                           cep.ClienteediconfiguracionId = @ll_configuracionId and
-                          cep.Fecha_parada_ini >= DATEADD(DAY, -7,GETDATE())
+                          cep.FechaIngreso >= DATEADD(DAY, -5,GETDATE())
                     Order by cep.Shipment asc 
 
                     -- Se cargan los registros del EDI en el cursos 
@@ -319,5 +321,236 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                 return reporteEventos;
             }
         }
+
+        public List<GetEstadisticas> GetReportEstadistica(string db) {
+            SqlCnx con = new SqlCnx();
+
+            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            {
+                connection.Open();
+                var query = $@"
+                            DECLARE @Table_ReporteDiario Table (
+                            ClienteEdiConfiguracionId INT,
+                            CodeSCAC varchar(6),
+                            RecibidosEdi INT,
+                            RelacionadosTrucks INT,
+                            PorcentajeRelacionados DECIMAL(18,8),
+                            ViajesReales INT,
+                            Importacion INT,
+                            Exportacion INT,
+                            ViajeLocal INT,
+                            Cruce INT,
+                            cepid INT,
+                            REPORTE_DIA DATETIME
+                            )
+                            DECLARE @Fecha DATETIME = DATEADD(DAY, -1, CAST( GETDATE() as DATE))
+
+                            -- Insertar clientes HG --
+                            INSERT INTO @Table_ReporteDiario (ClienteEdiConfiguracionId, CodeSCAC)
+                            Select    ClienteEdiConfiguracionId, CodeSCAC
+                            From    ClienteEdiConfiguracion With(NoLock)
+                            Where    ClienteEdiConfiguracionId IN (1,2,5,7,8)
+
+
+                            -- Obtener Recibidos Edi --
+                            UPDATE    @Table_ReporteDiario
+                                SET        RecibidosEdi = TR.CountPedido
+                                FROM    (Select    Count(DISTINCT(ClienteEdiPedidoId)) as CountPedido, ClienteEdiConfiguracionId as ClienteEdiConf
+                                        From    ClienteEdiPedido With(NoLock)
+                                        Where    CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE) And
+                                                --ClienteEdiConfiguracionId IN (1,2,5,7,8) And
+					                            ClienteEdiPedidoId in (Select ClienteEdiPedidoId
+											                            from ClienteEdiPedido With(NoLock)
+											                            Where CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+											                            and Shipment in	(Select DISTINCT(Shipment) 
+																                            from ClienteEdiPedido With(NoLock)
+															                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))) and
+                                                ClienteEdiEstatusId <> 5
+                                                Group by ClienteEdiConfiguracionId) TR
+                                Where ClienteEdiConfiguracionId = TR.ClienteEdiConf
+
+
+                            -- Obtener Relacionados Trucks --
+                            UPDATE    @Table_ReporteDiario
+                                SET        RelacionadosTrucks = TR.CountPedido
+                                FROM    (Select    COUNT(CEPHG.ClienteEdiPedidoId) as CountPedido, CEP.ClienteEdiConfiguracionId as ClienteEdiConf
+                                            From    --ClienteEdiPedidoEstatusSeguimiento CEPES With(NoLock),
+                                                    ClienteEdiPedidoHG CEPHG With(NoLock),
+                                                    ClienteEdiPedido CEP With(NoLock)
+                                            Where    CEPHG.ClienteEdiPedidoId = CEP.ClienteEdiPedidoId And
+                                                    CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE) And
+                                                    --CEP.ClienteEdiEstatusId <> 5 And
+                                                    CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+                                                    Group by CEP.ClienteEdiConfiguracionId) TR
+                                Where ClienteEdiConfiguracionId = TR.ClienteEdiConf
+
+                            -- Porcentaje Relacionados --
+                            UPDATE    @Table_ReporteDiario
+                                SET PorcentajeRelacionados = CONVERT(DECIMAL(18,2), ISNULL(RelacionadosTrucks,0) )/CONVERT(DECIMAL(18,2), ISNULL(RecibidosEdi, 0) ) * 100
+	                            where RecibidosEdi > 0
+	
+
+                            UPDATE    @Table_ReporteDiario
+                                SET ViajesReales = (SELECT TR.CountPedido)
+                                FROM (Select    COUNT(CEP.ClienteEdiPedidoId) as CountPedido,  
+                                                CEP.ClienteEdiConfiguracionId as ClienteEdiConf,
+                                                CEPHG.tipo_serv as tipo_serv
+                                        From    ClienteEdiPedidoHG CEPHG With(NoLock),
+                                                ClienteEdiPedido CEP With(NoLock)
+                                        Where    CEP.ClienteEdiPedidoId = CEPHG.ClienteEdiPedidoId And
+                                                CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+                                                --And CEPHG.tipo_serv = 'T'
+                                                --And CEP.ClienteEdiEstatusId IN (3,4,7)
+                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+					                            and CEP.ClienteEdiPedidoId IN (
+													                            Select ClienteEdiPedidoId
+															                             from ClienteEdiPedido WITH (NOLOCK)
+															                             Where CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+																		                            and Shipment in (
+																						                             Select DISTINCT(Shipment) 
+																						                             from ClienteEdiPedido WITH (NOLOCK)
+																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             and tipo_serv = 'T'
+					                            )
+                                                Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
+                                WHERE    ClienteEdiConfiguracionId = TR.ClienteEdiConf
+
+
+                            -- TIPO VIAJES: IMPORTACION --
+                            UPDATE    @Table_ReporteDiario
+                                SET Importacion = (SELECT TR.CountPedido)
+                                FROM (Select    COUNT(CEP.ClienteEdiPedidoId) as CountPedido,  
+                                                CEP.ClienteEdiConfiguracionId as ClienteEdiConf,
+                                                CEPHG.tipo_serv as tipo_serv
+                                        From    ClienteEdiPedidoHG CEPHG With(NoLock),
+                                                ClienteEdiPedido CEP With(NoLock)
+                                        Where    CEP.ClienteEdiPedidoId = CEPHG.ClienteEdiPedidoId And
+                                                CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+                                                --And CEPHG.tipo_serv = 'I'
+                                                --And CEP.ClienteEdiEstatusId IN (3,4,7)
+                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+					                            and CEP.ClienteEdiPedidoId IN (
+													                            Select ClienteEdiPedidoId
+															                             from ClienteEdiPedido WITH (NOLOCK)
+															                             Where CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+																		                            and Shipment in (
+																						                             Select DISTINCT(Shipment) 
+																						                             from ClienteEdiPedido WITH (NOLOCK)
+																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             and tipo_serv = 'I'
+					                            )
+                                                Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
+                                WHERE    ClienteEdiConfiguracionId = TR.ClienteEdiConf
+
+                            -- TIPO VIAJES: EXPORTACION --
+                            UPDATE    @Table_ReporteDiario
+                                SET Exportacion = (SELECT TR.CountPedido)
+                                FROM (Select    COUNT(CEP.ClienteEdiPedidoId) as CountPedido,  
+                                                CEP.ClienteEdiConfiguracionId as ClienteEdiConf,
+                                                CEPHG.tipo_serv as tipo_serv
+                                        From    ClienteEdiPedidoHG CEPHG With(NoLock),
+                                                ClienteEdiPedido CEP With(NoLock)
+                                        Where    CEP.ClienteEdiPedidoId = CEPHG.ClienteEdiPedidoId And
+                                                CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+                                                --And CEPHG.tipo_serv = 'E'
+                                                --And CEP.ClienteEdiEstatusId IN (3,4,7)
+                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+					                            and CEP.ClienteEdiPedidoId IN (
+													                            Select ClienteEdiPedidoId
+															                             from ClienteEdiPedido WITH (NOLOCK)
+															                             Where CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+																		                            and Shipment in (
+																						                             Select DISTINCT(Shipment) 
+																						                             from ClienteEdiPedido WITH (NOLOCK)
+																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             and tipo_serv = 'E'
+					                            )
+                                                Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
+                                WHERE    ClienteEdiConfiguracionId = TR.ClienteEdiConf
+
+                            -- TIPO VIAJES: DOMESTICO --
+                            UPDATE    @Table_ReporteDiario
+                                SET ViajeLocal = (SELECT TR.CountPedido)
+                                FROM (Select    COUNT(CEP.ClienteEdiPedidoId) as CountPedido,  
+                                                CEP.ClienteEdiConfiguracionId as ClienteEdiConf,
+                                                CEPHG.tipo_serv as tipo_serv
+                                        From    ClienteEdiPedidoHG CEPHG With(NoLock),
+                                                ClienteEdiPedido CEP With(NoLock)
+                                        Where    CEP.ClienteEdiPedidoId = CEPHG.ClienteEdiPedidoId And
+                                                CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+                                                --And CEPHG.tipo_serv = 'D'
+                                                --And CEP.ClienteEdiEstatusId IN (3,4,7)
+                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+					                            and CEP.ClienteEdiPedidoId IN (
+													                            Select ClienteEdiPedidoId
+															                             from ClienteEdiPedido WITH (NOLOCK)
+															                             Where CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+																		                            and Shipment in (
+																						                             Select DISTINCT(Shipment) 
+																						                             from ClienteEdiPedido WITH (NOLOCK)
+																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             and tipo_serv = 'D'
+					                            )
+                                                Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
+                                WHERE    ClienteEdiConfiguracionId = TR.ClienteEdiConf
+                            --Select @Fecha Fecha_ReporteDiario
+
+                            -- TIPO VIAJES: CRUCE --
+                            UPDATE    @Table_ReporteDiario
+                                SET Cruce = (SELECT TR.CountPedido)
+                                FROM (Select    COUNT(CEP.ClienteEdiPedidoId) as CountPedido,  
+                                                CEP.ClienteEdiConfiguracionId as ClienteEdiConf,
+                                                CEPHG.tipo_serv as tipo_serv
+                                        From    ClienteEdiPedidoHG CEPHG With(NoLock),
+                                                ClienteEdiPedido CEP With(NoLock)
+                                        Where    CEP.ClienteEdiPedidoId = CEPHG.ClienteEdiPedidoId And
+                                                CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+                                                --And CEPHG.tipo_serv = 'C'
+                                                --And CEP.ClienteEdiEstatusId IN (3,4,7)
+                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+					                            and CEP.ClienteEdiPedidoId IN (
+													                            Select ClienteEdiPedidoId
+															                             from ClienteEdiPedido WITH (NOLOCK)
+															                             Where CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE)
+																		                            and Shipment in (
+																						                             Select DISTINCT(Shipment) 
+																						                             from ClienteEdiPedido WITH (NOLOCK)
+																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             and tipo_serv = 'C'
+					                            )
+                                                Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
+                                WHERE    ClienteEdiConfiguracionId = TR.ClienteEdiConf
+
+
+                            Select    ClienteEdiConfiguracionId,
+                                    CodeSCAC,
+                                    ISNULL(RecibidosEdi, 0) as RecibidosEdi,
+                                    ISNULL(RelacionadosTrucks, 0) as RelacionadosTrucks,
+                                    ISNULL(PorcentajeRelacionados, 0) as PorcentajeRelacionados,
+                                    SUBSTRING( CONVERT(VARCHAR(27), ISNULL(PorcentajeRelacionados, 0) ), 0, CHARINDEX('.', CONVERT(VARCHAR(27), ISNULL(PorcentajeRelacionados, 0) ) ) ) + '%' as FormatoPorcentaje,
+                                    ISNULL(ViajesReales, 0) as ViajesReales,
+                                    ISNULL(Importacion, 0) as Importacion,
+                                    ISNULL(Exportacion, 0) as Exportacion,
+                                    ISNULL(ViajeLocal, 0) as Domestico,
+		                            ISNULL(Cruce, 0) as Cruce
+                            From    @Table_ReporteDiario
+                 ";
+
+                List<GetEstadisticas> ReporteEstadistica = connection.Query<GetEstadisticas>(query, commandTimeout: 3600).ToList();
+                var conec = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db));
+
+
+                DataTable dt = new DataTable();
+                dt.TableName = "@Table_ReporteDiario";
+                conec.Open();
+                SqlDataAdapter da = new SqlDataAdapter(query, conec);
+                da.SelectCommand.CommandTimeout = 3600;
+                da.Fill(dt);
+                conec.Close();
+
+                return ReporteEstadistica;
+            }
+        }
+
     }
 }

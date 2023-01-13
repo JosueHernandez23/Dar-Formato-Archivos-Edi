@@ -170,6 +170,7 @@
             this.dtGrid_EventosReportados.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dtGrid_EventosReportados.Size = new System.Drawing.Size(576, 121);
             this.dtGrid_EventosReportados.TabIndex = 4;
+            this.dtGrid_EventosReportados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellDoubleClick);
             // 
             // dtGrid_EstatusSeguimiento
             // 

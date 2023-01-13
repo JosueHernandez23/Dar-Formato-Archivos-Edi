@@ -16,14 +16,24 @@ using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEstatusSeguimiento;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis;
+using Dar_Formato_Archivos_Edi.Properties;
+using Org.BouncyCastle.Asn1.Cmp;
+using System.Threading;
+using Dar_Formato_Archivos_Edi.Clases.TipoConexion;
+using System.ComponentModel.Composition.Primitives;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
     public partial class EdiPedidos : Form
     {
-        public EdiPedidos()
+
+        public RichTextBox TxtFormatoTexto;
+        public EdiPedidos(RichTextBox e)
         {
+            this.TxtFormatoTexto = e;
+
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
             groupBox1.ForeColor = Color.White;
             groupBox2.ForeColor = Color.White;
             groupBox3.ForeColor = Color.White;
@@ -471,5 +481,37 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 }
             }
         }
+
+
+        // Evento para reportar los Eventos Reportados
+        private void dtGrid_EventosReportados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                dtGrid_EventosReportados.Enabled = false;
+                Thread hilo_leerArchivos = new Thread(new ParameterizedThreadStart(LeerArchivoServidor));
+                hilo_leerArchivos.Start(e.RowIndex);
+            }
+        }
+
+        // Lectura de los datos una vez dado el CLICK
+        private void LeerArchivoServidor(Object Parametros)
+        {
+
+            int RowIndex = (int)Parametros;
+            string nombreArchivo = "";
+
+
+            if (RowIndex != -1)
+            {
+                nombreArchivo = dtGrid_EventosReportados.Rows[RowIndex].Cells[3].Value.ToString();
+                TxtFormatoTexto.Text = nombreArchivo;
+                dtGrid_EventosReportados.Enabled = true;
+            }
+        }
+
+
+
+
     }
 }

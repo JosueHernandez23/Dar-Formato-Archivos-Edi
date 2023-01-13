@@ -445,7 +445,7 @@ namespace Dar_Formato_Archivos_Edi
 
         private void btnEdiPedidos_Click(object sender, EventArgs e)
         {
-            var f = new EdiPedidos();
+            var f = new EdiPedidos(TxtFormatoTexto);
             f.Show();
         }
 
@@ -467,7 +467,7 @@ namespace Dar_Formato_Archivos_Edi
             //Button[] bb = Controls.OfType<Button>().ToArray();
 
             //Botones del menu
-            List<Button> ArrButtons = tableLayoutPanel5.Controls.OfType<Button>().ToList();
+            List<Button> ArrButtons = groupBox2.Controls.OfType<Button>().ToList();
             //Botones para mostrar la informacion del texto
             ArrButtons.AddRange(tableLayoutPanel3.Controls.OfType<Button>().ToList());
 
@@ -492,6 +492,12 @@ namespace Dar_Formato_Archivos_Edi
             Button btn = (Button)sender;
             btn.BackColor = Color.FromArgb(46, 51, 73);
             btn.ForeColor = Color.White;
+        }
+
+        private void btnEstadistica_Click(object sender, EventArgs e)
+        {
+            var f = new Dashboard();
+            f.Show();
         }
     }
 }
