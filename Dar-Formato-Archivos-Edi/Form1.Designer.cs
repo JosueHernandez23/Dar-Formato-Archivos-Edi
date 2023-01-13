@@ -74,9 +74,6 @@
             // 
             // btnGenerarEdi
             // 
-            this.btnGenerarEdi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerarEdi.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGenerarEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerarEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -388,9 +385,6 @@
             // 
             // btnReporteEventos
             // 
-            this.btnReporteEventos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReporteEventos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReporteEventos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporteEventos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
