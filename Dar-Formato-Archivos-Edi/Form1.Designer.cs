@@ -275,7 +275,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreArchivo.AutoSize = true;
             this.txtNombreArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreArchivo.Location = new System.Drawing.Point(678, 0);
+            this.txtNombreArchivo.Location = new System.Drawing.Point(193, 97);
             this.txtNombreArchivo.Name = "txtNombreArchivo";
             this.txtNombreArchivo.Size = new System.Drawing.Size(14, 15);
             this.txtNombreArchivo.TabIndex = 1;
@@ -288,7 +288,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(575, 12);
+            this.label1.Location = new System.Drawing.Point(96, 96);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 15);
             this.label1.TabIndex = 0;
@@ -300,7 +300,7 @@
             this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnListadoSegmentos.Location = new System.Drawing.Point(16, 86);
+            this.btnListadoSegmentos.Location = new System.Drawing.Point(33, 86);
             this.btnListadoSegmentos.Name = "btnListadoSegmentos";
             this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
             this.btnListadoSegmentos.TabIndex = 10;
