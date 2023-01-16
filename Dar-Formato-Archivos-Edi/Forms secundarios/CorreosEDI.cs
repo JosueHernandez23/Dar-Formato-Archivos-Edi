@@ -32,6 +32,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             mails = outlookNS.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderInbox);
 
+
             //ObtenerCorreosEdi();
 
             listado_correos = ObtenerCorreosEdi().OrderByDescending(s => s.ReceivedTime).ToList();
