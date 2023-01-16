@@ -92,7 +92,7 @@
             this.btnCorreosEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCorreosEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCorreosEdi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCorreosEdi.Location = new System.Drawing.Point(6, 181);
+            this.btnCorreosEdi.Location = new System.Drawing.Point(6, 224);
             this.btnCorreosEdi.Name = "btnCorreosEdi";
             this.btnCorreosEdi.Size = new System.Drawing.Size(145, 37);
             this.btnCorreosEdi.TabIndex = 12;
@@ -434,7 +434,7 @@
             this.btnEstadistica.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEstadistica.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEstadistica.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEstadistica.Location = new System.Drawing.Point(6, 224);
+            this.btnEstadistica.Location = new System.Drawing.Point(6, 181);
             this.btnEstadistica.Name = "btnEstadistica";
             this.btnEstadistica.Size = new System.Drawing.Size(145, 37);
             this.btnEstadistica.TabIndex = 17;
