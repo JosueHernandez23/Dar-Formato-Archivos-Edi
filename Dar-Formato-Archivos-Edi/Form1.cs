@@ -24,6 +24,7 @@ namespace Dar_Formato_Archivos_Edi
             ConfigButtonEfects();
         }
 
+        #region Eventos Form1
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -115,6 +116,72 @@ namespace Dar_Formato_Archivos_Edi
             }
         }
 
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtNombreArchivo.Text = "";
+            TxtFormatoTexto.Text = "";
+        }
+
+        private void Form1_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                var archivo = (Array)e.Data.GetData(DataFormats.FileDrop);
+
+                string rutaArchivo = archivo.GetValue(0).ToString();
+
+                FileInfo fileInfo = new FileInfo(rutaArchivo);
+
+                if (fileInfo.Extension.ToUpper() == ".TXT" || fileInfo.Extension.ToUpper() == ".EDI")
+                {
+                    FileStream filestream = fileInfo.OpenRead();
+                    StreamReader streamreader = new StreamReader(filestream);
+
+                    string textoArchivo = streamreader.ReadToEnd();
+                    string segmento = txtSegmento.Text;
+                    string elemento = txtElemento.Text;
+                    txtNombreArchivo.Text = "";
+                    filestream.Close();
+                    filestream.Dispose();
+
+                    if (rbHabilitar.Checked)
+                    {
+                        segmento = ObtenerSegmento(textoArchivo);
+                        elemento = ObtenerElemento(textoArchivo);
+
+                        if (segmento == "")
+                            segmento = txtSegmento.Text;
+                        if (elemento == "")
+                            elemento = txtElemento.Text;
+                    }
+
+                    if (rbDeshabilitar.Checked)
+                    {
+                        if (segmento == "")
+                            segmento = ObtenerSegmento(textoArchivo);
+                        if (elemento == "")
+                            elemento = ObtenerElemento(textoArchivo);
+                    }
+
+                    txtNombreArchivo.Text = fileInfo.Name;
+                    TxtFormatoTexto.Text = DarFormatoTexto(textoArchivo, segmento, elemento);
+                }
+                else
+                {
+                    MessageBox.Show("No se permiten archivos con esta extension: " + fileInfo.Extension);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrio un error: \n\n" + ex.Message);
+            }
+        }
+
         private string DarFormatoTexto(string textoArchivo, string segmento, string elemento)
         {
             string[] SeparadorSegmento = textoArchivo.Split(Convert.ToChar(segmento)).Where(s => s != "\r\n" && s != "").ToArray();
@@ -167,6 +234,10 @@ namespace Dar_Formato_Archivos_Edi
 
         }
 
+        #endregion
+
+        #region Acceso otros forms
+
         private void btnListadoSegmentos_Click(object sender, EventArgs e)
         {
             //new Listado_Segmentos().Show();
@@ -176,6 +247,81 @@ namespace Dar_Formato_Archivos_Edi
             f.Show();
         }
 
+        private void btnGenerarEdi_Click(object sender, EventArgs e)
+        {
+            var f = new GenerarEdi();
+            f.Show();
+        }
+
+        private void btnCorreosEdi_Click(object sender, EventArgs e)
+        {
+            var f = new CorreosEDI();
+            f.Show();
+        }
+
+        private void btnEdiPedidos_Click(object sender, EventArgs e)
+        {
+            var f = new EdiPedidos(TxtFormatoTexto);
+            f.Show();
+        }
+
+        private void btnReporteEventos_Click(object sender, EventArgs e)
+        {
+            var f = new ReporteDeEventos();
+            f.Show();
+        }
+
+        private void btnDirectorioSFTP_Click(object sender, EventArgs e)
+        {
+            var f = new Directorio_SFTP(TxtFormatoTexto, txtNombreArchivo);
+            f.Show();
+        }
+
+        private void btnEstadistica_Click(object sender, EventArgs e)
+        {
+            var f = new Dashboard();
+            f.Show();
+        }
+
+        #endregion
+
+        #region Efecto Hover (Buttons)
+        public void ConfigButtonEfects()
+        {
+            //var la =  Controls.Cast<Control>().ToList().Where(vl => vl.Text == "");
+            //Button[] bb = Controls.OfType<Button>().ToArray();
+
+            //Botones del menu
+            List<Button> ArrButtons = groupBox2.Controls.OfType<Button>().ToList();
+            //Botones para mostrar la informacion del texto
+            ArrButtons.AddRange(tableLayoutPanel3.Controls.OfType<Button>().ToList());
+
+
+            foreach (Button btn in ArrButtons)
+            {
+                btn.MouseEnter += HoverEnter;
+                btn.MouseLeave += HoverLeave;
+            }
+        }
+
+        public static void HoverEnter(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackColor = Color.White;
+            btn.ForeColor = Color.Black;
+            btn.Cursor = Cursors.Hand;
+        }
+
+        public static void HoverLeave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackColor = Color.FromArgb(46, 51, 73);
+            btn.ForeColor = Color.White;
+        }
+
+        #endregion
+
+        #region otros procesos (desuso)
         public void ExtraerTextoPDF()
         {
             using (OpenFileDialog Cargar_archivo = new OpenFileDialog())
@@ -365,139 +511,7 @@ namespace Dar_Formato_Archivos_Edi
             public string[] list_codes { get; set; }
         }
 
-        private void btnGenerarEdi_Click(object sender, EventArgs e)
-        {
-            var f = new GenerarEdi();
-            f.Show();
-        }
+        #endregion
 
-        private void btnCorreosEdi_Click(object sender, EventArgs e)
-        {
-            var f = new CorreosEDI();
-            f.Show();
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            txtNombreArchivo.Text = "";
-            TxtFormatoTexto.Text = "";
-        }
-
-        private void Form1_DragOver(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-
-        private void Form1_DragDrop(object sender, DragEventArgs e)
-        {
-            try
-            {
-                var archivo = (Array)e.Data.GetData(DataFormats.FileDrop);
-
-                string rutaArchivo = archivo.GetValue(0).ToString();
-
-                FileInfo fileInfo = new FileInfo(rutaArchivo);
-
-                if (fileInfo.Extension.ToUpper() == ".TXT" || fileInfo.Extension.ToUpper() == ".EDI")
-                {
-                    FileStream filestream = fileInfo.OpenRead();
-                    StreamReader streamreader = new StreamReader(filestream);
-
-                    string textoArchivo = streamreader.ReadToEnd();
-                    string segmento = txtSegmento.Text;
-                    string elemento = txtElemento.Text;
-                    txtNombreArchivo.Text = "";
-                    filestream.Close();
-                    filestream.Dispose();
-
-                    if (rbHabilitar.Checked)
-                    {
-                        segmento = ObtenerSegmento(textoArchivo);
-                        elemento = ObtenerElemento(textoArchivo);
-
-                        if (segmento == "")
-                            segmento = txtSegmento.Text;
-                        if (elemento == "")
-                            elemento = txtElemento.Text;
-                    }
-
-                    if (rbDeshabilitar.Checked)
-                    {
-                        if (segmento == "")
-                            segmento = ObtenerSegmento(textoArchivo);
-                        if (elemento == "")
-                            elemento = ObtenerElemento(textoArchivo);
-                    }
-
-                    txtNombreArchivo.Text = fileInfo.Name;
-                    TxtFormatoTexto.Text = DarFormatoTexto(textoArchivo, segmento, elemento);
-                }
-                else
-                {
-                    MessageBox.Show("No se permiten archivos con esta extension: " + fileInfo.Extension);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrio un error: \n\n" + ex.Message);
-            }
-        }
-
-        private void btnEdiPedidos_Click(object sender, EventArgs e)
-        {
-            var f = new EdiPedidos(TxtFormatoTexto);
-            f.Show();
-        }
-
-        private void btnReporteEventos_Click(object sender, EventArgs e)
-        {
-            var f = new ReporteDeEventos();
-            f.Show();
-        }
-
-        private void btnDirectorioSFTP_Click(object sender, EventArgs e)
-        {
-            var f = new Directorio_SFTP(TxtFormatoTexto, txtNombreArchivo);
-            f.Show();
-        }
-
-        public void ConfigButtonEfects()
-        {
-            //var la =  Controls.Cast<Control>().ToList().Where(vl => vl.Text == "");
-            //Button[] bb = Controls.OfType<Button>().ToArray();
-
-            //Botones del menu
-            List<Button> ArrButtons = groupBox2.Controls.OfType<Button>().ToList();
-            //Botones para mostrar la informacion del texto
-            ArrButtons.AddRange(tableLayoutPanel3.Controls.OfType<Button>().ToList());
-
-
-            foreach (Button btn in ArrButtons)
-            {
-                btn.MouseEnter += HoverEnter;
-                btn.MouseLeave += HoverLeave;
-            }
-        }
-
-        public static void HoverEnter(object sender, EventArgs e) 
-        {
-            Button btn = (Button)sender;
-            btn.BackColor = Color.White;
-            btn.ForeColor = Color.Black;
-            btn.Cursor = Cursors.Hand;
-        }
-
-        public static void HoverLeave(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            btn.BackColor = Color.FromArgb(46, 51, 73);
-            btn.ForeColor = Color.White;
-        }
-
-        private void btnEstadistica_Click(object sender, EventArgs e)
-        {
-            var f = new Dashboard();
-            f.Show();
-        }
     }
 }
