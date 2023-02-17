@@ -553,8 +553,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
+        private void dtGrid_EventosReportados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
-
-
+        }
     }
 }

@@ -110,6 +110,7 @@
             this.txtPedido = new System.Windows.Forms.TextBox();
             this.lblPedido = new System.Windows.Forms.Label();
             this.dgvEventosReportadosAppMobil = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EventosReportados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EstatusSeguimiento)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -118,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPosicionUnidad)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventosReportadosAppMobil)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblClienteEdiPedidoId
@@ -155,47 +157,60 @@
             // 
             // lblEventosReportados
             // 
+            this.lblEventosReportados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblEventosReportados.AutoSize = true;
             this.lblEventosReportados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEventosReportados.Location = new System.Drawing.Point(37, 623);
+            this.lblEventosReportados.Location = new System.Drawing.Point(25, 16);
             this.lblEventosReportados.Name = "lblEventosReportados";
             this.lblEventosReportados.Size = new System.Drawing.Size(131, 16);
             this.lblEventosReportados.TabIndex = 3;
             this.lblEventosReportados.Text = "Eventos Reportados";
+            this.lblEventosReportados.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // dtGrid_EventosReportados
             // 
+            this.dtGrid_EventosReportados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dtGrid_EventosReportados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtGrid_EventosReportados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtGrid_EventosReportados.Location = new System.Drawing.Point(35, 642);
+            this.dtGrid_EventosReportados.Location = new System.Drawing.Point(28, 43);
             this.dtGrid_EventosReportados.Name = "dtGrid_EventosReportados";
             this.dtGrid_EventosReportados.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dtGrid_EventosReportados.Size = new System.Drawing.Size(576, 121);
+            this.dtGrid_EventosReportados.Size = new System.Drawing.Size(571, 170);
             this.dtGrid_EventosReportados.TabIndex = 4;
+            this.dtGrid_EventosReportados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellContentClick);
             this.dtGrid_EventosReportados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellDoubleClick);
             // 
             // dtGrid_EstatusSeguimiento
             // 
+            this.dtGrid_EstatusSeguimiento.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtGrid_EstatusSeguimiento.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtGrid_EstatusSeguimiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtGrid_EstatusSeguimiento.Location = new System.Drawing.Point(644, 642);
+            this.dtGrid_EstatusSeguimiento.Location = new System.Drawing.Point(632, 43);
             this.dtGrid_EstatusSeguimiento.Name = "dtGrid_EstatusSeguimiento";
             this.dtGrid_EstatusSeguimiento.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(574, 121);
+            this.dtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(576, 170);
             this.dtGrid_EstatusSeguimiento.TabIndex = 6;
             // 
             // lblSeguimiento
             // 
             this.lblSeguimiento.AutoSize = true;
             this.lblSeguimiento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSeguimiento.Location = new System.Drawing.Point(641, 623);
+            this.lblSeguimiento.Location = new System.Drawing.Point(630, 16);
             this.lblSeguimiento.Name = "lblSeguimiento";
             this.lblSeguimiento.Size = new System.Drawing.Size(129, 16);
             this.lblSeguimiento.TabIndex = 5;
             this.lblSeguimiento.Text = "Estatus Seguimiento";
+            this.lblSeguimiento.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.dgvEventosReportadosAppMobil);
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.label23);
@@ -245,7 +260,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 120);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1217, 500);
+            this.groupBox1.Size = new System.Drawing.Size(1217, 496);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion de la relacion";
@@ -350,12 +365,15 @@
             // 
             // dtGrid_PedidoDireccion
             // 
+            this.dtGrid_PedidoDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtGrid_PedidoDireccion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             this.dtGrid_PedidoDireccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid_PedidoDireccion.Location = new System.Drawing.Point(632, 372);
             this.dtGrid_PedidoDireccion.Name = "dtGrid_PedidoDireccion";
             this.dtGrid_PedidoDireccion.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dtGrid_PedidoDireccion.Size = new System.Drawing.Size(576, 121);
+            this.dtGrid_PedidoDireccion.Size = new System.Drawing.Size(576, 117);
             this.dtGrid_PedidoDireccion.TabIndex = 9;
             // 
             // txtNombreSitioDestAlt
@@ -761,17 +779,22 @@
             // 
             // dgvPosicionUnidad
             // 
+            this.dgvPosicionUnidad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPosicionUnidad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPosicionUnidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPosicionUnidad.Location = new System.Drawing.Point(1235, 143);
             this.dgvPosicionUnidad.Name = "dgvPosicionUnidad";
             this.dgvPosicionUnidad.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dgvPosicionUnidad.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dgvPosicionUnidad.Size = new System.Drawing.Size(298, 620);
+            this.dgvPosicionUnidad.Size = new System.Drawing.Size(298, 698);
             this.dgvPosicionUnidad.TabIndex = 9;
             // 
             // label22
             // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.Location = new System.Drawing.Point(1306, 120);
@@ -782,6 +805,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.txtEstatusViaje);
             this.groupBox3.Controls.Add(this.label21);
             this.groupBox3.Controls.Add(this.txtFechaFinViaje);
@@ -889,6 +913,8 @@
             // 
             // dgvEventosReportadosAppMobil
             // 
+            this.dgvEventosReportadosAppMobil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvEventosReportadosAppMobil.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -901,8 +927,24 @@
             this.dgvEventosReportadosAppMobil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEventosReportadosAppMobil.Location = new System.Drawing.Point(28, 372);
             this.dgvEventosReportadosAppMobil.Name = "dgvEventosReportadosAppMobil";
-            this.dgvEventosReportadosAppMobil.Size = new System.Drawing.Size(571, 121);
+            this.dgvEventosReportadosAppMobil.Size = new System.Drawing.Size(571, 117);
             this.dgvEventosReportadosAppMobil.TabIndex = 54;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.dtGrid_EventosReportados);
+            this.groupBox4.Controls.Add(this.dtGrid_EstatusSeguimiento);
+            this.groupBox4.Controls.Add(this.lblEventosReportados);
+            this.groupBox4.Controls.Add(this.lblSeguimiento);
+            this.groupBox4.Location = new System.Drawing.Point(12, 622);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(1217, 219);
+            this.groupBox4.TabIndex = 44;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "groupBox4";
             // 
             // EdiPedidos
             // 
@@ -910,16 +952,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1562, 804);
+            this.ClientSize = new System.Drawing.Size(1562, 865);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.dgvPosicionUnidad);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dtGrid_EstatusSeguimiento);
-            this.Controls.Add(this.lblSeguimiento);
-            this.Controls.Add(this.dtGrid_EventosReportados);
-            this.Controls.Add(this.lblEventosReportados);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtClienteEdiPedidoId);
             this.Controls.Add(this.lblClienteEdiPedidoId);
@@ -939,6 +978,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventosReportadosAppMobil)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1026,5 +1067,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.DataGridView dgvEventosReportadosAppMobil;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
