@@ -38,6 +38,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             groupBox2.ForeColor = Color.White;
             groupBox3.ForeColor = Color.White;
 
+            dgvEventosReportadosAppMobil.ForeColor = Color.Black;
+
             //WhiteMode();
             //BlackMode();
             //CustomMode(Color.White, Color.Red);
@@ -51,6 +53,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 limpiar();
                 // Llenar textbox con informacion de Estatus Edi
                 int ClienteEdiPedidoId = Convert.ToInt32(txtClienteEdiPedidoId.Text);
+                //int Viaje = Convert.ToInt32(txtViaje);
 
                 ClienteEdiPedido cep = SetClienteEdiEstatus(ClienteEdiPedidoId);
 
@@ -107,6 +110,11 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 txtPedido.Text = pedidoRelacionado.id_pedido.ToString();
                 txtViaje.Text = pedidoRelacionado.no_viaje.ToString();
 
+
+
+                // Llenar DataGrid con informacion ClienteEdiNotificaEvento
+                SetClienteEdiNotificaEventoAppMobil(Convert.ToInt32(txtViaje.Text));
+
                 // Obtener informacion del cliente y la geocerca
                 List<ClienteLis> lista_cliente = new List<ClienteLis>() {
                         new ClienteLis()
@@ -129,6 +137,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                             tipo_cliente = "Destinatario Ext",
                             id_cliente = pedidoRelacionado.id_destinatario_ext
                         }
+
                 };
 
                 List<ClienteLis> cliente_dataList = GetClienteLis(lista_cliente.Where(vl => vl.id_cliente != null).ToList(), sqldb);
@@ -216,7 +225,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void SetClienteEdiNotificaEvento(int ClienteEdiPedidoId)
+        public void SetClienteEdiNotificaEvento(int ClienteEdiPedidoId) // Se reportan los eventos en la tabla principal
         {
             List<ClienteEdiNotificaEvento> listado_NotificaEvento = GetClienteEdiNotificaEvento(ClienteEdiPedidoId);
 
@@ -231,6 +240,32 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     FechaIngreso = s.FechaIngreso.ToString(),
                     Texto214 = s.Texto214,
                     PedidoDireccionId = s.ClienteEdiPedidoDireccionId
+
+                }).ToList();
+            }
+        }
+
+
+        public void SetClienteEdiNotificaEventoAppMobil(int no_viaje)
+        {
+            List<ClienteEdiNotificaEventoApp> listado_NotificaEventoApp = GetClienteEdiNotificaEventoAppMob(no_viaje);
+
+            // Obtener informacion ClienteEdiNotificaEvento
+            if (listado_NotificaEventoApp.Count > 0)
+            {
+                dgvEventosReportadosAppMobil.DataSource = listado_NotificaEventoApp.Select(s => new
+                {
+                    mensaje = s.mensaje,
+                    fecha_recibido = s.fecha_recibido,
+                    id_pedido = s.id_pedido,
+                    parada = s.parada,
+                    sistema_origen = s.sistema_origen,
+                    no_viaje = s.no_viaje,
+                    //reason_code = s.reason_code,
+                    clienteEdiPedidoId = s.ClienteEdiPedidoId,
+                    id_personal = s.id_personal,
+                    tipo_empleado = s.tipo_empleado,
+                    nombre = s.nombre
 
                 }).ToList();
             }
@@ -290,6 +325,14 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             return clienteEdiPedido.GetClienteEdiNotificaEvento(ClienteEdiPedidoId);
         }
+
+        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMob(int no_viaje)
+        {
+            DataAccess_ClienteEdiPedido clienteEdiPedido = new DataAccess_ClienteEdiPedido();
+
+            return clienteEdiPedido.GetClienteEdiNotificaEventoAppMobil(no_viaje);
+        }
+
 
         public unidad_Viaje GetUnidadSatelite(int no_viaje, string db)
         {

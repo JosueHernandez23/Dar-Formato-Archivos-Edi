@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EdiPedidos));
             this.lblClienteEdiPedidoId = new System.Windows.Forms.Label();
             this.txtClienteEdiPedidoId = new System.Windows.Forms.TextBox();
@@ -74,7 +75,6 @@
             this.txtTipoSitioRem = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblClientesAlt = new System.Windows.Forms.Label();
-            this.ListV_ClientesAlt = new System.Windows.Forms.ListView();
             this.txtDestinatarioAlt = new System.Windows.Forms.TextBox();
             this.txtDestinatario = new System.Windows.Forms.TextBox();
             this.txtRemitente = new System.Windows.Forms.TextBox();
@@ -109,6 +109,7 @@
             this.lblViaje = new System.Windows.Forms.Label();
             this.txtPedido = new System.Windows.Forms.TextBox();
             this.lblPedido = new System.Windows.Forms.Label();
+            this.dgvEventosReportadosAppMobil = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EventosReportados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid_EstatusSeguimiento)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -116,6 +117,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPosicionUnidad)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEventosReportadosAppMobil)).BeginInit();
             this.SuspendLayout();
             // 
             // lblClienteEdiPedidoId
@@ -194,6 +196,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dgvEventosReportadosAppMobil);
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.label23);
             this.groupBox1.Controls.Add(this.txtSitioDestDesc);
@@ -231,7 +234,6 @@
             this.groupBox1.Controls.Add(this.txtTipoSitioRem);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lblClientesAlt);
-            this.groupBox1.Controls.Add(this.ListV_ClientesAlt);
             this.groupBox1.Controls.Add(this.txtDestinatarioAlt);
             this.groupBox1.Controls.Add(this.txtDestinatario);
             this.groupBox1.Controls.Add(this.txtRemitente);
@@ -565,18 +567,9 @@
             this.lblClientesAlt.AutoSize = true;
             this.lblClientesAlt.Location = new System.Drawing.Point(25, 352);
             this.lblClientesAlt.Name = "lblClientesAlt";
-            this.lblClientesAlt.Size = new System.Drawing.Size(118, 17);
+            this.lblClientesAlt.Size = new System.Drawing.Size(229, 17);
             this.lblClientesAlt.TabIndex = 18;
-            this.lblClientesAlt.Text = "Clientes Alternos:";
-            // 
-            // ListV_ClientesAlt
-            // 
-            this.ListV_ClientesAlt.HideSelection = false;
-            this.ListV_ClientesAlt.Location = new System.Drawing.Point(23, 372);
-            this.ListV_ClientesAlt.Name = "ListV_ClientesAlt";
-            this.ListV_ClientesAlt.Size = new System.Drawing.Size(576, 121);
-            this.ListV_ClientesAlt.TabIndex = 17;
-            this.ListV_ClientesAlt.UseCompatibleStateImageBehavior = false;
+            this.lblClientesAlt.Text = "Eventos Reportados Por App Mobil";
             // 
             // txtDestinatarioAlt
             // 
@@ -894,13 +887,30 @@
             this.lblPedido.TabIndex = 12;
             this.lblPedido.Text = "Pedido: ";
             // 
+            // dgvEventosReportadosAppMobil
+            // 
+            this.dgvEventosReportadosAppMobil.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.InfoText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEventosReportadosAppMobil.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvEventosReportadosAppMobil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEventosReportadosAppMobil.Location = new System.Drawing.Point(28, 372);
+            this.dgvEventosReportadosAppMobil.Name = "dgvEventosReportadosAppMobil";
+            this.dgvEventosReportadosAppMobil.Size = new System.Drawing.Size(571, 121);
+            this.dgvEventosReportadosAppMobil.TabIndex = 54;
+            // 
             // EdiPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1562, 804);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.dgvPosicionUnidad);
@@ -928,6 +938,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPosicionUnidad)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEventosReportadosAppMobil)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -949,7 +960,6 @@
         private System.Windows.Forms.Label lblRemitente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblClientesAlt;
-        private System.Windows.Forms.ListView ListV_ClientesAlt;
         private System.Windows.Forms.TextBox txtDestinatarioAlt;
         private System.Windows.Forms.TextBox txtDestinatario;
         private System.Windows.Forms.TextBox txtRemitente;
@@ -1015,5 +1025,6 @@
         private System.Windows.Forms.Label lblPedido;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.DataGridView dgvEventosReportadosAppMobil;
     }
 }
