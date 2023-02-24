@@ -52,25 +52,22 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             {
                 connection.Open();
                 string query = $@"
-                     	Select	
-					            dpum.mensaje,
-					            dpum.fecha_recibido,
-					            dpum.id_pedido,
-					            dpum.parada,
-					            dpum.sistema_origen,
-					            dpum.no_viaje,
-					            --dpum.reason_code,
-					            dpum.ClienteEdiPedidoId,
-                                pp.id_personal,
-					            pp.tipo_empleado, 
-					            CASE WHEN ( nombapm IS NOT NULL ) AND ( appat IS NOT NULL ) AND ( apmat IS NOT NULL ) THEN nombapm + ' ' + appat + ' ' + apmat ELSE nombre END AS nombre 
-			            from [hgdb_lis].[dbo].desp_posicion_unidad_mensaje dpum With( Nolock ), 
-				             [hgdb_lis].[dbo].personal_personal pp With( Nolock ),
-				             [hgdb_lis].[dbo].trafico_viaje tv With( Nolock )
-			            where tv.no_viaje = dpum.no_viaje
-				              and tv.id_personal = pp.id_personal
-				              and dpum.no_viaje = {no_viaje}
-			            order by dpum.fecha_recibido ASC
+						Select		dpum.mensaje,			dpum.fecha_recibido,			dpum.id_pedido,
+									dpum.parada,			dpum.sistema_origen,			dpum.no_viaje,
+									dpum.ClienteEdiPedidoId,pp.id_personal,					pp.tipo_empleado, 
+									CASE WHEN ( nombapm IS NOT NULL ) AND ( appat IS NOT NULL ) AND ( apmat IS NOT NULL ) THEN nombapm + ' ' + appat + ' ' + apmat ELSE nombre END AS nombre 
+						from 
+							        [hgdb_lis].[dbo].desp_posicion_unidad_mensaje dpum		With( Nolock ) , 
+							        [hgdb_lis].[dbo].personal_personal pp					With( Nolock ),
+							        [hgdb_lis].[dbo].trafico_viaje tv						With( Nolock ),
+							        [hgdb_lis].[dbo].mtto_unidades mu						With( Nolock )
+						Where 
+							        tv.no_viaje = dpum.no_viaje and
+							        dpum.mctnumber = mu.mctnumber And
+							        tv.id_personal = pp.id_personal and
+							        dpum.id_Area = 1 And 
+							        (dpum.no_viaje = {no_viaje})
+						ORDER BY dpum.fecha_recibido ASC
                 ";
 
                 List<ClienteEdiNotificaEventoApp> ClienteEdiNotificaEventoApp = connection.Query<ClienteEdiNotificaEventoApp>(query).ToList();
