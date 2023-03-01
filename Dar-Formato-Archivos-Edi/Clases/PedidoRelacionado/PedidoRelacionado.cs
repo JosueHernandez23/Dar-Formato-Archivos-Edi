@@ -14,5 +14,6 @@ namespace Dar_Formato_Archivos_Edi.Clases.PedidoRelacionado
         public int? id_remitente_ext { get; set; }
         public int? id_destinatario { get; set; }
         public int? id_destinatario_ext { get; set; }
+        public int? ClienteEdiPedidoId { get; set; }
     }
 }

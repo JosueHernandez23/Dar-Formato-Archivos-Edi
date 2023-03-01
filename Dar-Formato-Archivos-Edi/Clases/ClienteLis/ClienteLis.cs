@@ -36,6 +36,16 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
 
     }
 
+
+    public class ConfiguracionCliente
+    {
+        public int ClienteEdiConfiguracionId { get; set; }
+        public string descripcion { get; set; }
+        public string SQL { get; set; }
+
+    }
+
+
     public class ReporteEventos
     {
         public int ClienteEdiPedidoId { get; set; }

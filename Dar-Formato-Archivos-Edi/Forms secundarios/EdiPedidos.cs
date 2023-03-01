@@ -21,6 +21,7 @@ using Org.BouncyCastle.Asn1.Cmp;
 using System.Threading;
 using Dar_Formato_Archivos_Edi.Clases.TipoConexion;
 using System.ComponentModel.Composition.Primitives;
+using Dar_Formato_Archivos_Edi.Clases.ClienteEdiConfiguracion;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
@@ -95,6 +96,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         public void SetInformacionRelacion(int ClienteEdiPedidoId, string sqldb)
         {
             PedidoRelacionado pedidoRelacionado = new PedidoRelacionado();
+            pedidoRelacionado.ClienteEdiPedidoId = ClienteEdiPedidoId;
             // Obtener Informacion de la relacion
             if (sqldb == "chdb_lis")
             {
@@ -107,13 +109,15 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (pedidoRelacionado != null)
             {
+                pedidoRelacionado.ClienteEdiPedidoId = ClienteEdiPedidoId;
                 txtPedido.Text = pedidoRelacionado.id_pedido.ToString();
                 txtViaje.Text = pedidoRelacionado.no_viaje.ToString();
+                txtClienteEdiPedidoId.Text = pedidoRelacionado.ClienteEdiPedidoId.ToString();
 
 
 
                 // Llenar DataGrid con informacion ClienteEdiNotificaEvento
-                SetClienteEdiNotificaEventoAppMobil(Convert.ToInt32(txtViaje.Text));
+                SetClienteEdiNotificaEventoAppMobil(Convert.ToInt32(txtViaje.Text),(Convert.ToInt32(txtClienteEdiPedidoId.Text)));
 
                 // Obtener informacion del cliente y la geocerca
                 List<ClienteLis> lista_cliente = new List<ClienteLis>() {
@@ -246,12 +250,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         }
 
 
-        public void SetClienteEdiNotificaEventoAppMobil(int no_viaje)
+        public void SetClienteEdiNotificaEventoAppMobil(int no_viaje, int ClienteEdiPedidoId)
         {
-            List<ClienteEdiNotificaEventoApp> listado_NotificaEventoApp = GetClienteEdiNotificaEventoAppMob(no_viaje);
+            List<ClienteEdiNotificaEventoApp> listado_NotificaEventoApp = GetClienteEdiNotificaEventoAppMob(no_viaje, ClienteEdiPedidoId);
 
             // Obtener informacion ClienteEdiNotificaEvento
-            if (listado_NotificaEventoApp.Count > 0)
+            if (listado_NotificaEventoApp.Count >= 0)
             {
                 dgvEventosReportadosAppMobil.DataSource = listado_NotificaEventoApp.Select(s => new
                 {
@@ -269,6 +273,25 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
                 }).ToList();
             }
+            if (listado_NotificaEventoApp.Count == 0)
+            {
+                dgvEventosReportadosAppMobil.DataSource = listado_NotificaEventoApp.Select(s => new
+                {
+                    mensaje = s.mensaje,
+                    fecha_recibido = s.fecha_recibido,
+                    id_pedido = s.id_pedido,
+                    parada = s.parada,
+                    sistema_origen = s.sistema_origen,
+                    no_viaje = s.no_viaje,
+                    //reason_code = s.reason_code,
+                    clienteEdiPedidoId = s.ClienteEdiPedidoId,
+                    id_personal = s.id_personal,
+                    tipo_empleado = s.tipo_empleado,
+                    nombre = s.nombre
+
+                }).ToList();
+            }
+
         }
 
         public void SetClienteEdiEstatusSeguimiento(int ClienteEdiPedidoId)
@@ -287,6 +310,30 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 }).ToList();
             }
         }
+
+        public void SetClienteConfiguracion(string db)
+        {
+            List<ConfiguracionCliente> list_EstatusSeguimiento = GetCLientesConfiguracion(db);
+
+            if (list_EstatusSeguimiento.Count > 0)
+            {
+                dtGrid_EstatusSeguimiento.DataSource = list_EstatusSeguimiento.Select(s => new
+                {
+
+                    ClienteEdiConfiguracionId = s.ClienteEdiConfiguracionId,
+                    Empresa = s.descripcion,
+                    DataBase = s.SQL.ToString()
+
+                }).ToList();
+            }
+
+        }
+
+
+
+
+
+
         #endregion
 
         #region Get_Informacion
@@ -326,11 +373,11 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return clienteEdiPedido.GetClienteEdiNotificaEvento(ClienteEdiPedidoId);
         }
 
-        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMob(int no_viaje)
+        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMob(int no_viaje,int ClienteEdiPedidoId)
         {
             DataAccess_ClienteEdiPedido clienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
-            return clienteEdiPedido.GetClienteEdiNotificaEventoAppMobil(no_viaje);
+            return clienteEdiPedido.GetClienteEdiNotificaEventoAppMobil(no_viaje, ClienteEdiPedidoId);
         }
 
 
@@ -360,6 +407,13 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
             return dataAccess_ClienteEdiPedido.GetClienteEdiPedidoDireccion(ClienteEdiPedidoId);
+        }
+
+        public List<ConfiguracionCliente> GetCLientesConfiguracion(string db)
+        {
+            DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
+
+            return dataAccess_ClienteEdiPedido.GetClienteEdiConfiguracion(db);
         }
 
         #endregion

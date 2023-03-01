@@ -45,30 +45,59 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             }
         }
 
-        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMobil(int no_viaje)
+        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMobil(int no_viaje, int ClienteEdiPedidoId)
         {
             SqlCnx con = new SqlCnx();
             using (var connection = new SqlConnection(con.connectionString))
             {
+              
                 connection.Open();
-                string query = $@"
-						Select		dpum.mensaje,			dpum.fecha_recibido,			dpum.id_pedido,
-									dpum.parada,			dpum.sistema_origen,			dpum.no_viaje,
-									dpum.ClienteEdiPedidoId,pp.id_personal,					pp.tipo_empleado, 
-									CASE WHEN ( nombapm IS NOT NULL ) AND ( appat IS NOT NULL ) AND ( apmat IS NOT NULL ) THEN nombapm + ' ' + appat + ' ' + apmat ELSE nombre END AS nombre 
-						from 
-							        [hgdb_lis].[dbo].desp_posicion_unidad_mensaje dpum		With( Nolock ) , 
-							        [hgdb_lis].[dbo].personal_personal pp					With( Nolock ),
-							        [hgdb_lis].[dbo].trafico_viaje tv						With( Nolock ),
-							        [hgdb_lis].[dbo].mtto_unidades mu						With( Nolock )
-						Where 
-							        tv.no_viaje = dpum.no_viaje and
-							        dpum.mctnumber = mu.mctnumber And
-							        tv.id_personal = pp.id_personal and
-							        dpum.id_Area = 1 And 
-							        (dpum.no_viaje = {no_viaje})
-						ORDER BY dpum.fecha_recibido ASC
+                
+                    string query = $@"
+						DECLARE @li_ClienteEdiPedido int = {ClienteEdiPedidoId},
+		                        @li_NoViaje int = {no_viaje}
+						
+						IF(@li_ClienteEdiPedido >= 0)
+						BEGIN
+							Select		dpum.mensaje,			dpum.fecha_recibido,			dpum.id_pedido,
+										dpum.parada,			dpum.sistema_origen,			dpum.no_viaje,
+										dpum.ClienteEdiPedidoId,pp.id_personal,					pp.tipo_empleado, 
+										CASE WHEN ( nombapm IS NOT NULL ) AND ( appat IS NOT NULL ) AND ( apmat IS NOT NULL ) THEN nombapm + ' ' + appat + ' ' + apmat ELSE nombre END AS nombre 
+							from 
+										[hgdb_lis].[dbo].desp_posicion_unidad_mensaje dpum		With( Nolock ) , 
+										[hgdb_lis].[dbo].personal_personal pp					With( Nolock ),
+										[hgdb_lis].[dbo].trafico_viaje tv						With( Nolock ),
+										[hgdb_lis].[dbo].mtto_unidades mu						With( Nolock )
+							Where 
+										tv.no_viaje = dpum.no_viaje and
+										dpum.mctnumber = mu.mctnumber And
+										tv.id_personal = pp.id_personal and
+										dpum.id_Area = 1 And 
+										dpum.no_viaje = @li_NoViaje
+							ORDER BY dpum.fecha_recibido ASC
+						END
+
+						IF(@li_NoViaje >= 0)
+						BEGIN
+							Select		dpum.mensaje,			dpum.fecha_recibido,			dpum.id_pedido,
+										dpum.parada,			dpum.sistema_origen,			dpum.no_viaje,
+										dpum.ClienteEdiPedidoId,pp.id_personal,					pp.tipo_empleado, 
+										CASE WHEN ( nombapm IS NOT NULL ) AND ( appat IS NOT NULL ) AND ( apmat IS NOT NULL ) THEN nombapm + ' ' + appat + ' ' + apmat ELSE nombre END AS nombre 
+							from 
+										[hgdb_lis].[dbo].desp_posicion_unidad_mensaje dpum		With( Nolock ) , 
+										[hgdb_lis].[dbo].personal_personal pp					With( Nolock ),
+										[hgdb_lis].[dbo].trafico_viaje tv						With( Nolock ),
+										[hgdb_lis].[dbo].mtto_unidades mu						With( Nolock )
+							Where 
+										tv.no_viaje = dpum.no_viaje and
+										dpum.mctnumber = mu.mctnumber And
+										tv.id_personal = pp.id_personal and
+										dpum.id_Area = 1 And 
+										(dpum.ClienteEdiPedidoId = @li_ClienteEdiPedido )
+							ORDER BY dpum.fecha_recibido ASC
+						END
                 ";
+               
 
                 List<ClienteEdiNotificaEventoApp> ClienteEdiNotificaEventoApp = connection.Query<ClienteEdiNotificaEventoApp>(query).ToList();
 
@@ -188,6 +217,28 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                 connection.Close();
 
                 return posicion_Unidads;
+            }
+
+        }
+
+        public List<ConfiguracionCliente> GetClienteEdiConfiguracion(string db)
+        {
+            SqlCnx con = new SqlCnx();
+            using (var connection = new SqlConnection(con.connectionString))
+            {
+                connection.Open();
+
+                var query = $@"
+                    Select ClienteEdiConfiguracionId, descripcion,SQL_DB
+                    from ClienteEdiConfiguracion
+                    where SQL_DB = '{db}'
+                ";
+
+                List<ConfiguracionCliente> CLienteConfiguracion = connection.Query<ConfiguracionCliente>(query).ToList();
+                connection.Close();
+
+
+                return CLienteConfiguracion;
             }
 
         }

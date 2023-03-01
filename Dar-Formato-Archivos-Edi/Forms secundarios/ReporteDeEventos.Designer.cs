@@ -37,6 +37,7 @@
             this.lblComplete = new System.Windows.Forms.Label();
             this.pbCargandoDatos = new System.Windows.Forms.PictureBox();
             this.gbReporteEventosExcel = new System.Windows.Forms.GroupBox();
+            this.cBoxClienteId = new System.Windows.Forms.ComboBox();
             this.gbEstatusDelReporte = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCargandoDatos)).BeginInit();
@@ -72,7 +73,8 @@
             this.cBoxSQL.Name = "cBoxSQL";
             this.cBoxSQL.Size = new System.Drawing.Size(121, 21);
             this.cBoxSQL.TabIndex = 1;
-            this.cBoxSQL.SelectedIndexChanged += new System.EventHandler(this.cBoxSQL_SelectedIndexChanged);
+            this.cBoxSQL.SelectedIndexChanged += new System.EventHandler(this.btnExportExcel_Click);
+            this.cBoxSQL.SelectionChangeCommitted += new System.EventHandler(this.cBoxSQL_SelectionChangeCommitted);
             // 
             // lblWaiting
             // 
@@ -131,6 +133,7 @@
             this.gbReporteEventosExcel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbReporteEventosExcel.AutoSize = true;
+            this.gbReporteEventosExcel.Controls.Add(this.cBoxClienteId);
             this.gbReporteEventosExcel.Controls.Add(this.dgvEventos);
             this.gbReporteEventosExcel.Controls.Add(this.cBoxSQL);
             this.gbReporteEventosExcel.Controls.Add(this.lblWaiting);
@@ -142,6 +145,19 @@
             this.gbReporteEventosExcel.TabIndex = 7;
             this.gbReporteEventosExcel.TabStop = false;
             this.gbReporteEventosExcel.Text = "Eventos Reportados";
+            // 
+            // cBoxClienteId
+            // 
+            this.cBoxClienteId.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cBoxClienteId.FormattingEnabled = true;
+            this.cBoxClienteId.Items.AddRange(new object[] {
+            "2",
+            "3",
+            "5"});
+            this.cBoxClienteId.Location = new System.Drawing.Point(292, 17);
+            this.cBoxClienteId.Name = "cBoxClienteId";
+            this.cBoxClienteId.Size = new System.Drawing.Size(64, 21);
+            this.cBoxClienteId.TabIndex = 5;
             // 
             // gbEstatusDelReporte
             // 
@@ -198,5 +214,6 @@
         private System.Windows.Forms.PictureBox pbCargandoDatos;
         private System.Windows.Forms.GroupBox gbReporteEventosExcel;
         private System.Windows.Forms.GroupBox gbEstatusDelReporte;
+        private System.Windows.Forms.ComboBox cBoxClienteId;
     }
 }

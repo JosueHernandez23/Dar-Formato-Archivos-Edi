@@ -349,7 +349,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                             INSERT INTO @Table_ReporteDiario (ClienteEdiConfiguracionId, CodeSCAC)
                             Select    ClienteEdiConfiguracionId, CodeSCAC
                             From    ClienteEdiConfiguracion With(NoLock)
-                            Where    ClienteEdiConfiguracionId IN (1,2,5,7,8)
+                            Where    ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion)
 
 
                             -- Obtener Recibidos Edi --
@@ -358,13 +358,13 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                                 FROM    (Select    Count(DISTINCT(ClienteEdiPedidoId)) as CountPedido, ClienteEdiConfiguracionId as ClienteEdiConf
                                         From    ClienteEdiPedido With(NoLock)
                                         Where    CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE) And
-                                                --ClienteEdiConfiguracionId IN (1,2,5,7,8) And
+                                                --ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion) And
 					                            ClienteEdiPedidoId in (Select ClienteEdiPedidoId
 											                            from ClienteEdiPedido With(NoLock)
 											                            Where CAST(FechaIngreso AS DATE) = CAST(@Fecha as DATE)
 											                            and Shipment in	(Select DISTINCT(Shipment) 
 																                            from ClienteEdiPedido With(NoLock)
-															                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))) and
+															                             where ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion))) and
                                                 ClienteEdiEstatusId <> 5
                                                 Group by ClienteEdiConfiguracionId) TR
                                 Where ClienteEdiConfiguracionId = TR.ClienteEdiConf
@@ -380,7 +380,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                                             Where    CEPHG.ClienteEdiPedidoId = CEP.ClienteEdiPedidoId And
                                                     CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE) And
                                                     --CEP.ClienteEdiEstatusId <> 5 And
-                                                    CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+                                                    CEP.ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion)
                                                     Group by CEP.ClienteEdiConfiguracionId) TR
                                 Where ClienteEdiConfiguracionId = TR.ClienteEdiConf
 
@@ -401,7 +401,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                                                 CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
                                                 --And CEPHG.tipo_serv = 'T'
                                                 --And CEP.ClienteEdiEstatusId IN (3,4,7)
-                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+                                                And CEP.ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion)
 					                            and CEP.ClienteEdiPedidoId IN (
 													                            Select ClienteEdiPedidoId
 															                             from ClienteEdiPedido WITH (NOLOCK)
@@ -409,7 +409,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 																		                            and Shipment in (
 																						                             Select DISTINCT(Shipment) 
 																						                             from ClienteEdiPedido WITH (NOLOCK)
-																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             where ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion))
 																						                             and tipo_serv = 'T'
 					                            )
                                                 Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
@@ -428,7 +428,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                                                 CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
                                                 --And CEPHG.tipo_serv = 'I'
                                                 --And CEP.ClienteEdiEstatusId IN (3,4,7)
-                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+                                                And CEP.ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion)
 					                            and CEP.ClienteEdiPedidoId IN (
 													                            Select ClienteEdiPedidoId
 															                             from ClienteEdiPedido WITH (NOLOCK)
@@ -436,7 +436,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 																		                            and Shipment in (
 																						                             Select DISTINCT(Shipment) 
 																						                             from ClienteEdiPedido WITH (NOLOCK)
-																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             where ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion))
 																						                             and tipo_serv = 'I'
 					                            )
                                                 Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
@@ -454,7 +454,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                                                 CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
                                                 --And CEPHG.tipo_serv = 'E'
                                                 --And CEP.ClienteEdiEstatusId IN (3,4,7)
-                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+                                                And CEP.ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion)
 					                            and CEP.ClienteEdiPedidoId IN (
 													                            Select ClienteEdiPedidoId
 															                             from ClienteEdiPedido WITH (NOLOCK)
@@ -462,7 +462,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 																		                            and Shipment in (
 																						                             Select DISTINCT(Shipment) 
 																						                             from ClienteEdiPedido WITH (NOLOCK)
-																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             where ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion))
 																						                             and tipo_serv = 'E'
 					                            )
                                                 Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
@@ -480,7 +480,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                                                 CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
                                                 --And CEPHG.tipo_serv = 'D'
                                                 --And CEP.ClienteEdiEstatusId IN (3,4,7)
-                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+                                                And CEP.ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion)
 					                            and CEP.ClienteEdiPedidoId IN (
 													                            Select ClienteEdiPedidoId
 															                             from ClienteEdiPedido WITH (NOLOCK)
@@ -488,7 +488,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 																		                            and Shipment in (
 																						                             Select DISTINCT(Shipment) 
 																						                             from ClienteEdiPedido WITH (NOLOCK)
-																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             where ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion))
 																						                             and tipo_serv = 'D'
 					                            )
                                                 Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
@@ -507,7 +507,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                                                 CAST(CEP.FechaIngreso AS DATE) = CAST(@Fecha as DATE)
                                                 --And CEPHG.tipo_serv = 'C'
                                                 --And CEP.ClienteEdiEstatusId IN (3,4,7)
-                                                And CEP.ClienteEdiConfiguracionId IN (1,2,5,7,8)
+                                                And CEP.ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion)
 					                            and CEP.ClienteEdiPedidoId IN (
 													                            Select ClienteEdiPedidoId
 															                             from ClienteEdiPedido WITH (NOLOCK)
@@ -515,7 +515,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 																		                            and Shipment in (
 																						                             Select DISTINCT(Shipment) 
 																						                             from ClienteEdiPedido WITH (NOLOCK)
-																						                             where ClienteEdiConfiguracionId IN (1,2,5,7,8))
+																						                             where ClienteEdiConfiguracionId IN (Select ClienteEdiConfiguracionId from ClienteEdiConfiguracion))
 																						                             and tipo_serv = 'C'
 					                            )
                                                 Group by CEP.ClienteEdiConfiguracionId, CEPHG.tipo_serv) TR
