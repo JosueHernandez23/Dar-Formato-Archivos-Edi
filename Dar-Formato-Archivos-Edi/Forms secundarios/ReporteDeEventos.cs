@@ -18,45 +18,33 @@ using NuGet.Protocol.Plugins;
 using DocumentFormat.OpenXml.Bibliography;
 using System.Data;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
+    
     public partial class ReporteDeEventos : Form
     {
-
+        
         public void SetClienteConfiguracion(string db)
         {
             List<ConfiguracionCliente> lista = GetCLientesConfiguracion(db);
+            cBoxClienteId.Visible = true;
 
             if (lista.Count > 0)
             {
                 cBoxClienteId.DisplayMember = "descripcion";
-
-                cBoxClienteId.ValueMember = "SQL";
-                cBoxSQL.DisplayMember = "descripcion";
-                cBoxSQL.DataSource = lista;
-
+                cBoxClienteId.ValueMember = "ClienteEdiConfiguracionId";
+                cBoxClienteId.DataSource = lista;
+                cBoxClienteId.Text = "";
             }
-
-            //CheckForIllegalCrossThreadCalls = false;
-            //Thread thread1 = new Thread(new ThreadStart(CargaDataGrid));
-            //if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
-            //    lblComplete.Text = "Espera a que termine de cargar los datos";
-            //pbCargandoDatos.Show();
-            //thread1.Start();
-            //btnExportExcel.Show();
         }
-
 
         public List<ConfiguracionCliente> GetCLientesConfiguracion(string db)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
-
             return dataAccess_ClienteEdiPedido.GetClienteEdiConfiguracion(db);
         }
-
-
-
 
         public ReporteDeEventos()
         {
@@ -74,66 +62,25 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return dataAccess_ClienteEdiPedido.GetReporte(db,config);
         }
 
-
-
         public void CargaDataGrid() 
         {
-            string db;
-            object config;
-
-            if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
+            string db = cBoxSQL.Text;
+            object config = cBoxClienteId.SelectedValue;
+            
+            if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null )
             {
-                
                 pbCargandoDatos.Image = Resources.loading;
                 dgvEventos.ForeColor = System.Drawing.Color.Black;
 
-                if (cBoxSQL.SelectedIndex.ToString() == "CHDB_LIS")
+                if (config != null || dgvEventos.DataSource != null)
                 {
-                        
                         MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-                        db = cBoxSQL.Text;
-                        config = 1;
-                        dgvEventos.DataSource = GetReporte(db, (int)config);
+                         dgvEventos.DataSource = GetReporte(db, (int)config);
                         MessageBox.Show("Se Cargaron Completamente los datos");
-                   
+                        lblComplete.Text = "Se Completo la carga de datos";
+                        pbCargandoDatos.Image = Resources.Complete;
+                        btnExportExcel.Show();
                 }
-
-                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "HGDB_LIS")
-                {
-                    db = cBoxSQL.Text;
-                    //cBoxClienteId.SelectedIndex.ToString(cBoxClienteId.SelectedIndex(0));
-                    config = 3;
-                    if (cBoxClienteId.SelectedIndex.ToString(cBoxClienteId.Text) != "" || dgvEventos.DataSource != null)
-                    {
-                        MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-                        config = cBoxSQL.SelectedIndex.ToString(cBoxClienteId.Text);
-                        dgvEventos.DataSource = GetReporte(db, (int)config);
-                        MessageBox.Show("Se Cargaron Completamente los datos");
-                    }
-
-                }
-
-                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "RLDB_LIS")
-                {
-                    MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-                    db = cBoxSQL.Text;
-                    config = 7;
-                    dgvEventos.DataSource = GetReporte(db, (int)config);
-                    MessageBox.Show("Se Cargaron Completamente los datos");
-                }
-
-                if (cBoxSQL.SelectedIndex.ToString(cBoxSQL.Text) == "LINDADB")
-                {
-                    MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-                    db = cBoxSQL.Text;
-                    config = 8;
-                    dgvEventos.DataSource = GetReporte(db, (int)config);
-                    MessageBox.Show("Se Cargaron Completamente los datos");
-                }
-
-                lblComplete.Text = "Se Completo la carga de datos";
-                pbCargandoDatos.Image = Resources.Complete;
-                btnExportExcel.Show();
             }
         }
 
@@ -210,6 +157,13 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         private void cBoxSQL_SelectionChangeCommitted(object sender, EventArgs e)
         {
             SetClienteConfiguracion(cBoxSQL.SelectedItem.ToString());
+            cBoxClienteId.Text = " ";
+        }
+
+
+        private void cBoxClienteId_SelectionChangeCommitted_1(object sender, EventArgs e)
+        {
+            CargaDataGrid();
         }
     }
 }

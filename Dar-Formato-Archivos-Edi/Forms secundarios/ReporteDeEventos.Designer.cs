@@ -57,7 +57,7 @@
             this.dgvEventos.Name = "dgvEventos";
             this.dgvEventos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dgvEventos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvEventos.Size = new System.Drawing.Size(434, 289);
+            this.dgvEventos.Size = new System.Drawing.Size(499, 289);
             this.dgvEventos.TabIndex = 0;
             // 
             // cBoxSQL
@@ -73,7 +73,6 @@
             this.cBoxSQL.Name = "cBoxSQL";
             this.cBoxSQL.Size = new System.Drawing.Size(121, 21);
             this.cBoxSQL.TabIndex = 1;
-            this.cBoxSQL.SelectedIndexChanged += new System.EventHandler(this.btnExportExcel_Click);
             this.cBoxSQL.SelectionChangeCommitted += new System.EventHandler(this.cBoxSQL_SelectionChangeCommitted);
             // 
             // lblWaiting
@@ -92,7 +91,7 @@
             this.lblEspera.AutoSize = true;
             this.lblEspera.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEspera.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblEspera.Location = new System.Drawing.Point(36, 20);
+            this.lblEspera.Location = new System.Drawing.Point(38, 24);
             this.lblEspera.Name = "lblEspera";
             this.lblEspera.Size = new System.Drawing.Size(0, 25);
             this.lblEspera.TabIndex = 3;
@@ -101,7 +100,7 @@
             // 
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportExcel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExportExcel.Location = new System.Drawing.Point(362, 15);
+            this.btnExportExcel.Location = new System.Drawing.Point(427, 17);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 23);
             this.btnExportExcel.TabIndex = 4;
@@ -113,7 +112,7 @@
             // 
             this.lblComplete.AutoSize = true;
             this.lblComplete.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblComplete.Location = new System.Drawing.Point(38, 27);
+            this.lblComplete.Location = new System.Drawing.Point(40, 31);
             this.lblComplete.Name = "lblComplete";
             this.lblComplete.Size = new System.Drawing.Size(0, 13);
             this.lblComplete.TabIndex = 5;
@@ -121,7 +120,7 @@
             // pbCargandoDatos
             // 
             this.pbCargandoDatos.Image = global::Dar_Formato_Archivos_Edi.Properties.Resources.loading;
-            this.pbCargandoDatos.Location = new System.Drawing.Point(6, 19);
+            this.pbCargandoDatos.Location = new System.Drawing.Point(6, 24);
             this.pbCargandoDatos.Name = "pbCargandoDatos";
             this.pbCargandoDatos.Size = new System.Drawing.Size(26, 21);
             this.pbCargandoDatos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -141,7 +140,7 @@
             this.gbReporteEventosExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gbReporteEventosExcel.Location = new System.Drawing.Point(12, 12);
             this.gbReporteEventosExcel.Name = "gbReporteEventosExcel";
-            this.gbReporteEventosExcel.Size = new System.Drawing.Size(443, 339);
+            this.gbReporteEventosExcel.Size = new System.Drawing.Size(508, 339);
             this.gbReporteEventosExcel.TabIndex = 7;
             this.gbReporteEventosExcel.TabStop = false;
             this.gbReporteEventosExcel.Text = "Eventos Reportados";
@@ -156,8 +155,10 @@
             "5"});
             this.cBoxClienteId.Location = new System.Drawing.Point(292, 17);
             this.cBoxClienteId.Name = "cBoxClienteId";
-            this.cBoxClienteId.Size = new System.Drawing.Size(64, 21);
+            this.cBoxClienteId.Size = new System.Drawing.Size(129, 21);
             this.cBoxClienteId.TabIndex = 5;
+            this.cBoxClienteId.Visible = false;
+            this.cBoxClienteId.SelectionChangeCommitted += new System.EventHandler(this.cBoxClienteId_SelectionChangeCommitted_1);
             // 
             // gbEstatusDelReporte
             // 
@@ -168,9 +169,9 @@
             this.gbEstatusDelReporte.Controls.Add(this.lblEspera);
             this.gbEstatusDelReporte.Controls.Add(this.lblComplete);
             this.gbEstatusDelReporte.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gbEstatusDelReporte.Location = new System.Drawing.Point(12, 368);
+            this.gbEstatusDelReporte.Location = new System.Drawing.Point(12, 364);
             this.gbEstatusDelReporte.Name = "gbEstatusDelReporte";
-            this.gbEstatusDelReporte.Size = new System.Drawing.Size(443, 61);
+            this.gbEstatusDelReporte.Size = new System.Drawing.Size(502, 65);
             this.gbEstatusDelReporte.TabIndex = 8;
             this.gbEstatusDelReporte.TabStop = false;
             this.gbEstatusDelReporte.Text = "Estatus del Reporte";
@@ -182,7 +183,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(464, 441);
+            this.ClientSize = new System.Drawing.Size(523, 441);
             this.Controls.Add(this.gbEstatusDelReporte);
             this.Controls.Add(this.gbReporteEventosExcel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

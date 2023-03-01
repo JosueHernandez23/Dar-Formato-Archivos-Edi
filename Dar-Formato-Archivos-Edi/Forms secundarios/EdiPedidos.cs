@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiPedido;
 using Dar_Formato_Archivos_Edi.Clases.PedidoRelacionado;
@@ -55,7 +52,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 // Llenar textbox con informacion de Estatus Edi
                 int ClienteEdiPedidoId = Convert.ToInt32(txtClienteEdiPedidoId.Text);
                 //int Viaje = Convert.ToInt32(txtViaje);
-
                 ClienteEdiPedido cep = SetClienteEdiEstatus(ClienteEdiPedidoId);
 
                 // Llenar textbox con Informacion de la relacion
