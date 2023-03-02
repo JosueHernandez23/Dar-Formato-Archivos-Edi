@@ -183,7 +183,7 @@
             this.dtGrid_EventosReportados.Location = new System.Drawing.Point(6, 35);
             this.dtGrid_EventosReportados.Name = "dtGrid_EventosReportados";
             this.dtGrid_EventosReportados.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dtGrid_EventosReportados.Size = new System.Drawing.Size(539, 152);
+            this.dtGrid_EventosReportados.Size = new System.Drawing.Size(539, 128);
             this.dtGrid_EventosReportados.TabIndex = 4;
             this.dtGrid_EventosReportados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellContentClick);
             this.dtGrid_EventosReportados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellDoubleClick);
@@ -201,7 +201,7 @@
             this.dtGrid_EstatusSeguimiento.Name = "dtGrid_EstatusSeguimiento";
             this.dtGrid_EstatusSeguimiento.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dtGrid_EstatusSeguimiento.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(541, 152);
+            this.dtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(541, 128);
             this.dtGrid_EstatusSeguimiento.TabIndex = 6;
             // 
             // lblSeguimiento
@@ -840,7 +840,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             this.dgvPosicionUnidad.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPosicionUnidad.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dgvPosicionUnidad.Size = new System.Drawing.Size(307, 650);
+            this.dgvPosicionUnidad.Size = new System.Drawing.Size(307, 626);
             this.dgvPosicionUnidad.TabIndex = 9;
             // 
             // label22
@@ -975,7 +975,7 @@
             this.groupBox4.Controls.Add(this.lblSeguimiento);
             this.groupBox4.Location = new System.Drawing.Point(12, 609);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1175, 193);
+            this.groupBox4.Size = new System.Drawing.Size(1175, 169);
             this.groupBox4.TabIndex = 44;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "groupBox4";
@@ -988,7 +988,7 @@
             this.Seguimiento_Viaje.Controls.Add(this.label22);
             this.Seguimiento_Viaje.Location = new System.Drawing.Point(1193, 111);
             this.Seguimiento_Viaje.Name = "Seguimiento_Viaje";
-            this.Seguimiento_Viaje.Size = new System.Drawing.Size(319, 691);
+            this.Seguimiento_Viaje.Size = new System.Drawing.Size(319, 667);
             this.Seguimiento_Viaje.TabIndex = 45;
             this.Seguimiento_Viaje.TabStop = false;
             this.Seguimiento_Viaje.Text = "groupBox5";
@@ -999,7 +999,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1563, 814);
+            this.ClientSize = new System.Drawing.Size(1563, 790);
             this.Controls.Add(this.Seguimiento_Viaje);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
