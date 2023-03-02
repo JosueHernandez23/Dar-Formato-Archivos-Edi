@@ -31,7 +31,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             groupBox2.ForeColor = Color.White;
             groupBox3.ForeColor = Color.White;
 
-            dgvEventosReportadosAppMobil.ForeColor = Color.Black;
+            kdgvEventosReportadosAppMobil.ForeColor = Color.Black;
 
             //WhiteMode();
             //BlackMode();
@@ -178,13 +178,14 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     unidad_Viaje cUnidad = GetUnidadSatelite(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
                     txtUnidad.Text = cUnidad.id_unidad;
                     txtSatelite.Text = cUnidad.mctNumber != null ? cUnidad.mctNumber : "";
-
                     txtFechaInicioViaje.Text = cUnidad.fecha_real_viaje.ToString();
                     txtFechaFinViaje.Text = cUnidad.fecha_real_fin_viaje.ToString();
-
                     txtEstatusViaje.Text = cUnidad.status_viaje;
+
+                    //Llenado en DataGridView
                     List<posicion_unidad> posicion = GetPosicionUnidad(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
-                    dgvPosicionUnidad.DataSource = posicion;
+                    //dgvPosicionUnidad.DataSource = posicion;
+                    kryptonDataGridView1.DataSource = posicion;
                 }
                 else
                 {
@@ -200,7 +201,25 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (list_PedidoDireccion.Count > 0)
             {
-                dtGrid_PedidoDireccion.DataSource = list_PedidoDireccion.Select(s => new
+                //dtGrid_PedidoDireccion.DataSource = list_PedidoDireccion.Select(s => new
+                //{
+
+                //    ClienteEdiPedidoDireccionId = s.ClienteEdiPedidoDireccionId,
+                //    ClienteEdiTipoDireccion = s.TipoDireccionId + " - " + s.NombreClienteEdiTipoDireccion,
+                //    FechaEntrada = s.FechaEntrada.ToString(),
+                //    FechaSalida = s.FechaSalida.ToString(),
+                //    Nombre = s.Nombre,
+                //    Pais = s.Pais,
+                //    Estado = s.Estado,
+                //    Ciudad = s.Ciudad,
+                //    Calle = s.Calle,
+                //    CodigoPostal = s.CodigoPostal,
+                //    Stop = s.Stop,
+                //    Accion = s.Accion
+
+                //}).ToList();
+
+                kdtGrid_PedidoDireccion.DataSource = list_PedidoDireccion.Select(s => new
                 {
 
                     ClienteEdiPedidoDireccionId = s.ClienteEdiPedidoDireccionId,
@@ -227,7 +246,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             // Obtener informacion ClienteEdiNotificaEvento
             if (listado_NotificaEvento.Count > 0)
             {
-                dtGrid_EventosReportados.DataSource = listado_NotificaEvento.Select(s => new
+                kdtGrid_EventosReportados.DataSource = listado_NotificaEvento.Select(s => new
                 {
 
                     ClienteEdiNotificaEventoId = s.ClienteEdiNotificaEventoId,
@@ -248,7 +267,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             // Obtener informacion ClienteEdiNotificaEvento
             if (listado_NotificaEventoApp.Count >= 0)
             {
-                dgvEventosReportadosAppMobil.DataSource = listado_NotificaEventoApp.Select(s => new
+             
+                kdgvEventosReportadosAppMobil.DataSource = listado_NotificaEventoApp.Select(s => new
                 {
                     mensaje = s.mensaje,
                     fecha_recibido = s.fecha_recibido,
@@ -264,25 +284,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
                 }).ToList();
             }
-            if (listado_NotificaEventoApp.Count == 0)
-            {
-                dgvEventosReportadosAppMobil.DataSource = listado_NotificaEventoApp.Select(s => new
-                {
-                    mensaje = s.mensaje,
-                    fecha_recibido = s.fecha_recibido,
-                    id_pedido = s.id_pedido,
-                    parada = s.parada,
-                    sistema_origen = s.sistema_origen,
-                    no_viaje = s.no_viaje,
-                    //reason_code = s.reason_code,
-                    clienteEdiPedidoId = s.ClienteEdiPedidoId,
-                    id_personal = s.id_personal,
-                    tipo_empleado = s.tipo_empleado,
-                    nombre = s.nombre
-
-                }).ToList();
-            }
-
         }
 
         public void SetClienteEdiEstatusSeguimiento(int ClienteEdiPedidoId)
@@ -291,7 +292,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (list_EstatusSeguimiento.Count > 0)
             {
-                dtGrid_EstatusSeguimiento.DataSource = list_EstatusSeguimiento.Select(s => new
+                kdtGrid_EstatusSeguimiento.DataSource = list_EstatusSeguimiento.Select(s => new
                 {
 
                     ClienteEdiPedidoEstatusSeguimientoId = s.ClienteEdiPedidoEstatusSeguimientoId,
@@ -308,7 +309,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (list_EstatusSeguimiento.Count > 0)
             {
-                dtGrid_EstatusSeguimiento.DataSource = list_EstatusSeguimiento.Select(s => new
+                kdtGrid_EstatusSeguimiento.DataSource = list_EstatusSeguimiento.Select(s => new
                 {
 
                     ClienteEdiConfiguracionId = s.ClienteEdiConfiguracionId,
@@ -576,7 +577,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         {
             if (e.RowIndex != -1)
             {
-                dtGrid_EventosReportados.Enabled = false;
+                kdtGrid_EventosReportados.Enabled = false;
                 Thread hilo_leerArchivos = new Thread(new ParameterizedThreadStart(LeerArchivoServidor));
                 hilo_leerArchivos.Start(e.RowIndex);
             }
@@ -592,9 +593,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (RowIndex != -1)
             {
-                nombreArchivo = dtGrid_EventosReportados.Rows[RowIndex].Cells[3].Value.ToString();
+                nombreArchivo = kdtGrid_EventosReportados.Rows[RowIndex].Cells[3].Value.ToString();
                 TxtFormatoTexto.Text = nombreArchivo;
-                dtGrid_EventosReportados.Enabled = true;
+                kdtGrid_EventosReportados.Enabled = true;
             }
         }
 
