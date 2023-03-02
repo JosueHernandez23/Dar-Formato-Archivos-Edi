@@ -30,7 +30,7 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
     public class posicion_unidad
     {
         public string ubicacion { get; set; }
-        public string EventTypeDescription { get; set; }
+        public string EventTypeDescription { get; set; } 
         public DateTime posdate { get; set; }
         //public string id_unidad { get; set; }
 

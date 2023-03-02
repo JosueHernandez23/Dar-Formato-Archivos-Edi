@@ -13,12 +13,7 @@ using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEstatusSeguimiento;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis;
-using Dar_Formato_Archivos_Edi.Properties;
-using Org.BouncyCastle.Asn1.Cmp;
 using System.Threading;
-using Dar_Formato_Archivos_Edi.Clases.TipoConexion;
-using System.ComponentModel.Composition.Primitives;
-using Dar_Formato_Archivos_Edi.Clases.ClienteEdiConfiguracion;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {

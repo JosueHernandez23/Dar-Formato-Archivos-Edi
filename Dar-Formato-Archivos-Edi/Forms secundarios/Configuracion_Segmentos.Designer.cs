@@ -36,6 +36,7 @@
             this.BtnOrdenar = new System.Windows.Forms.Button();
             this.BtnAddSegmento = new System.Windows.Forms.Button();
             this.BtnGuardar = new System.Windows.Forms.Button();
+            this.PTB_Estatus = new System.Windows.Forms.PictureBox();
             this.TLayoutPanel_ComboBox = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,13 +44,12 @@
             this.Cbo_Cliente = new System.Windows.Forms.ComboBox();
             this.Cbo_Segmentos = new System.Windows.Forms.ComboBox();
             this.CboTipoArchivo = new System.Windows.Forms.ComboBox();
-            this.PTB_Estatus = new System.Windows.Forms.PictureBox();
             this.TLayoutPanel_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DTGV_Segmentos)).BeginInit();
             this.TLayputPanel_Configuracion.SuspendLayout();
             this.TLayoutPanel_Botones.SuspendLayout();
-            this.TLayoutPanel_ComboBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PTB_Estatus)).BeginInit();
+            this.TLayoutPanel_ComboBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // TLayoutPanel_Main
@@ -106,10 +106,10 @@
             this.TLayoutPanel_Botones.ColumnCount = 6;
             this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.70454F));
             this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.29546F));
-            this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153F));
-            this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
+            this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 137F));
+            this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207F));
+            this.TLayoutPanel_Botones.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 208F));
             this.TLayoutPanel_Botones.Controls.Add(this.BtnConsultar, 0, 0);
             this.TLayoutPanel_Botones.Controls.Add(this.BtnOrdenar, 1, 0);
             this.TLayoutPanel_Botones.Controls.Add(this.BtnAddSegmento, 2, 0);
@@ -132,7 +132,7 @@
             this.BtnConsultar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnConsultar.Location = new System.Drawing.Point(3, 5);
             this.BtnConsultar.Name = "BtnConsultar";
-            this.BtnConsultar.Size = new System.Drawing.Size(90, 37);
+            this.BtnConsultar.Size = new System.Drawing.Size(111, 37);
             this.BtnConsultar.TabIndex = 0;
             this.BtnConsultar.Text = "Consultar";
             this.BtnConsultar.UseVisualStyleBackColor = true;
@@ -146,9 +146,9 @@
             this.BtnOrdenar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOrdenar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnOrdenar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnOrdenar.Location = new System.Drawing.Point(100, 5);
+            this.BtnOrdenar.Location = new System.Drawing.Point(120, 5);
             this.BtnOrdenar.Name = "BtnOrdenar";
-            this.BtnOrdenar.Size = new System.Drawing.Size(85, 37);
+            this.BtnOrdenar.Size = new System.Drawing.Size(104, 37);
             this.BtnOrdenar.TabIndex = 1;
             this.BtnOrdenar.Text = "Ordenar";
             this.BtnOrdenar.UseVisualStyleBackColor = true;
@@ -162,9 +162,9 @@
             this.BtnAddSegmento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAddSegmento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnAddSegmento.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnAddSegmento.Location = new System.Drawing.Point(191, 5);
+            this.BtnAddSegmento.Location = new System.Drawing.Point(230, 5);
             this.BtnAddSegmento.Name = "BtnAddSegmento";
-            this.BtnAddSegmento.Size = new System.Drawing.Size(147, 37);
+            this.BtnAddSegmento.Size = new System.Drawing.Size(131, 37);
             this.BtnAddSegmento.TabIndex = 2;
             this.BtnAddSegmento.Text = "Añadir Segmento";
             this.BtnAddSegmento.UseVisualStyleBackColor = true;
@@ -178,13 +178,23 @@
             this.BtnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnGuardar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnGuardar.Location = new System.Drawing.Point(451, 7);
+            this.BtnGuardar.Location = new System.Drawing.Point(450, 7);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(95, 34);
             this.BtnGuardar.TabIndex = 3;
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.UseVisualStyleBackColor = true;
             this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
+            // 
+            // PTB_Estatus
+            // 
+            this.PTB_Estatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.PTB_Estatus.Location = new System.Drawing.Point(560, 7);
+            this.PTB_Estatus.Name = "PTB_Estatus";
+            this.PTB_Estatus.Size = new System.Drawing.Size(41, 34);
+            this.PTB_Estatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PTB_Estatus.TabIndex = 4;
+            this.PTB_Estatus.TabStop = false;
             // 
             // TLayoutPanel_ComboBox
             // 
@@ -194,7 +204,7 @@
             this.TLayoutPanel_ComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.95434F));
             this.TLayoutPanel_ComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.04566F));
             this.TLayoutPanel_ComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
-            this.TLayoutPanel_ComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
+            this.TLayoutPanel_ComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 157F));
             this.TLayoutPanel_ComboBox.Controls.Add(this.label1, 0, 0);
             this.TLayoutPanel_ComboBox.Controls.Add(this.label2, 1, 0);
             this.TLayoutPanel_ComboBox.Controls.Add(this.label3, 2, 0);
@@ -215,7 +225,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(58, 26);
+            this.label1.Location = new System.Drawing.Point(57, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 17);
             this.label1.TabIndex = 0;
@@ -227,7 +237,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(265, 26);
+            this.label2.Location = new System.Drawing.Point(263, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 17);
             this.label2.TabIndex = 1;
@@ -239,7 +249,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(477, 26);
+            this.label3.Location = new System.Drawing.Point(475, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 17);
             this.label3.TabIndex = 2;
@@ -249,7 +259,7 @@
             // 
             this.Cbo_Cliente.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Cbo_Cliente.FormattingEnabled = true;
-            this.Cbo_Cliente.Location = new System.Drawing.Point(26, 46);
+            this.Cbo_Cliente.Location = new System.Drawing.Point(25, 46);
             this.Cbo_Cliente.Name = "Cbo_Cliente";
             this.Cbo_Cliente.Size = new System.Drawing.Size(123, 21);
             this.Cbo_Cliente.TabIndex = 3;
@@ -259,30 +269,20 @@
             // 
             this.Cbo_Segmentos.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Cbo_Segmentos.FormattingEnabled = true;
-            this.Cbo_Segmentos.Location = new System.Drawing.Point(178, 46);
+            this.Cbo_Segmentos.Location = new System.Drawing.Point(177, 46);
             this.Cbo_Segmentos.Name = "Cbo_Segmentos";
-            this.Cbo_Segmentos.Size = new System.Drawing.Size(257, 21);
+            this.Cbo_Segmentos.Size = new System.Drawing.Size(256, 21);
             this.Cbo_Segmentos.TabIndex = 4;
             // 
             // CboTipoArchivo
             // 
             this.CboTipoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.CboTipoArchivo.FormattingEnabled = true;
-            this.CboTipoArchivo.Location = new System.Drawing.Point(457, 46);
+            this.CboTipoArchivo.Location = new System.Drawing.Point(455, 46);
             this.CboTipoArchivo.Name = "CboTipoArchivo";
             this.CboTipoArchivo.Size = new System.Drawing.Size(132, 21);
             this.CboTipoArchivo.TabIndex = 5;
             this.CboTipoArchivo.SelectionChangeCommitted += new System.EventHandler(this.CboTipoArchivo_SelectionChangeCommitted);
-            // 
-            // PTB_Estatus
-            // 
-            this.PTB_Estatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.PTB_Estatus.Location = new System.Drawing.Point(561, 7);
-            this.PTB_Estatus.Name = "PTB_Estatus";
-            this.PTB_Estatus.Size = new System.Drawing.Size(41, 34);
-            this.PTB_Estatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PTB_Estatus.TabIndex = 4;
-            this.PTB_Estatus.TabStop = false;
             // 
             // Configuracion_Segmentos
             // 
@@ -298,9 +298,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.DTGV_Segmentos)).EndInit();
             this.TLayputPanel_Configuracion.ResumeLayout(false);
             this.TLayoutPanel_Botones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PTB_Estatus)).EndInit();
             this.TLayoutPanel_ComboBox.ResumeLayout(false);
             this.TLayoutPanel_ComboBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PTB_Estatus)).EndInit();
             this.ResumeLayout(false);
 
         }
