@@ -510,6 +510,11 @@
     <Content Include="EstructuraEDI\Estructura_997.txt" />
     <Content Include="EstructuraEDI\Estructura_214.txt" />
     <Content Include="EstructuraEDI\Estructura_990.txt" />
+    <Content Include="Toolkit\ComponentFactory.Krypton.Docking.dll" />
+    <Content Include="Toolkit\ComponentFactory.Krypton.Navigator.dll" />
+    <Content Include="Toolkit\ComponentFactory.Krypton.Ribbon.dll" />
+    <Content Include="Toolkit\ComponentFactory.Krypton.Toolkit.dll" />
+    <Content Include="Toolkit\ComponentFactory.Krypton.Workspace.dll" />
     <None Include="Resources\Complete.gif" />
     <None Include="Resources\loading.gif" />
   </ItemGroup>
