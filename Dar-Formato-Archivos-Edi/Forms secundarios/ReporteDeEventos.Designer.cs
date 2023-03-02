@@ -57,7 +57,7 @@
             this.dgvEventos.Name = "dgvEventos";
             this.dgvEventos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dgvEventos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvEventos.Size = new System.Drawing.Size(499, 289);
+            this.dgvEventos.Size = new System.Drawing.Size(680, 289);
             this.dgvEventos.TabIndex = 0;
             // 
             // cBoxSQL
@@ -100,7 +100,7 @@
             // 
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportExcel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExportExcel.Location = new System.Drawing.Point(427, 17);
+            this.btnExportExcel.Location = new System.Drawing.Point(608, 17);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 23);
             this.btnExportExcel.TabIndex = 4;
@@ -140,7 +140,7 @@
             this.gbReporteEventosExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gbReporteEventosExcel.Location = new System.Drawing.Point(12, 12);
             this.gbReporteEventosExcel.Name = "gbReporteEventosExcel";
-            this.gbReporteEventosExcel.Size = new System.Drawing.Size(508, 339);
+            this.gbReporteEventosExcel.Size = new System.Drawing.Size(689, 339);
             this.gbReporteEventosExcel.TabIndex = 7;
             this.gbReporteEventosExcel.TabStop = false;
             this.gbReporteEventosExcel.Text = "Eventos Reportados";
@@ -171,7 +171,7 @@
             this.gbEstatusDelReporte.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gbEstatusDelReporte.Location = new System.Drawing.Point(12, 364);
             this.gbEstatusDelReporte.Name = "gbEstatusDelReporte";
-            this.gbEstatusDelReporte.Size = new System.Drawing.Size(502, 65);
+            this.gbEstatusDelReporte.Size = new System.Drawing.Size(683, 65);
             this.gbEstatusDelReporte.TabIndex = 8;
             this.gbEstatusDelReporte.TabStop = false;
             this.gbEstatusDelReporte.Text = "Estatus del Reporte";
@@ -183,7 +183,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(523, 441);
+            this.ClientSize = new System.Drawing.Size(704, 441);
             this.Controls.Add(this.gbEstatusDelReporte);
             this.Controls.Add(this.gbReporteEventosExcel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

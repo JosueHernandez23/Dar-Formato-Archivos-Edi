@@ -25,12 +25,49 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
     
     public partial class ReporteDeEventos : Form
     {
-        
+        //Inicio del Form
+        public ReporteDeEventos() 
+        {
+            InitializeComponent();
+            pbCargandoDatos.Hide();
+
+            if (cBoxSQL.SelectedIndex.ToString() == "" || dgvEventos.DataSource == null)
+                dgvEventos.ClearSelection();
+            btnExportExcel.Hide();
+        }
+
+
+        //Lista de obtencion de datos por configuracion por configuracion y reporte de eventos
+        public List<ConfiguracionCliente> GetCLientesConfiguracion(string db)
+        {
+            DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
+            return dataAccess_ClienteEdiPedido.GetClienteEdiConfiguracion(db);
+        }
+        public List<ReporteEventos> GetReporte(string db, int config)
+        {
+            DataAccess_ClienteLis dataAccess_ClienteEdiPedido = new DataAccess_ClienteLis();
+            return dataAccess_ClienteEdiPedido.GetReporte(db, config);
+        }
+
+       
+
+        //Proceso donde se ejecuta la obtencion y Seteos de informacion
+        private void cBoxSQL_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            SetClienteConfiguracion(cBoxSQL.SelectedItem.ToString());
+            cBoxClienteId.Text = " ";
+        }
+        private void cBoxClienteId_SelectionChangeCommitted_1(object sender, EventArgs e)
+        {
+            CargaDataGrid();
+        }
+
+        /* SETEO DE INFORMACION ALMACENADAS POR LA BUSQUEDA EN LA BASE DE DATOS DE CADA OPCION */
+        //Seteo de informacion en el combo box obtenido de la base de datos por el cBoxCLienteId de configuracion de base de datos
         public void SetClienteConfiguracion(string db)
         {
             List<ConfiguracionCliente> lista = GetCLientesConfiguracion(db);
             cBoxClienteId.Visible = true;
-
             if (lista.Count > 0)
             {
                 cBoxClienteId.DisplayMember = "descripcion";
@@ -40,50 +77,31 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public List<ConfiguracionCliente> GetCLientesConfiguracion(string db)
-        {
-            DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
-            return dataAccess_ClienteEdiPedido.GetClienteEdiConfiguracion(db);
-        }
-
-        public ReporteDeEventos()
-        {
-            InitializeComponent();
-            pbCargandoDatos.Hide();
-
-            if (cBoxSQL.SelectedIndex.ToString() == "" || dgvEventos.DataSource == null)
-                dgvEventos.ClearSelection();
-                btnExportExcel.Hide();
-        }
-
-        public List<ReporteEventos> GetReporte(string db,int config)
-        {
-            DataAccess_ClienteLis dataAccess_ClienteEdiPedido = new DataAccess_ClienteLis();
-            return dataAccess_ClienteEdiPedido.GetReporte(db,config);
-        }
-
-        public void CargaDataGrid() 
+        //Se llena el DataGrid de los pedidos encontrados que se obtuvo los eventos reportados por cada uno
+        public void CargaDataGrid()
         {
             string db = cBoxSQL.Text;
             object config = cBoxClienteId.SelectedValue;
-            
-            if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null )
+
+            if (cBoxSQL.SelectedIndex.ToString() != "" || dgvEventos.DataSource != null)
             {
                 pbCargandoDatos.Image = Resources.loading;
                 dgvEventos.ForeColor = System.Drawing.Color.Black;
 
                 if (config != null || dgvEventos.DataSource != null)
                 {
-                        MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
-                         dgvEventos.DataSource = GetReporte(db, (int)config);
-                        MessageBox.Show("Se Cargaron Completamente los datos");
-                        lblComplete.Text = "Se Completo la carga de datos";
-                        pbCargandoDatos.Image = Resources.Complete;
-                        btnExportExcel.Show();
+                    MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
+                    dgvEventos.DataSource = GetReporte(db, (int)config);
+                    MessageBox.Show("Se Cargaron Completamente los datos");
+                    lblComplete.Text = "Se Completo la carga de datos";
+                    pbCargandoDatos.Image = Resources.Complete;
+                    pbCargandoDatos.Visible = true;
+                    btnExportExcel.Show();
                 }
             }
         }
 
+        //Parte donde se reporta los eventos encontrados en un Reporte de Excel.
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
             // Obtener informacion del DataGridView
@@ -130,16 +148,30 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             worksheet.Columns().AdjustToContents();
 
             GuardarExcel(wb);
-            //wb.SaveAs(@"C:\Interfaces_HG\prueba.xlsx");
         }
 
         public void GuardarExcel(XLWorkbook wb)
         {
+            List<ConfiguracionCliente> lista = GetCLientesConfiguracion(cBoxSQL.Text);
+            cBoxClienteId.DisplayMember = "descripcion";
+            cBoxClienteId.ValueMember = "ClienteEdiConfiguracionId";
+            cBoxClienteId.DataSource = lista;
+
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xlsx)|*.xlsx";
-            object value = wb.Worksheet("ReporteEdi").Cell(2, 3).Value;
+            if (lista.Count > 0)
+            {
+                cBoxClienteId.DisplayMember = "descripcion";
+                cBoxClienteId.ValueMember = "ClienteEdiConfiguracionId";
+                cBoxClienteId.DataSource = lista;
+                //cBoxClienteId.Text = "";
+            }
 
-            sfd.FileName = "Reporte de Eventos_" + value + " " + DateTime.Today.Day + "-" +
+            object value = wb.Worksheet("ReporteEdi").Cell(2, 3).Value;
+            string valor = lista.Select(s => s.descripcion).FirstOrDefault().ToString();
+            
+            
+            sfd.FileName = "Reporte de Eventos_" + value + "_" + valor + DateTime.Today.Day + " -" +
                                                    DateTime.Today.Month + "-" +
                                                    DateTime.Today.Year + "_.xlsx";
 
@@ -154,16 +186,5 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             
         }
 
-        private void cBoxSQL_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            SetClienteConfiguracion(cBoxSQL.SelectedItem.ToString());
-            cBoxClienteId.Text = " ";
-        }
-
-
-        private void cBoxClienteId_SelectionChangeCommitted_1(object sender, EventArgs e)
-        {
-            CargaDataGrid();
-        }
     }
 }
