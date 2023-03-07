@@ -100,9 +100,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 
                 ";
                
-
                 List<ClienteEdiNotificaEventoApp> ClienteEdiNotificaEventoApp = connection.Query<ClienteEdiNotificaEventoApp>(query).ToList();
-
                 connection.Close();
 
                 return ClienteEdiNotificaEventoApp;
