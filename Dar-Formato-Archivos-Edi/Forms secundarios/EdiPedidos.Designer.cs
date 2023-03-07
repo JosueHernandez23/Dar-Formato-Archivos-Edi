@@ -35,8 +35,9 @@
             this.lblEventosReportados = new System.Windows.Forms.Label();
             this.lblSeguimiento = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.kdgvEventosReportadosAppMobil = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.label14 = new System.Windows.Forms.Label();
             this.kdtGrid_PedidoDireccion = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kdgvEventosReportadosAppMobil = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.txtSitioDestDesc = new System.Windows.Forms.TextBox();
@@ -47,7 +48,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.txtSitioRemAltDesc = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.txtNombreSitioDestAlt = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtSiteIDDestAlt = new System.Windows.Forms.TextBox();
@@ -111,8 +111,8 @@
             this.Seguimiento_Viaje = new System.Windows.Forms.GroupBox();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -182,9 +182,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.kdtGrid_PedidoDireccion);
@@ -240,21 +237,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion de la relacion";
             // 
-            // kdgvEventosReportadosAppMobil
+            // label14
             // 
-            this.kdgvEventosReportadosAppMobil.AllowUserToAddRows = false;
-            this.kdgvEventosReportadosAppMobil.AllowUserToDeleteRows = false;
-            this.kdgvEventosReportadosAppMobil.AllowUserToOrderColumns = true;
-            this.kdgvEventosReportadosAppMobil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.kdgvEventosReportadosAppMobil.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.kdgvEventosReportadosAppMobil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kdgvEventosReportadosAppMobil.Location = new System.Drawing.Point(6, 373);
-            this.kdgvEventosReportadosAppMobil.Name = "kdgvEventosReportadosAppMobil";
-            this.kdgvEventosReportadosAppMobil.ReadOnly = true;
-            this.kdgvEventosReportadosAppMobil.RowHeadersVisible = false;
-            this.kdgvEventosReportadosAppMobil.Size = new System.Drawing.Size(481, 117);
-            this.kdgvEventosReportadosAppMobil.TabIndex = 56;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(739, 344);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(111, 16);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "Pedido Direccion";
             // 
             // kdtGrid_PedidoDireccion
             // 
@@ -272,6 +263,22 @@
             this.kdtGrid_PedidoDireccion.RowHeadersVisible = false;
             this.kdtGrid_PedidoDireccion.Size = new System.Drawing.Size(536, 117);
             this.kdtGrid_PedidoDireccion.TabIndex = 55;
+            // 
+            // kdgvEventosReportadosAppMobil
+            // 
+            this.kdgvEventosReportadosAppMobil.AllowUserToAddRows = false;
+            this.kdgvEventosReportadosAppMobil.AllowUserToDeleteRows = false;
+            this.kdgvEventosReportadosAppMobil.AllowUserToOrderColumns = true;
+            this.kdgvEventosReportadosAppMobil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.kdgvEventosReportadosAppMobil.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.kdgvEventosReportadosAppMobil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kdgvEventosReportadosAppMobil.Location = new System.Drawing.Point(6, 373);
+            this.kdgvEventosReportadosAppMobil.Name = "kdgvEventosReportadosAppMobil";
+            this.kdgvEventosReportadosAppMobil.ReadOnly = true;
+            this.kdgvEventosReportadosAppMobil.RowHeadersVisible = false;
+            this.kdgvEventosReportadosAppMobil.Size = new System.Drawing.Size(481, 117);
+            this.kdgvEventosReportadosAppMobil.TabIndex = 56;
             // 
             // label24
             // 
@@ -360,16 +367,6 @@
             this.label15.Size = new System.Drawing.Size(90, 17);
             this.label15.TabIndex = 43;
             this.label15.Text = "Descripcion: ";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(739, 344);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(111, 16);
-            this.label14.TabIndex = 9;
-            this.label14.Text = "Pedido Direccion";
             // 
             // txtNombreSitioDestAlt
             // 
@@ -787,7 +784,8 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.txtFechaFinViaje);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.txtFechaInicioViaje);
@@ -887,9 +885,8 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox4.Controls.Add(this.kdtGrid_EstatusSeguimiento);
             this.groupBox4.Controls.Add(this.kdtGrid_EventosReportados);
             this.groupBox4.Controls.Add(this.lblEventosReportados);
@@ -937,7 +934,8 @@
             // 
             // Seguimiento_Viaje
             // 
-            this.Seguimiento_Viaje.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Seguimiento_Viaje.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Seguimiento_Viaje.Controls.Add(this.txtEstatusViaje);
             this.Seguimiento_Viaje.Controls.Add(this.kryptonDataGridView1);
@@ -988,8 +986,8 @@
             this.Text = "EdiPedidos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
