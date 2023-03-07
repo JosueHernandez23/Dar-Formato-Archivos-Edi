@@ -57,7 +57,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 						DECLARE @li_ClienteEdiPedido int = {ClienteEdiPedidoId},
 		                        @li_NoViaje int = {no_viaje}
 						
-						IF(@li_ClienteEdiPedido >= 0)
+						IF(@li_ClienteEdiPedido > 0)
 						BEGIN
 							Select		dpum.mensaje,			dpum.fecha_recibido,			dpum.id_pedido,
 										dpum.parada,			dpum.sistema_origen,			dpum.no_viaje,
@@ -77,7 +77,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 							ORDER BY dpum.fecha_recibido ASC
 						END
 
-						IF(@li_NoViaje >= 0)
+						IF(@li_NoViaje > 0)
 						BEGIN
 							Select		dpum.mensaje,			dpum.fecha_recibido,			dpum.id_pedido,
 										dpum.parada,			dpum.sistema_origen,			dpum.no_viaje,

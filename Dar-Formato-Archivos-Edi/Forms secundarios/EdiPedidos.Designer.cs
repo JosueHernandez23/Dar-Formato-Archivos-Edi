@@ -35,6 +35,8 @@
             this.lblEventosReportados = new System.Windows.Forms.Label();
             this.lblSeguimiento = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.kdgvEventosReportadosAppMobil = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kdtGrid_PedidoDireccion = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.txtSitioDestDesc = new System.Windows.Forms.TextBox();
@@ -94,7 +96,6 @@
             this.lblEstatus = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtEstatusViaje = new System.Windows.Forms.TextBox();
             this.txtFechaFinViaje = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.txtFechaInicioViaje = new System.Windows.Forms.TextBox();
@@ -103,23 +104,22 @@
             this.lblViaje = new System.Windows.Forms.Label();
             this.txtPedido = new System.Windows.Forms.TextBox();
             this.lblPedido = new System.Windows.Forms.Label();
+            this.txtEstatusViaje = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.kdtGrid_EstatusSeguimiento = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kdtGrid_EventosReportados = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.Seguimiento_Viaje = new System.Windows.Forms.GroupBox();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kdtGrid_PedidoDireccion = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kdgvEventosReportadosAppMobil = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kdtGrid_EventosReportados = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.kdtGrid_EstatusSeguimiento = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_EstatusSeguimiento)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_EventosReportados)).BeginInit();
             this.Seguimiento_Viaje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_EventosReportados)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_EstatusSeguimiento)).BeginInit();
             this.SuspendLayout();
             // 
             // lblClienteEdiPedidoId
@@ -234,10 +234,43 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 107);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1047, 496);
+            this.groupBox1.Size = new System.Drawing.Size(1047, 485);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion de la relacion";
+            // 
+            // kdgvEventosReportadosAppMobil
+            // 
+            this.kdgvEventosReportadosAppMobil.AllowUserToAddRows = false;
+            this.kdgvEventosReportadosAppMobil.AllowUserToDeleteRows = false;
+            this.kdgvEventosReportadosAppMobil.AllowUserToOrderColumns = true;
+            this.kdgvEventosReportadosAppMobil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.kdgvEventosReportadosAppMobil.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.kdgvEventosReportadosAppMobil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kdgvEventosReportadosAppMobil.Location = new System.Drawing.Point(11, 363);
+            this.kdgvEventosReportadosAppMobil.Name = "kdgvEventosReportadosAppMobil";
+            this.kdgvEventosReportadosAppMobil.ReadOnly = true;
+            this.kdgvEventosReportadosAppMobil.RowHeadersVisible = false;
+            this.kdgvEventosReportadosAppMobil.Size = new System.Drawing.Size(481, 111);
+            this.kdgvEventosReportadosAppMobil.TabIndex = 56;
+            // 
+            // kdtGrid_PedidoDireccion
+            // 
+            this.kdtGrid_PedidoDireccion.AllowUserToAddRows = false;
+            this.kdtGrid_PedidoDireccion.AllowUserToDeleteRows = false;
+            this.kdtGrid_PedidoDireccion.AllowUserToOrderColumns = true;
+            this.kdtGrid_PedidoDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.kdtGrid_PedidoDireccion.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.kdtGrid_PedidoDireccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kdtGrid_PedidoDireccion.Location = new System.Drawing.Point(533, 363);
+            this.kdtGrid_PedidoDireccion.Name = "kdtGrid_PedidoDireccion";
+            this.kdtGrid_PedidoDireccion.ReadOnly = true;
+            this.kdtGrid_PedidoDireccion.RowHeadersVisible = false;
+            this.kdtGrid_PedidoDireccion.Size = new System.Drawing.Size(508, 111);
+            this.kdtGrid_PedidoDireccion.TabIndex = 55;
             // 
             // label24
             // 
@@ -331,7 +364,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(724, 344);
+            this.label14.Location = new System.Drawing.Point(739, 344);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(111, 16);
             this.label14.TabIndex = 9;
@@ -774,17 +807,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Info. Edi";
             // 
-            // txtEstatusViaje
-            // 
-            this.txtEstatusViaje.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEstatusViaje.Enabled = false;
-            this.txtEstatusViaje.Location = new System.Drawing.Point(300, 12);
-            this.txtEstatusViaje.Name = "txtEstatusViaje";
-            this.txtEstatusViaje.Size = new System.Drawing.Size(42, 20);
-            this.txtEstatusViaje.TabIndex = 62;
-            this.txtEstatusViaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // txtFechaFinViaje
             // 
             this.txtFechaFinViaje.Enabled = false;
@@ -851,6 +873,17 @@
             this.lblPedido.TabIndex = 12;
             this.lblPedido.Text = "Pedido: ";
             // 
+            // txtEstatusViaje
+            // 
+            this.txtEstatusViaje.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEstatusViaje.Enabled = false;
+            this.txtEstatusViaje.Location = new System.Drawing.Point(300, 12);
+            this.txtEstatusViaje.Name = "txtEstatusViaje";
+            this.txtEstatusViaje.Size = new System.Drawing.Size(42, 20);
+            this.txtEstatusViaje.TabIndex = 62;
+            this.txtEstatusViaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -866,6 +899,40 @@
             this.groupBox4.TabIndex = 44;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "groupBox4";
+            // 
+            // kdtGrid_EstatusSeguimiento
+            // 
+            this.kdtGrid_EstatusSeguimiento.AllowUserToAddRows = false;
+            this.kdtGrid_EstatusSeguimiento.AllowUserToDeleteRows = false;
+            this.kdtGrid_EstatusSeguimiento.AllowUserToOrderColumns = true;
+            this.kdtGrid_EstatusSeguimiento.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.kdtGrid_EstatusSeguimiento.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.kdtGrid_EstatusSeguimiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kdtGrid_EstatusSeguimiento.Location = new System.Drawing.Point(533, 35);
+            this.kdtGrid_EstatusSeguimiento.Name = "kdtGrid_EstatusSeguimiento";
+            this.kdtGrid_EstatusSeguimiento.ReadOnly = true;
+            this.kdtGrid_EstatusSeguimiento.RowHeadersVisible = false;
+            this.kdtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(508, 128);
+            this.kdtGrid_EstatusSeguimiento.TabIndex = 8;
+            // 
+            // kdtGrid_EventosReportados
+            // 
+            this.kdtGrid_EventosReportados.AllowUserToAddRows = false;
+            this.kdtGrid_EventosReportados.AllowUserToDeleteRows = false;
+            this.kdtGrid_EventosReportados.AllowUserToOrderColumns = true;
+            this.kdtGrid_EventosReportados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.kdtGrid_EventosReportados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.kdtGrid_EventosReportados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kdtGrid_EventosReportados.Location = new System.Drawing.Point(11, 35);
+            this.kdtGrid_EventosReportados.Name = "kdtGrid_EventosReportados";
+            this.kdtGrid_EventosReportados.ReadOnly = true;
+            this.kdtGrid_EventosReportados.RowHeadersVisible = false;
+            this.kdtGrid_EventosReportados.Size = new System.Drawing.Size(481, 128);
+            this.kdtGrid_EventosReportados.TabIndex = 7;
+            this.kdtGrid_EventosReportados.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellDoubleClick);
             // 
             // Seguimiento_Viaje
             // 
@@ -894,71 +961,9 @@
             this.kryptonDataGridView1.Location = new System.Drawing.Point(6, 35);
             this.kryptonDataGridView1.Name = "kryptonDataGridView1";
             this.kryptonDataGridView1.ReadOnly = true;
+            this.kryptonDataGridView1.RowHeadersVisible = false;
             this.kryptonDataGridView1.Size = new System.Drawing.Size(336, 626);
             this.kryptonDataGridView1.TabIndex = 46;
-            // 
-            // kdtGrid_PedidoDireccion
-            // 
-            this.kdtGrid_PedidoDireccion.AllowUserToAddRows = false;
-            this.kdtGrid_PedidoDireccion.AllowUserToDeleteRows = false;
-            this.kdtGrid_PedidoDireccion.AllowUserToOrderColumns = true;
-            this.kdtGrid_PedidoDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.kdtGrid_PedidoDireccion.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.kdtGrid_PedidoDireccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kdtGrid_PedidoDireccion.Location = new System.Drawing.Point(533, 363);
-            this.kdtGrid_PedidoDireccion.Name = "kdtGrid_PedidoDireccion";
-            this.kdtGrid_PedidoDireccion.ReadOnly = true;
-            this.kdtGrid_PedidoDireccion.Size = new System.Drawing.Size(508, 122);
-            this.kdtGrid_PedidoDireccion.TabIndex = 55;
-            // 
-            // kdgvEventosReportadosAppMobil
-            // 
-            this.kdgvEventosReportadosAppMobil.AllowUserToAddRows = false;
-            this.kdgvEventosReportadosAppMobil.AllowUserToDeleteRows = false;
-            this.kdgvEventosReportadosAppMobil.AllowUserToOrderColumns = true;
-            this.kdgvEventosReportadosAppMobil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.kdgvEventosReportadosAppMobil.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.kdgvEventosReportadosAppMobil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kdgvEventosReportadosAppMobil.Location = new System.Drawing.Point(11, 363);
-            this.kdgvEventosReportadosAppMobil.Name = "kdgvEventosReportadosAppMobil";
-            this.kdgvEventosReportadosAppMobil.ReadOnly = true;
-            this.kdgvEventosReportadosAppMobil.Size = new System.Drawing.Size(481, 122);
-            this.kdgvEventosReportadosAppMobil.TabIndex = 56;
-            // 
-            // kdtGrid_EventosReportados
-            // 
-            this.kdtGrid_EventosReportados.AllowUserToAddRows = false;
-            this.kdtGrid_EventosReportados.AllowUserToDeleteRows = false;
-            this.kdtGrid_EventosReportados.AllowUserToOrderColumns = true;
-            this.kdtGrid_EventosReportados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.kdtGrid_EventosReportados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            this.kdtGrid_EventosReportados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kdtGrid_EventosReportados.Location = new System.Drawing.Point(11, 35);
-            this.kdtGrid_EventosReportados.Name = "kdtGrid_EventosReportados";
-            this.kdtGrid_EventosReportados.ReadOnly = true;
-            this.kdtGrid_EventosReportados.Size = new System.Drawing.Size(481, 128);
-            this.kdtGrid_EventosReportados.TabIndex = 7;
-            this.kdtGrid_EventosReportados.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellDoubleClick);
-            // 
-            // kdtGrid_EstatusSeguimiento
-            // 
-            this.kdtGrid_EstatusSeguimiento.AllowUserToAddRows = false;
-            this.kdtGrid_EstatusSeguimiento.AllowUserToDeleteRows = false;
-            this.kdtGrid_EstatusSeguimiento.AllowUserToOrderColumns = true;
-            this.kdtGrid_EstatusSeguimiento.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.kdtGrid_EstatusSeguimiento.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.kdtGrid_EstatusSeguimiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kdtGrid_EstatusSeguimiento.Location = new System.Drawing.Point(533, 35);
-            this.kdtGrid_EstatusSeguimiento.Name = "kdtGrid_EstatusSeguimiento";
-            this.kdtGrid_EstatusSeguimiento.ReadOnly = true;
-            this.kdtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(508, 128);
-            this.kdtGrid_EstatusSeguimiento.TabIndex = 8;
             // 
             // EdiPedidos
             // 
@@ -982,19 +987,19 @@
             this.Text = "EdiPedidos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_EstatusSeguimiento)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_EventosReportados)).EndInit();
             this.Seguimiento_Viaje.ResumeLayout(false);
             this.Seguimiento_Viaje.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_EventosReportados)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_EstatusSeguimiento)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -91,6 +91,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (config != null || dgvEventos.DataSource != null)
                 {
                     MessageBox.Show("Favor de esperar a que termine de procesar los datos...");
+                    //lblEspera.Text = "Cargando Datos";
+                    //pbCargandoDatos.Image = Resources.loading;
+
                     dgvEventos.DataSource = GetReporte(db, (int)config);
                     MessageBox.Show("Se Cargaron Completamente los datos");
                     lblComplete.Text = "Se Completo la carga de datos";
