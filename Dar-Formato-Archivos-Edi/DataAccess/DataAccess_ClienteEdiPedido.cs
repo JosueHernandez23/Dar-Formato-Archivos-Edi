@@ -96,8 +96,6 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 										(dpum.ClienteEdiPedidoId = @li_ClienteEdiPedido )
 							ORDER BY dpum.fecha_recibido ASC
 						END
-
-
                 ";
                
                 List<ClienteEdiNotificaEventoApp> ClienteEdiNotificaEventoApp = connection.Query<ClienteEdiNotificaEventoApp>(query).ToList();
@@ -106,10 +104,6 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                 return ClienteEdiNotificaEventoApp;
             }
         }
-
-
-
-
 
         public List<ClienteEdiNotificaEvento> GetClienteEdiNotificaEvento(int ClienteEdiPedidoId)
         {
