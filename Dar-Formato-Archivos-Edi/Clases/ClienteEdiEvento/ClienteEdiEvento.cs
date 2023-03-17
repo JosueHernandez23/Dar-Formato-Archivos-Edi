@@ -10,5 +10,6 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteEdiEvento
     {
         public int ClienteEdiEventoId { get; set; }
         public string NombreEvento { get; set; }
+        public string Descripcion { get; set; } 
     }
 }

@@ -513,5 +513,10 @@ namespace Dar_Formato_Archivos_Edi
 
         #endregion
 
+        private void btnEventoEdi_Click(object sender, EventArgs e)
+        {
+            var f = new EventosEdi();
+            f.Show();
+        }
     }
 }

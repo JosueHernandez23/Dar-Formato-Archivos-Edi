@@ -100,6 +100,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (pedidoRelacionado != null)
             {
+                // Obtener viaje de la tabla desp_pedido
+                if (pedidoRelacionado.id_pedido > 0 && pedidoRelacionado.no_viaje == 0 && sqldb != "chdb_lis")
+                {
+                    pedidoRelacionado = GetDesp_pedido_viaje(ClienteEdiPedidoId, sqldb);
+                }
+
                 pedidoRelacionado.ClienteEdiPedidoId = ClienteEdiPedidoId;
                 txtPedido.Text = pedidoRelacionado.id_pedido.ToString();
                 txtViaje.Text = pedidoRelacionado.no_viaje.ToString();
@@ -349,6 +355,13 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             DataAccess_PedidoRelacionado dataAccess_PedidoRelacionado = new DataAccess_PedidoRelacionado();
 
             return dataAccess_PedidoRelacionado.GetDesp_pedido_edi(ClienteEdiPedidoId, db);
+        }
+
+        public PedidoRelacionado GetDesp_pedido_viaje(int ClienteEdiPedidoId, string db)
+        {
+            DataAccess_PedidoRelacionado dataAccess_PedidoRelacionado = new DataAccess_PedidoRelacionado();
+
+            return dataAccess_PedidoRelacionado.GetDesp_pedido_viaje(ClienteEdiPedidoId, db);
         }
 
         public List<ClienteLis> GetClienteLis(List<ClienteLis> lista_cliente, string db)

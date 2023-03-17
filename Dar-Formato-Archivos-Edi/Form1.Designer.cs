@@ -55,6 +55,7 @@
             this.btnReporteEventos = new System.Windows.Forms.Button();
             this.btnDirectorioSFTP = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnEventoEdi = new System.Windows.Forms.Button();
             this.btnEstadistica = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -416,6 +417,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox2.AutoSize = true;
+            this.groupBox2.Controls.Add(this.btnEventoEdi);
             this.groupBox2.Controls.Add(this.btnEstadistica);
             this.groupBox2.Controls.Add(this.btnCorreosEdi);
             this.groupBox2.Controls.Add(this.btnGenerarEdi);
@@ -427,6 +429,20 @@
             this.groupBox2.Size = new System.Drawing.Size(157, 593);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
+            // 
+            // btnEventoEdi
+            // 
+            this.btnEventoEdi.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEventoEdi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEventoEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEventoEdi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnEventoEdi.Location = new System.Drawing.Point(6, 267);
+            this.btnEventoEdi.Name = "btnEventoEdi";
+            this.btnEventoEdi.Size = new System.Drawing.Size(145, 37);
+            this.btnEventoEdi.TabIndex = 18;
+            this.btnEventoEdi.Text = "Eventos EDI";
+            this.btnEventoEdi.UseVisualStyleBackColor = true;
+            this.btnEventoEdi.Click += new System.EventHandler(this.btnEventoEdi_Click);
             // 
             // btnEstadistica
             // 
@@ -516,6 +532,7 @@
         private System.Windows.Forms.RichTextBox TxtFormatoTexto;
         private System.Windows.Forms.Button btnEstadistica;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnEventoEdi;
     }
 }
 

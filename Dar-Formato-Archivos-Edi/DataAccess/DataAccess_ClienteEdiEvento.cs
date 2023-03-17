@@ -18,7 +18,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiEvento
             using (var connection = new SqlConnection(con.connectionString))
             {
                 connection.Open();
-                string query = "Select ClienteEdiEventoId, NombreEvento From ClienteEdiEvento";
+                string query = "Select ClienteEdiEventoId, NombreEvento, NombreEvento + ' - ' + Descriocion as Descripcion From ClienteEdiEvento";
 
                 List<ClienteEdiEvento> EdiEventos = connection.Query<ClienteEdiEvento>(query).ToList();
 

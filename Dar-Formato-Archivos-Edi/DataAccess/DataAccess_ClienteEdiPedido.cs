@@ -205,6 +205,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                             posdate
                      from	desp_posicion_unidad dpu With(NoLock) 
                      where	dpu.id_viaje = {no_viaje}
+                            order by dpu.posdate
                 ";
 
                 List<posicion_unidad> posicion_Unidads = connection.Query<posicion_unidad>(query).ToList();

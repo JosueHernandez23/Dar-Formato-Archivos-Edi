@@ -379,6 +379,7 @@
   <ItemGroup>
     <Compile Include="Clases\ClienteEdiConfiguracionArchivo\ClienteEdiConfiguracionArchivo.cs" />
     <Compile Include="Clases\ClienteEdiConfiguracionArchivo_Segmentos\ClienteEdiArchivoConfiguracion_Segmentos.cs" />
+    <Compile Include="Clases\ClienteEdiConfiguracionEvento\ClienteEdiConfiguracionEvento.cs" />
     <Compile Include="Clases\ClienteEdiConfiguracion\ClienteEdiConfiguracion.cs" />
     <Compile Include="Clases\ClienteEdiEstatusSeguimiento\ClienteEdiPedidoEstatusSeguimiento.cs" />
     <Compile Include="Clases\ClienteEdiEvento\ClienteEdiEvento.cs" />
@@ -393,6 +394,7 @@
     <Compile Include="Clases\TipoConexion\TipoConexion.cs" />
     <Compile Include="Conexion\SqlCnx.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteEdiConfiguracion.cs" />
+    <Compile Include="DataAccess\DataAccess_ClienteEdiConfiguracionEvento.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteEdiEvento.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteEdiPedido.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteLis.cs" />
@@ -435,6 +437,12 @@
     <Compile Include="Forms secundarios\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms secundarios\EventosEdi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms secundarios\EventosEdi.Designer.cs">
+      <DependentUpon>EventosEdi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms secundarios\GenerarEdi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -472,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\EdiPedidos.resx">
       <DependentUpon>EdiPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms secundarios\EventosEdi.resx">
+      <DependentUpon>EventosEdi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\GenerarEdi.resx">
       <DependentUpon>GenerarEdi.cs</DependentUpon>
@@ -531,6 +542,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.4.0.2\build\Fody.targets" Condition="Exists('..\packages\Fody.4.0.2\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
