@@ -30,14 +30,18 @@
         {
             this.tableLayoutPanel_Main = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel_Params = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblClienteEdiConfiguracion = new System.Windows.Forms.Label();
-            this.lblEventosEdi = new System.Windows.Forms.Label();
             this.cboClienteEdi = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.cboEdiEvento = new System.Windows.Forms.ComboBox();
+            this.lblEventosEdi = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.dtGV_Data = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel_Main.SuspendLayout();
             this.tableLayoutPanel_Params.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGV_Data)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,21 +68,36 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel_Params.ColumnCount = 3;
-            this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
-            this.tableLayoutPanel_Params.Controls.Add(this.lblEventosEdi, 1, 0);
-            this.tableLayoutPanel_Params.Controls.Add(this.lblClienteEdiConfiguracion, 0, 0);
-            this.tableLayoutPanel_Params.Controls.Add(this.cboClienteEdi, 0, 1);
-            this.tableLayoutPanel_Params.Controls.Add(this.cboEdiEvento, 1, 1);
-            this.tableLayoutPanel_Params.Controls.Add(this.btnAceptar, 2, 1);
+            this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.24281F));
+            this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.75719F));
+            this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 442F));
+            this.tableLayoutPanel_Params.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tableLayoutPanel_Params.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel_Params.Controls.Add(this.btnAceptar, 0, 1);
             this.tableLayoutPanel_Params.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel_Params.Name = "tableLayoutPanel_Params";
             this.tableLayoutPanel_Params.RowCount = 2;
-            this.tableLayoutPanel_Params.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel_Params.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel_Params.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 63.15789F));
+            this.tableLayoutPanel_Params.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.84211F));
             this.tableLayoutPanel_Params.Size = new System.Drawing.Size(938, 95);
             this.tableLayoutPanel_Params.TabIndex = 0;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.lblClienteEdiConfiguracion, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cboClienteEdi, 0, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(233, 53);
+            this.tableLayoutPanel1.TabIndex = 5;
             // 
             // lblClienteEdiConfiguracion
             // 
@@ -86,11 +105,48 @@
             this.lblClienteEdiConfiguracion.AutoSize = true;
             this.lblClienteEdiConfiguracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClienteEdiConfiguracion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblClienteEdiConfiguracion.Location = new System.Drawing.Point(101, 29);
+            this.lblClienteEdiConfiguracion.Location = new System.Drawing.Point(29, 8);
             this.lblClienteEdiConfiguracion.Name = "lblClienteEdiConfiguracion";
             this.lblClienteEdiConfiguracion.Size = new System.Drawing.Size(174, 18);
-            this.lblClienteEdiConfiguracion.TabIndex = 0;
+            this.lblClienteEdiConfiguracion.TabIndex = 3;
             this.lblClienteEdiConfiguracion.Text = "Cliente Edi Configuracion";
+            // 
+            // cboClienteEdi
+            // 
+            this.cboClienteEdi.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cboClienteEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboClienteEdi.FormattingEnabled = true;
+            this.cboClienteEdi.Location = new System.Drawing.Point(12, 29);
+            this.cboClienteEdi.Name = "cboClienteEdi";
+            this.cboClienteEdi.Size = new System.Drawing.Size(208, 24);
+            this.cboClienteEdi.TabIndex = 2;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.cboEdiEvento, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblEventosEdi, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(242, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(250, 53);
+            this.tableLayoutPanel2.TabIndex = 6;
+            // 
+            // cboEdiEvento
+            // 
+            this.cboEdiEvento.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cboEdiEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboEdiEvento.FormattingEnabled = true;
+            this.cboEdiEvento.Location = new System.Drawing.Point(3, 29);
+            this.cboEdiEvento.Name = "cboEdiEvento";
+            this.cboEdiEvento.Size = new System.Drawing.Size(244, 21);
+            this.cboEdiEvento.TabIndex = 3;
             // 
             // lblEventosEdi
             // 
@@ -98,39 +154,19 @@
             this.lblEventosEdi.AutoSize = true;
             this.lblEventosEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEventosEdi.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblEventosEdi.Location = new System.Drawing.Point(522, 29);
+            this.lblEventosEdi.Location = new System.Drawing.Point(81, 8);
             this.lblEventosEdi.Name = "lblEventosEdi";
             this.lblEventosEdi.Size = new System.Drawing.Size(87, 18);
-            this.lblEventosEdi.TabIndex = 1;
+            this.lblEventosEdi.TabIndex = 2;
             this.lblEventosEdi.Text = "Eventos Edi";
-            // 
-            // cboClienteEdi
-            // 
-            this.cboClienteEdi.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cboClienteEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboClienteEdi.FormattingEnabled = true;
-            this.cboClienteEdi.Location = new System.Drawing.Point(84, 50);
-            this.cboClienteEdi.Name = "cboClienteEdi";
-            this.cboClienteEdi.Size = new System.Drawing.Size(208, 24);
-            this.cboClienteEdi.TabIndex = 2;
-            // 
-            // cboEdiEvento
-            // 
-            this.cboEdiEvento.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cboEdiEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboEdiEvento.FormattingEnabled = true;
-            this.cboEdiEvento.Location = new System.Drawing.Point(425, 50);
-            this.cboEdiEvento.Name = "cboEdiEvento";
-            this.cboEdiEvento.Size = new System.Drawing.Size(280, 21);
-            this.cboEdiEvento.TabIndex = 3;
             // 
             // btnAceptar
             // 
             this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptar.Location = new System.Drawing.Point(797, 50);
+            this.btnAceptar.Location = new System.Drawing.Point(70, 62);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(98, 36);
+            this.btnAceptar.Size = new System.Drawing.Size(98, 29);
             this.btnAceptar.TabIndex = 4;
             this.btnAceptar.Text = "Buscar";
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -160,7 +196,10 @@
             this.Text = "EventosEdi";
             this.tableLayoutPanel_Main.ResumeLayout(false);
             this.tableLayoutPanel_Params.ResumeLayout(false);
-            this.tableLayoutPanel_Params.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGV_Data)).EndInit();
             this.ResumeLayout(false);
 
@@ -170,11 +209,13 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Main;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Params;
-        private System.Windows.Forms.Label lblEventosEdi;
-        private System.Windows.Forms.Label lblClienteEdiConfiguracion;
         private System.Windows.Forms.ComboBox cboClienteEdi;
         private System.Windows.Forms.ComboBox cboEdiEvento;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.DataGridView dtGV_Data;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label lblClienteEdiConfiguracion;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label lblEventosEdi;
     }
 }

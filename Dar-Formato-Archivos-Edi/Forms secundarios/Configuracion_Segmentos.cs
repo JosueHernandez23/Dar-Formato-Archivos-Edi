@@ -323,6 +323,10 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                         Font = new Font(Font, FontStyle.Bold)
                     };
                 }
+                else
+                {
+                    item.ReadOnly = true;
+                }
 
                 if (item.Name == "CA_ClienteEdiConfiguracionId" || item.Name == "CA_ClienteEdiTipoArchivoId")
                 {

@@ -445,6 +445,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     item.BackColor = Color.Empty;
                 }
             }
+
+            kdtGrid_EstatusSeguimiento.DataSource = null;
+            kdtGrid_EventosReportados.DataSource = null;
+            kdtGrid_PedidoDireccion.DataSource = null;
+            kdgvEventosReportadosAppMobil.DataSource = null;
+            kryptonDataGridView1.DataSource = null;
         }
 
         public void MarcarInformacionInvalida()
