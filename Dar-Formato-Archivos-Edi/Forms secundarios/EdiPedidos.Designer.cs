@@ -874,12 +874,11 @@
             // 
             // txtEstatusViaje
             // 
-            this.txtEstatusViaje.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEstatusViaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEstatusViaje.Enabled = false;
-            this.txtEstatusViaje.Location = new System.Drawing.Point(300, 12);
+            this.txtEstatusViaje.Location = new System.Drawing.Point(221, 12);
             this.txtEstatusViaje.Name = "txtEstatusViaje";
-            this.txtEstatusViaje.Size = new System.Drawing.Size(0, 20);
+            this.txtEstatusViaje.Size = new System.Drawing.Size(28, 20);
             this.txtEstatusViaje.TabIndex = 62;
             this.txtEstatusViaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
