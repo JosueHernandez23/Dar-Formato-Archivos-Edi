@@ -22,6 +22,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             using (var connection = new SqlConnection(con.connectionString))
             {
                 connection.Open();
+
                 string query = $@"
                     select	
 		                    cep.ClienteEdiPedidoId ClienteEdiPedidoId,
@@ -34,11 +35,57 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                     from	ClienteEdiPedido cep With(NoLock)
 	                        INNER JOIN ClienteEdiEstatus cee With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
 		                    INNER JOIN ClienteEdiConfiguracion cec With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
-                    where	cep.ClienteEdiPedidoId = {ClienteEdiPedidoId}
+                    where	cep.ClienteEdiPedidoId = {ClienteEdiPedidoId} or cep.Shipment = CONVERT(varchar(10),{ClienteEdiPedidoId}) and cep.ClienteEdiEstatusId not in (2,6) and cep.ClienteEdiEstatusId in (3,4,5,7)
                 ";
 
+                //string query = @"
+                //                DECLARE     @return varchar(10) = ''
+                //                      ,@ClienteEdiPedidoId int
+                //                      ,@EstatusId int
+                //                      ,@Estatus varchar(80) = ''
+                //                      ,@SCAC varchar(4) = ''
+                //                      ,@Shipment varchar(10) = ''
+                //                      ,@FechaIngreso datetime
+                //                      ,@SQL_DB varchar (10) = ''
+
+
+                //                    IF(@return = '')
+                //                    BEGIN
+
+
+                //                     select	TOP 1
+                //                       @ClienteEdiPedidoId = cep.ClienteEdiPedidoId,
+                //                       @EstatusId = cep.ClienteEdiEstatusId,
+                //                       @Estatus = cee.NombreClienteEdiEstatus,
+                //                       @SCAC = cep.CodeSCAC,
+                //                       @Shipment = cep.Shipment,
+                //                       @FechaIngreso = cep.FechaIngreso,
+                //                       @SQL_DB = LOWER(cec.SQL_DB)
+                //                     from	ClienteEdiPedido cep						With(NoLock)
+                //                       INNER JOIN ClienteEdiEstatus cee			With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
+                //                       INNER JOIN ClienteEdiConfiguracion cec		With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
+                //                     where	cep.ClienteEdiPedidoId = 0 or cep.Shipment = CONVERT(varchar ,856124922)  and cep.ClienteEdiEstatusId not in (2,6) and cep.ClienteEdiEstatusId in (3,4,5,7)
+
+                //                      IF(@ClienteEdiPedidoId > 0)
+                //                      BEGIN
+                //                       SET @return = @ClienteEdiPedidoId;
+                //                      END
+
+                //                      Select	@return as ClienteEdiPedidoId 
+                //                        ,@EstatusId as EstatusId
+                //                        ,@Estatus as Estatus
+                //                        ,@SCAC as SCAC
+                //                        ,@Shipment as Shipment
+                //                        ,@FechaIngreso as FechaIngreso
+                //                        ,@SQL_DB as SQL_DB
+                //                    END
+                //                ";
+
                 ClienteEdiPedido EdiPedidoId = connection.QuerySingle<ClienteEdiPedido>(query);
-                
+
+                ClienteEdiPedidoId = EdiPedidoId.ClienteEdiPedidoId;
+
+
                 connection.Close();
 
                 return EdiPedidoId;

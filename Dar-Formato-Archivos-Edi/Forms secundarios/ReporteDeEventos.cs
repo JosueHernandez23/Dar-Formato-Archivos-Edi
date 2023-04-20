@@ -57,6 +57,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             SetClienteConfiguracion(cBoxSQL.SelectedItem.ToString());
             cBoxClienteId.Text = " ";
         }
+
         private void cBoxClienteId_SelectionChangeCommitted_1(object sender, EventArgs e)
         {
             CargaDataGrid();
