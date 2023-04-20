@@ -259,11 +259,25 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     ClienteEdiNotificaEventoId = s.ClienteEdiNotificaEventoId,
                     Evento = s.EventoId + " - " + s.Evento,
                     FechaIngreso = s.FechaIngreso.ToString(),
-                    Texto214 = s.Texto214,
-                    PedidoDireccionId = s.ClienteEdiPedidoDireccionId
+                    //PedidoDireccionId = s.ClienteEdiPedidoDireccionId,
+                    Caso = s.caso,
+                    Texto214 = s.Texto214
 
                 }).ToList();
             }
+
+            // Configurar columnas para mostrar la informacion importante
+
+            // ClienteEdiNotificaEventoId
+            kdtGrid_EventosReportados.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader);
+            // Evento
+            kdtGrid_EventosReportados.AutoResizeColumn(1, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            // FechaIngreso
+            kdtGrid_EventosReportados.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            // Caso
+            kdtGrid_EventosReportados.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            // Texto214
+            kdtGrid_EventosReportados.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.ColumnHeader);
         }
 
 
