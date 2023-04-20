@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiConfiguracion;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEvento;
@@ -18,11 +18,21 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
     public partial class EventosEdi : Form
     {
+        List<ClienteEdiConfiguracionEvento> configuracionEvento = new List<ClienteEdiConfiguracionEvento>();
         public EventosEdi()
         {
             InitializeComponent();
             ConfigButtonEfects();
             InicializarPantalla();
+            CheckForIllegalCrossThreadCalls = false;
+
+            List<Button> ArrButtons = tableLayoutPanel_Params.Controls.OfType<Button>().ToList();
+
+            foreach (Button btn in ArrButtons)
+            {
+                btn.BackColor = Color.FromArgb(46, 51, 73);
+                btn.ForeColor = Color.White;
+            }
         }
 
         public void InicializarPantalla()
@@ -43,17 +53,90 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             cboEdiEvento.DisplayMember = "Descripcion";
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
+            dtGV_Data.DataSource = null;
             int cliente = Convert.ToInt32(cboClienteEdi.SelectedValue);
 
-            dtGV_Data.DataSource = ObtenerConfiguracionEventos(cliente);
+            new Thread(() =>
+            {
+                // Deshabilitar boton
+                SwitchButtonState(sender);
 
-            // Cambiar el color de las celdas que se guardaran cambios
-            ConfigurarDTGV_Segmentos();
+                configuracionEvento = ObtenerConfiguracionEventos(cliente);
+
+                dtGV_Data.DataSource = configuracionEvento;
+
+                // Cambiar el color de las celdas que se guardaran cambios
+                ConfigurarDTGV_Segmentos();
+
+                //Habilitar boton
+                SwitchButtonState(sender);
+            }).Start();
         }
 
-        #region GetData
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            dtGV_Data.DataSource = null;
+            
+            new Thread(() =>
+            {
+                SwitchButtonState(sender);
+
+                configuracionEvento.Add(
+                    new ClienteEdiConfiguracionEvento()
+                    {
+                        ClienteEdiConfiguracionEventoId = 0,
+                        ClienteEdiConfiguracionId = configuracionEvento.Select(vl => vl.ClienteEdiConfiguracionId).FirstOrDefault(),
+                        ClienteEdiConsideraServ = 0,
+                        ClienteEdiTipoServ = "",
+                        ClienteEdiEventoId = Convert.ToInt32(cboEdiEvento.SelectedValue),
+                        NombreEvento = cboEdiEvento.Text.Substring(0, cboEdiEvento.Text.IndexOf(" ") ),
+                        Orden = 0
+                    }
+                );
+
+                dtGV_Data.DataSource = configuracionEvento;
+
+                // Cambiar el color de las celdas que se guardaran cambios
+                ConfigurarDTGV_Segmentos();
+
+                SwitchButtonState(sender);
+            }).Start();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            dtGV_Data.DataSource = null;
+
+            new Thread(() =>
+            {
+                SwitchButtonState(sender);
+
+                foreach (ClienteEdiConfiguracionEvento item in configuracionEvento)
+                {
+                    if (item.ClienteEdiConfiguracionEventoId == 0)
+                    {
+                        // Insertar
+                        InsertEventos(item);
+                    }
+                    else
+                    {
+                        // Actualizar
+                        UpdateEvento(item);
+                    }
+                }
+
+                configuracionEvento = ObtenerConfiguracionEventos(Convert.ToInt32(cboClienteEdi.SelectedValue));
+                dtGV_Data.DataSource = configuracionEvento;
+
+                SwitchButtonState(sender);
+
+                MessageBox.Show(" Se ha guardado con exito ");
+            }).Start();
+        }
+
+        #region ProcessData
         public List<ClienteEdiConfiguracion> ObtenerClientes()
         {
             DataAccess_ClienteEdiConfiguracion OCEC = new DataAccess_ClienteEdiConfiguracion();
@@ -75,9 +158,21 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return OCECE.Listado_Configuraciones(cliente);
         }
 
+        public void InsertEventos(ClienteEdiConfiguracionEvento evento) 
+        {
+            DataAccess_ClienteEdiConfiguracionEvento OCECE = new DataAccess_ClienteEdiConfiguracionEvento();
+            OCECE.InsertEvento(evento);
+        }
+
+        public void UpdateEvento(ClienteEdiConfiguracionEvento evento)
+        {
+            DataAccess_ClienteEdiConfiguracionEvento OCECE = new DataAccess_ClienteEdiConfiguracionEvento();
+            OCECE.UpdateEvento(evento);
+        }
+
         #endregion
 
-        #region Efecto Hover (Buttons)
+        #region Config (Buttons)
         public void ConfigButtonEfects()
         {
             //Obtener botones
@@ -103,6 +198,13 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             Button btn = (Button)sender;
             btn.BackColor = Color.FromArgb(46, 51, 73);
             btn.ForeColor = Color.White;
+        }
+
+        public static void SwitchButtonState(object sender) 
+        {
+            Button btn = (Button)sender;
+
+            btn.Enabled = btn.Enabled ? false : true;
         }
 
         #endregion

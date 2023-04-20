@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
@@ -32,6 +33,38 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiConfiguracion
                 List<ClienteEdiConfiguracionEvento> ConfiguracionEventos = connection.Query<ClienteEdiConfiguracionEvento>(query).ToList();
 
                 return ConfiguracionEventos;
+            }
+        }
+
+        public void InsertEvento(ClienteEdiConfiguracionEvento evento) 
+        {
+            SqlCnx con = new SqlCnx();
+            using (var connection = new SqlConnection(con.connectionString))
+            {
+                connection.Open();
+                string query = $@"
+                    Insert into ClienteEdiConfiguracionEvento (ClienteEdiConfiguracionId, ClienteEdiEventoId, ClienteEdiConsideraServ, ClienteEdiTipoServ, Orden)
+                    Values ({evento.ClienteEdiConfiguracionId}, {evento.ClienteEdiEventoId}, {evento.ClienteEdiConsideraServ}, '{evento.ClienteEdiTipoServ}', {evento.Orden} )
+                ";
+
+                connection.Execute(query, CommandType.Text);
+            }
+        }
+
+        public void UpdateEvento(ClienteEdiConfiguracionEvento evento)
+        {
+            SqlCnx con = new SqlCnx();
+            using (var connection = new SqlConnection(con.connectionString))
+            {
+                connection.Open();
+                string query = $@"
+                    Update	ClienteEdiConfiguracionEvento
+                    Set		ClienteEdiEventoId = {evento.ClienteEdiEventoId},
+		                    Orden = {evento.Orden},
+		                    ClienteEdiConsideraServ = {evento.ClienteEdiConsideraServ},
+		                    ClienteEdiTipoServ = '{evento.ClienteEdiTipoServ}'
+                    Where	ClienteEdiConfiguracionEventoId = {evento.ClienteEdiConfiguracionEventoId}
+                ";
             }
         }
     }
