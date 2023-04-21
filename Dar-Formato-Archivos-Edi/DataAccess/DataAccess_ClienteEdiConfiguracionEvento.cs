@@ -65,6 +65,8 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiConfiguracion
 		                    ClienteEdiTipoServ = '{evento.ClienteEdiTipoServ}'
                     Where	ClienteEdiConfiguracionEventoId = {evento.ClienteEdiConfiguracionEventoId}
                 ";
+
+                connection.Execute(query, CommandType.Text);
             }
         }
     }

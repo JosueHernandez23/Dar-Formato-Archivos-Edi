@@ -261,7 +261,7 @@
             this.kdtGrid_PedidoDireccion.Name = "kdtGrid_PedidoDireccion";
             this.kdtGrid_PedidoDireccion.ReadOnly = true;
             this.kdtGrid_PedidoDireccion.RowHeadersVisible = false;
-            this.kdtGrid_PedidoDireccion.Size = new System.Drawing.Size(536, 95);
+            this.kdtGrid_PedidoDireccion.Size = new System.Drawing.Size(536, 111);
             this.kdtGrid_PedidoDireccion.TabIndex = 55;
             // 
             // kdgvEventosReportadosAppMobil
@@ -277,7 +277,7 @@
             this.kdgvEventosReportadosAppMobil.Name = "kdgvEventosReportadosAppMobil";
             this.kdgvEventosReportadosAppMobil.ReadOnly = true;
             this.kdgvEventosReportadosAppMobil.RowHeadersVisible = false;
-            this.kdgvEventosReportadosAppMobil.Size = new System.Drawing.Size(481, 95);
+            this.kdgvEventosReportadosAppMobil.Size = new System.Drawing.Size(486, 111);
             this.kdgvEventosReportadosAppMobil.TabIndex = 56;
             // 
             // label24

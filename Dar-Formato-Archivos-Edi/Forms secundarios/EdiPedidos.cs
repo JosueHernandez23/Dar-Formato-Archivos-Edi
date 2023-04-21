@@ -264,20 +264,20 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     Texto214 = s.Texto214
 
                 }).ToList();
+
+                // Configurar columnas para mostrar la informacion importante
+
+                // ClienteEdiNotificaEventoId
+                kdtGrid_EventosReportados.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader);
+                // Evento
+                kdtGrid_EventosReportados.AutoResizeColumn(1, DataGridViewAutoSizeColumnMode.DisplayedCells);
+                // FechaIngreso
+                kdtGrid_EventosReportados.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.DisplayedCells);
+                // Caso
+                kdtGrid_EventosReportados.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.DisplayedCells);
+                // Texto214
+                kdtGrid_EventosReportados.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.ColumnHeader);
             }
-
-            // Configurar columnas para mostrar la informacion importante
-
-            // ClienteEdiNotificaEventoId
-            kdtGrid_EventosReportados.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader);
-            // Evento
-            kdtGrid_EventosReportados.AutoResizeColumn(1, DataGridViewAutoSizeColumnMode.DisplayedCells);
-            // FechaIngreso
-            kdtGrid_EventosReportados.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.DisplayedCells);
-            // Caso
-            kdtGrid_EventosReportados.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.DisplayedCells);
-            // Texto214
-            kdtGrid_EventosReportados.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.ColumnHeader);
         }
 
 
@@ -293,17 +293,38 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 {
                     mensaje = s.mensaje,
                     fecha_recibido = s.fecha_recibido,
-                    id_pedido = s.id_pedido,
-                    parada = s.parada,
                     sistema_origen = s.sistema_origen,
                     no_viaje = s.no_viaje,
-                    //reason_code = s.reason_code,
-                    clienteEdiPedidoId = s.ClienteEdiPedidoId,
                     id_personal = s.id_personal,
-                    tipo_empleado = s.tipo_empleado,
-                    nombre = s.nombre
+                    nombre = s.nombre,
+                    //reason_code = s.reason_code,
+                    id_pedido = s.id_pedido,
+                    parada = s.parada,
+                    clienteEdiPedidoId = s.ClienteEdiPedidoId,
+                    //tipo_empleado = s.tipo_empleado
 
                 }).ToList();
+
+                // Configurar columnas para mostrar la informacion importante
+
+                // mensaje
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader);
+                // fecha_recibido
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(1, DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader);
+                // sistema_origen
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader);
+                // no_viaje
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader);
+                // id_personal
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                // nombre
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(5, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                // id_pedido
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(6, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                // parada
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(7, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                // clienteEdiPedidoId
+                kdgvEventosReportadosAppMobil.AutoResizeColumn(8, DataGridViewAutoSizeColumnMode.ColumnHeader);
             }
         }
 
