@@ -51,18 +51,25 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
         public int ClienteEdiPedidoId { get; set; }
         public int ClienteId { get; set; }
         public string CodeSCAC { get; set; }
+        public string Origen { get; set; }
+        public string Destino { get; set; }
         public string descripcion { get; set; }
         public string Estatus_EDI { get; set; }
         public string Shipment { get; set; }
         public string Equipo { get; set; }
-        public string ISA6 { get; set; }
-        public string FechaIngreso { get; set; }
-        public string FechaExpiracion { get; set; }
+        public DateTime? FechaIngreso { get; set; }
+        public DateTime? FechaAceptacion { get; set; }
+        public DateTime? fechaRelacionPedido { get; set; }
+        public DateTime? FechaExpiracion { get; set; }
+        public DateTime? fecha_real_viaje { get; set; }
+        public DateTime? fecha_real_fin_viaje { get; set; }
         public string Tipo_Mov { get; set; }
         public string Seg_TRucks { get; set; }
-        public string id_pedido { get; set; }
+        public int? id_pedido { get; set; }
+        public int id_viaje { get; set; }
+        public string mctnumber { get; set; }
         public string Estatus_204 { get; set; }
-        public int Cant { get; set; }
+        public int? Cant { get; set; }
         public string AA { get; set; }
         public string X3 { get; set; }
         public string AF { get; set; }
@@ -70,6 +77,9 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
         public string X6 { get; set; }
         public string X1 { get; set; }
         public string D1 { get; set; }
+        public string porcentaje { get; set; }
+        public string CantX6 { get; set; }
+        public string UsuarioRelacion { get; set; }
     }
 
     public class GetEstadisticas

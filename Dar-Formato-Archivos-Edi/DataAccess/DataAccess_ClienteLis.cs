@@ -150,160 +150,255 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                 connection.Open();
                 var query = $@"
 
-                    Declare @ll_ClienteEdiPedidoId integer,
-		                    @ll_evento int,
-                            @ll_configuracionId int = "+ config +@"
+                    Declare @li_ClienteEdiConfiguracionId int = " + config + @"
 
 		
-                    --Select * from edidb.dbo.ClienteEdiEstatus
                     CREATE TABLE #tt_edi_nuevo(   ClienteEdiPedidoId Integer Null, ClienteId Integer Null, CodeSCAC Varchar(10) Null, Obs Varchar(1000) Null, Origen Varchar(500) Null, 
-                        Destino Varchar(500) Null, descripcion Varchar(500) Null, Estatus_EDI Varchar(500) Null, Archivo Varchar(500) Null, Shipment Varchar(500) Null, Equipo Varchar(500) Null, 
-                        ISA6 Varchar(500) Null, FechaExpiracion datetime NULL, FechaIngreso datetime NULL, Tipo_Mov Varchar(50) Null, Seg_TRucks Varchar(50) Null, id_pedido Integer Null,
-                        Estatus_204 Varchar(50) Null, Cant Integer Null, AA Varchar(4) Null, X3 Varchar(4) Null, AF Varchar(4) Null, AB Varchar(4) Null, X1 Varchar(4) Null, X6 Varchar(4) Null, 
-                        CD Varchar(4) Null, AG Varchar(4) Null, D1 Varchar(4) Null )
+    Destino Varchar(500) Null, descripcion Varchar(500) Null, Estatus_EDI Varchar(500) Null, Archivo Varchar(500) Null, Shipment Varchar(500) Null, Equipo Varchar(500) Null, 
+    ISA6 Varchar(500) Null, FechaExpiracion datetime NULL, FechaIngreso datetime NULL, Tipo_Mov Varchar(50) Null, Seg_TRucks Varchar(50) Null, id_pedido Integer Null,
+    Estatus_204 Varchar(50) Null, Cant Integer Null, AA Varchar(4) Null, X3 Varchar(4) Null, AF Varchar(4) Null, AB Varchar(4) Null, X1 Varchar(4) Null, X6 Varchar(4) Null, 
+    CD Varchar(4) Null, AG Varchar(4) Null, D1 Varchar(4) Null,id_estatus int,hr_ing_acep int,hr_creacion_pedido int,hr_StopIni_Viaje int,UsuarioAceptacion varchar(10),fechaAceptacion datetime,fecha_real_viaje datetime,fecha_real_fin_viaje datetime,fechaRelacionPedido datetime,fechaRelacionPedidoMin int,UsuarioRelacion varchar(10),id_viaje int,mctnumber varchar(255),CantX6 VARCHAR(MAX) )
 
-                    Insert Into #tt_edi_nuevo( ClienteEdiPedidoId, ClienteId, CodeSCAC, Obs, Origen, Destino, descripcion, Estatus_EDI, Archivo, Shipment, Equipo, ISA6, FechaExpiracion, FechaIngreso, Tipo_Mov, Seg_TRucks, id_pedido, Estatus_204, Cant, AA, X3, AF, AB, X1, X6, CD, AG, D1 )
 
-                    Select cep.ClienteEdiPedidoId, cep.ClienteId, cec.CodeSCAC, IsNull( cep.estatus_obs, '' ) Obs, cep.Origen, cep.Destino,
-                        cec.descripcion, cee.NombreClienteEdiEstatus Estatus_EDI, cep.NombreArchivo, cep.Shipment, cep.Equipo, cep.ISA6, cep.FechaExpiracion, cep.FechaIngreso, 
-                        Case When cep.cruce = 1 Then 'Cruce' Else 'Viaje' End Tipo_Mov, 
-                        Case When IsNull( cephg.ClienteEdiPedidoHGId, 0 ) > 0 Then 'Relacionado' Else 'Pendiente' End Seg_TRucks, cephg.id_pedido,
-                        Case When cephg.fecha_real_fin_viaje is null Then 'Sin Viaje' Else Case When DATEDIFF ( hh, cephg.fecha_real_fin_viaje, cep.FechaIngreso ) > 0 Then '204 Desfazado' Else '204 En tiempo' End End Estatus_204, 
-                        --cephg.f_pedido, cephg.fecha_ingreso, cephg.fecha_real_viaje, cephg.fecha_real_fin_viaje
-                        1 Cant, '','','','','','','','',''
+Insert Into #tt_edi_nuevo( ClienteEdiPedidoId, ClienteId, CodeSCAC, Obs, Origen, Destino, descripcion, Estatus_EDI, Archivo, Shipment, Equipo, ISA6, FechaExpiracion, FechaIngreso, Tipo_Mov, Seg_TRucks, id_pedido, Estatus_204, Cant, AA, X3, AF, AB, X1, X6, CD, AG, D1,id_estatus,hr_ing_acep ,hr_creacion_pedido ,hr_StopIni_Viaje,UsuarioAceptacion,FechaAceptacion,fecha_real_viaje,fecha_real_fin_viaje,fechaRelacionPedido,fechaRelacionPedidoMin,UsuarioRelacion,id_viaje,mctnumber,CantX6  )
+Select cep.ClienteEdiPedidoId, cep.ClienteId, cec.CodeSCAC, IsNull( cep.estatus_obs, '' ) Obs, cep.Origen, cep.Destino,
+    cec.descripcion, cee.NombreClienteEdiEstatus Estatus_EDI, cep.NombreArchivo, cep.Shipment, cep.Equipo, cep.ISA6, cep.FechaExpiracion,
+	cep.FechaIngreso, 
+    Case When cep.cruce = 1 Then 'Cruce' Else 'Viaje' End Tipo_Mov, 
+    Case When IsNull( cephg.ClienteEdiPedidoHGId, 0 ) > 0 Then 'Relacionado' Else 'Pendiente' End Seg_TRucks, cephg.id_pedido,
+    Case When cephg.fecha_real_fin_viaje is null Then 'Sin Viaje' Else Case When DATEDIFF ( hh, cephg.fecha_real_fin_viaje, cep.FechaIngreso ) > 0 Then '204 Desfazado' Else '204 En tiempo' End End Estatus_204, 
+    1 Cant, '','','','','','','','',''
+	,cephg.id_estatus_bi
+	,DATEDIFF(Hour, cep.FechaIngreso, cep.fechaaceptacion ) AS hrs_ing_acep
+	,DATEDIFF(Hour, cep.fechaaceptacion, cephg.f_pedido )	AS hr_creacion_pedido
+	,DATEDIFF(Hour, cep.Fecha_parada_ini, cephg.f_pedido )	AS hr_StopIni_Viaje
+	,UsuarioAceptacion,cep.FechaAceptacion,cephg.fecha_real_viaje,cephg.fecha_real_fin_viaje,cephg.fecha_ingreso
+	,DATEDIFF(MINUTE, cep.Fecha_parada_ini, cephg.f_pedido ) AS min_ing_relacinado
+	,cephg.id_ingreso
+	,cephg.no_viaje
+	,cephg.mctnumber
+	,''
+From edidb.dbo.ClienteEdiPedido cep With( Nolock ) 
+     LEFT OUTER JOIN edidb.dbo.ClienteEdiPedidohg cephg With( Nolock ) On ( cep.ClienteEdiPedidoId = cephg.ClienteEdiPedidoId )
+	 INNER JOIN edidb.dbo.ClienteEdiConfiguracion cec With( Nolock ) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
+	 INNER JOIN edidb.dbo.ClienteEdiEstatus cee With( Nolock ) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId 
+Where cec.SQL_DB In ( Select valor from general_parametros With( NoLock ) Where  nombre = 'edihgnuevodbname' ) And
+	  cep.ClienteediconfiguracionId in( @li_ClienteEdiConfiguracionId ) and
+	  cep.FechaIngreso > DATEADD(MONTH,-1,getdate())
+Order by cep.Shipment asc
 
-                    From edidb.dbo.ClienteEdiPedido cep With( Nolock ) 
-                         Left Outer Join edidb.dbo.ClienteEdiPedidohg cephg With( Nolock ) On ( cep.ClienteEdiPedidoId = cephg.ClienteEdiPedidoId ), 
-                         edidb.dbo.ClienteEdiConfiguracion cec With( Nolock ), 
-                         edidb.dbo.ClienteEdiEstatus cee With( Nolock ) 
+/* Columna para parametrizar cuantos X6 se enviaron contra los que se esperaban y devuelva el resultado*/
+--ALTER TABLE #tt_edi_nuevo ADD FechaAF datetime, FechaX1 datetime
 
-                    Where cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId And 
-                          cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId And 
-                          cec.SQL_DB In ( Select valor from general_parametros With( NoLock ) Where  nombre = 'edihgnuevodbname' ) And
-                          cep.ClienteediconfiguracionId = @ll_configuracionId and
-                          cep.FechaIngreso >= DATEADD(DAY, -5,GETDATE())
-                    Order by cep.Shipment asc 
+UPDATE #tt_edi_nuevo
+SET AA = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 1)  > 0;
 
-                    -- Se cargan los registros del EDI en el cursos 
-                    Declare c_edi Cursor For
-                    SElect ClienteEdiPedidoId From #tt_edi_nuevo
+UPDATE #tt_edi_nuevo
+SET X3 = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 2)  > 0;
 
-                    -- Se abre el cursor de unidades y se coloca en la 1er. posicion 
-                    Open c_edi
-                    Fetch Next From c_edi Into @ll_ClienteEdiPedidoId
+UPDATE #tt_edi_nuevo
+SET AF = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 3)  > 0;
+   
+UPDATE #tt_edi_nuevo
+SET AB = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 4)  > 0;
 
-                    -- Se actualizan las unidades con los datos de las posiciones
-                    While ( @@fetch_status <> -1 ) 
-                    Begin 
-                       Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'AA' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set AA = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                       Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'X3' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set X3 = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                       Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'AF' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set AF = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                          Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'AB' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set AB = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                       Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'X1' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set X1 = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                          Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'X6' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set X6 = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                          Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'CD' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set CD = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                          Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'AG' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set AG = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                          Select @ll_evento = Case When COUNT( cee.NombreEvento ) > 0 Then 1 Else 0 End
-                       From edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock ), edidb.dbo.ClienteEdiEvento cee With( Nolock ) 
-                       Where cene.EventoId =  cee.ClienteEdiEventoId And cee.NombreEvento = 'D1' And cene.ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-   
-                       If @ll_evento = 1
-                       Begin
-                          Update #tt_edi_nuevo
-                          Set D1 = @ll_evento
-                          Where ClienteEdiPedidoId = @ll_ClienteEdiPedidoId 
-                       End
-   
-                       Fetch Next From c_edi Into @ll_ClienteEdiPedidoId
-                    End 
+UPDATE #tt_edi_nuevo
+SET X1 = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 5)  > 0;
 
-                    Select ClienteEdiPedidoId, ClienteId, CodeSCAC,  --Obs, Origen, Destino, 
-                           descripcion, Estatus_EDI, --Archivo, 
-                           Shipment, Equipo, ISA6,  FechaIngreso,FechaExpiracion,
-                           Tipo_Mov ,Seg_TRucks ,id_pedido ,Estatus_204, Cant, AA, X3, AF, AB, X6, X1--, CD, AG
-	                       , D1 
-                    From #tt_edi_nuevo
-                    Order by ClienteEdiPedidoId DESC
+UPDATE #tt_edi_nuevo
+SET X6 = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 6)  > 0;
+
+UPDATE #tt_edi_nuevo
+SET CD = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 7)  > 0;
+
+UPDATE #tt_edi_nuevo
+SET AG = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 8)  > 0;
+
+UPDATE #tt_edi_nuevo
+SET D1 = 1
+WHERE (SELECT COUNT(cene.ClienteEdiPedidoId) 
+			FROM edidb.dbo.ClienteEdiNotificaEvento cene With( Nolock )
+				INNER JOIN edidb.dbo.ClienteEdiEvento cee With( Nolock )
+					ON cene.EventoId =  cee.ClienteEdiEventoId
+		WHERE cene.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId 
+			AND cee.ClienteEdiEventoId = 9)  > 0;
+
+
+-- Actualizar la columna '@MostrarPorcentaje' con los valores correspondientes
+UPDATE #tt_edi_nuevo
+SET CantX6 = (
+    SELECT TOP 1
+        (SELECT COUNT(1) FROM edidb.dbo.ClienteEdiNotificaEvento WHERE ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId AND EventoId = 6) as Porcentaje
+    FROM
+        edidb.dbo.ClienteEdiPedidoHG ceph
+        INNER JOIN edidb.dbo.ClienteEdiNotificaEvento cene ON (cene.ClienteEdiPedidoId = ceph.ClienteEdiPedidoId) AND EventoId IN (3, 5, 6)
+        INNER JOIN edidb.dbo.ClienteEdiPedido cep ON (cep.ClienteEdiPedidoId = cene.ClienteEdiPedidoId)
+        INNER JOIN edidb.dbo.ClienteEdiConfiguracion cee ON (cee.ClienteEdiConfiguracionId = cep.ClienteEdiConfiguracionId)
+    WHERE ceph.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId
+)
+
+IF(@li_ClienteEdiConfiguracionId in (1,2,4,7,8))
+BEGIN
+    	Select ClienteEdiPedidoId, ClienteId, CodeSCAC,
+		   Origen,Destino,
+		   descripcion, Estatus_EDI,
+		   Shipment, Equipo,
+		   FechaIngreso ,FechaAceptacion,fechaRelacionPedido,FechaExpiracion,fecha_real_viaje,fecha_real_fin_viaje ,
+		   Tipo_Mov ,Seg_TRucks ,id_pedido,id_viaje ,mctnumber,Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,
+		   ROUND((SUM(
+			  CASE WHEN CONVERT(INT, AA) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, AB) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, X6) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, D1) = 1 THEN 1 ELSE 0 END
+			  ) * 100.0) / (COUNT(*) * 7), 3) AS porcentaje,
+            CantX6,
+		   UsuarioRelacion
+	From #tt_edi_nuevo
+	GROUP BY ClienteEdiPedidoId, ClienteId, CodeSCAC,
+         Origen, Destino,
+         descripcion, Estatus_EDI,
+         Shipment, Equipo,
+         FechaIngreso, FechaAceptacion, fechaRelacionPedido, FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje,
+         Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,CantX6, UsuarioRelacion
+	Order by CantX6 DESC
+END
+
+IF(@li_ClienteEdiConfiguracionId in (1,2,4,7,8))
+BEGIN
+    	Select ClienteEdiPedidoId, ClienteId, CodeSCAC,
+		   Origen,Destino,
+		   descripcion, Estatus_EDI,
+		   Shipment, Equipo,
+		   FechaIngreso ,FechaAceptacion,fechaRelacionPedido,FechaExpiracion,fecha_real_viaje,fecha_real_fin_viaje ,
+		   Tipo_Mov ,Seg_TRucks ,id_pedido,id_viaje ,mctnumber,Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,
+		   ROUND((SUM(
+			  CASE WHEN CONVERT(INT, AA) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, AB) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, X6) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, D1) = 1 THEN 1 ELSE 0 END
+			  ) * 100.0) / (COUNT(*) * 7), 3) AS porcentaje,
+            CantX6,
+		   UsuarioRelacion
+	From #tt_edi_nuevo
+	GROUP BY ClienteEdiPedidoId, ClienteId, CodeSCAC,
+         Origen, Destino,
+         descripcion, Estatus_EDI,
+         Shipment, Equipo,
+         FechaIngreso, FechaAceptacion, fechaRelacionPedido, FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje,
+         Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,CantX6, UsuarioRelacion
+	Order by CantX6 DESC
+END	
+
+IF(@li_ClienteEdiConfiguracionId in (5))
+BEGIN
+    	Select ClienteEdiPedidoId, ClienteId, CodeSCAC,
+		   Origen,Destino,
+		   descripcion, Estatus_EDI,
+		   Shipment, Equipo,
+		   FechaIngreso ,FechaAceptacion,fechaRelacionPedido,FechaExpiracion,fecha_real_viaje,fecha_real_fin_viaje ,
+		   Tipo_Mov ,Seg_TRucks ,id_pedido,id_viaje ,mctnumber,Estatus_204, Cant, X3, AF, AG, X6, X1,AG, D1,
+		   ROUND((SUM(
+			  CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, AG) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, X6) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END +
+			  CASE WHEN CONVERT(INT, AB) = 1 THEN 1 ELSE 0 END
+			  ) * 100.0) / (COUNT(*) * 6), 3) AS porcentaje,
+           CantX6,
+		   UsuarioRelacion
+	From #tt_edi_nuevo
+	GROUP BY ClienteEdiPedidoId, ClienteId, CodeSCAC,
+         Origen, Destino,
+         descripcion, Estatus_EDI,
+         Shipment, Equipo,
+         FechaIngreso, FechaAceptacion, fechaRelacionPedido, FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje,
+         Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,CantX6, UsuarioRelacion
+	Order by CantX6 DESC
+END	
+
+IF(@li_ClienteEdiConfiguracionId in (3))
+BEGIN
+    	Select ClienteEdiPedidoId, ClienteId, CodeSCAC,
+		   Origen,Destino,
+		   descripcion, Estatus_EDI,
+		   Shipment, Equipo,
+		   FechaIngreso ,FechaAceptacion,fechaRelacionPedido,FechaExpiracion,fecha_real_viaje,fecha_real_fin_viaje ,
+		   Tipo_Mov ,Seg_TRucks ,id_pedido,id_viaje ,mctnumber,Estatus_204, Cant,AA, X3, AF, AG, X6, X1,AG, D1,
+		   ROUND((SUM(
+			    CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
+			    CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
+			    CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END 
+			    ) * 100.0) / (COUNT(*) * 6), 3) AS porcentaje,
+           CantX6,
+		   UsuarioRelacion
+	From #tt_edi_nuevo
+	GROUP BY ClienteEdiPedidoId, ClienteId, CodeSCAC,
+         Origen, Destino,
+         descripcion, Estatus_EDI,
+         Shipment, Equipo,
+         FechaIngreso, FechaAceptacion, fechaRelacionPedido, FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje,
+         Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,CantX6, UsuarioRelacion
+	Order by CantX6 DESC
+END
+
+
+
+
                  ";
 
                 List<ReporteEventos> reporteEventos = connection.Query<ReporteEventos>(query,commandTimeout: 3600).ToList();
