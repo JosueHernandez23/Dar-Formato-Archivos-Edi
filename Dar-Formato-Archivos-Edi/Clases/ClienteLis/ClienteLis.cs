@@ -73,9 +73,10 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
         public string AA { get; set; }
         public string X3 { get; set; }
         public string AF { get; set; }
-        public string AB { get; set; }
+        public string AG { get; set; }
         public string X6 { get; set; }
         public string X1 { get; set; }
+        public string AB { get; set; }
         public string D1 { get; set; }
         public string porcentaje { get; set; }
         public string CantX6 { get; set; }

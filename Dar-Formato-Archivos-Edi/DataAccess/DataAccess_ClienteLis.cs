@@ -152,15 +152,15 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 
                     Declare @li_ClienteEdiConfiguracionId int = " + config + @"
 
-		
-                    CREATE TABLE #tt_edi_nuevo(   ClienteEdiPedidoId Integer Null, ClienteId Integer Null, CodeSCAC Varchar(10) Null, Obs Varchar(1000) Null, Origen Varchar(500) Null, 
+
+CREATE TABLE #tt_edi_nuevo(   ClienteEdiPedidoId Integer Null, ClienteId Integer Null, CodeSCAC Varchar(10) Null, Obs Varchar(1000) Null, Origen Varchar(500) Null, 
     Destino Varchar(500) Null, descripcion Varchar(500) Null, Estatus_EDI Varchar(500) Null, Archivo Varchar(500) Null, Shipment Varchar(500) Null, Equipo Varchar(500) Null, 
     ISA6 Varchar(500) Null, FechaExpiracion datetime NULL, FechaIngreso datetime NULL, Tipo_Mov Varchar(50) Null, Seg_TRucks Varchar(50) Null, id_pedido Integer Null,
     Estatus_204 Varchar(50) Null, Cant Integer Null, AA Varchar(4) Null, X3 Varchar(4) Null, AF Varchar(4) Null, AB Varchar(4) Null, X1 Varchar(4) Null, X6 Varchar(4) Null, 
-    CD Varchar(4) Null, AG Varchar(4) Null, D1 Varchar(4) Null,id_estatus int,hr_ing_acep int,hr_creacion_pedido int,hr_StopIni_Viaje int,UsuarioAceptacion varchar(10),fechaAceptacion datetime,fecha_real_viaje datetime,fecha_real_fin_viaje datetime,fechaRelacionPedido datetime,fechaRelacionPedidoMin int,UsuarioRelacion varchar(10),id_viaje int,mctnumber varchar(255),CantX6 VARCHAR(MAX) )
+    CD Varchar(4) Null, AG Varchar(4) Null, D1 Varchar(4) Null,id_estatus int,hr_ing_acep int,hr_creacion_pedido int,hr_StopIni_Viaje int,UsuarioAceptacion varchar(10),fechaAceptacion datetime,fecha_real_viaje datetime,fecha_real_fin_viaje datetime,fechaRelacionPedido datetime,fechaRelacionPedidoMin int,UsuarioRelacion varchar(10),id_viaje int,mctnumber varchar(255),CantX6 VARCHAR(MAX),porcentaje varchar(MAX),ClienteEdiConfiguracionId int )
 
 
-Insert Into #tt_edi_nuevo( ClienteEdiPedidoId, ClienteId, CodeSCAC, Obs, Origen, Destino, descripcion, Estatus_EDI, Archivo, Shipment, Equipo, ISA6, FechaExpiracion, FechaIngreso, Tipo_Mov, Seg_TRucks, id_pedido, Estatus_204, Cant, AA, X3, AF, AB, X1, X6, CD, AG, D1,id_estatus,hr_ing_acep ,hr_creacion_pedido ,hr_StopIni_Viaje,UsuarioAceptacion,FechaAceptacion,fecha_real_viaje,fecha_real_fin_viaje,fechaRelacionPedido,fechaRelacionPedidoMin,UsuarioRelacion,id_viaje,mctnumber,CantX6  )
+Insert Into #tt_edi_nuevo( ClienteEdiPedidoId, ClienteId, CodeSCAC, Obs, Origen, Destino, descripcion, Estatus_EDI, Archivo, Shipment, Equipo, ISA6, FechaExpiracion, FechaIngreso, Tipo_Mov, Seg_TRucks, id_pedido, Estatus_204, Cant, AA, X3, AF, AB, X1, X6, CD, AG, D1,id_estatus,hr_ing_acep ,hr_creacion_pedido ,hr_StopIni_Viaje,UsuarioAceptacion,FechaAceptacion,fecha_real_viaje,fecha_real_fin_viaje,fechaRelacionPedido,fechaRelacionPedidoMin,UsuarioRelacion,id_viaje,mctnumber,CantX6,porcentaje,ClienteEdiConfiguracionId  )
 Select cep.ClienteEdiPedidoId, cep.ClienteId, cec.CodeSCAC, IsNull( cep.estatus_obs, '' ) Obs, cep.Origen, cep.Destino,
     cec.descripcion, cee.NombreClienteEdiEstatus Estatus_EDI, cep.NombreArchivo, cep.Shipment, cep.Equipo, cep.ISA6, cep.FechaExpiracion,
 	cep.FechaIngreso, 
@@ -177,7 +177,7 @@ Select cep.ClienteEdiPedidoId, cep.ClienteId, cec.CodeSCAC, IsNull( cep.estatus_
 	,cephg.id_ingreso
 	,cephg.no_viaje
 	,cephg.mctnumber
-	,''
+	,'','',cep.ClienteEdiConfiguracionId
 From edidb.dbo.ClienteEdiPedido cep With( Nolock ) 
      LEFT OUTER JOIN edidb.dbo.ClienteEdiPedidohg cephg With( Nolock ) On ( cep.ClienteEdiPedidoId = cephg.ClienteEdiPedidoId )
 	 INNER JOIN edidb.dbo.ClienteEdiConfiguracion cec With( Nolock ) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
@@ -186,9 +186,6 @@ Where cec.SQL_DB In ( Select valor from general_parametros With( NoLock ) Where 
 	  cep.ClienteediconfiguracionId in( @li_ClienteEdiConfiguracionId ) and
 	  cep.FechaIngreso > DATEADD(MONTH,-1,getdate())
 Order by cep.Shipment asc
-
-/* Columna para parametrizar cuantos X6 se enviaron contra los que se esperaban y devuelva el resultado*/
---ALTER TABLE #tt_edi_nuevo ADD FechaAF datetime, FechaX1 datetime
 
 UPDATE #tt_edi_nuevo
 SET AA = 1
@@ -285,119 +282,71 @@ SET CantX6 = (
     WHERE ceph.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId
 )
 
-IF(@li_ClienteEdiConfiguracionId in (1,2,4,7,8))
-BEGIN
-    	Select ClienteEdiPedidoId, ClienteId, CodeSCAC,
-		   Origen,Destino,
-		   descripcion, Estatus_EDI,
-		   Shipment, Equipo,
-		   FechaIngreso ,FechaAceptacion,fechaRelacionPedido,FechaExpiracion,fecha_real_viaje,fecha_real_fin_viaje ,
-		   Tipo_Mov ,Seg_TRucks ,id_pedido,id_viaje ,mctnumber,Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,
-		   ROUND((SUM(
-			  CASE WHEN CONVERT(INT, AA) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, AB) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, X6) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, D1) = 1 THEN 1 ELSE 0 END
-			  ) * 100.0) / (COUNT(*) * 7), 3) AS porcentaje,
-            CantX6,
-		   UsuarioRelacion
-	From #tt_edi_nuevo
-	GROUP BY ClienteEdiPedidoId, ClienteId, CodeSCAC,
-         Origen, Destino,
-         descripcion, Estatus_EDI,
-         Shipment, Equipo,
-         FechaIngreso, FechaAceptacion, fechaRelacionPedido, FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje,
-         Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,CantX6, UsuarioRelacion
-	Order by CantX6 DESC
-END
 
-IF(@li_ClienteEdiConfiguracionId in (1,2,4,7,8))
-BEGIN
-    	Select ClienteEdiPedidoId, ClienteId, CodeSCAC,
-		   Origen,Destino,
-		   descripcion, Estatus_EDI,
-		   Shipment, Equipo,
-		   FechaIngreso ,FechaAceptacion,fechaRelacionPedido,FechaExpiracion,fecha_real_viaje,fecha_real_fin_viaje ,
-		   Tipo_Mov ,Seg_TRucks ,id_pedido,id_viaje ,mctnumber,Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,
-		   ROUND((SUM(
-			  CASE WHEN CONVERT(INT, AA) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, AB) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, X6) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, D1) = 1 THEN 1 ELSE 0 END
-			  ) * 100.0) / (COUNT(*) * 7), 3) AS porcentaje,
-            CantX6,
-		   UsuarioRelacion
-	From #tt_edi_nuevo
-	GROUP BY ClienteEdiPedidoId, ClienteId, CodeSCAC,
-         Origen, Destino,
-         descripcion, Estatus_EDI,
-         Shipment, Equipo,
-         FechaIngreso, FechaAceptacion, fechaRelacionPedido, FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje,
-         Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,CantX6, UsuarioRelacion
-	Order by CantX6 DESC
-END	
 
-IF(@li_ClienteEdiConfiguracionId in (5))
-BEGIN
-    	Select ClienteEdiPedidoId, ClienteId, CodeSCAC,
-		   Origen,Destino,
-		   descripcion, Estatus_EDI,
-		   Shipment, Equipo,
-		   FechaIngreso ,FechaAceptacion,fechaRelacionPedido,FechaExpiracion,fecha_real_viaje,fecha_real_fin_viaje ,
-		   Tipo_Mov ,Seg_TRucks ,id_pedido,id_viaje ,mctnumber,Estatus_204, Cant, X3, AF, AG, X6, X1,AG, D1,
-		   ROUND((SUM(
-			  CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, AG) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, X6) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END +
-			  CASE WHEN CONVERT(INT, AB) = 1 THEN 1 ELSE 0 END
-			  ) * 100.0) / (COUNT(*) * 6), 3) AS porcentaje,
-           CantX6,
-		   UsuarioRelacion
-	From #tt_edi_nuevo
-	GROUP BY ClienteEdiPedidoId, ClienteId, CodeSCAC,
-         Origen, Destino,
-         descripcion, Estatus_EDI,
-         Shipment, Equipo,
-         FechaIngreso, FechaAceptacion, fechaRelacionPedido, FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje,
-         Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,CantX6, UsuarioRelacion
-	Order by CantX6 DESC
-END	
-
-IF(@li_ClienteEdiConfiguracionId in (3))
-BEGIN
-    	Select ClienteEdiPedidoId, ClienteId, CodeSCAC,
-		   Origen,Destino,
-		   descripcion, Estatus_EDI,
-		   Shipment, Equipo,
-		   FechaIngreso ,FechaAceptacion,fechaRelacionPedido,FechaExpiracion,fecha_real_viaje,fecha_real_fin_viaje ,
-		   Tipo_Mov ,Seg_TRucks ,id_pedido,id_viaje ,mctnumber,Estatus_204, Cant,AA, X3, AF, AG, X6, X1,AG, D1,
-		   ROUND((SUM(
-			    CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
-			    CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
-			    CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END 
-			    ) * 100.0) / (COUNT(*) * 6), 3) AS porcentaje,
-           CantX6,
-		   UsuarioRelacion
-	From #tt_edi_nuevo
-	GROUP BY ClienteEdiPedidoId, ClienteId, CodeSCAC,
-         Origen, Destino,
-         descripcion, Estatus_EDI,
-         Shipment, Equipo,
-         FechaIngreso, FechaAceptacion, fechaRelacionPedido, FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje,
-         Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant,AA, X3, AF, AB, X6, X1, D1,CantX6, UsuarioRelacion
-	Order by CantX6 DESC
-END
+UPDATE #tt_edi_nuevo
+SET porcentaje = 
+    CASE 
+        WHEN ClienteEdiConfiguracionId IN (1, 2, 4, 7, 8) THEN
+            (
+                SELECT ROUND((SUM(
+                    CASE WHEN CONVERT(INT, AA) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, AB) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, X6) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, D1) = 1 THEN 1 ELSE 0 END
+                    ) * 100.0) / (COUNT(*) * 7), 3) AS porcentaje
+                FROM #tt_edi_nuevo AS sub
+                WHERE sub.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId
+                GROUP BY ClienteEdiPedidoId
+            )
+        WHEN ClienteEdiConfiguracionId = 5 AND Tipo_Mov = 'Viaje' THEN
+            (
+                SELECT ROUND((SUM(
+                    CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, AG) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, X6) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, AB) = 1 THEN 1 ELSE 0 END
+                    ) * 100.0) / (COUNT(*) * 7), 3) AS porcentaje
+                FROM #tt_edi_nuevo AS sub
+                WHERE sub.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId
+                GROUP BY ClienteEdiPedidoId
+            )
+        WHEN ClienteEdiConfiguracionId = 5 AND Tipo_Mov = 'Cruce' THEN
+            (
+                SELECT ROUND((SUM(
+                    CASE WHEN CONVERT(INT, D1) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END
+                    ) * 100.0) / (COUNT(*) * 2), 3) AS porcentaje
+                FROM #tt_edi_nuevo AS sub
+                WHERE sub.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId
+                GROUP BY ClienteEdiPedidoId
+            )
+        WHEN ClienteEdiConfiguracionId = 3 THEN
+            (
+                SELECT ROUND((SUM(
+                    CASE WHEN CONVERT(INT, X3) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, AF) = 1 THEN 1 ELSE 0 END +
+                    CASE WHEN CONVERT(INT, X1) = 1 THEN 1 ELSE 0 END
+                    ) * 100.0) / (COUNT(*) * 3), 3) AS porcentaje
+                FROM #tt_edi_nuevo AS sub
+                WHERE sub.ClienteEdiPedidoId = #tt_edi_nuevo.ClienteEdiPedidoId
+                GROUP BY ClienteEdiPedidoId
+            )
+        ELSE 0 -- Valor por defecto si no se cumple ninguna condición
+    END
 
 
 
+SELECT 
+    ClienteEdiPedidoId, ClienteId, CodeSCAC, Origen, Destino, descripcion, Estatus_EDI, Shipment, Equipo, FechaIngreso, FechaAceptacion, fechaRelacionPedido,
+    FechaExpiracion, fecha_real_viaje, fecha_real_fin_viaje, Tipo_Mov, Seg_TRucks, id_pedido, id_viaje, mctnumber, Estatus_204, Cant, AA, X3, AF, AG, X6,
+    X1, AB, D1, porcentaje, CantX6, UsuarioRelacion
+FROM #tt_edi_nuevo
 
                  ";
 
