@@ -390,6 +390,8 @@
     <Compile Include="Clases\ClienteEdiTipoArchivo\ClienteEdiTipoArchivo.cs" />
     <Compile Include="Clases\ClienteEdiTipoArchivo\EdiTipoArchivoFormatos.cs" />
     <Compile Include="Clases\ClienteLis\ClienteLis.cs" />
+    <Compile Include="Clases\Edi\Edi824.cs" />
+    <Compile Include="Clases\Edi\Edi997.cs" />
     <Compile Include="Clases\PedidoRelacionado\PedidoRelacionado.cs" />
     <Compile Include="Clases\TipoConexion\TipoConexion.cs" />
     <Compile Include="Conexion\SqlCnx.cs" />
@@ -455,6 +457,12 @@
     <Compile Include="Forms secundarios\Listado Segmentos.Designer.cs">
       <DependentUpon>Listado Segmentos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms secundarios\PopUpInfoEdi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms secundarios\PopUpInfoEdi.Designer.cs">
+      <DependentUpon>PopUpInfoEdi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms secundarios\ReporteDeEventos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -489,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\Listado Segmentos.resx">
       <DependentUpon>Listado Segmentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms secundarios\PopUpInfoEdi.resx">
+      <DependentUpon>PopUpInfoEdi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\ReporteDeEventos.resx">
       <DependentUpon>ReporteDeEventos.cs</DependentUpon>

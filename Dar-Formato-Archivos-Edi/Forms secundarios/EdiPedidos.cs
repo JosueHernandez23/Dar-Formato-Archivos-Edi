@@ -33,10 +33,16 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             kdgvEventosReportadosAppMobil.ForeColor = Color.Black;
 
-            //WhiteMode();
-            //BlackMode();
-            //CustomMode(Color.White, Color.Red);
-            //CustomModeARGB(new byte[4] {255,46,51,73}, new byte[4] { 255, 255, 255, 255 }, new byte[4] { 255, 255, 255, 255 });
+            new List<Label>() { lbl824, lbl997 }.ForEach(lbls =>
+            {
+                lbls.MouseHover += HoverEnter;
+            });
+        }
+
+        public static void HoverEnter(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            lbl.Cursor = Cursors.Hand;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -193,6 +199,17 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     List<posicion_unidad> posicion = GetPosicionUnidad(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
                     //dgvPosicionUnidad.DataSource = posicion;
                     kryptonDataGridView1.DataSource = posicion;
+
+                    // Organizar el espacio de las celdas y columnas del grid de las posiciones de la unidad con el viaje
+
+                    //ubicacion
+                    kryptonDataGridView1.AutoResizeColumn(1, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
+                    //posdate
+                    kryptonDataGridView1.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
+                    // Sistema_origen
+                    kryptonDataGridView1.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
+                    // posdate_inserto
+                    kryptonDataGridView1.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
                 }
                 else
                 {
@@ -255,14 +272,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             {
                 kdtGrid_EventosReportados.DataSource = listado_NotificaEvento.Select(s => new
                 {
-
                     ClienteEdiNotificaEventoId = s.ClienteEdiNotificaEventoId,
                     Evento = s.EventoId + " - " + s.Evento,
                     FechaIngreso = s.FechaIngreso.ToString(),
                     //PedidoDireccionId = s.ClienteEdiPedidoDireccionId,
                     Caso = s.caso,
                     Texto214 = s.Texto214
-
                 }).ToList();
 
                 // Configurar columnas para mostrar la informacion importante
@@ -653,6 +668,19 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         private void dtGrid_EventosReportados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void lbl824_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtClienteEdiPedidoId.Text))
+            {
+                var frm = new PopUpInfoEdi(Convert.ToInt32(txtClienteEdiPedidoId.Text), "824");
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("No hay pedido EDI ingresado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

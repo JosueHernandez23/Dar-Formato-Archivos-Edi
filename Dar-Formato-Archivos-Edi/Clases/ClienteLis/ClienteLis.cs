@@ -33,6 +33,8 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
         public string EventTypeDescription { get; set; } 
         public DateTime posdate { get; set; }
         //public string id_unidad { get; set; }
+        public string Sistema_origen { get; set; }
+        public DateTime posdate_inserto { get; set; }
 
     }
 

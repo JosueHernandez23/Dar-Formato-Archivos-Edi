@@ -110,6 +110,8 @@
             this.kdtGrid_EventosReportados = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.Seguimiento_Viaje = new System.Windows.Forms.GroupBox();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.lbl997 = new System.Windows.Forms.Label();
+            this.lbl824 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).BeginInit();
@@ -786,6 +788,8 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.lbl824);
+            this.groupBox3.Controls.Add(this.lbl997);
             this.groupBox3.Controls.Add(this.txtFechaFinViaje);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.txtFechaInicioViaje);
@@ -801,7 +805,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(645, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(693, 98);
+            this.groupBox3.Size = new System.Drawing.Size(836, 98);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Info. Edi";
@@ -876,7 +880,7 @@
             // 
             this.txtEstatusViaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEstatusViaje.Enabled = false;
-            this.txtEstatusViaje.Location = new System.Drawing.Point(221, 12);
+            this.txtEstatusViaje.Location = new System.Drawing.Point(364, 12);
             this.txtEstatusViaje.Name = "txtEstatusViaje";
             this.txtEstatusViaje.Size = new System.Drawing.Size(28, 20);
             this.txtEstatusViaje.TabIndex = 62;
@@ -892,7 +896,7 @@
             this.groupBox4.Controls.Add(this.lblSeguimiento);
             this.groupBox4.Location = new System.Drawing.Point(12, 587);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1065, 130);
+            this.groupBox4.Size = new System.Drawing.Size(1065, 207);
             this.groupBox4.TabIndex = 44;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "groupBox4";
@@ -911,7 +915,7 @@
             this.kdtGrid_EstatusSeguimiento.Name = "kdtGrid_EstatusSeguimiento";
             this.kdtGrid_EstatusSeguimiento.ReadOnly = true;
             this.kdtGrid_EstatusSeguimiento.RowHeadersVisible = false;
-            this.kdtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(542, 89);
+            this.kdtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(542, 166);
             this.kdtGrid_EstatusSeguimiento.TabIndex = 8;
             // 
             // kdtGrid_EventosReportados
@@ -927,7 +931,7 @@
             this.kdtGrid_EventosReportados.Name = "kdtGrid_EventosReportados";
             this.kdtGrid_EventosReportados.ReadOnly = true;
             this.kdtGrid_EventosReportados.RowHeadersVisible = false;
-            this.kdtGrid_EventosReportados.Size = new System.Drawing.Size(481, 89);
+            this.kdtGrid_EventosReportados.Size = new System.Drawing.Size(481, 166);
             this.kdtGrid_EventosReportados.TabIndex = 7;
             this.kdtGrid_EventosReportados.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellDoubleClick);
             // 
@@ -941,7 +945,7 @@
             this.Seguimiento_Viaje.Controls.Add(this.label22);
             this.Seguimiento_Viaje.Location = new System.Drawing.Point(1083, 111);
             this.Seguimiento_Viaje.Name = "Seguimiento_Viaje";
-            this.Seguimiento_Viaje.Size = new System.Drawing.Size(255, 606);
+            this.Seguimiento_Viaje.Size = new System.Drawing.Size(398, 683);
             this.Seguimiento_Viaje.TabIndex = 45;
             this.Seguimiento_Viaje.TabStop = false;
             this.Seguimiento_Viaje.Text = "groupBox5";
@@ -960,8 +964,29 @@
             this.kryptonDataGridView1.Name = "kryptonDataGridView1";
             this.kryptonDataGridView1.ReadOnly = true;
             this.kryptonDataGridView1.RowHeadersVisible = false;
-            this.kryptonDataGridView1.Size = new System.Drawing.Size(243, 565);
+            this.kryptonDataGridView1.Size = new System.Drawing.Size(386, 642);
             this.kryptonDataGridView1.TabIndex = 46;
+            // 
+            // lbl997
+            // 
+            this.lbl997.AutoSize = true;
+            this.lbl997.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl997.Location = new System.Drawing.Point(697, 65);
+            this.lbl997.Name = "lbl997";
+            this.lbl997.Size = new System.Drawing.Size(39, 20);
+            this.lbl997.TabIndex = 61;
+            this.lbl997.Text = "997";
+            // 
+            // lbl824
+            // 
+            this.lbl824.AutoSize = true;
+            this.lbl824.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl824.Location = new System.Drawing.Point(697, 34);
+            this.lbl824.Name = "lbl824";
+            this.lbl824.Size = new System.Drawing.Size(39, 20);
+            this.lbl824.TabIndex = 62;
+            this.lbl824.Text = "824";
+            this.lbl824.Click += new System.EventHandler(this.lbl824_Click);
             // 
             // EdiPedidos
             // 
@@ -969,7 +994,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.ClientSize = new System.Drawing.Size(1493, 806);
             this.Controls.Add(this.Seguimiento_Viaje);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
@@ -1086,5 +1111,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kdgvEventosReportadosAppMobil;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kdtGrid_EventosReportados;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kdtGrid_EstatusSeguimiento;
+        private System.Windows.Forms.Label lbl824;
+        private System.Windows.Forms.Label lbl997;
     }
 }

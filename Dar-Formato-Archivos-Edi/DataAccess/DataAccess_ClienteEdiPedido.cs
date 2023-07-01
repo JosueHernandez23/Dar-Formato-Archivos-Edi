@@ -8,6 +8,7 @@ using Dar_Formato_Archivos_Edi.Clases.ClienteEdiPedido;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiNotificaEvento;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiEstatusSeguimiento;
 using Dar_Formato_Archivos_Edi.Clases.ClienteEdiPedidoDireccion;
+using Dar_Formato_Archivos_Edi.Clases.Edi;
 using System.Data.SqlClient;
 using Dapper;
 using Dar_Formato_Archivos_Edi.Clases.ClienteLis;
@@ -250,7 +251,9 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                 var query = $@"
                     select ubicacion,
 		                    EventTypeDescription,
-                            posdate
+                            posdate,
+                            Sistema_origen,
+                            posdate_inserto
                      from	desp_posicion_unidad dpu With(NoLock) 
                      where	dpu.id_viaje = {no_viaje}
                             order by dpu.posdate
@@ -284,6 +287,37 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                 return CLienteConfiguracion;
             }
 
+        }
+
+        public static List<Edi824> getEdi824(int ClienteEdiPedidoId)
+        {
+            SqlCnx con = new SqlCnx();
+            using (var connection = new SqlConnection(con.connectionString))
+            {
+                connection.Open();
+
+                var query = $@"
+                    Select	edi.scacSender, 
+		                    edi.scacReceiver, 
+		                    edi.application_ErrorCode, 
+		                    edi.message_Error, 
+		                    edi.dateIssue, 
+		                    edi.reference_Code, 
+		                    edi.reference_Description, 
+		                    edi.interchangeDate, 
+		                    edi.entryDate, 
+		                    edi.filesContent
+                    From edi824 edi With(NoLock) 
+	                     inner join ClienteEdiPedido cep With(NoLock) on ( edi.reference_Description = cep.Shipment )
+	                     inner join ClienteEdiConfiguracion cec With(NoLock) on ( cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId and cec.ISA8 = edi.scacSender )
+                    Where cep.ClienteEdiPedidoId = {ClienteEdiPedidoId}
+                ";
+
+                List<Edi824> Edi824 = connection.Query<Edi824>(query).ToList();
+                connection.Close();
+
+                return Edi824;
+            }
         }
 
 

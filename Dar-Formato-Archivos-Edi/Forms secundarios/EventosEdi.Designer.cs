@@ -72,7 +72,7 @@
             this.tableLayoutPanel_Params.ColumnCount = 3;
             this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.24281F));
             this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.75719F));
-            this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 446F));
+            this.tableLayoutPanel_Params.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 448F));
             this.tableLayoutPanel_Params.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel_Params.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel_Params.Controls.Add(this.btnBuscar, 0, 1);
@@ -139,7 +139,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(260, 56);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(258, 56);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // cboEdiEvento
@@ -147,7 +147,7 @@
             this.cboEdiEvento.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cboEdiEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboEdiEvento.FormattingEnabled = true;
-            this.cboEdiEvento.Location = new System.Drawing.Point(8, 31);
+            this.cboEdiEvento.Location = new System.Drawing.Point(7, 31);
             this.cboEdiEvento.Name = "cboEdiEvento";
             this.cboEdiEvento.Size = new System.Drawing.Size(244, 21);
             this.cboEdiEvento.TabIndex = 3;
@@ -158,7 +158,7 @@
             this.lblEventosEdi.AutoSize = true;
             this.lblEventosEdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEventosEdi.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblEventosEdi.Location = new System.Drawing.Point(86, 10);
+            this.lblEventosEdi.Location = new System.Drawing.Point(85, 10);
             this.lblEventosEdi.Name = "lblEventosEdi";
             this.lblEventosEdi.Size = new System.Drawing.Size(87, 18);
             this.lblEventosEdi.TabIndex = 2;
@@ -180,7 +180,7 @@
             // 
             this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.Location = new System.Drawing.Point(687, 65);
+            this.btnGuardar.Location = new System.Drawing.Point(686, 65);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(98, 29);
             this.btnGuardar.TabIndex = 7;
@@ -192,7 +192,7 @@
             // 
             this.btnAgregar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(331, 65);
+            this.btnAgregar.Location = new System.Drawing.Point(330, 65);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(98, 29);
             this.btnAgregar.TabIndex = 8;

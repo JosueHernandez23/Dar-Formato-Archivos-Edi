@@ -118,7 +118,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     if (item.ClienteEdiConfiguracionEventoId == 0)
                     {
                         // Insertar
-                        InsertEventos(item);
+                        InsertEvento(item);
                     }
                     else
                     {
@@ -158,7 +158,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return OCECE.Listado_Configuraciones(cliente);
         }
 
-        public void InsertEventos(ClienteEdiConfiguracionEvento evento) 
+        public void InsertEvento(ClienteEdiConfiguracionEvento evento) 
         {
             DataAccess_ClienteEdiConfiguracionEvento OCECE = new DataAccess_ClienteEdiConfiguracionEvento();
             OCECE.InsertEvento(evento);
