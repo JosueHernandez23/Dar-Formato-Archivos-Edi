@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dar-Formato-Archivos-Edi", "Dar-Formato-Archivos-Edi\Dar-Formato-Archivos-Edi.csproj", "{23B3240D-9F2D-4CFF-8D77-00E2AEE1ED20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDI Tracker", "Dar-Formato-Archivos-Edi\EDI Tracker.csproj", "{23B3240D-9F2D-4CFF-8D77-00E2AEE1ED20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
