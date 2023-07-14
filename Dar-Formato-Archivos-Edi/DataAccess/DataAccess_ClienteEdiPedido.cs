@@ -311,6 +311,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 	                     inner join ClienteEdiPedido cep With(NoLock) on ( edi.reference_Description = cep.Shipment )
 	                     inner join ClienteEdiConfiguracion cec With(NoLock) on ( cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId and cec.ISA8 = edi.scacSender )
                     Where cep.ClienteEdiPedidoId = {ClienteEdiPedidoId}
+                    Order by edi.dateIssue asc
                 ";
 
                 List<Edi824> Edi824 = connection.Query<Edi824>(query).ToList();
