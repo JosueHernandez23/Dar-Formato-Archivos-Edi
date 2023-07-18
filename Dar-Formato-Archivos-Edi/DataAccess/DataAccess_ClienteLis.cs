@@ -128,7 +128,12 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
 		                    mu.mctNumber,
                             fecha_real_viaje,
                             fecha_real_fin_viaje,
-                            status_viaje
+                            CASE WHEN status_viaje = 'A' THEN '(' + status_viaje + ') - Pendiente'
+			                     WHEN status_viaje = 'C' THEN '(' + status_viaje + ') - Liquidado'
+			                     WHEN status_viaje = 'R' THEN '(' + status_viaje + ') - Realizado'
+			                     WHEN status_viaje = 'B' THEN '(' + status_viaje + ') - Cancelado'
+			                     WHEN status_viaje = 'T' THEN '(' + status_viaje + ') - Transito'
+		                    ELSE status_viaje END AS status_viaje
                      from	trafico_viaje tv With(NoLock) 
 		                    INNER JOIN mtto_unidades mu With(NoLock) ON tv.id_unidad = mu.id_unidad
                      where	tv.no_viaje = {no_viaje}

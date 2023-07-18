@@ -36,7 +36,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                     from	ClienteEdiPedido cep With(NoLock)
 	                        INNER JOIN ClienteEdiEstatus cee With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
 		                    INNER JOIN ClienteEdiConfiguracion cec With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
-                    where	cep.ClienteEdiPedidoId = {ClienteEdiPedidoId} or cep.Shipment = CONVERT(varchar(10),{ClienteEdiPedidoId}) and cep.ClienteEdiEstatusId not in (2,6) and cep.ClienteEdiEstatusId in (3,4,5,7)
+                    where	cep.ClienteEdiPedidoId = {ClienteEdiPedidoId} and cep.ClienteEdiEstatusId in (2,3,4,5,7)
                 ";
 
                 //string query = @"
@@ -321,7 +321,34 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             }
         }
 
+        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(int Shipment)
+        {
+            SqlCnx con = new SqlCnx();
+            using (var connection = new SqlConnection(con.connectionString))
+            {
+                connection.Open();
 
+                var query = $@"
+                    select	
+		                    cep.ClienteEdiPedidoId ClienteEdiPedidoId,
+                            cep.ClienteEdiEstatusId EstatusId,
+		                    cee.NombreClienteEdiEstatus Estatus,
+		                    cep.CodeSCAC SCAC,
+		                    cep.Shipment Shipment,
+		                    cep.FechaIngreso FechaIngreso,
+                            LOWER(cec.SQL_DB) SQL_DB
+                    from	ClienteEdiPedido cep With(NoLock)
+	                        INNER JOIN ClienteEdiEstatus cee With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
+		                    INNER JOIN ClienteEdiConfiguracion cec With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
+                    where	cep.Shipment = '{Shipment}' and cep.ClienteEdiEstatusId in (2,3,4,7)
+                ";
+
+                List<ClienteEdiPedido> ClienteEdiPedido = connection.Query<ClienteEdiPedido>(query).ToList();
+                connection.Close();
+
+                return ClienteEdiPedido;
+            }
+        }
 
     }
 }

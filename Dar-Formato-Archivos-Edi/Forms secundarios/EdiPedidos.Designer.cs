@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EdiPedidos));
-            this.lblClienteEdiPedidoId = new System.Windows.Forms.Label();
             this.txtClienteEdiPedidoId = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.lblEventosReportados = new System.Windows.Forms.Label();
@@ -52,26 +51,18 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtSiteIDDestAlt = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtTipoSitioDestAlt = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.txtNombreSitioRemAlt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtSiteIDRemAlt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtTipoSitioRemAlt = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtNombreSitioDest = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtSiteIDDest = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtTipoSitioDest = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.txtNombreSitioRem = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSiteIDRem = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtTipoSitioRem = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblClientesAlt = new System.Windows.Forms.Label();
             this.txtDestinatarioAlt = new System.Windows.Forms.TextBox();
             this.txtDestinatario = new System.Windows.Forms.TextBox();
@@ -96,6 +87,8 @@
             this.lblEstatus = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lbl824 = new System.Windows.Forms.Label();
+            this.lbl997 = new System.Windows.Forms.Label();
             this.txtFechaFinViaje = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.txtFechaInicioViaje = new System.Windows.Forms.TextBox();
@@ -110,8 +103,9 @@
             this.kdtGrid_EventosReportados = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.Seguimiento_Viaje = new System.Windows.Forms.GroupBox();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.lbl997 = new System.Windows.Forms.Label();
-            this.lbl824 = new System.Windows.Forms.Label();
+            this.rbtnArchivoId = new System.Windows.Forms.RadioButton();
+            this.rbtnShipment = new System.Windows.Forms.RadioButton();
+            this.label21 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).BeginInit();
@@ -124,22 +118,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // lblClienteEdiPedidoId
-            // 
-            this.lblClienteEdiPedidoId.AutoSize = true;
-            this.lblClienteEdiPedidoId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClienteEdiPedidoId.Location = new System.Drawing.Point(12, 9);
-            this.lblClienteEdiPedidoId.Name = "lblClienteEdiPedidoId";
-            this.lblClienteEdiPedidoId.Size = new System.Drawing.Size(123, 16);
-            this.lblClienteEdiPedidoId.TabIndex = 0;
-            this.lblClienteEdiPedidoId.Text = "ClienteEdiPedidoId";
-            // 
             // txtClienteEdiPedidoId
             // 
             this.txtClienteEdiPedidoId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClienteEdiPedidoId.Location = new System.Drawing.Point(12, 28);
+            this.txtClienteEdiPedidoId.Location = new System.Drawing.Point(96, 21);
             this.txtClienteEdiPedidoId.Name = "txtClienteEdiPedidoId";
-            this.txtClienteEdiPedidoId.Size = new System.Drawing.Size(120, 22);
+            this.txtClienteEdiPedidoId.Size = new System.Drawing.Size(84, 22);
             this.txtClienteEdiPedidoId.TabIndex = 1;
             this.txtClienteEdiPedidoId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -150,9 +134,9 @@
             this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(12, 56);
+            this.btnBuscar.Location = new System.Drawing.Point(12, 76);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(120, 24);
+            this.btnBuscar.Size = new System.Drawing.Size(168, 24);
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
@@ -202,26 +186,18 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtSiteIDDestAlt);
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.txtTipoSitioDestAlt);
-            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.txtNombreSitioRemAlt);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtSiteIDRemAlt);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.txtTipoSitioRemAlt);
-            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtNombreSitioDest);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtSiteIDDest);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.txtTipoSitioDest);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtNombreSitioRem);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtSiteIDRem);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtTipoSitioRem);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lblClientesAlt);
             this.groupBox1.Controls.Add(this.txtDestinatarioAlt);
             this.groupBox1.Controls.Add(this.txtDestinatario);
@@ -232,9 +208,9 @@
             this.groupBox1.Controls.Add(this.lblRemitenteAlt);
             this.groupBox1.Controls.Add(this.lblRemitente);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 107);
+            this.groupBox1.Location = new System.Drawing.Point(12, 115);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1065, 474);
+            this.groupBox1.Size = new System.Drawing.Size(1039, 406);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion de la relacion";
@@ -243,7 +219,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(739, 331);
+            this.label14.Location = new System.Drawing.Point(743, 288);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(111, 16);
             this.label14.TabIndex = 9;
@@ -259,11 +235,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kdtGrid_PedidoDireccion.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.kdtGrid_PedidoDireccion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kdtGrid_PedidoDireccion.Location = new System.Drawing.Point(517, 351);
+            this.kdtGrid_PedidoDireccion.Location = new System.Drawing.Point(521, 308);
             this.kdtGrid_PedidoDireccion.Name = "kdtGrid_PedidoDireccion";
             this.kdtGrid_PedidoDireccion.ReadOnly = true;
             this.kdtGrid_PedidoDireccion.RowHeadersVisible = false;
-            this.kdtGrid_PedidoDireccion.Size = new System.Drawing.Size(536, 111);
+            this.kdtGrid_PedidoDireccion.Size = new System.Drawing.Size(510, 88);
             this.kdtGrid_PedidoDireccion.TabIndex = 55;
             // 
             // kdgvEventosReportadosAppMobil
@@ -275,11 +251,11 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.kdgvEventosReportadosAppMobil.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.kdgvEventosReportadosAppMobil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kdgvEventosReportadosAppMobil.Location = new System.Drawing.Point(6, 351);
+            this.kdgvEventosReportadosAppMobil.Location = new System.Drawing.Point(10, 308);
             this.kdgvEventosReportadosAppMobil.Name = "kdgvEventosReportadosAppMobil";
             this.kdgvEventosReportadosAppMobil.ReadOnly = true;
             this.kdgvEventosReportadosAppMobil.RowHeadersVisible = false;
-            this.kdgvEventosReportadosAppMobil.Size = new System.Drawing.Size(486, 111);
+            this.kdgvEventosReportadosAppMobil.Size = new System.Drawing.Size(486, 88);
             this.kdgvEventosReportadosAppMobil.TabIndex = 56;
             // 
             // label24
@@ -339,7 +315,7 @@
             // txtSitioDestAltDesc
             // 
             this.txtSitioDestAltDesc.Enabled = false;
-            this.txtSitioDestAltDesc.Location = new System.Drawing.Point(671, 271);
+            this.txtSitioDestAltDesc.Location = new System.Drawing.Point(671, 250);
             this.txtSitioDestAltDesc.Name = "txtSitioDestAltDesc";
             this.txtSitioDestAltDesc.Size = new System.Drawing.Size(333, 23);
             this.txtSitioDestAltDesc.TabIndex = 46;
@@ -347,7 +323,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(538, 274);
+            this.label16.Location = new System.Drawing.Point(538, 253);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(90, 17);
             this.label16.TabIndex = 45;
@@ -356,7 +332,7 @@
             // txtSitioRemAltDesc
             // 
             this.txtSitioRemAltDesc.Enabled = false;
-            this.txtSitioRemAltDesc.Location = new System.Drawing.Point(126, 274);
+            this.txtSitioRemAltDesc.Location = new System.Drawing.Point(126, 250);
             this.txtSitioRemAltDesc.Name = "txtSitioRemAltDesc";
             this.txtSitioRemAltDesc.Size = new System.Drawing.Size(341, 23);
             this.txtSitioRemAltDesc.TabIndex = 44;
@@ -364,7 +340,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(13, 274);
+            this.label15.Location = new System.Drawing.Point(13, 250);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(90, 17);
             this.label15.TabIndex = 43;
@@ -373,7 +349,7 @@
             // txtNombreSitioDestAlt
             // 
             this.txtNombreSitioDestAlt.Enabled = false;
-            this.txtNombreSitioDestAlt.Location = new System.Drawing.Point(671, 213);
+            this.txtNombreSitioDestAlt.Location = new System.Drawing.Point(671, 192);
             this.txtNombreSitioDestAlt.Name = "txtNombreSitioDestAlt";
             this.txtNombreSitioDestAlt.Size = new System.Drawing.Size(333, 23);
             this.txtNombreSitioDestAlt.TabIndex = 42;
@@ -381,7 +357,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(537, 213);
+            this.label11.Location = new System.Drawing.Point(537, 192);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(66, 17);
             this.label11.TabIndex = 41;
@@ -390,7 +366,7 @@
             // txtSiteIDDestAlt
             // 
             this.txtSiteIDDestAlt.Enabled = false;
-            this.txtSiteIDDestAlt.Location = new System.Drawing.Point(671, 242);
+            this.txtSiteIDDestAlt.Location = new System.Drawing.Point(671, 221);
             this.txtSiteIDDestAlt.Name = "txtSiteIDDestAlt";
             this.txtSiteIDDestAlt.Size = new System.Drawing.Size(333, 23);
             this.txtSiteIDDestAlt.TabIndex = 40;
@@ -398,33 +374,16 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(537, 245);
+            this.label12.Location = new System.Drawing.Point(537, 224);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(53, 17);
             this.label12.TabIndex = 39;
             this.label12.Text = "SiteID: ";
             // 
-            // txtTipoSitioDestAlt
-            // 
-            this.txtTipoSitioDestAlt.Enabled = false;
-            this.txtTipoSitioDestAlt.Location = new System.Drawing.Point(670, 300);
-            this.txtTipoSitioDestAlt.Name = "txtTipoSitioDestAlt";
-            this.txtTipoSitioDestAlt.Size = new System.Drawing.Size(49, 23);
-            this.txtTipoSitioDestAlt.TabIndex = 38;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(536, 303);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(71, 17);
-            this.label13.TabIndex = 37;
-            this.label13.Text = "Tipo Sitio:";
-            // 
             // txtNombreSitioRemAlt
             // 
             this.txtNombreSitioRemAlt.Enabled = false;
-            this.txtNombreSitioRemAlt.Location = new System.Drawing.Point(126, 216);
+            this.txtNombreSitioRemAlt.Location = new System.Drawing.Point(126, 192);
             this.txtNombreSitioRemAlt.Name = "txtNombreSitioRemAlt";
             this.txtNombreSitioRemAlt.Size = new System.Drawing.Size(341, 23);
             this.txtNombreSitioRemAlt.TabIndex = 36;
@@ -432,7 +391,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 219);
+            this.label8.Location = new System.Drawing.Point(13, 195);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 17);
             this.label8.TabIndex = 35;
@@ -441,7 +400,7 @@
             // txtSiteIDRemAlt
             // 
             this.txtSiteIDRemAlt.Enabled = false;
-            this.txtSiteIDRemAlt.Location = new System.Drawing.Point(126, 245);
+            this.txtSiteIDRemAlt.Location = new System.Drawing.Point(126, 221);
             this.txtSiteIDRemAlt.Name = "txtSiteIDRemAlt";
             this.txtSiteIDRemAlt.Size = new System.Drawing.Size(341, 23);
             this.txtSiteIDRemAlt.TabIndex = 34;
@@ -449,28 +408,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 245);
+            this.label9.Location = new System.Drawing.Point(13, 221);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 17);
             this.label9.TabIndex = 33;
             this.label9.Text = "SiteID: ";
-            // 
-            // txtTipoSitioRemAlt
-            // 
-            this.txtTipoSitioRemAlt.Enabled = false;
-            this.txtTipoSitioRemAlt.Location = new System.Drawing.Point(126, 303);
-            this.txtTipoSitioRemAlt.Name = "txtTipoSitioRemAlt";
-            this.txtTipoSitioRemAlt.Size = new System.Drawing.Size(49, 23);
-            this.txtTipoSitioRemAlt.TabIndex = 32;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 306);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 17);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "Tipo Sitio:";
             // 
             // txtNombreSitioDest
             // 
@@ -506,23 +448,6 @@
             this.label6.TabIndex = 27;
             this.label6.Text = "SiteID: ";
             // 
-            // txtTipoSitioDest
-            // 
-            this.txtTipoSitioDest.Enabled = false;
-            this.txtTipoSitioDest.Location = new System.Drawing.Point(671, 157);
-            this.txtTipoSitioDest.Name = "txtTipoSitioDest";
-            this.txtTipoSitioDest.Size = new System.Drawing.Size(49, 23);
-            this.txtTipoSitioDest.TabIndex = 26;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(536, 160);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 17);
-            this.label7.TabIndex = 25;
-            this.label7.Text = "Tipo Sitio:";
-            // 
             // txtNombreSitioRem
             // 
             this.txtNombreSitioRem.Enabled = false;
@@ -557,27 +482,10 @@
             this.label3.TabIndex = 21;
             this.label3.Text = "SiteID: ";
             // 
-            // txtTipoSitioRem
-            // 
-            this.txtTipoSitioRem.Enabled = false;
-            this.txtTipoSitioRem.Location = new System.Drawing.Point(126, 158);
-            this.txtTipoSitioRem.Name = "txtTipoSitioRem";
-            this.txtTipoSitioRem.Size = new System.Drawing.Size(49, 23);
-            this.txtTipoSitioRem.TabIndex = 20;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 161);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 17);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Tipo Sitio:";
-            // 
             // lblClientesAlt
             // 
             this.lblClientesAlt.AutoSize = true;
-            this.lblClientesAlt.Location = new System.Drawing.Point(134, 331);
+            this.lblClientesAlt.Location = new System.Drawing.Point(138, 288);
             this.lblClientesAlt.Name = "lblClientesAlt";
             this.lblClientesAlt.Size = new System.Drawing.Size(229, 17);
             this.lblClientesAlt.TabIndex = 18;
@@ -586,7 +494,7 @@
             // txtDestinatarioAlt
             // 
             this.txtDestinatarioAlt.Enabled = false;
-            this.txtDestinatarioAlt.Location = new System.Drawing.Point(670, 184);
+            this.txtDestinatarioAlt.Location = new System.Drawing.Point(670, 163);
             this.txtDestinatarioAlt.Name = "txtDestinatarioAlt";
             this.txtDestinatarioAlt.Size = new System.Drawing.Size(333, 23);
             this.txtDestinatarioAlt.TabIndex = 16;
@@ -610,7 +518,7 @@
             // txtRemitenteAlt
             // 
             this.txtRemitenteAlt.Enabled = false;
-            this.txtRemitenteAlt.Location = new System.Drawing.Point(126, 187);
+            this.txtRemitenteAlt.Location = new System.Drawing.Point(126, 163);
             this.txtRemitenteAlt.Name = "txtRemitenteAlt";
             this.txtRemitenteAlt.Size = new System.Drawing.Size(341, 23);
             this.txtRemitenteAlt.TabIndex = 9;
@@ -618,7 +526,7 @@
             // lblDestinatarioAlt
             // 
             this.lblDestinatarioAlt.AutoSize = true;
-            this.lblDestinatarioAlt.Location = new System.Drawing.Point(536, 187);
+            this.lblDestinatarioAlt.Location = new System.Drawing.Point(536, 166);
             this.lblDestinatarioAlt.Name = "lblDestinatarioAlt";
             this.lblDestinatarioAlt.Size = new System.Drawing.Size(108, 17);
             this.lblDestinatarioAlt.TabIndex = 6;
@@ -636,7 +544,7 @@
             // lblRemitenteAlt
             // 
             this.lblRemitenteAlt.AutoSize = true;
-            this.lblRemitenteAlt.Location = new System.Drawing.Point(13, 190);
+            this.lblRemitenteAlt.Location = new System.Drawing.Point(13, 166);
             this.lblRemitenteAlt.Name = "lblRemitenteAlt";
             this.lblRemitenteAlt.Size = new System.Drawing.Size(96, 17);
             this.lblRemitenteAlt.TabIndex = 2;
@@ -654,15 +562,15 @@
             // txtSatelite
             // 
             this.txtSatelite.Enabled = false;
-            this.txtSatelite.Location = new System.Drawing.Point(309, 61);
+            this.txtSatelite.Location = new System.Drawing.Point(257, 61);
             this.txtSatelite.Name = "txtSatelite";
-            this.txtSatelite.Size = new System.Drawing.Size(133, 23);
+            this.txtSatelite.Size = new System.Drawing.Size(111, 23);
             this.txtSatelite.TabIndex = 15;
             // 
             // lblSatelite
             // 
             this.lblSatelite.AutoSize = true;
-            this.lblSatelite.Location = new System.Drawing.Point(244, 64);
+            this.lblSatelite.Location = new System.Drawing.Point(192, 64);
             this.lblSatelite.Name = "lblSatelite";
             this.lblSatelite.Size = new System.Drawing.Size(59, 17);
             this.lblSatelite.TabIndex = 14;
@@ -671,15 +579,15 @@
             // txtUnidad
             // 
             this.txtUnidad.Enabled = false;
-            this.txtUnidad.Location = new System.Drawing.Point(309, 30);
+            this.txtUnidad.Location = new System.Drawing.Point(257, 30);
             this.txtUnidad.Name = "txtUnidad";
-            this.txtUnidad.Size = new System.Drawing.Size(133, 23);
+            this.txtUnidad.Size = new System.Drawing.Size(111, 23);
             this.txtUnidad.TabIndex = 13;
             // 
             // lblUnidad
             // 
             this.lblUnidad.AutoSize = true;
-            this.lblUnidad.Location = new System.Drawing.Point(242, 33);
+            this.lblUnidad.Location = new System.Drawing.Point(190, 33);
             this.lblUnidad.Name = "lblUnidad";
             this.lblUnidad.Size = new System.Drawing.Size(61, 17);
             this.lblUnidad.TabIndex = 12;
@@ -696,9 +604,9 @@
             this.groupBox2.Controls.Add(this.txtEstatus);
             this.groupBox2.Controls.Add(this.lblEstatus);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(149, 3);
+            this.groupBox2.Location = new System.Drawing.Point(194, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(486, 98);
+            this.groupBox2.Size = new System.Drawing.Size(483, 98);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Info. Edi";
@@ -706,15 +614,15 @@
             // txtShipment
             // 
             this.txtShipment.Enabled = false;
-            this.txtShipment.Location = new System.Drawing.Point(342, 62);
+            this.txtShipment.Location = new System.Drawing.Point(346, 62);
             this.txtShipment.Name = "txtShipment";
-            this.txtShipment.Size = new System.Drawing.Size(128, 23);
+            this.txtShipment.Size = new System.Drawing.Size(116, 23);
             this.txtShipment.TabIndex = 16;
             // 
             // lblShipment
             // 
             this.lblShipment.AutoSize = true;
-            this.lblShipment.Location = new System.Drawing.Point(257, 65);
+            this.lblShipment.Location = new System.Drawing.Point(261, 65);
             this.lblShipment.Name = "lblShipment";
             this.lblShipment.Size = new System.Drawing.Size(71, 17);
             this.lblShipment.TabIndex = 15;
@@ -725,12 +633,13 @@
             this.txtFechaIngreso.Enabled = false;
             this.txtFechaIngreso.Location = new System.Drawing.Point(114, 61);
             this.txtFechaIngreso.Name = "txtFechaIngreso";
-            this.txtFechaIngreso.Size = new System.Drawing.Size(128, 23);
+            this.txtFechaIngreso.Size = new System.Drawing.Size(136, 23);
             this.txtFechaIngreso.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(6, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(102, 17);
@@ -740,15 +649,15 @@
             // txtSCAC
             // 
             this.txtSCAC.Enabled = false;
-            this.txtSCAC.Location = new System.Drawing.Point(342, 30);
+            this.txtSCAC.Location = new System.Drawing.Point(346, 30);
             this.txtSCAC.Name = "txtSCAC";
-            this.txtSCAC.Size = new System.Drawing.Size(128, 23);
+            this.txtSCAC.Size = new System.Drawing.Size(116, 23);
             this.txtSCAC.TabIndex = 12;
             // 
             // lblSCAC
             // 
             this.lblSCAC.AutoSize = true;
-            this.lblSCAC.Location = new System.Drawing.Point(257, 33);
+            this.lblSCAC.Location = new System.Drawing.Point(261, 33);
             this.lblSCAC.Name = "lblSCAC";
             this.lblSCAC.Size = new System.Drawing.Size(48, 17);
             this.lblSCAC.TabIndex = 11;
@@ -759,7 +668,7 @@
             this.txtEstatus.Enabled = false;
             this.txtEstatus.Location = new System.Drawing.Point(114, 30);
             this.txtEstatus.Name = "txtEstatus";
-            this.txtEstatus.Size = new System.Drawing.Size(128, 23);
+            this.txtEstatus.Size = new System.Drawing.Size(136, 23);
             this.txtEstatus.TabIndex = 10;
             // 
             // lblEstatus
@@ -803,25 +712,46 @@
             this.groupBox3.Controls.Add(this.lblSatelite);
             this.groupBox3.Controls.Add(this.txtSatelite);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(645, 3);
+            this.groupBox3.Location = new System.Drawing.Point(683, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(836, 98);
+            this.groupBox3.Size = new System.Drawing.Size(798, 98);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Info. Edi";
             // 
+            // lbl824
+            // 
+            this.lbl824.AutoSize = true;
+            this.lbl824.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl824.Location = new System.Drawing.Point(601, 34);
+            this.lbl824.Name = "lbl824";
+            this.lbl824.Size = new System.Drawing.Size(39, 20);
+            this.lbl824.TabIndex = 62;
+            this.lbl824.Text = "824";
+            this.lbl824.Click += new System.EventHandler(this.lbl824_Click);
+            // 
+            // lbl997
+            // 
+            this.lbl997.AutoSize = true;
+            this.lbl997.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl997.Location = new System.Drawing.Point(601, 65);
+            this.lbl997.Name = "lbl997";
+            this.lbl997.Size = new System.Drawing.Size(39, 20);
+            this.lbl997.TabIndex = 61;
+            this.lbl997.Text = "997";
+            // 
             // txtFechaFinViaje
             // 
             this.txtFechaFinViaje.Enabled = false;
-            this.txtFechaFinViaje.Location = new System.Drawing.Point(545, 62);
+            this.txtFechaFinViaje.Location = new System.Drawing.Point(467, 62);
             this.txtFechaFinViaje.Name = "txtFechaFinViaje";
-            this.txtFechaFinViaje.Size = new System.Drawing.Size(133, 23);
+            this.txtFechaFinViaje.Size = new System.Drawing.Size(124, 23);
             this.txtFechaFinViaje.TabIndex = 60;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(462, 64);
+            this.label20.Location = new System.Drawing.Point(384, 64);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(64, 17);
             this.label20.TabIndex = 59;
@@ -830,15 +760,15 @@
             // txtFechaInicioViaje
             // 
             this.txtFechaInicioViaje.Enabled = false;
-            this.txtFechaInicioViaje.Location = new System.Drawing.Point(545, 31);
+            this.txtFechaInicioViaje.Location = new System.Drawing.Point(467, 31);
             this.txtFechaInicioViaje.Name = "txtFechaInicioViaje";
-            this.txtFechaInicioViaje.Size = new System.Drawing.Size(133, 23);
+            this.txtFechaInicioViaje.Size = new System.Drawing.Size(124, 23);
             this.txtFechaInicioViaje.TabIndex = 58;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(462, 35);
+            this.label19.Location = new System.Drawing.Point(384, 35);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(77, 17);
             this.label19.TabIndex = 57;
@@ -846,15 +776,15 @@
             // 
             // txtViaje
             // 
-            this.txtViaje.Location = new System.Drawing.Point(84, 62);
+            this.txtViaje.Location = new System.Drawing.Point(65, 62);
             this.txtViaje.Name = "txtViaje";
-            this.txtViaje.Size = new System.Drawing.Size(133, 23);
+            this.txtViaje.Size = new System.Drawing.Size(111, 23);
             this.txtViaje.TabIndex = 15;
             // 
             // lblViaje
             // 
             this.lblViaje.AutoSize = true;
-            this.lblViaje.Location = new System.Drawing.Point(25, 65);
+            this.lblViaje.Location = new System.Drawing.Point(6, 65);
             this.lblViaje.Name = "lblViaje";
             this.lblViaje.Size = new System.Drawing.Size(43, 17);
             this.lblViaje.TabIndex = 14;
@@ -862,15 +792,15 @@
             // 
             // txtPedido
             // 
-            this.txtPedido.Location = new System.Drawing.Point(84, 30);
+            this.txtPedido.Location = new System.Drawing.Point(65, 30);
             this.txtPedido.Name = "txtPedido";
-            this.txtPedido.Size = new System.Drawing.Size(133, 23);
+            this.txtPedido.Size = new System.Drawing.Size(111, 23);
             this.txtPedido.TabIndex = 13;
             // 
             // lblPedido
             // 
             this.lblPedido.AutoSize = true;
-            this.lblPedido.Location = new System.Drawing.Point(25, 33);
+            this.lblPedido.Location = new System.Drawing.Point(6, 33);
             this.lblPedido.Name = "lblPedido";
             this.lblPedido.Size = new System.Drawing.Size(60, 17);
             this.lblPedido.TabIndex = 12;
@@ -880,9 +810,9 @@
             // 
             this.txtEstatusViaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEstatusViaje.Enabled = false;
-            this.txtEstatusViaje.Location = new System.Drawing.Point(364, 12);
+            this.txtEstatusViaje.Location = new System.Drawing.Point(280, 12);
             this.txtEstatusViaje.Name = "txtEstatusViaje";
-            this.txtEstatusViaje.Size = new System.Drawing.Size(28, 20);
+            this.txtEstatusViaje.Size = new System.Drawing.Size(138, 20);
             this.txtEstatusViaje.TabIndex = 62;
             this.txtEstatusViaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -894,9 +824,9 @@
             this.groupBox4.Controls.Add(this.kdtGrid_EventosReportados);
             this.groupBox4.Controls.Add(this.lblEventosReportados);
             this.groupBox4.Controls.Add(this.lblSeguimiento);
-            this.groupBox4.Location = new System.Drawing.Point(12, 587);
+            this.groupBox4.Location = new System.Drawing.Point(12, 521);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1065, 207);
+            this.groupBox4.Size = new System.Drawing.Size(1039, 338);
             this.groupBox4.TabIndex = 44;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "groupBox4";
@@ -915,7 +845,7 @@
             this.kdtGrid_EstatusSeguimiento.Name = "kdtGrid_EstatusSeguimiento";
             this.kdtGrid_EstatusSeguimiento.ReadOnly = true;
             this.kdtGrid_EstatusSeguimiento.RowHeadersVisible = false;
-            this.kdtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(542, 166);
+            this.kdtGrid_EstatusSeguimiento.Size = new System.Drawing.Size(516, 297);
             this.kdtGrid_EstatusSeguimiento.TabIndex = 8;
             // 
             // kdtGrid_EventosReportados
@@ -931,7 +861,7 @@
             this.kdtGrid_EventosReportados.Name = "kdtGrid_EventosReportados";
             this.kdtGrid_EventosReportados.ReadOnly = true;
             this.kdtGrid_EventosReportados.RowHeadersVisible = false;
-            this.kdtGrid_EventosReportados.Size = new System.Drawing.Size(481, 166);
+            this.kdtGrid_EventosReportados.Size = new System.Drawing.Size(481, 297);
             this.kdtGrid_EventosReportados.TabIndex = 7;
             this.kdtGrid_EventosReportados.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_EventosReportados_CellDoubleClick);
             // 
@@ -943,9 +873,9 @@
             this.Seguimiento_Viaje.Controls.Add(this.txtEstatusViaje);
             this.Seguimiento_Viaje.Controls.Add(this.kryptonDataGridView1);
             this.Seguimiento_Viaje.Controls.Add(this.label22);
-            this.Seguimiento_Viaje.Location = new System.Drawing.Point(1083, 111);
+            this.Seguimiento_Viaje.Location = new System.Drawing.Point(1057, 119);
             this.Seguimiento_Viaje.Name = "Seguimiento_Viaje";
-            this.Seguimiento_Viaje.Size = new System.Drawing.Size(398, 683);
+            this.Seguimiento_Viaje.Size = new System.Drawing.Size(424, 740);
             this.Seguimiento_Viaje.TabIndex = 45;
             this.Seguimiento_Viaje.TabStop = false;
             this.Seguimiento_Viaje.Text = "groupBox5";
@@ -964,29 +894,42 @@
             this.kryptonDataGridView1.Name = "kryptonDataGridView1";
             this.kryptonDataGridView1.ReadOnly = true;
             this.kryptonDataGridView1.RowHeadersVisible = false;
-            this.kryptonDataGridView1.Size = new System.Drawing.Size(386, 642);
+            this.kryptonDataGridView1.Size = new System.Drawing.Size(412, 699);
             this.kryptonDataGridView1.TabIndex = 46;
             // 
-            // lbl997
+            // rbtnArchivoId
             // 
-            this.lbl997.AutoSize = true;
-            this.lbl997.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl997.Location = new System.Drawing.Point(697, 65);
-            this.lbl997.Name = "lbl997";
-            this.lbl997.Size = new System.Drawing.Size(39, 20);
-            this.lbl997.TabIndex = 61;
-            this.lbl997.Text = "997";
+            this.rbtnArchivoId.AutoSize = true;
+            this.rbtnArchivoId.Checked = true;
+            this.rbtnArchivoId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnArchivoId.Location = new System.Drawing.Point(12, 49);
+            this.rbtnArchivoId.Name = "rbtnArchivoId";
+            this.rbtnArchivoId.Size = new System.Drawing.Size(81, 20);
+            this.rbtnArchivoId.TabIndex = 46;
+            this.rbtnArchivoId.TabStop = true;
+            this.rbtnArchivoId.Text = "ArchivoId";
+            this.rbtnArchivoId.UseVisualStyleBackColor = true;
             // 
-            // lbl824
+            // rbtnShipment
             // 
-            this.lbl824.AutoSize = true;
-            this.lbl824.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl824.Location = new System.Drawing.Point(697, 34);
-            this.lbl824.Name = "lbl824";
-            this.lbl824.Size = new System.Drawing.Size(39, 20);
-            this.lbl824.TabIndex = 62;
-            this.lbl824.Text = "824";
-            this.lbl824.Click += new System.EventHandler(this.lbl824_Click);
+            this.rbtnShipment.AutoSize = true;
+            this.rbtnShipment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnShipment.Location = new System.Drawing.Point(99, 49);
+            this.rbtnShipment.Name = "rbtnShipment";
+            this.rbtnShipment.Size = new System.Drawing.Size(81, 20);
+            this.rbtnShipment.TabIndex = 47;
+            this.rbtnShipment.Text = "Shipment";
+            this.rbtnShipment.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(9, 24);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(81, 16);
+            this.label21.TabIndex = 48;
+            this.label21.Text = "Busqueda:";
             // 
             // EdiPedidos
             // 
@@ -994,15 +937,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1493, 806);
+            this.ClientSize = new System.Drawing.Size(1493, 863);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.rbtnShipment);
+            this.Controls.Add(this.rbtnArchivoId);
             this.Controls.Add(this.Seguimiento_Viaje);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtClienteEdiPedidoId);
-            this.Controls.Add(this.lblClienteEdiPedidoId);
+            this.Controls.Add(this.btnBuscar);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EdiPedidos";
@@ -1029,8 +975,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblClienteEdiPedidoId;
         private System.Windows.Forms.TextBox txtClienteEdiPedidoId;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label lblEventosReportados;
@@ -1062,26 +1006,18 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtSiteIDDestAlt;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtTipoSitioDestAlt;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtNombreSitioRemAlt;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtSiteIDRemAlt;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtTipoSitioRemAlt;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtNombreSitioDest;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSiteIDDest;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtTipoSitioDest;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtNombreSitioRem;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtSiteIDRem;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtTipoSitioRem;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtSitioDestDesc;
         private System.Windows.Forms.Label label18;
@@ -1113,5 +1049,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kdtGrid_EstatusSeguimiento;
         private System.Windows.Forms.Label lbl824;
         private System.Windows.Forms.Label lbl997;
+        private System.Windows.Forms.RadioButton rbtnArchivoId;
+        private System.Windows.Forms.RadioButton rbtnShipment;
+        private System.Windows.Forms.Label label21;
     }
 }

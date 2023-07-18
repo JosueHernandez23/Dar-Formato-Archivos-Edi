@@ -51,7 +51,43 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             {
                 limpiar();
                 // Llenar textbox con informacion de Estatus Edi
-                int ClienteEdiPedidoId = Convert.ToInt32(txtClienteEdiPedidoId.Text);
+                //int ClienteEdiPedidoId = Convert.ToInt32(txtClienteEdiPedidoId.Text);
+                int ClienteEdiPedidoId;
+                var isNumber = int.TryParse(txtClienteEdiPedidoId.Text, out ClienteEdiPedidoId);
+
+                if (!isNumber)
+                {
+                    MessageBox.Show("Numero no valido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtClienteEdiPedidoId.Clear();
+                    return;
+                }
+
+                if (rbtnShipment.Checked)
+                {
+                    // Obtener ClienteEdiPedidoId a traves del shipment
+                    var List_ClienteEdiPedido = GetClienteEdiPedidoShipment(ClienteEdiPedidoId);
+                    
+                    if (!List_ClienteEdiPedido.Any())
+                    {
+                        MessageBox.Show("No se encontro el shipment: " + ClienteEdiPedidoId.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (List_ClienteEdiPedido.Count > 1)
+                    {
+                        string shipmentEdi = string.Empty;
+                        List_ClienteEdiPedido.ForEach(item =>
+                        {
+                            shipmentEdi += string.Format("\n Shipment: {0} - ArchivoId: {1} ", item.Shipment, item.ClienteEdiPedidoId);
+                        });
+
+                        MessageBox.Show("Se encontro mas de un shipment, ingresar ArchivoId para realizar su busqueda: \n" + shipmentEdi, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
+                    ClienteEdiPedidoId = List_ClienteEdiPedido.First().ClienteEdiPedidoId;
+                }
+
                 //int Viaje = Convert.ToInt32(txtViaje);
                 ClienteEdiPedido cep = SetClienteEdiEstatus(ClienteEdiPedidoId);
 
@@ -85,7 +121,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             txtEstatus.Text = clienteEdiPedido.EstatusId.ToString() + " - " + clienteEdiPedido.Estatus;
             txtSCAC.Text = clienteEdiPedido.SCAC;
-            txtFechaIngreso.Text = clienteEdiPedido.FechaIngreso.ToString();
+            txtFechaIngreso.Text = clienteEdiPedido.FechaIngreso.ToString("dd/MM/yyyy HH:mm:ss");
             txtShipment.Text = clienteEdiPedido.Shipment;
 
             return clienteEdiPedido;
@@ -111,12 +147,18 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (pedidoRelacionado.id_pedido > 0 && pedidoRelacionado.no_viaje == 0 && sqldb != "chdb_lis")
                 {
                     pedidoRelacionado = GetDesp_pedido_viaje(ClienteEdiPedidoId, sqldb);
+
+                    if (pedidoRelacionado.no_viaje == 0)
+                    {
+                        MessageBox.Show("El pedido no cuenta con viaje", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
 
                 pedidoRelacionado.ClienteEdiPedidoId = ClienteEdiPedidoId;
                 txtPedido.Text = pedidoRelacionado.id_pedido.ToString();
                 txtViaje.Text = pedidoRelacionado.no_viaje.ToString();
-                txtClienteEdiPedidoId.Text = pedidoRelacionado.ClienteEdiPedidoId.ToString();
+                //txtClienteEdiPedidoId.Text = pedidoRelacionado.ClienteEdiPedidoId.ToString(); // Se comento por que estaba reemplazando el valor cuando se buscaba por shipment
 
 
 
@@ -156,28 +198,28 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     {
                         case "Remitente":
                             txtRemitente.Text = item.id_cliente.ToString() + " - " + item.nombre_cliente;
-                            txtTipoSitioRem.Text = item.tipositio.ToString();
+                            //txtTipoSitioRem.Text = item.tipositio.ToString();
                             txtSiteIDRem.Text = item.siteID == null ? "" : item.siteID.ToString();
                             txtNombreSitioRem.Text = item.ubicacion == null ? "" : item.ubicacion.ToString();
                             txtSitioRemDesc.Text = item.descripcion;
                             break;
                         case "Remitente Ext":
                             txtRemitenteAlt.Text = item.id_cliente.ToString() + " - " + item.nombre_cliente;
-                            txtTipoSitioRemAlt.Text = item.tipositio.ToString();
+                            //txtTipoSitioRemAlt.Text = item.tipositio.ToString();
                             txtSiteIDRemAlt.Text = item.siteID == null ? "" : item.siteID.ToString();
                             txtNombreSitioRemAlt.Text = item.ubicacion == null ? "" : item.ubicacion.ToString();
                             txtSitioRemAltDesc.Text = item.descripcion;
                             break;
                         case "Destinatario":
                             txtDestinatario.Text = item.id_cliente.ToString() + " - " + item.nombre_cliente;
-                            txtTipoSitioDest.Text = item.tipositio.ToString();
+                            //txtTipoSitioDest.Text = item.tipositio.ToString();
                             txtSiteIDDest.Text = item.siteID == null ? "" : item.siteID.ToString();
                             txtNombreSitioDest.Text = item.ubicacion == null ? "" : item.ubicacion.ToString();
                             txtSitioDestDesc.Text = item.descripcion;
                             break;
                         case "Destinatario Ext":
                             txtDestinatarioAlt.Text = item.id_cliente.ToString() + " - " + item.nombre_cliente;
-                            txtTipoSitioDestAlt.Text = item.tipositio.ToString();
+                            //txtTipoSitioDestAlt.Text = item.tipositio.ToString();
                             txtSiteIDDestAlt.Text = item.siteID == null ? "" : item.siteID.ToString();
                             txtNombreSitioDestAlt.Text = item.ubicacion == null ? "" : item.ubicacion.ToString();
                             txtSitioDestAltDesc.Text = item.descripcion;
@@ -191,25 +233,34 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     unidad_Viaje cUnidad = GetUnidadSatelite(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
                     txtUnidad.Text = cUnidad.id_unidad;
                     txtSatelite.Text = cUnidad.mctNumber != null ? cUnidad.mctNumber : "";
-                    txtFechaInicioViaje.Text = cUnidad.fecha_real_viaje.ToString();
-                    txtFechaFinViaje.Text = cUnidad.fecha_real_fin_viaje.ToString();
+                    txtFechaInicioViaje.Text = cUnidad.fecha_real_viaje.ToString("dd/MM/yyyy HH:mm:ss");
+                    txtFechaFinViaje.Text = cUnidad.fecha_real_fin_viaje.ToString("dd/MM/yyyy HH:mm:ss");
                     txtEstatusViaje.Text = cUnidad.status_viaje;
 
                     //Llenado en DataGridView
                     List<posicion_unidad> posicion = GetPosicionUnidad(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
                     //dgvPosicionUnidad.DataSource = posicion;
-                    kryptonDataGridView1.DataSource = posicion;
+                    kryptonDataGridView1.DataSource = posicion.Select(vl => new
+                    {
+                        Ubicacion = vl.ubicacion,
+                        Evento = vl.EventTypeDescription,
+                        Posdate = vl.posdate.ToString("dd/MM/yyyy HH:mm:ss"),
+                        Origen = vl.Sistema_origen,
+                        Posdate_Inserto = vl.posdate_inserto.ToString("dd/MM/yyyy HH:mm:ss")
+                    }).ToList();
 
                     // Organizar el espacio de las celdas y columnas del grid de las posiciones de la unidad con el viaje
 
+                    // Sistema_origen
+                    kryptonDataGridView1.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                    // posdate_inserto
+                    kryptonDataGridView1.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.ColumnHeader);
                     //ubicacion
+                    kryptonDataGridView1.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                    //EventTypeDescription
                     kryptonDataGridView1.AutoResizeColumn(1, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
                     //posdate
                     kryptonDataGridView1.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
-                    // Sistema_origen
-                    kryptonDataGridView1.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
-                    // posdate_inserto
-                    kryptonDataGridView1.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
                 }
                 else
                 {
@@ -248,8 +299,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
                     ClienteEdiPedidoDireccionId = s.ClienteEdiPedidoDireccionId,
                     ClienteEdiTipoDireccion = s.TipoDireccionId + " - " + s.NombreClienteEdiTipoDireccion,
-                    FechaEntrada = s.FechaEntrada.ToString(),
-                    FechaSalida = s.FechaSalida.ToString(),
+                    FechaEntrada = s.FechaEntrada.ToString("dd/MM/yyyy HH:mm:ss"),
+                    FechaSalida = s.FechaSalida.ToString("dd/MM/yyyy HH:mm:ss"),
                     Nombre = s.Nombre,
                     Pais = s.Pais,
                     Estado = s.Estado,
@@ -383,6 +434,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         #region Get_Informacion
 
+        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(int Shipment)
+        {
+            DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
+
+            return dataAccess_ClienteEdiPedido.GetClienteEdiPedidoShipment(Shipment);
+        }
         public ClienteEdiPedido GetClienteEdiPedido(int ClienteEdiPedidoId)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
@@ -508,11 +565,15 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 {
                     foreach (Control subitem in item.Controls)
                     {
-                        if (subitem.AccessibilityObject.Role == AccessibleRole.Text && subitem.AccessibilityObject.Value == "")
+                        if (subitem.AccessibilityObject.Role == AccessibleRole.Text && string.IsNullOrEmpty(subitem.AccessibilityObject.Value))
                             subitem.BackColor = Color.Red;
 
                         // Validar que el cliente tenga una geocerca relacionada en lugar de un sitio
-                        if (subitem.Name.Contains("txtTipoSitio") && subitem.AccessibilityObject.Value == "1" || subitem.AccessibilityObject.Value == "0")
+                        //if (subitem.Name.Contains("txtTipoSitio") && subitem.AccessibilityObject.Value == "1" || subitem.AccessibilityObject.Value == "0")
+                        //    subitem.BackColor = Color.Red;
+
+                        // Valida que el campo de descripcion diga CLIENTE o El campo aparece vacio entonces marcara como error
+                        if (subitem.Name.Contains("txtSitio") && subitem.AccessibilityObject.Value != "CLIENTE")
                             subitem.BackColor = Color.Red;
                     }
                 }
