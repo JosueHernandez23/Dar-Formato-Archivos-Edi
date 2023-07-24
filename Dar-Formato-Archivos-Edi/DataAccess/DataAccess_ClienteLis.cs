@@ -22,7 +22,8 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
         public List<ClienteLis> GetClienteLis(List<ClienteLis> lista_cliente, string db)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            string conexion = db == "hgdb_lis" ? con.connectionString_Hg_Cloud : con.connectionString_Lis.Replace("@DB@", db);
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 
@@ -119,7 +120,8 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
         public unidad_Viaje GetUnidad(int no_viaje, string db)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            string conexion = db == "hgdb_lis" ? con.connectionString_Hg_Cloud : con.connectionString_Lis.Replace("@DB@", db);
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 
@@ -145,12 +147,12 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
             }
         }
 
-        public List<ReporteEventos> GetReporte(string db,int config)
+        public List<ReporteEventos> GetReporte(string db, int config)
         {
             SqlCnx con = new SqlCnx();
-            
+            string conexion = db == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
 
-            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
                 var query = $@"
@@ -355,8 +357,8 @@ FROM #tt_edi_nuevo
 
                  ";
 
-                List<ReporteEventos> reporteEventos = connection.Query<ReporteEventos>(query,commandTimeout: 3600).ToList();
-                var conec = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db));
+                List<ReporteEventos> reporteEventos = connection.Query<ReporteEventos>(query, commandTimeout: 3600).ToList();
+                var conec = new SqlConnection(conexion);
 
 
                 DataTable dt = new DataTable();
@@ -371,10 +373,12 @@ FROM #tt_edi_nuevo
             }
         }
 
-        public List<GetEstadisticas> GetReportEstadistica(string db) {
+        public List<GetEstadisticas> GetReportEstadistica(string db)
+        {
             SqlCnx con = new SqlCnx();
+            string conexion = db == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString_Lis;
 
-            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
                 var query = $@"
@@ -586,7 +590,7 @@ FROM #tt_edi_nuevo
                  ";
 
                 List<GetEstadisticas> ReporteEstadistica = connection.Query<GetEstadisticas>(query, commandTimeout: 3600).ToList();
-                var conec = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db));
+                var conec = new SqlConnection(conexion);
 
 
                 DataTable dt = new DataTable();

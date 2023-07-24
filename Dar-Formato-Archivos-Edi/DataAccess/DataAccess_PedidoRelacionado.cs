@@ -12,10 +12,11 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado
 {
     public class DataAccess_PedidoRelacionado
     {
-        public PedidoRelacionado GetPedidoRelacionado(int ClienteEdiPedidoId) 
+        public PedidoRelacionado GetPedidoRelacionado(int ClienteEdiPedidoId, string sqldb) 
         { 
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = sqldb == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 
@@ -65,7 +66,8 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado
         public PedidoRelacionado GetDesp_pedido_viaje(int ClienteEdiPedidoId, string db)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            string conexion = db == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 

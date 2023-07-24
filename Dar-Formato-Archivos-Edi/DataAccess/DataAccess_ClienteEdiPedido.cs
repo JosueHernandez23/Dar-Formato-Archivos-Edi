@@ -17,10 +17,12 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 {
     public class DataAccess_ClienteEdiPedido
     {
-        public ClienteEdiPedido GetClienteEdiPedido(int ClienteEdiPedidoId) 
+        public ClienteEdiPedido GetClienteEdiPedido(int ClienteEdiPedidoId, string empresa) 
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = empresa == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 
@@ -32,60 +34,16 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 		                    cep.CodeSCAC SCAC,
 		                    cep.Shipment Shipment,
 		                    cep.FechaIngreso FechaIngreso,
-                            LOWER(cec.SQL_DB) SQL_DB
+                            '{conexion}' SQL_DB
                     from	ClienteEdiPedido cep With(NoLock)
 	                        INNER JOIN ClienteEdiEstatus cee With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
 		                    INNER JOIN ClienteEdiConfiguracion cec With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
                     where	cep.ClienteEdiPedidoId = {ClienteEdiPedidoId} and cep.ClienteEdiEstatusId in (2,3,4,5,7)
                 ";
 
-                //string query = @"
-                //                DECLARE     @return varchar(10) = ''
-                //                      ,@ClienteEdiPedidoId int
-                //                      ,@EstatusId int
-                //                      ,@Estatus varchar(80) = ''
-                //                      ,@SCAC varchar(4) = ''
-                //                      ,@Shipment varchar(10) = ''
-                //                      ,@FechaIngreso datetime
-                //                      ,@SQL_DB varchar (10) = ''
-
-
-                //                    IF(@return = '')
-                //                    BEGIN
-
-
-                //                     select	TOP 1
-                //                       @ClienteEdiPedidoId = cep.ClienteEdiPedidoId,
-                //                       @EstatusId = cep.ClienteEdiEstatusId,
-                //                       @Estatus = cee.NombreClienteEdiEstatus,
-                //                       @SCAC = cep.CodeSCAC,
-                //                       @Shipment = cep.Shipment,
-                //                       @FechaIngreso = cep.FechaIngreso,
-                //                       @SQL_DB = LOWER(cec.SQL_DB)
-                //                     from	ClienteEdiPedido cep						With(NoLock)
-                //                       INNER JOIN ClienteEdiEstatus cee			With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
-                //                       INNER JOIN ClienteEdiConfiguracion cec		With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
-                //                     where	cep.ClienteEdiPedidoId = 0 or cep.Shipment = CONVERT(varchar ,856124922)  and cep.ClienteEdiEstatusId not in (2,6) and cep.ClienteEdiEstatusId in (3,4,5,7)
-
-                //                      IF(@ClienteEdiPedidoId > 0)
-                //                      BEGIN
-                //                       SET @return = @ClienteEdiPedidoId;
-                //                      END
-
-                //                      Select	@return as ClienteEdiPedidoId 
-                //                        ,@EstatusId as EstatusId
-                //                        ,@Estatus as Estatus
-                //                        ,@SCAC as SCAC
-                //                        ,@Shipment as Shipment
-                //                        ,@FechaIngreso as FechaIngreso
-                //                        ,@SQL_DB as SQL_DB
-                //                    END
-                //                ";
-
                 ClienteEdiPedido EdiPedidoId = connection.QuerySingle<ClienteEdiPedido>(query);
 
                 ClienteEdiPedidoId = EdiPedidoId.ClienteEdiPedidoId;
-
 
                 connection.Close();
 
@@ -93,10 +51,11 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             }
         }
 
-        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMobil(int no_viaje, int ClienteEdiPedidoId)
+        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMobil(int no_viaje, int ClienteEdiPedidoId, string sqldb)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = sqldb == "hgdb_lis" ? con.connectionString_Hg_Cloud : con.connectionString_Lis.Replace("@DB@", sqldb);
+            using (var connection = new SqlConnection(conexion))
             {
               
                 connection.Open();
@@ -112,10 +71,10 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 										dpum.ClienteEdiPedidoId,pp.id_personal,					pp.tipo_empleado, 
 										CASE WHEN ( nombapm IS NOT NULL ) AND ( appat IS NOT NULL ) AND ( apmat IS NOT NULL ) THEN nombapm + ' ' + appat + ' ' + apmat ELSE nombre END AS nombre 
 							from 
-										[hgdb_lis].[dbo].desp_posicion_unidad_mensaje dpum		With( Nolock ) , 
-										[hgdb_lis].[dbo].personal_personal pp					With( Nolock ),
-										[hgdb_lis].[dbo].trafico_viaje tv						With( Nolock ),
-										[hgdb_lis].[dbo].mtto_unidades mu						With( Nolock )
+										desp_posicion_unidad_mensaje dpum		With( Nolock ) , 
+										personal_personal pp					With( Nolock ),
+										trafico_viaje tv						With( Nolock ),
+										mtto_unidades mu						With( Nolock )
 							Where 
 										tv.no_viaje = dpum.no_viaje and
 										dpum.mctnumber = mu.mctnumber And
@@ -132,10 +91,10 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 										dpum.ClienteEdiPedidoId,pp.id_personal,					pp.tipo_empleado, 
 										CASE WHEN ( nombapm IS NOT NULL ) AND ( appat IS NOT NULL ) AND ( apmat IS NOT NULL ) THEN nombapm + ' ' + appat + ' ' + apmat ELSE nombre END AS nombre 
 							from 
-										[hgdb_lis].[dbo].desp_posicion_unidad_mensaje dpum		With( Nolock ) , 
-										[hgdb_lis].[dbo].personal_personal pp					With( Nolock ),
-										[hgdb_lis].[dbo].trafico_viaje tv						With( Nolock ),
-										[hgdb_lis].[dbo].mtto_unidades mu						With( Nolock )
+										desp_posicion_unidad_mensaje dpum		With( Nolock ) , 
+										personal_personal pp					With( Nolock ),
+										trafico_viaje tv						With( Nolock ),
+										mtto_unidades mu						With( Nolock )
 							Where 
 										tv.no_viaje = dpum.no_viaje and
 										dpum.mctnumber = mu.mctnumber And
@@ -153,10 +112,11 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             }
         }
 
-        public List<ClienteEdiNotificaEvento> GetClienteEdiNotificaEvento(int ClienteEdiPedidoId)
+        public List<ClienteEdiNotificaEvento> GetClienteEdiNotificaEvento(int ClienteEdiPedidoId, string empresa)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = empresa == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
                 string query = $@"
@@ -182,10 +142,11 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             }
         }
 
-        public List<ClienteEdiPedidoEstatusSeguimiento> GetClienteEdiPedidoEstatusSeguimiento(int ClienteEdiPedidoId) 
+        public List<ClienteEdiPedidoEstatusSeguimiento> GetClienteEdiPedidoEstatusSeguimiento(int ClienteEdiPedidoId, string empresa) 
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = empresa == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
                 string query = $@"
@@ -207,10 +168,11 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             }
         }
 
-        public List<ClienteEdiPedidoDireccion> GetClienteEdiPedidoDireccion(int ClienteEdiPedidoId)
+        public List<ClienteEdiPedidoDireccion> GetClienteEdiPedidoDireccion(int ClienteEdiPedidoId, string empresa)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = empresa == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
                 string query = $@"
@@ -244,7 +206,9 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
         public List<posicion_unidad>  GetPosicion_Unidad(int no_viaje, string db)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString_Lis.Replace("@DB@", db)))
+            string conexion = db == "hgdb_lis" ? con.connectionString_Hg_Cloud : con.connectionString_Lis.Replace("@DB@", db);
+
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 
@@ -270,7 +234,8 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
         public List<ConfiguracionCliente> GetClienteEdiConfiguracion(string db)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = db == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 
@@ -289,10 +254,11 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 
         }
 
-        public static List<Edi824> getEdi824(int ClienteEdiPedidoId)
+        public static List<Edi824> getEdi824(int ClienteEdiPedidoId, string empresa)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = empresa == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 
@@ -321,10 +287,12 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             }
         }
 
-        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(int Shipment)
+        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(int Shipment, string empresa)
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            string conexion = empresa == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+
+            using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
 
@@ -336,7 +304,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 		                    cep.CodeSCAC SCAC,
 		                    cep.Shipment Shipment,
 		                    cep.FechaIngreso FechaIngreso,
-                            LOWER(cec.SQL_DB) SQL_DB
+                            '{empresa}' SQL_DB
                     from	ClienteEdiPedido cep With(NoLock)
 	                        INNER JOIN ClienteEdiEstatus cee With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
 		                    INNER JOIN ClienteEdiConfiguracion cec With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId

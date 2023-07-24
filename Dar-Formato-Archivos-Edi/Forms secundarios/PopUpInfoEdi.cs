@@ -16,13 +16,16 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
     public partial class PopUpInfoEdi : Form
     {
         public string TipoEdi = "";
+        public string empresa = "";
         public int ClienteEdiPedidoId;
-        public PopUpInfoEdi(int clienteEdiPedidoId, string tipoEdi)
+
+        public PopUpInfoEdi(int clienteEdiPedidoId, string tipoEdi, string empresa)
         {
             InitializeComponent();
         
             this.ClienteEdiPedidoId = clienteEdiPedidoId;
             this.TipoEdi = tipoEdi;
+            this.empresa = empresa;
 
             obtenerInformacionEdi();
         }
@@ -65,7 +68,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         public List<Edi824> getEdi824(int ClienteEdiPedidoId)
         {
-            return DataAccess_ClienteEdiPedido.getEdi824(ClienteEdiPedidoId);
+            return DataAccess_ClienteEdiPedido.getEdi824(ClienteEdiPedidoId, empresa);
         }
     }
 }

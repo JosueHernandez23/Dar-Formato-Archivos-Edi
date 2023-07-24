@@ -37,6 +37,17 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             {
                 lbls.MouseHover += HoverEnter;
             });
+
+            // Cargar combobox Empresa
+            Dictionary<string, string> empresas = new Dictionary<string, string>();
+            empresas.Add("hgdb_lis", "HG");
+            empresas.Add("chdb_lis", "CH");
+            empresas.Add("rldb_lis", "RL");
+            empresas.Add("lindadb", "LINDA");
+
+            cboEmpresa.DataSource = new BindingSource(empresas, null); ;
+            cboEmpresa.ValueMember = "Key";
+            cboEmpresa.DisplayMember = "Value";
         }
 
         public static void HoverEnter(object sender, EventArgs e)
@@ -54,6 +65,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 //int ClienteEdiPedidoId = Convert.ToInt32(txtClienteEdiPedidoId.Text);
                 int ClienteEdiPedidoId;
                 var isNumber = int.TryParse(txtClienteEdiPedidoId.Text, out ClienteEdiPedidoId);
+                string empresa = cboEmpresa.SelectedValue.ToString();
 
                 if (!isNumber)
                 {
@@ -65,7 +77,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 if (rbtnShipment.Checked)
                 {
                     // Obtener ClienteEdiPedidoId a traves del shipment
-                    var List_ClienteEdiPedido = GetClienteEdiPedidoShipment(ClienteEdiPedidoId);
+                    var List_ClienteEdiPedido = GetClienteEdiPedidoShipment(ClienteEdiPedidoId, empresa);
                     
                     if (!List_ClienteEdiPedido.Any())
                     {
@@ -89,19 +101,19 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 }
 
                 //int Viaje = Convert.ToInt32(txtViaje);
-                ClienteEdiPedido cep = SetClienteEdiEstatus(ClienteEdiPedidoId);
+                ClienteEdiPedido cep = SetClienteEdiEstatus(ClienteEdiPedidoId, empresa);
 
                 // Llenar textbox con Informacion de la relacion
                 SetInformacionRelacion(ClienteEdiPedidoId, cep.SQL_DB);
 
                 // Llenar DataGrid con informacion ClienteEdiPedidoDireccion
-                SetClienteEdiPedidoDireccion(ClienteEdiPedidoId);
+                SetClienteEdiPedidoDireccion(ClienteEdiPedidoId, empresa);
 
                 // Llenar DataGrid con informacion ClienteEdiNotificaEvento
-                SetClienteEdiNotificaEvento(ClienteEdiPedidoId);
+                SetClienteEdiNotificaEvento(ClienteEdiPedidoId, empresa);
 
                 // Llenar DataGrid con informacion ClienteEdiNotificaEvento
-                SetClienteEdiEstatusSeguimiento(ClienteEdiPedidoId);
+                SetClienteEdiEstatusSeguimiento(ClienteEdiPedidoId, empresa);
 
                 //Marcar textbox en rojo para la informacion pendiente
                 MarcarInformacionInvalida();
@@ -113,11 +125,11 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         }
 
         #region Set_Informacion
-        public ClienteEdiPedido SetClienteEdiEstatus(int ClienteEdiPedidoId)
+        public ClienteEdiPedido SetClienteEdiEstatus(int ClienteEdiPedidoId, string empresa)
         {
 
             // Obtener Estatus Edi
-            ClienteEdiPedido clienteEdiPedido = GetClienteEdiPedido(ClienteEdiPedidoId);
+            ClienteEdiPedido clienteEdiPedido = GetClienteEdiPedido(ClienteEdiPedidoId, empresa);
 
             txtEstatus.Text = clienteEdiPedido.EstatusId.ToString() + " - " + clienteEdiPedido.Estatus;
             txtSCAC.Text = clienteEdiPedido.SCAC;
@@ -138,7 +150,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
             else
             {
-                pedidoRelacionado = GetPedidoRelacionado(ClienteEdiPedidoId);
+                pedidoRelacionado = GetPedidoRelacionado(ClienteEdiPedidoId, sqldb);
             }
 
             if (pedidoRelacionado != null)
@@ -163,7 +175,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
 
                 // Llenar DataGrid con informacion ClienteEdiNotificaEvento
-                SetClienteEdiNotificaEventoAppMobil(Convert.ToInt32(txtViaje.Text),(Convert.ToInt32(txtClienteEdiPedidoId.Text)));
+                SetClienteEdiNotificaEventoAppMobil(Convert.ToInt32(txtViaje.Text),Convert.ToInt32(txtClienteEdiPedidoId.Text), sqldb);
 
                 // Obtener informacion del cliente y la geocerca
                 List<ClienteLis> lista_cliente = new List<ClienteLis>() {
@@ -270,9 +282,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void SetClienteEdiPedidoDireccion(int ClienteEdiPedidoId)
+        public void SetClienteEdiPedidoDireccion(int ClienteEdiPedidoId, string empresa)
         {
-            List<ClienteEdiPedidoDireccion> list_PedidoDireccion = GetClienteEdiPedidoDireccion(ClienteEdiPedidoId);
+            List<ClienteEdiPedidoDireccion> list_PedidoDireccion = GetClienteEdiPedidoDireccion(ClienteEdiPedidoId, empresa);
 
             if (list_PedidoDireccion.Count > 0)
             {
@@ -314,9 +326,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void SetClienteEdiNotificaEvento(int ClienteEdiPedidoId) // Se reportan los eventos en la tabla principal
+        public void SetClienteEdiNotificaEvento(int ClienteEdiPedidoId, string empresa) // Se reportan los eventos en la tabla principal
         {
-            List<ClienteEdiNotificaEvento> listado_NotificaEvento = GetClienteEdiNotificaEvento(ClienteEdiPedidoId);
+            List<ClienteEdiNotificaEvento> listado_NotificaEvento = GetClienteEdiNotificaEvento(ClienteEdiPedidoId, empresa);
 
             // Obtener informacion ClienteEdiNotificaEvento
             if (listado_NotificaEvento.Count > 0)
@@ -347,9 +359,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         }
 
 
-        public void SetClienteEdiNotificaEventoAppMobil(int no_viaje, int ClienteEdiPedidoId)
+        public void SetClienteEdiNotificaEventoAppMobil(int no_viaje, int ClienteEdiPedidoId, string sqldb)
         {
-            List<ClienteEdiNotificaEventoApp> listado_NotificaEventoApp = GetClienteEdiNotificaEventoAppMob(no_viaje, ClienteEdiPedidoId);
+            List<ClienteEdiNotificaEventoApp> listado_NotificaEventoApp = GetClienteEdiNotificaEventoAppMob(no_viaje, ClienteEdiPedidoId, sqldb);
 
             // Obtener informacion ClienteEdiNotificaEvento
             if (listado_NotificaEventoApp.Count >= 0)
@@ -394,9 +406,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void SetClienteEdiEstatusSeguimiento(int ClienteEdiPedidoId)
+        public void SetClienteEdiEstatusSeguimiento(int ClienteEdiPedidoId, string empresa)
         {
-            List<ClienteEdiPedidoEstatusSeguimiento> list_EstatusSeguimiento = GetClienteEdiPedidoEstatusSeguimiento(ClienteEdiPedidoId);
+            List<ClienteEdiPedidoEstatusSeguimiento> list_EstatusSeguimiento = GetClienteEdiPedidoEstatusSeguimiento(ClienteEdiPedidoId, empresa);
 
             if (list_EstatusSeguimiento.Count > 0)
             {
@@ -434,24 +446,24 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         #region Get_Informacion
 
-        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(int Shipment)
+        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(int Shipment, string empresa)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
-            return dataAccess_ClienteEdiPedido.GetClienteEdiPedidoShipment(Shipment);
+            return dataAccess_ClienteEdiPedido.GetClienteEdiPedidoShipment(Shipment, empresa);
         }
-        public ClienteEdiPedido GetClienteEdiPedido(int ClienteEdiPedidoId)
+        public ClienteEdiPedido GetClienteEdiPedido(int ClienteEdiPedidoId, string empresa)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
-            return dataAccess_ClienteEdiPedido.GetClienteEdiPedido(ClienteEdiPedidoId);
+            return dataAccess_ClienteEdiPedido.GetClienteEdiPedido(ClienteEdiPedidoId, empresa);
         }
 
-        public PedidoRelacionado GetPedidoRelacionado(int ClienteEdiPedidoId)
+        public PedidoRelacionado GetPedidoRelacionado(int ClienteEdiPedidoId, string sqldb)
         {
             DataAccess_PedidoRelacionado dataAccess_PedidoRelacionado = new DataAccess_PedidoRelacionado();
 
-            return dataAccess_PedidoRelacionado.GetPedidoRelacionado(ClienteEdiPedidoId);
+            return dataAccess_PedidoRelacionado.GetPedidoRelacionado(ClienteEdiPedidoId, sqldb);
         }
 
         public PedidoRelacionado GetDesp_pedido_edi(int ClienteEdiPedidoId, string db)
@@ -475,18 +487,18 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return dataAccess_ClienteLis.GetClienteLis(lista_cliente, db);
         }
 
-        public List<ClienteEdiNotificaEvento> GetClienteEdiNotificaEvento(int ClienteEdiPedidoId)
+        public List<ClienteEdiNotificaEvento> GetClienteEdiNotificaEvento(int ClienteEdiPedidoId, string empresa)
         {
             DataAccess_ClienteEdiPedido clienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
-            return clienteEdiPedido.GetClienteEdiNotificaEvento(ClienteEdiPedidoId);
+            return clienteEdiPedido.GetClienteEdiNotificaEvento(ClienteEdiPedidoId, empresa);
         }
 
-        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMob(int no_viaje,int ClienteEdiPedidoId)
+        public List<ClienteEdiNotificaEventoApp> GetClienteEdiNotificaEventoAppMob(int no_viaje,int ClienteEdiPedidoId, string sqldb)
         {
             DataAccess_ClienteEdiPedido clienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
-            return clienteEdiPedido.GetClienteEdiNotificaEventoAppMobil(no_viaje, ClienteEdiPedidoId);
+            return clienteEdiPedido.GetClienteEdiNotificaEventoAppMobil(no_viaje, ClienteEdiPedidoId, sqldb);
         }
 
 
@@ -504,18 +516,18 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return dataAccess_ClienteEdiPedido.GetPosicion_Unidad(no_viaje, db);
         }
 
-        public List<ClienteEdiPedidoEstatusSeguimiento> GetClienteEdiPedidoEstatusSeguimiento(int ClienteEdiPedidoId)
+        public List<ClienteEdiPedidoEstatusSeguimiento> GetClienteEdiPedidoEstatusSeguimiento(int ClienteEdiPedidoId, string empresa)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
-            return dataAccess_ClienteEdiPedido.GetClienteEdiPedidoEstatusSeguimiento(ClienteEdiPedidoId);
+            return dataAccess_ClienteEdiPedido.GetClienteEdiPedidoEstatusSeguimiento(ClienteEdiPedidoId, empresa);
         }
 
-        public List<ClienteEdiPedidoDireccion> GetClienteEdiPedidoDireccion(int ClienteEdiPedidoId)
+        public List<ClienteEdiPedidoDireccion> GetClienteEdiPedidoDireccion(int ClienteEdiPedidoId, string empresa)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
-            return dataAccess_ClienteEdiPedido.GetClienteEdiPedidoDireccion(ClienteEdiPedidoId);
+            return dataAccess_ClienteEdiPedido.GetClienteEdiPedidoDireccion(ClienteEdiPedidoId, empresa);
         }
 
         public List<ConfiguracionCliente> GetCLientesConfiguracion(string db)
@@ -726,16 +738,11 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        private void dtGrid_EventosReportados_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void lbl824_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtClienteEdiPedidoId.Text))
             {
-                var frm = new PopUpInfoEdi(Convert.ToInt32(txtClienteEdiPedidoId.Text), "824");
+                var frm = new PopUpInfoEdi(Convert.ToInt32(txtClienteEdiPedidoId.Text), "824", cboEmpresa.SelectedValue.ToString());
                 frm.Show();
             }
             else

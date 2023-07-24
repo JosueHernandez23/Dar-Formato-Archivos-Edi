@@ -106,6 +106,8 @@
             this.rbtnArchivoId = new System.Windows.Forms.RadioButton();
             this.rbtnShipment = new System.Windows.Forms.RadioButton();
             this.label21 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cboEmpresa = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kdtGrid_PedidoDireccion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kdgvEventosReportadosAppMobil)).BeginInit();
@@ -121,9 +123,9 @@
             // txtClienteEdiPedidoId
             // 
             this.txtClienteEdiPedidoId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClienteEdiPedidoId.Location = new System.Drawing.Point(96, 21);
+            this.txtClienteEdiPedidoId.Location = new System.Drawing.Point(88, 36);
             this.txtClienteEdiPedidoId.Name = "txtClienteEdiPedidoId";
-            this.txtClienteEdiPedidoId.Size = new System.Drawing.Size(84, 22);
+            this.txtClienteEdiPedidoId.Size = new System.Drawing.Size(92, 22);
             this.txtClienteEdiPedidoId.TabIndex = 1;
             this.txtClienteEdiPedidoId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -134,7 +136,7 @@
             this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(12, 76);
+            this.btnBuscar.Location = new System.Drawing.Point(12, 91);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(168, 24);
             this.btnBuscar.TabIndex = 2;
@@ -902,7 +904,7 @@
             this.rbtnArchivoId.AutoSize = true;
             this.rbtnArchivoId.Checked = true;
             this.rbtnArchivoId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnArchivoId.Location = new System.Drawing.Point(12, 49);
+            this.rbtnArchivoId.Location = new System.Drawing.Point(12, 64);
             this.rbtnArchivoId.Name = "rbtnArchivoId";
             this.rbtnArchivoId.Size = new System.Drawing.Size(81, 20);
             this.rbtnArchivoId.TabIndex = 46;
@@ -914,7 +916,7 @@
             // 
             this.rbtnShipment.AutoSize = true;
             this.rbtnShipment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnShipment.Location = new System.Drawing.Point(99, 49);
+            this.rbtnShipment.Location = new System.Drawing.Point(99, 64);
             this.rbtnShipment.Name = "rbtnShipment";
             this.rbtnShipment.Size = new System.Drawing.Size(81, 20);
             this.rbtnShipment.TabIndex = 47;
@@ -925,11 +927,29 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(9, 24);
+            this.label21.Location = new System.Drawing.Point(9, 39);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(81, 16);
+            this.label21.Size = new System.Drawing.Size(59, 16);
             this.label21.TabIndex = 48;
-            this.label21.Text = "Busqueda:";
+            this.label21.Text = "Buscar:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 16);
+            this.label1.TabIndex = 49;
+            this.label1.Text = "Empresa:";
+            // 
+            // cboEmpresa
+            // 
+            this.cboEmpresa.FormattingEnabled = true;
+            this.cboEmpresa.Location = new System.Drawing.Point(88, 13);
+            this.cboEmpresa.Name = "cboEmpresa";
+            this.cboEmpresa.Size = new System.Drawing.Size(92, 21);
+            this.cboEmpresa.TabIndex = 50;
             // 
             // EdiPedidos
             // 
@@ -938,6 +958,8 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1493, 863);
+            this.Controls.Add(this.cboEmpresa);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.rbtnShipment);
             this.Controls.Add(this.rbtnArchivoId);
@@ -1052,5 +1074,7 @@
         private System.Windows.Forms.RadioButton rbtnArchivoId;
         private System.Windows.Forms.RadioButton rbtnShipment;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cboEmpresa;
     }
 }
