@@ -86,7 +86,6 @@
             this.btnGenerarEdi.TabIndex = 11;
             this.btnGenerarEdi.Text = "Generar EDI";
             this.btnGenerarEdi.UseVisualStyleBackColor = true;
-            this.btnGenerarEdi.Visible = false;
             this.btnGenerarEdi.Click += new System.EventHandler(this.btnGenerarEdi_Click);
             // 
             // btnCorreosEdi
@@ -102,7 +101,6 @@
             this.btnCorreosEdi.TabIndex = 12;
             this.btnCorreosEdi.Text = "Correos EDI";
             this.btnCorreosEdi.UseVisualStyleBackColor = true;
-            this.btnCorreosEdi.Visible = false;
             this.btnCorreosEdi.Click += new System.EventHandler(this.btnCorreosEdi_Click);
             // 
             // btnEdiPedidos
@@ -290,7 +288,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(96, 95);
+            this.label1.Location = new System.Drawing.Point(96, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 15);
             this.label1.TabIndex = 0;
@@ -415,7 +413,6 @@
             this.btnDirectorioSFTP.TabIndex = 16;
             this.btnDirectorioSFTP.Text = "Directorio SFTP";
             this.btnDirectorioSFTP.UseVisualStyleBackColor = true;
-            this.btnDirectorioSFTP.Visible = false;
             this.btnDirectorioSFTP.Click += new System.EventHandler(this.btnDirectorioSFTP_Click);
             // 
             // groupBox2
@@ -449,7 +446,6 @@
             this.btnEventoEdi.TabIndex = 18;
             this.btnEventoEdi.Text = "Eventos EDI";
             this.btnEventoEdi.UseVisualStyleBackColor = true;
-            this.btnEventoEdi.Visible = false;
             this.btnEventoEdi.Click += new System.EventHandler(this.btnEventoEdi_Click);
             // 
             // btnEstadistica
@@ -465,7 +461,6 @@
             this.btnEstadistica.TabIndex = 17;
             this.btnEstadistica.Text = "Estadistica EDI";
             this.btnEstadistica.UseVisualStyleBackColor = true;
-            this.btnEstadistica.Visible = false;
             this.btnEstadistica.Click += new System.EventHandler(this.btnEstadistica_Click);
             // 
             // panel2
@@ -491,7 +486,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(932, 500);
+            this.MinimumSize = new System.Drawing.Size(932, 499);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Formato Edi";

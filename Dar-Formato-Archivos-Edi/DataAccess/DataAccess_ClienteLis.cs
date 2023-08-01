@@ -150,7 +150,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
         public List<ReporteEventos> GetReporte(string db, int config)
         {
             SqlCnx con = new SqlCnx();
-            string conexion = db == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            string conexion = db == "HGDB_LIS" ? con.connectionString_Hg_Cloud : con.connectionString;
 
             using (var connection = new SqlConnection(conexion))
             {
