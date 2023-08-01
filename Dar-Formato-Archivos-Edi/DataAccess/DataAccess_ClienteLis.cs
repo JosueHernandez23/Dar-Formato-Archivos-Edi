@@ -158,6 +158,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                 var query = $@"
 
                     Declare @li_ClienteEdiConfiguracionId int = " + config + @"
+                    use " + db + @"
 
 
 CREATE TABLE #tt_edi_nuevo(   ClienteEdiPedidoId Integer Null, ClienteId Integer Null, CodeSCAC Varchar(10) Null, Obs Varchar(1000) Null, Origen Varchar(500) Null, 
