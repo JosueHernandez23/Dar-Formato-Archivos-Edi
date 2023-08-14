@@ -38,7 +38,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                     from	ClienteEdiPedido cep With(NoLock)
 	                        INNER JOIN ClienteEdiEstatus cee With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
 		                    INNER JOIN ClienteEdiConfiguracion cec With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
-                    where	cep.ClienteEdiPedidoId = {ClienteEdiPedidoId} and cep.ClienteEdiEstatusId in (2,3,4,5,7)
+                    where	cep.ClienteEdiPedidoId = {ClienteEdiPedidoId} and cep.ClienteEdiEstatusId in (2,3,4,5,7, 12)
                 ";
 
                 ClienteEdiPedido EdiPedidoId = connection.QuerySingle<ClienteEdiPedido>(query);
@@ -308,7 +308,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                     from	ClienteEdiPedido cep With(NoLock)
 	                        INNER JOIN ClienteEdiEstatus cee With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
 		                    INNER JOIN ClienteEdiConfiguracion cec With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId
-                    where	cep.Shipment = '{Shipment}' and cep.ClienteEdiEstatusId in (2,3,4,7)
+                    where	cep.Shipment = '{Shipment}' and cep.ClienteEdiEstatusId in (2,3,4,7,12)
                 ";
 
                 List<ClienteEdiPedido> ClienteEdiPedido = connection.Query<ClienteEdiPedido>(query).ToList();

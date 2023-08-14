@@ -86,6 +86,7 @@
             this.btnGenerarEdi.TabIndex = 11;
             this.btnGenerarEdi.Text = "Generar EDI";
             this.btnGenerarEdi.UseVisualStyleBackColor = true;
+            this.btnGenerarEdi.Visible = false;
             this.btnGenerarEdi.Click += new System.EventHandler(this.btnGenerarEdi_Click);
             // 
             // btnCorreosEdi
@@ -101,6 +102,7 @@
             this.btnCorreosEdi.TabIndex = 12;
             this.btnCorreosEdi.Text = "Correos EDI";
             this.btnCorreosEdi.UseVisualStyleBackColor = true;
+            this.btnCorreosEdi.Visible = false;
             this.btnCorreosEdi.Click += new System.EventHandler(this.btnCorreosEdi_Click);
             // 
             // btnEdiPedidos
@@ -413,6 +415,7 @@
             this.btnDirectorioSFTP.TabIndex = 16;
             this.btnDirectorioSFTP.Text = "Directorio SFTP";
             this.btnDirectorioSFTP.UseVisualStyleBackColor = true;
+            this.btnDirectorioSFTP.Visible = false;
             this.btnDirectorioSFTP.Click += new System.EventHandler(this.btnDirectorioSFTP_Click);
             // 
             // groupBox2
@@ -446,6 +449,7 @@
             this.btnEventoEdi.TabIndex = 18;
             this.btnEventoEdi.Text = "Eventos EDI";
             this.btnEventoEdi.UseVisualStyleBackColor = true;
+            this.btnEventoEdi.Visible = false;
             this.btnEventoEdi.Click += new System.EventHandler(this.btnEventoEdi_Click);
             // 
             // btnEstadistica
@@ -461,6 +465,7 @@
             this.btnEstadistica.TabIndex = 17;
             this.btnEstadistica.Text = "Estadistica EDI";
             this.btnEstadistica.UseVisualStyleBackColor = true;
+            this.btnEstadistica.Visible = false;
             this.btnEstadistica.Click += new System.EventHandler(this.btnEstadistica_Click);
             // 
             // panel2
