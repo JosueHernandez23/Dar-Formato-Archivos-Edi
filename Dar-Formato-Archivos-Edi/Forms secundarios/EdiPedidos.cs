@@ -33,7 +33,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             kdgvEventosReportadosAppMobil.ForeColor = Color.Black;
 
-            new List<Label>() { lbl824, lbl997 }.ForEach(lbls =>
+            new List<Label>() { lbl824, lbl997, lblUnidad }.ForEach(lbls =>
             {
                 lbls.MouseHover += HoverEnter;
             });
@@ -748,6 +748,23 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             else
             {
                 MessageBox.Show("No hay pedido EDI ingresado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void lblUnidad_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUnidad.Text))
+            {
+                MessageBox.Show("Unidad pendiente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (string.IsNullOrEmpty(txtSatelite.Text))
+            {
+                MessageBox.Show("La unidad no cuenta con antena relacionada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                var frm = new PosicionUnidad(cboEmpresa.SelectedValue.ToString(), txtUnidad.Text, Convert.ToDateTime(txtFechaInicioViaje.Text));
+                frm.Show();
             }
         }
     }

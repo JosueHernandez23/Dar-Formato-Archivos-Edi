@@ -589,11 +589,13 @@
             // lblUnidad
             // 
             this.lblUnidad.AutoSize = true;
-            this.lblUnidad.Location = new System.Drawing.Point(190, 33);
+            this.lblUnidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnidad.Location = new System.Drawing.Point(182, 33);
             this.lblUnidad.Name = "lblUnidad";
-            this.lblUnidad.Size = new System.Drawing.Size(61, 17);
+            this.lblUnidad.Size = new System.Drawing.Size(69, 17);
             this.lblUnidad.TabIndex = 12;
             this.lblUnidad.Text = "Unidad: ";
+            this.lblUnidad.Click += new System.EventHandler(this.lblUnidad_Click);
             // 
             // groupBox2
             // 

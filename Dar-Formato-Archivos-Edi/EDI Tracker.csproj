@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Edi Tracker</ProductName>
     <PublisherName>HG DESARROLLO</PublisherName>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -485,6 +485,12 @@
     <Compile Include="Forms secundarios\PopUpInfoEdi.Designer.cs">
       <DependentUpon>PopUpInfoEdi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms secundarios\PosicionUnidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms secundarios\PosicionUnidad.Designer.cs">
+      <DependentUpon>PosicionUnidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms secundarios\ReporteDeEventos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -522,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\PopUpInfoEdi.resx">
       <DependentUpon>PopUpInfoEdi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms secundarios\PosicionUnidad.resx">
+      <DependentUpon>PosicionUnidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\ReporteDeEventos.resx">
       <DependentUpon>ReporteDeEventos.cs</DependentUpon>

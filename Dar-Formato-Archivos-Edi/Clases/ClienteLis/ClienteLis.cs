@@ -29,12 +29,23 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteLis
 
     public class posicion_unidad
     {
-        public string ubicacion { get; set; }
-        public string EventTypeDescription { get; set; } 
         public DateTime posdate { get; set; }
         //public string id_unidad { get; set; }
         public string Sistema_origen { get; set; }
         public DateTime posdate_inserto { get; set; }
+
+        public string IdUnidad { get; set; }
+        public int NoViaje { get; set; }
+        public string Antena { get; set; }
+        public DateTime Fecha { get; set; }
+        public string ubicacion { get; set; }
+        public string Posicion { get; set; }
+        public int EventSubType { get; set; }
+        public string EventTypeDescription { get; set; }
+        public string SiteId { get; set; }
+        public Decimal Latitud { get; set; }
+        public Decimal Longitud { get; set; }
+        public Decimal Velocidad { get; set; }
 
     }
 

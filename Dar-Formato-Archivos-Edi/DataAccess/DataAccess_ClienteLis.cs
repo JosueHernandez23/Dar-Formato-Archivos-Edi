@@ -606,5 +606,143 @@ FROM #tt_edi_nuevo
             }
         }
 
+        public List<posicion_unidad> GetPosicionUnidad(string db, string idUnidad, string origenDatos, DateTime fechaInicio, DateTime fechaFin)
+        {
+            SqlCnx con = new SqlCnx();
+            string conexion = db == "hgdb_lis" ? con.connectionString_Hg_Cloud : con.connectionString_Lis.Replace("@DB@", db);
+            using (var connection = new SqlConnection(conexion))
+            {
+                connection.Open();
+
+                var query = $@"
+                    declare @idUnidad		varchar(50) = '{idUnidad}';
+                    declare @antena			varchar(50) = '';
+                    declare @ls_clave		varchar(5) = '';
+                    declare @ls_empresa_avl varchar(50) = '';
+                    declare @fechaInicio	DateTime = '{fechaInicio.ToString("yyyy-MM-dd HH:mm:ss")}';
+                    declare @fechaFin		DateTime = '{fechaFin.ToString("yyyy-MM-dd HH:mm:ss")}';
+                    declare @origenDatos	varchar(20) = '{origenDatos}';
+
+                    declare @fechaInicioUTC DateTime = Convert( DateTime, Switchoffset(Convert( Datetimeoffset, @fechaInicio ), REPLACE(DATENAME(TZOFFSET, SYSDATETIMEOFFSET()), '-', '+') ));
+                    declare @fechaFinUTC    DateTime = Convert( DateTime, Switchoffset(Convert( Datetimeoffset, @fechaFin ), REPLACE(DATENAME(TZOFFSET, SYSDATETIMEOFFSET()), '-', '+') ));
+
+                    declare @idVehiculo varchar(50) = '';
+
+                    -- Se toma la clave de la empresa para verificar el filtro de la compañia
+                    Select @ls_clave = IsNull( clave, 'HG' ) from general_area With( NoLock ) Where id_area = 1
+
+                    -- Filtro unidades de segun clave de la empresa ( Referencia Select * from IC_ClientDB.dbo.navman_ic_api_owner )
+                    If @ls_clave = 'CH' Set @ls_empresa_avl = '574DEDC3-C052-413D-B37A-A148492E4990' Else Set @ls_empresa_avl = '19C3B1C6-93C2-4945-BF2A-2A96DC4ABC21'
+
+                    Select @antena = mctnumber 
+                    From mtto_unidades With ( nolock )
+                    Where id_unidad = @idUnidad
+
+                    IF ( @origenDatos = 'REPOSITORIO' )
+                    BEGIN
+
+	                    -- NAVMAN
+	                    IF EXISTS( select 1 from IC_ClientDB.dbo.trucks_ic_api_vehicle with ( nolock ) where CONVERT(VARCHAR(50), vehicleId) = @antena )
+	                    BEGIN
+	
+		                    SELECT @idUnidad AS IdUnidad,
+			                       @antena AS Antena,
+			                       Convert( DateTime, Switchoffset(Convert( Datetimeoffset, nial.activitydatetime ), DATENAME(TzOffset, SYSDATETIMEOFFSET()))) AS posdate,
+			                       Case When  IsNull( niag.displayName, '' ) = '' Then 'Transito' Else IsNull( niag.displayName, '' ) End AS ubicacion,
+			                       '( ' + Case When nial.EventSubTypeID In ( 1,  2 ) Then IsNull( niag.displayName, '' ) Else IsNull( nias.DisplayName, '' ) End + ' ) ' + IsNull( nial.[location], '' ) AS Posicion,
+			                       EventSubTypeID AS EventSubType, 
+			                       IsNull( Case When nial.EventSubTypeID = 1 Then 'Geofence Entered' When nial.EventSubTypeID = 2 Then 'Geofence Exit' When nial.EventSubTypeID = 6 And nial.SiteID <> '00000000-0000-0000-0000-000000000000' Then 'Site' Else 'Timed Update' End, '' ) AS EventTypeDescription,
+			                       IsNull( CONVERT(VARCHAR(50), nial.siteID), '00000000-0000-0000-0000-000000000000' ) AS SiteId,
+			                       nial.latitude AS Latitud, 
+			                       nial.longitude AS Longitud,
+			                       nial.Speed AS Velocidad,
+			                       'NAVMAN' AS Sistema_origen
+		                    FROM IC_ClientDB.dbo.navman_ic_api_activitylogreal nial WITH ( NOLOCK )
+			                     INNER JOIN IC_ClientDB.dbo.navman_ic_api_vehicle niav WITH ( NOLOCK ) ON ( niav.VehicleID = nial.VehicleID AND niav.OwnerID = nial.OwnerID )
+			                     LEFT OUTER JOIN IC_ClientDB.dbo.navman_ic_api_geofence niag WITH ( NOLOCK ) ON ( niag.GeofenceID = nial.CustomID AND niag.OwnerID = nial.OwnerID ) 
+			                     LEFT OUTER JOIN IC_ClientDB.dbo.navman_ic_api_site nias WITH ( NOLOCK ) ON ( nias.siteID = nial.siteID AND nias.OwnerID = nial.OwnerID )
+		                    WHERE nial.OwnerID = @ls_empresa_avl
+			                      AND nial.VehicleID = @antena 
+			                      AND nial.activitydatetime >= @fechaInicioUTC 
+			                      AND nial.activitydatetime <= @fechaFinUTC
+			                      AND nial.EventSubTypeID IN ( 1, 2, 6, 7, 8, 58, 41, 77 )
+		                    ORDER BY Convert( DateTime, Switchoffset(Convert( Datetimeoffset, nial.activitydatetime ), DATENAME(TzOffset, SYSDATETIMEOFFSET()))) ASC
+
+	                    END
+
+	                    --IF EXISTS( 
+	                    --	select 1 
+	                    --	from  Gps.dbo.samsaraVehicles sv with( nolock )
+	                    --		  inner join Gps.dbo.samsaraGateways sg with( nolock ) on (sv.serialGateway = sg.serialGateway)
+	                    --	where CONVERT(VARCHAR(50), sg.id) = @antena
+	                    --)
+
+	                    -- SAMSARA
+	                    ELSE 
+	                    BEGIN
+	
+		                    SELECT @idVehiculo = sv.idVehicle 
+		                    FROM  Gps.dbo.samsaraVehicles sv with( nolock )
+			                      inner join Gps.dbo.samsaraGateways sg with( nolock ) on (sv.serialGateway = sg.serialGateway)
+		                    WHERE CONVERT(VARCHAR(50), sg.id) = @antena
+
+		                    SELECT @idUnidad AS IdUnidad
+                                   ,@antena AS Antena
+			                       ,Convert( DateTime, Switchoffset(Convert( Datetimeoffset, sh.timeGps ), DATENAME(TzOffset, SYSDATETIMEOFFSET()))) AS posdate  
+			                       ,Case When IsNull( sh.nameGeo, '' )  = '' Then 'Transito' Else sh.nameGeo End AS ubicacion
+			                       ,'( ' + Case When sh.eventTypeDescription In ( 'Geofence Entered',  'Geofence Exit' ) Then IsNull( sh.nameGeo, '' ) Else IsNull( sh.nameGeo, '' ) End + ' ) ' + IsNull( sh.formattedLocation, '' ) AS Posicion
+			                       ,Case When sh.eventTypeDescription = 'Geofence Entered' Then 1 
+					                    When sh.eventTypeDescription = 'Geofence Exit' Then 2 
+					                    When sh.eventTypeDescription = 'ENGACHE' Then 7 
+					                    When sh.eventTypeDescription = 'DESENGANCHE' Then 8
+					                    Else 6
+				                    End AS EventSubType
+				                    ,IsNull( Case When sh.eventTypeDescription In ( 'Geofence Entered',  'Geofence Exit' ) Then sh.eventTypeDescription Else 'Timed Update' End, '' ) AS EventTypeDescription
+				                    ,CONVERT(VARCHAR(50), sge.id) AS SiteId
+				                    ,sh.latitude AS Latitud
+				                    ,sh.longitude AS Longitud
+				                    ,sh.speedMilesPerHour AS Velocidad
+				                    , 'SAMSARA' AS Sistema_origen
+		                    FROM Gps.dbo.samsaraHistoricalStats sh With( NoLock )
+			                     LEFT OUTER JOIN Gps.dbo.samsaraGeofences sge With ( NoLock ) ON ( sh.idGeofence = sge.idGeofence )
+		                    WHERE sh.idVehicle = @idVehiculo
+			                      AND sh.timeGps > @fechaInicioUTC and sh.timeGps <= @fechaFinUTC
+		                    ORDER BY Convert( DateTime, Switchoffset(Convert( Datetimeoffset, sh.timeGps ), DATENAME(TzOffset, SYSDATETIMEOFFSET()))) ASC
+
+	                    END
+
+                    END
+
+                    ELSE IF ( @origenDatos = 'TRUCKS' )
+                    BEGIN
+
+	                    SELECT id_viaje AS NoViaje
+		                       ,id_unidad AS IdUnidad
+                               ,@antena AS Antena
+		                       ,posdate
+		                       ,ubicacion AS ubicacion
+		                       ,EventTypeDescription AS EventTypeDescription
+		                       ,posicion AS Posicion
+		                       ,poslat AS Latitud
+		                       ,poslon AS Longitud
+		                       ,CONVERT(VARCHAR(50), siteID) AS SiteId
+		                       ,id_pedido AS IdPedido
+		                       ,posdate_inserto
+		                       ,Sistema_origen
+	                    FROM desp_posicion_unidad WITH ( NOLOCK )
+	                    WHERE id_unidad = @idUnidad
+		                      AND posdate >= @fechaInicio
+		                      AND posdate <= @fechaFin
+	                    ORDER BY POSDATE ASC
+
+                    END
+                ";
+
+                var csunidad = connection.Query<posicion_unidad>(query).ToList();
+
+                return csunidad;
+            }
+        }
+
     }
 }
