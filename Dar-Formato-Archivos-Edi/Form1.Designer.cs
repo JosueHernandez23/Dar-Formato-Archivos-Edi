@@ -44,7 +44,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtNombreArchivo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnListadoSegmentos = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSegmento = new System.Windows.Forms.TextBox();
             this.txtElemento = new System.Windows.Forms.TextBox();
@@ -58,6 +57,7 @@
             this.btnEventoEdi = new System.Windows.Forms.Button();
             this.btnEstadistica = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnListadoSegmentos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -296,19 +296,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre archivo: ";
             // 
-            // btnListadoSegmentos
-            // 
-            this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
-            this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnListadoSegmentos.Location = new System.Drawing.Point(33, 86);
-            this.btnListadoSegmentos.Name = "btnListadoSegmentos";
-            this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
-            this.btnListadoSegmentos.TabIndex = 10;
-            this.btnListadoSegmentos.UseVisualStyleBackColor = true;
-            this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -478,6 +465,19 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1018, 412);
             this.panel2.TabIndex = 18;
+            // 
+            // btnListadoSegmentos
+            // 
+            this.btnListadoSegmentos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnListadoSegmentos.BackgroundImage")));
+            this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnListadoSegmentos.Location = new System.Drawing.Point(33, 86);
+            this.btnListadoSegmentos.Name = "btnListadoSegmentos";
+            this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
+            this.btnListadoSegmentos.TabIndex = 10;
+            this.btnListadoSegmentos.UseVisualStyleBackColor = true;
+            this.btnListadoSegmentos.Click += new System.EventHandler(this.btnListadoSegmentos_Click);
             // 
             // Form1
             // 
