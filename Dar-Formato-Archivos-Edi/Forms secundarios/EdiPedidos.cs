@@ -175,7 +175,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
 
                 // Llenar DataGrid con informacion ClienteEdiNotificaEvento
-                SetClienteEdiNotificaEventoAppMobil(Convert.ToInt32(txtViaje.Text),Convert.ToInt32(txtClienteEdiPedidoId.Text), sqldb);
+                SetClienteEdiNotificaEventoAppMobil(Convert.ToInt32(txtViaje.Text), ClienteEdiPedidoId, sqldb);
 
                 // Obtener informacion del cliente y la geocerca
                 List<ClienteLis> lista_cliente = new List<ClienteLis>() {

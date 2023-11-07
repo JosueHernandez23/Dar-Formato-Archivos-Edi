@@ -66,7 +66,8 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado
         public PedidoRelacionado GetDesp_pedido_viaje(int ClienteEdiPedidoId, string db)
         {
             SqlCnx con = new SqlCnx();
-            string conexion = db == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            //string conexion = db == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
+            string conexion = db == "hgdb_lis" ? con.connectionString_Hg_Cloud : con.connectionString_Lis.Replace("@DB@", db);
             using (var connection = new SqlConnection(conexion))
             {
                 connection.Open();
