@@ -732,7 +732,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (RowIndex != -1)
             {
-                nombreArchivo = kdtGrid_EventosReportados.Rows[RowIndex].Cells[3].Value.ToString();
+                nombreArchivo = kdtGrid_EventosReportados.Rows[RowIndex].Cells[4].Value.ToString();
                 TxtFormatoTexto.Text = nombreArchivo;
                 kdtGrid_EventosReportados.Enabled = true;
             }
