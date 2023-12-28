@@ -64,24 +64,27 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 // Llenar textbox con informacion de Estatus Edi
                 //int ClienteEdiPedidoId = Convert.ToInt32(txtClienteEdiPedidoId.Text);
                 int ClienteEdiPedidoId;
-                var isNumber = int.TryParse(txtClienteEdiPedidoId.Text, out ClienteEdiPedidoId);
+                Int64 Shipment;
+                
                 string empresa = cboEmpresa.SelectedValue.ToString();
-
-                if (!isNumber)
-                {
-                    MessageBox.Show("Numero no valido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtClienteEdiPedidoId.Clear();
-                    return;
-                }
 
                 if (rbtnShipment.Checked)
                 {
+                    var isNumber = Int64.TryParse(txtClienteEdiPedidoId.Text, out Shipment);
+
+                    if (!isNumber)
+                    {
+                        MessageBox.Show("Shipment no valido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtClienteEdiPedidoId.Clear();
+                        return;
+                    }
+
                     // Obtener ClienteEdiPedidoId a traves del shipment
-                    var List_ClienteEdiPedido = GetClienteEdiPedidoShipment(ClienteEdiPedidoId, empresa);
+                    var List_ClienteEdiPedido = GetClienteEdiPedidoShipment(Shipment, empresa);
                     
                     if (!List_ClienteEdiPedido.Any())
                     {
-                        MessageBox.Show("No se encontro el shipment: " + ClienteEdiPedidoId.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("No se encontro el shipment: " + Shipment.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -98,6 +101,17 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     }
 
                     ClienteEdiPedidoId = List_ClienteEdiPedido.First().ClienteEdiPedidoId;
+                }
+                else
+                {
+                    var isNumber = int.TryParse(txtClienteEdiPedidoId.Text, out ClienteEdiPedidoId);
+
+                    if (!isNumber)
+                    {
+                        MessageBox.Show("Numero no valido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtClienteEdiPedidoId.Clear();
+                        return;
+                    }
                 }
 
                 //int Viaje = Convert.ToInt32(txtViaje);
@@ -248,9 +262,18 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     txtFechaInicioViaje.Text = cUnidad.fecha_real_viaje.ToString("dd/MM/yyyy HH:mm:ss");
                     txtFechaFinViaje.Text = cUnidad.fecha_real_fin_viaje.ToString("dd/MM/yyyy HH:mm:ss");
                     txtEstatusViaje.Text = cUnidad.status_viaje;
+                }
+                else
+                {
+                    txtUnidad.Text = " Revisar estatus del viaje ";
+                    txtSatelite.Text = " Revisar estatus del viaje ";
+                }
 
-                    //Llenado en DataGridView
+                //Llenado en DataGridView
                     List<posicion_unidad> posicion = GetPosicionUnidad(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
+                
+                if (posicion != null && posicion.Any())
+                {
                     //dgvPosicionUnidad.DataSource = posicion;
                     kryptonDataGridView1.DataSource = posicion.Select(vl => new
                     {
@@ -446,7 +469,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
         #region Get_Informacion
 
-        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(int Shipment, string empresa)
+        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(Int64 Shipment, string empresa)
         {
             DataAccess_ClienteEdiPedido dataAccess_ClienteEdiPedido = new DataAccess_ClienteEdiPedido();
 
@@ -506,7 +529,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
         {
             DataAccess_ClienteLis dataAccess_ClienteLis = new DataAccess_ClienteLis();
 
-            return dataAccess_ClienteLis.GetUnidad(no_viaje, db);
+            return dataAccess_ClienteLis.GetUnidad( no_viaje, db);
         }
 
         public List<posicion_unidad> GetPosicionUnidad(int no_viaje, string db)

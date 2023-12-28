@@ -213,14 +213,14 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
                 connection.Open();
 
                 var query = $@"
-                    select ubicacion,
-		                    EventTypeDescription,
-                            posdate,
-                            Sistema_origen,
-                            posdate_inserto
-                     from	desp_posicion_unidad dpu With(NoLock) 
-                     where	dpu.id_viaje = {no_viaje}
-                            order by dpu.posdate
+                        select ubicacion,
+		                        EventTypeDescription,
+                                posdate,
+                                Sistema_origen,
+                                posdate_inserto
+                        from	desp_posicion_unidad dpu With(NoLock) 
+                        where	dpu.id_viaje = {no_viaje}
+                        order by dpu.posdate
                 ";
 
                 List<posicion_unidad> posicion_Unidads = connection.Query<posicion_unidad>(query).ToList();
@@ -287,7 +287,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
             }
         }
 
-        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(int Shipment, string empresa)
+        public List<ClienteEdiPedido> GetClienteEdiPedidoShipment(Int64 Shipment, string empresa)
         {
             SqlCnx con = new SqlCnx();
             string conexion = empresa == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;

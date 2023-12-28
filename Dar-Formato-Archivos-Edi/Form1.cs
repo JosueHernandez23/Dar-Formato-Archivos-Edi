@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using iTextSharp.text.pdf;
 using Dar_Formato_Archivos_Edi.Forms_secundarios;
 using Newtonsoft.Json;
+using static Dar_Formato_Archivos_Edi.Form1;
 
 namespace Dar_Formato_Archivos_Edi
 {
@@ -234,6 +235,49 @@ namespace Dar_Formato_Archivos_Edi
 
         }
 
+        private void btnGenerarArchivo_Click(object sender, EventArgs e)
+        {
+            string contenido = TxtFormatoTexto.Text;
+
+            if (string.IsNullOrEmpty(contenido.Trim()))
+            {
+                MessageBox.Show("Ingresar contenido de archivo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                string segmento = "";
+                string elemento = "";
+                string contenidoFormato = "";
+
+                if (rbHabilitar.Checked)
+                {
+                    segmento = ObtenerSegmento(contenido);
+                    elemento = ObtenerElemento(contenido);
+
+                    if (segmento == "")
+                        segmento = txtSegmento.Text;
+                    if (elemento == "")
+                        elemento = txtElemento.Text;
+                }
+
+                if (rbDeshabilitar.Checked)
+                {
+                    if (segmento == "")
+                        segmento = ObtenerSegmento(contenido);
+                    if (elemento == "")
+                        elemento = ObtenerElemento(contenido);
+                }
+
+                contenidoFormato = DarFormatoTexto(contenido, segmento, elemento);
+
+                using (SaveFileDialog guardar_archivo = new SaveFileDialog())
+                {
+                    //guardar_archivo.
+                }
+            }
+        }
+
         #endregion
 
         #region Acceso otros forms
@@ -280,6 +324,12 @@ namespace Dar_Formato_Archivos_Edi
         private void btnEstadistica_Click(object sender, EventArgs e)
         {
             var f = new Dashboard();
+            f.Show();
+        }
+
+        private void btnEventoEdi_Click(object sender, EventArgs e)
+        {
+            var f = new EventosEdi();
             f.Show();
         }
 
@@ -513,10 +563,5 @@ namespace Dar_Formato_Archivos_Edi
 
         #endregion
 
-        private void btnEventoEdi_Click(object sender, EventArgs e)
-        {
-            var f = new EventosEdi();
-            f.Show();
-        }
     }
 }

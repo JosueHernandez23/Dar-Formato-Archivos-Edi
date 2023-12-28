@@ -126,19 +126,19 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis
                 connection.Open();
 
                 var query = $@"
-                    select tv.id_unidad,
-		                    mu.mctNumber,
-                            fecha_real_viaje,
-                            fecha_real_fin_viaje,
-                            CASE WHEN status_viaje = 'A' THEN '(' + status_viaje + ') - Pendiente'
-			                     WHEN status_viaje = 'C' THEN '(' + status_viaje + ') - Liquidado'
-			                     WHEN status_viaje = 'R' THEN '(' + status_viaje + ') - Realizado'
-			                     WHEN status_viaje = 'B' THEN '(' + status_viaje + ') - Cancelado'
-			                     WHEN status_viaje = 'T' THEN '(' + status_viaje + ') - Transito'
-		                    ELSE status_viaje END AS status_viaje
-                     from	trafico_viaje tv With(NoLock) 
-		                    INNER JOIN mtto_unidades mu With(NoLock) ON tv.id_unidad = mu.id_unidad
-                     where	tv.no_viaje = {no_viaje}
+                        select tv.id_unidad,
+		                        mu.mctNumber,
+                                fecha_real_viaje,
+                                fecha_real_fin_viaje,
+                                CASE WHEN status_viaje = 'A' THEN '(' + status_viaje + ') - Pendiente'
+			                         WHEN status_viaje = 'C' THEN '(' + status_viaje + ') - Liquidado'
+			                         WHEN status_viaje = 'R' THEN '(' + status_viaje + ') - Realizado'
+			                         WHEN status_viaje = 'B' THEN '(' + status_viaje + ') - Cancelado'
+			                         WHEN status_viaje = 'T' THEN '(' + status_viaje + ') - Transito'
+		                        ELSE status_viaje END AS status_viaje
+                         from	trafico_viaje tv With(NoLock) 
+		                        INNER JOIN mtto_unidades mu With(NoLock) ON tv.id_unidad = mu.id_unidad
+                         where	tv.no_viaje = {no_viaje}
                 ";
 
                 unidad_Viaje csunidad = connection.QuerySingleOrDefault<unidad_Viaje>(query);
@@ -622,6 +622,7 @@ FROM #tt_edi_nuevo
                     declare @fechaInicio	DateTime = '{fechaInicio.ToString("yyyy-MM-dd HH:mm:ss")}';
                     declare @fechaFin		DateTime = '{fechaFin.ToString("yyyy-MM-dd HH:mm:ss")}';
                     declare @origenDatos	varchar(20) = '{origenDatos}';
+                    declare @ls_empresa_gta varchar(50) = '45D69687-829A-4B36-BA0B-1299106337F4';
 
                     declare @fechaInicioUTC DateTime = Convert( DateTime, Switchoffset(Convert( Datetimeoffset, @fechaInicio ), REPLACE(DATENAME(TZOFFSET, SYSDATETIMEOFFSET()), '-', '+') ));
                     declare @fechaFinUTC    DateTime = Convert( DateTime, Switchoffset(Convert( Datetimeoffset, @fechaFin ), REPLACE(DATENAME(TZOFFSET, SYSDATETIMEOFFSET()), '-', '+') ));
@@ -661,7 +662,7 @@ FROM #tt_edi_nuevo
 			                     INNER JOIN IC_ClientDB.dbo.navman_ic_api_vehicle niav WITH ( NOLOCK ) ON ( niav.VehicleID = nial.VehicleID AND niav.OwnerID = nial.OwnerID )
 			                     LEFT OUTER JOIN IC_ClientDB.dbo.navman_ic_api_geofence niag WITH ( NOLOCK ) ON ( niag.GeofenceID = nial.CustomID AND niag.OwnerID = nial.OwnerID ) 
 			                     LEFT OUTER JOIN IC_ClientDB.dbo.navman_ic_api_site nias WITH ( NOLOCK ) ON ( nias.siteID = nial.siteID AND nias.OwnerID = nial.OwnerID )
-		                    WHERE nial.OwnerID = @ls_empresa_avl
+		                    WHERE nial.OwnerID IN ( @ls_empresa_avl, @ls_empresa_gta)
 			                      AND nial.VehicleID = @antena 
 			                      AND nial.activitydatetime >= @fechaInicioUTC 
 			                      AND nial.activitydatetime <= @fechaFinUTC

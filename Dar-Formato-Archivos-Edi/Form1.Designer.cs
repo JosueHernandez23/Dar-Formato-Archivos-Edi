@@ -42,6 +42,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnGenerarArchivo = new System.Windows.Forms.Button();
             this.txtNombreArchivo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnListadoSegmentos = new System.Windows.Forms.Button();
@@ -168,6 +169,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.97279F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.69388F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.01361F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(195, 147);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -253,6 +255,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.btnGenerarArchivo);
             this.groupBox1.Controls.Add(this.txtNombreArchivo);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnListadoSegmentos);
@@ -270,6 +273,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deteccion automatica de caracteres: ";
             // 
+            // btnGenerarArchivo
+            // 
+            this.btnGenerarArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGenerarArchivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerarArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerarArchivo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnGenerarArchivo.Location = new System.Drawing.Point(6, 87);
+            this.btnGenerarArchivo.Name = "btnGenerarArchivo";
+            this.btnGenerarArchivo.Size = new System.Drawing.Size(115, 41);
+            this.btnGenerarArchivo.TabIndex = 16;
+            this.btnGenerarArchivo.Text = "Generar Archivo";
+            this.btnGenerarArchivo.UseVisualStyleBackColor = true;
+            this.btnGenerarArchivo.Click += new System.EventHandler(this.btnGenerarArchivo_Click);
+            // 
             // txtNombreArchivo
             // 
             this.txtNombreArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -277,7 +294,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreArchivo.AutoSize = true;
             this.txtNombreArchivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreArchivo.Location = new System.Drawing.Point(193, 97);
+            this.txtNombreArchivo.Location = new System.Drawing.Point(224, 97);
             this.txtNombreArchivo.Name = "txtNombreArchivo";
             this.txtNombreArchivo.Size = new System.Drawing.Size(14, 15);
             this.txtNombreArchivo.TabIndex = 1;
@@ -290,7 +307,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(96, 94);
+            this.label1.Location = new System.Drawing.Point(127, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 15);
             this.label1.TabIndex = 0;
@@ -302,7 +319,7 @@
             this.btnListadoSegmentos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnListadoSegmentos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnListadoSegmentos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnListadoSegmentos.Location = new System.Drawing.Point(33, 86);
+            this.btnListadoSegmentos.Location = new System.Drawing.Point(748, 16);
             this.btnListadoSegmentos.Name = "btnListadoSegmentos";
             this.btnListadoSegmentos.Size = new System.Drawing.Size(34, 34);
             this.btnListadoSegmentos.TabIndex = 10;
@@ -405,7 +422,6 @@
             // btnDirectorioSFTP
             // 
             this.btnDirectorioSFTP.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDirectorioSFTP.Enabled = false;
             this.btnDirectorioSFTP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDirectorioSFTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDirectorioSFTP.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -415,7 +431,6 @@
             this.btnDirectorioSFTP.TabIndex = 16;
             this.btnDirectorioSFTP.Text = "Directorio SFTP";
             this.btnDirectorioSFTP.UseVisualStyleBackColor = true;
-            this.btnDirectorioSFTP.Visible = false;
             this.btnDirectorioSFTP.Click += new System.EventHandler(this.btnDirectorioSFTP_Click);
             // 
             // groupBox2
@@ -543,6 +558,7 @@
         private System.Windows.Forms.Button btnEstadistica;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnEventoEdi;
+        private System.Windows.Forms.Button btnGenerarArchivo;
     }
 }
 
