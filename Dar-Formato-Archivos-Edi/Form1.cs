@@ -305,7 +305,7 @@ namespace Dar_Formato_Archivos_Edi
 
         private void btnEdiPedidos_Click(object sender, EventArgs e)
         {
-            var f = new EdiPedidos(TxtFormatoTexto);
+            var f = new EdiPedidos(TxtFormatoTexto, txtNombreArchivo, btnTexto);
             f.Show();
         }
 

@@ -16,5 +16,6 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteEdiPedido
         public string Shipment { get; set; }
         public DateTime FechaIngreso { get; set; }
         public string SQL_DB { get; set; }
+        public int Cruce { get; set; }
     }
 }

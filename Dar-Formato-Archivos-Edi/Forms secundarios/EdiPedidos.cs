@@ -14,6 +14,9 @@ using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado;
 using Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteLis;
 using System.Threading;
+using Dar_Formato_Archivos_Edi.PopUp;
+using Dar_Formato_Archivos_Edi.Clases.ClienteEdiArchivo;
+using Dar_Formato_Archivos_Edi.DataAccess;
 
 namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 {
@@ -21,9 +24,14 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
     {
 
         public RichTextBox TxtFormatoTexto;
-        public EdiPedidos(RichTextBox e)
+        public Label lblNombreArchivo;
+        public Button btnTexto;
+
+        public EdiPedidos(RichTextBox e, Label l, Button b)
         {
             this.TxtFormatoTexto = e;
+            this.lblNombreArchivo = l;
+            this.btnTexto = b;
 
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
@@ -90,17 +98,27 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
                     if (List_ClienteEdiPedido.Count > 1)
                     {
-                        string shipmentEdi = string.Empty;
-                        List_ClienteEdiPedido.ForEach(item =>
+                        var f = new EdiShipmentDuplicado(List_ClienteEdiPedido);
+
+                        DialogResult resultado = f.ShowDialog();
+                        if (resultado == DialogResult.OK)
                         {
-                            shipmentEdi += string.Format("\n Shipment: {0} - ArchivoId: {1} ", item.Shipment, item.ClienteEdiPedidoId);
-                        });
-
-                        MessageBox.Show("Se encontro mas de un shipment, ingresar ArchivoId para realizar su busqueda: \n" + shipmentEdi, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                            // Accede a los datos seleccionados en FormularioSecundario
+                            ClienteEdiPedidoId = f.ClienteEdiPedido;
+                            txtClienteEdiPedidoId.Text = ClienteEdiPedidoId.ToString();
+                            rbtnArchivoId.Checked = true;
+                            rbtnShipment.Checked = false;
+                            
+                        }
+                        else
+                        {
+                            return;
+                        }
                     }
-
-                    ClienteEdiPedidoId = List_ClienteEdiPedido.First().ClienteEdiPedidoId;
+                    else
+                    {
+                        ClienteEdiPedidoId = List_ClienteEdiPedido.First().ClienteEdiPedidoId;
+                    }
                 }
                 else
                 {
@@ -269,38 +287,41 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     txtSatelite.Text = " Revisar estatus del viaje ";
                 }
 
-                //Llenado en DataGridView
+                if (pedidoRelacionado.no_viaje > 0)
+                {
+                    //Llenado en DataGridView
                     List<posicion_unidad> posicion = GetPosicionUnidad(Convert.ToInt32(pedidoRelacionado.no_viaje), sqldb);
-                
-                if (posicion != null && posicion.Any())
-                {
-                    //dgvPosicionUnidad.DataSource = posicion;
-                    kryptonDataGridView1.DataSource = posicion.Select(vl => new
+
+                    if (posicion != null && posicion.Any())
                     {
-                        Ubicacion = vl.ubicacion,
-                        Evento = vl.EventTypeDescription,
-                        Posdate = vl.posdate.ToString("dd/MM/yyyy HH:mm:ss"),
-                        Origen = vl.Sistema_origen,
-                        Posdate_Inserto = vl.posdate_inserto.ToString("dd/MM/yyyy HH:mm:ss")
-                    }).ToList();
+                        //dgvPosicionUnidad.DataSource = posicion;
+                        kryptonDataGridView1.DataSource = posicion.Select(vl => new
+                        {
+                            Ubicacion = vl.ubicacion,
+                            Evento = vl.EventTypeDescription,
+                            Posdate = vl.posdate.ToString("dd/MM/yyyy HH:mm:ss"),
+                            Origen = vl.Sistema_origen,
+                            Posdate_Inserto = vl.posdate_inserto.ToString("dd/MM/yyyy HH:mm:ss")
+                        }).ToList();
 
-                    // Organizar el espacio de las celdas y columnas del grid de las posiciones de la unidad con el viaje
+                        // Organizar el espacio de las celdas y columnas del grid de las posiciones de la unidad con el viaje
 
-                    // Sistema_origen
-                    kryptonDataGridView1.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.ColumnHeader);
-                    // posdate_inserto
-                    kryptonDataGridView1.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.ColumnHeader);
-                    //ubicacion
-                    kryptonDataGridView1.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.ColumnHeader);
-                    //EventTypeDescription
-                    kryptonDataGridView1.AutoResizeColumn(1, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
-                    //posdate
-                    kryptonDataGridView1.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
-                }
-                else
-                {
-                    txtUnidad.Text = " Revisar estatus del viaje ";
-                    txtSatelite.Text = " Revisar estatus del viaje ";
+                        // Sistema_origen
+                        kryptonDataGridView1.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                        // posdate_inserto
+                        kryptonDataGridView1.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                        //ubicacion
+                        kryptonDataGridView1.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                        //EventTypeDescription
+                        kryptonDataGridView1.AutoResizeColumn(1, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
+                        //posdate
+                        kryptonDataGridView1.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
+                    }
+                    else
+                    {
+                        txtUnidad.Text = " Revisar estatus del viaje ";
+                        txtSatelite.Text = " Revisar estatus del viaje ";
+                    }
                 }
             }
         }
@@ -560,6 +581,13 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             return dataAccess_ClienteEdiPedido.GetClienteEdiConfiguracion(db);
         }
 
+        public ClienteEdiArchivo GetClienteArchivo(Int64 ClienteEdiPedidoId, string db)
+        {
+            DataAccess_ClienteEdiArchivo dataAccess_ClienteEdiArchivo = new DataAccess_ClienteEdiArchivo();
+
+            return dataAccess_ClienteEdiArchivo.GetClienteArchivo(ClienteEdiPedidoId, db);
+        }
+
         #endregion
 
         public void limpiar()
@@ -620,119 +648,6 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             }
         }
 
-        public void WhiteMode()
-        {
-            // Fondo del form: Blanco
-            this.BackColor = Color.White;
-
-            foreach (Control item in this.Controls)
-            {
-                switch (item.AccessibilityObject.Role)
-                {
-                    case AccessibleRole.Text:
-                        item.ForeColor = Color.Black;
-                        break;
-                    case AccessibleRole.Table:
-                        item.ForeColor = Color.Black;
-                        break;
-
-                    default:
-                        item.ForeColor = Color.Black;
-                        break;
-                }
-            }
-        }
-
-        public void BlackMode()
-        {
-            // Fondo del form: Blanco
-            this.BackColor = Color.Black;
-
-            foreach (Control item in this.Controls)
-            {
-                switch (item.AccessibilityObject.Role)
-                {
-                    case AccessibleRole.Text:
-                        item.ForeColor = Color.Black;
-                        break;
-                    case AccessibleRole.Table:
-                        item.ForeColor = Color.Black;
-                        break;
-
-                    default:
-                        item.ForeColor = Color.White;
-                        break;
-                }
-            }
-        }
-
-        public void CustomMode(Color Back, Color Fore)
-        {
-            // Fondo del form: Blanco
-            this.BackColor = Back;
-
-            foreach (Control item in this.Controls)
-            {
-                switch (item.AccessibilityObject.Role)
-                {
-                    case AccessibleRole.Text:
-                        item.ForeColor = Fore;
-                        break;
-                    case AccessibleRole.Table:
-                        item.ForeColor = Fore;
-                        break;
-
-                    default:
-                        item.ForeColor = Fore;
-                        break;
-                }
-            }
-        }
-
-        public void CustomModeARGB(byte[] BackArgb, byte[] BodyForeArgb, byte[] TitleContentArgb)
-        {
-
-            List<Control> listado_Controles = new List<Control>();
-
-            foreach (Control item in Controls)
-            {
-                if (item.Controls.Count > 0)
-                {
-                    foreach (Control SubItem in item.Controls)
-                    {
-                        listado_Controles.Add(SubItem);
-                    }
-                }
-                else
-                {
-                    listado_Controles.Add(item);
-                }
-            }
-
-            // Fondo del form: Blanco
-            this.BackColor = Color.FromArgb(BackArgb[0], BackArgb[1], BackArgb[2], BackArgb[3]);
-
-            foreach (Control item in listado_Controles)
-            {
-                switch (item.GetType().Name)
-                {
-                    case "TextBox":
-                        item.ForeColor = Color.FromArgb(BodyForeArgb[0], BodyForeArgb[1], BodyForeArgb[2], BodyForeArgb[3]);
-                        break;
-                    case "DataGridView":
-                        item.ForeColor = Color.FromArgb(BodyForeArgb[0], BodyForeArgb[1], BodyForeArgb[2], BodyForeArgb[3]);
-                        break;
-                    case "Label":
-                        item.ForeColor = Color.FromArgb(BodyForeArgb[0], BodyForeArgb[1], BodyForeArgb[2], BodyForeArgb[3]);
-                        break;
-
-                    default:
-                        item.ForeColor = Color.FromArgb(BodyForeArgb[0], BodyForeArgb[1], BodyForeArgb[2], BodyForeArgb[3]);
-                        break;
-                }
-            }
-        }
-
 
         // Evento para reportar los Eventos Reportados
         private void dtGrid_EventosReportados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -757,6 +672,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             {
                 nombreArchivo = kdtGrid_EventosReportados.Rows[RowIndex].Cells[4].Value.ToString();
                 TxtFormatoTexto.Text = nombreArchivo;
+                btnTexto.PerformClick();
                 kdtGrid_EventosReportados.Enabled = true;
             }
         }
@@ -788,6 +704,48 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             {
                 var frm = new PosicionUnidad(cboEmpresa.SelectedValue.ToString(), txtUnidad.Text, Convert.ToDateTime(txtFechaInicioViaje.Text));
                 frm.Show();
+            }
+        }
+
+        private void btnArchivo204_Click(object sender, EventArgs e)
+        {
+            if (rbtnArchivoId.Checked)
+            {
+                // Obtener archivo y contenido 204
+                Int64 ClienteEdiPedidoId;
+                string db = cboEmpresa.SelectedValue.ToString();
+
+                if (string.IsNullOrEmpty(txtClienteEdiPedidoId.Text))
+                {
+                    MessageBox.Show(" El campo ArchivoId es requerido ", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var isNumber = Int64.TryParse(txtClienteEdiPedidoId.Text, out ClienteEdiPedidoId);
+                if (!isNumber)
+                {
+                    MessageBox.Show("ArchivoId no valido", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtClienteEdiPedidoId.Clear();
+                    return;
+                }
+
+                var ediArchivo = GetClienteArchivo(ClienteEdiPedidoId, db);
+
+                if ( ediArchivo != null )
+                {
+                    //Enviar al formulario principal
+                    TxtFormatoTexto.Text = ediArchivo.TextoClienteEdiArchivo;
+                    btnTexto.PerformClick();
+                    lblNombreArchivo.Text = $"{ediArchivo.NomClienteEdiArchivo} + ( {ediArchivo.FechaIngreso.ToString("dd/MM/yyyy HH:mm")} )";
+                }
+                else
+                {
+                    MessageBox.Show(" No se encontro informacion del archivo ", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show(" Debe seleccionar la opcion de: ArchivoId ", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

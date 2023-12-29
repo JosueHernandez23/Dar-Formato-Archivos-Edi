@@ -304,7 +304,8 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 		                    cep.CodeSCAC SCAC,
 		                    cep.Shipment Shipment,
 		                    cep.FechaIngreso FechaIngreso,
-                            '{empresa}' SQL_DB
+                            '{empresa}' SQL_DB,
+                            cep.cruce Cruce
                     from	ClienteEdiPedido cep With(NoLock)
 	                        INNER JOIN ClienteEdiEstatus cee With(NoLock) ON cep.ClienteEdiEstatusId = cee.ClienteEdiEstatusId
 		                    INNER JOIN ClienteEdiConfiguracion cec With(NoLock) ON cep.ClienteEdiConfiguracionId = cec.ClienteEdiConfiguracionId

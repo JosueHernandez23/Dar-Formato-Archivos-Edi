@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Edi Tracker</ProductName>
     <PublisherName>HG DESARROLLO</PublisherName>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>21</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -399,6 +399,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\ClienteEdiArchivo\ClienteEdiArchivo.cs" />
     <Compile Include="Clases\ClienteEdiConfiguracionArchivo\ClienteEdiConfiguracionArchivo.cs" />
     <Compile Include="Clases\ClienteEdiConfiguracionArchivo_Segmentos\ClienteEdiArchivoConfiguracion_Segmentos.cs" />
     <Compile Include="Clases\ClienteEdiConfiguracionEvento\ClienteEdiConfiguracionEvento.cs" />
@@ -417,6 +418,7 @@
     <Compile Include="Clases\PedidoRelacionado\PedidoRelacionado.cs" />
     <Compile Include="Clases\TipoConexion\TipoConexion.cs" />
     <Compile Include="Conexion\SqlCnx.cs" />
+    <Compile Include="DataAccess\DataAccess_ClienteEdiArchivo.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteEdiConfiguracion.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteEdiConfiguracionEvento.cs" />
     <Compile Include="DataAccess\DataAccess_ClienteEdiEvento.cs" />
@@ -497,6 +499,12 @@
     <Compile Include="Forms secundarios\ReporteDeEventos.Designer.cs">
       <DependentUpon>ReporteDeEventos.cs</DependentUpon>
     </Compile>
+    <Compile Include="PopUp\EdiShipmentDuplicado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopUp\EdiShipmentDuplicado.Designer.cs">
+      <DependentUpon>EdiShipmentDuplicado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -534,6 +542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\ReporteDeEventos.resx">
       <DependentUpon>ReporteDeEventos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUp\EdiShipmentDuplicado.resx">
+      <DependentUpon>EdiShipmentDuplicado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
