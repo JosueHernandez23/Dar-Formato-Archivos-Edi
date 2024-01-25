@@ -381,9 +381,10 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 {
                     ClienteEdiNotificaEventoId = s.ClienteEdiNotificaEventoId,
                     Evento = s.EventoId + " - " + s.Evento,
-                    FechaIngreso = s.FechaIngreso.ToString(),
-                    //PedidoDireccionId = s.ClienteEdiPedidoDireccionId,
+                    FechaEvento = s.FechaIngreso.ToString(),
                     Caso = s.caso,
+                    FechaRegistro = s.fechaRegistro.ToString(),
+                    Archivo = s.nombreArchivo,
                     Texto214 = s.Texto214
                 }).ToList();
 
@@ -397,8 +398,10 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 kdtGrid_EventosReportados.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.DisplayedCells);
                 // Caso
                 kdtGrid_EventosReportados.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.DisplayedCells);
+                // FechaRegistro
+                kdtGrid_EventosReportados.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.DisplayedCells);
                 // Texto214
-                kdtGrid_EventosReportados.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                kdtGrid_EventosReportados.AutoResizeColumn(6, DataGridViewAutoSizeColumnMode.ColumnHeader);
             }
         }
 

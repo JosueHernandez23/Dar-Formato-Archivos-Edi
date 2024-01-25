@@ -30,7 +30,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiConfiguracion
         public List<ClienteEdiConfiguracion> ListadoClienteEdiConfiguracionFrom()
         {
             SqlCnx con = new SqlCnx();
-            using (var connection = new SqlConnection(con.connectionString))
+            using (var connection = new SqlConnection(con.connectionString_Edi_Cloud))
             {
                 connection.Open();
                 string query = "Select ClienteEdiConfiguracionId, descripcion + ' - ' + CONVERT(VARCHAR(4), ClienteEdiConfiguracionId) as descripcion, SFTPServerPRD, SFTPUsuarioPRD, SFTPPasswordPRD, SFTPFolderFromPRD as FolderDestino From ClienteEdiConfiguracion";

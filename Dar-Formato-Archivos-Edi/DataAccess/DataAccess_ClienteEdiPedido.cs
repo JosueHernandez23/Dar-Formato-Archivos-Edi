@@ -127,7 +127,9 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_ClienteEdiPedido
 		                    cene.FechaIngreso,
 		                    cene.Texto214,
                             cene.ClienteEdiPedidoDireccionId,
-                            cene.Caso caso
+                            cene.Caso caso,
+                            cene.nombreArchivo,
+                            cene.fechaRegistro
                      from	ClienteEdiNotificaEvento cene With(NoLock)
 		                    INNER JOIN ClienteEdiEvento cee With(Nolock) ON cene.EventoId = cee.ClienteEdiEventoId
                      where	cene.ClienteEdiPedidoId = {ClienteEdiPedidoId}

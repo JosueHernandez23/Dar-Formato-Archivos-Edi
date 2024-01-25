@@ -15,6 +15,9 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteEdiNotificaEvento
         public DateTime FechaIngreso { get; set; }
         public int ClienteEdiPedidoDireccionId { get; set; }
         public string caso { get; set; }
+
+        public DateTime fechaRegistro { get; set; }
+        public string nombreArchivo { get; set; }
     }
 
 
