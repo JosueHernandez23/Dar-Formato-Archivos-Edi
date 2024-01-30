@@ -75,7 +75,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado
                 var query = $@"
                   select	
                             cephg.id_pedido,
-		                    dp.no_viaje,
+		                    ISNULL(dp.no_viaje, 0) AS no_viaje,
 		                    cephg.id_remitente,
 		                    cephg.id_remitente_ext,
 		                    cephg.id_destinatario,

@@ -333,6 +333,12 @@ namespace Dar_Formato_Archivos_Edi
             f.Show();
         }
 
+        private void btnInfoCruce_Click(object sender, EventArgs e)
+        {
+            var f = new InfoCruce();
+            f.Show();
+        }
+
         #endregion
 
         #region Efecto Hover (Buttons)

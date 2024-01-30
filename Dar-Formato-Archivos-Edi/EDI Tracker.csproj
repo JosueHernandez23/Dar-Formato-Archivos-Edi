@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Edi Tracker</ProductName>
     <PublisherName>HG DESARROLLO</PublisherName>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -413,6 +413,8 @@
     <Compile Include="Clases\ClienteEdiTipoArchivo\ClienteEdiTipoArchivo.cs" />
     <Compile Include="Clases\ClienteEdiTipoArchivo\EdiTipoArchivoFormatos.cs" />
     <Compile Include="Clases\ClienteLis\ClienteLis.cs" />
+    <Compile Include="Clases\Cruce\SitExpoRepository.cs" />
+    <Compile Include="Clases\Cruce\ViajesCruce.cs" />
     <Compile Include="Clases\Edi\Edi824.cs" />
     <Compile Include="Clases\Edi\Edi997.cs" />
     <Compile Include="Clases\PedidoRelacionado\PedidoRelacionado.cs" />
@@ -427,6 +429,7 @@
     <Compile Include="DataAccess\DataAccess_Form_ListadoSegmentos.cs" />
     <Compile Include="DataAccess\DataAccess_PedidoRelacionado.cs" />
     <Compile Include="DataAccess\DataAccess_TipoArchivo.cs" />
+    <Compile Include="DataAccess\DataAccess_ViajeCruce.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -474,6 +477,12 @@
     </Compile>
     <Compile Include="Forms secundarios\GenerarEdi.Designer.cs">
       <DependentUpon>GenerarEdi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms secundarios\InfoCruce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms secundarios\InfoCruce.Designer.cs">
+      <DependentUpon>InfoCruce.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms secundarios\Listado Segmentos.cs">
       <SubType>Form</SubType>
@@ -530,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\GenerarEdi.resx">
       <DependentUpon>GenerarEdi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms secundarios\InfoCruce.resx">
+      <DependentUpon>InfoCruce.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms secundarios\Listado Segmentos.resx">
       <DependentUpon>Listado Segmentos.cs</DependentUpon>
