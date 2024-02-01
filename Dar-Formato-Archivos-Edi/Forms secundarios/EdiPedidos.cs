@@ -317,11 +317,11 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                         //posdate
                         kryptonDataGridView1.AutoResizeColumn(2, DataGridViewAutoSizeColumnMode.AllCellsExceptHeader);
                     }
-                    else
-                    {
-                        txtUnidad.Text = " Revisar estatus del viaje ";
-                        txtSatelite.Text = " Revisar estatus del viaje ";
-                    }
+                    //else
+                    //{
+                    //    txtUnidad.Text = " Revisar estatus del viaje ";
+                    //    txtSatelite.Text = " Revisar estatus del viaje ";
+                    //}
                 }
             }
         }
@@ -673,7 +673,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (RowIndex != -1)
             {
-                nombreArchivo = kdtGrid_EventosReportados.Rows[RowIndex].Cells[4].Value.ToString();
+                nombreArchivo = kdtGrid_EventosReportados.Rows[RowIndex].Cells[6].Value.ToString();
                 TxtFormatoTexto.Text = nombreArchivo;
                 btnTexto.PerformClick();
                 kdtGrid_EventosReportados.Enabled = true;
