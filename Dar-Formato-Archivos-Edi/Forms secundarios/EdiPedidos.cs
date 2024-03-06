@@ -385,6 +385,8 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                     Caso = s.caso,
                     FechaRegistro = s.fechaRegistro.ToString(),
                     Archivo = s.nombreArchivo,
+                    Enviado = s.Enviado ? "Si" : "No",
+                    FechaEnvio = s.FechaEnvio.ToString(),
                     Texto214 = s.Texto214
                 }).ToList();
 
@@ -400,8 +402,12 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
                 kdtGrid_EventosReportados.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.DisplayedCells);
                 // FechaRegistro
                 kdtGrid_EventosReportados.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.DisplayedCells);
-                // Texto214
+                // Enviado
                 kdtGrid_EventosReportados.AutoResizeColumn(6, DataGridViewAutoSizeColumnMode.ColumnHeader);
+                // FechaEnvio
+                kdtGrid_EventosReportados.AutoResizeColumn(7, DataGridViewAutoSizeColumnMode.DisplayedCells);
+                // Texto214
+                kdtGrid_EventosReportados.AutoResizeColumn(8, DataGridViewAutoSizeColumnMode.ColumnHeader);
             }
         }
 
@@ -673,7 +679,7 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
 
             if (RowIndex != -1)
             {
-                nombreArchivo = kdtGrid_EventosReportados.Rows[RowIndex].Cells[6].Value.ToString();
+                nombreArchivo = kdtGrid_EventosReportados.Rows[RowIndex].Cells[8].Value.ToString();
                 TxtFormatoTexto.Text = nombreArchivo;
                 btnTexto.PerformClick();
                 kdtGrid_EventosReportados.Enabled = true;

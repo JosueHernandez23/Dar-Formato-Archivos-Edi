@@ -12,8 +12,8 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado
 {
     public class DataAccess_PedidoRelacionado
     {
-        public PedidoRelacionado GetPedidoRelacionado(int ClienteEdiPedidoId, string sqldb) 
-        { 
+        public PedidoRelacionado GetPedidoRelacionado(int ClienteEdiPedidoId, string sqldb)
+        {
             SqlCnx con = new SqlCnx();
             string conexion = sqldb == "hgdb_lis" ? con.connectionString_Edi_Cloud : con.connectionString;
             using (var connection = new SqlConnection(conexion))
@@ -58,6 +58,22 @@ namespace Dar_Formato_Archivos_Edi.DataAccess.DataAccess_PedidoRelacionado
                 ";
 
                 PedidoRelacionado pedidoRelacionado = connection.QuerySingleOrDefault<PedidoRelacionado>(query);
+
+                if (pedidoRelacionado == null)
+                {
+                    query = $@"
+                       select	0 AS id_pedido,
+                                 no_viaje,
+                                 id_remitente,
+                                 0 AS id_remitente_ext,
+                                 id_destinatario,
+                                 0 AS id_destinatario_ext
+                        from	chdb_lis.dbo.trafico_viaje With(NoLock)
+                        where	ClienteEdiPedidoId = {ClienteEdiPedidoId}
+                    ";
+
+                    pedidoRelacionado = connection.QuerySingleOrDefault<PedidoRelacionado>(query);
+                }
 
                 return pedidoRelacionado;
             }

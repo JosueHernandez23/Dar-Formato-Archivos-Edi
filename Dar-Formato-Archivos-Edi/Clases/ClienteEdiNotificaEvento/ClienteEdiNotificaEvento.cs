@@ -18,6 +18,8 @@ namespace Dar_Formato_Archivos_Edi.Clases.ClienteEdiNotificaEvento
 
         public DateTime fechaRegistro { get; set; }
         public string nombreArchivo { get; set; }
+        public bool Enviado { get; set; }
+        public DateTime FechaEnvio { get; set; }
     }
 
 
