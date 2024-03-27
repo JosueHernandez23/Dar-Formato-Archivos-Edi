@@ -38,7 +38,7 @@ namespace Dar_Formato_Archivos_Edi.DataAccess
                       ,[Destino]
                       ,[FechaIngreso]
                       , CASE WHEN ISNULL([EstatusEnvio], 0) = 0 THEN 'Por Enviar' ELSE 'Enviado' END AS EstatusEnvio
-                      ,[TipoServicio]
+                      ,[TipoMovimiento]
                   FROM [dbo].[SitExpoRepository]
                   WHERE FechaIngreso >= '{fechaInicio.Date.ToString("yyyy-MM-dd HH:mm:ss")}'
                         AND FechaIngreso <= '{fechaFin.Date.ToString("yyyy-MM-dd 23:59:59")}'
