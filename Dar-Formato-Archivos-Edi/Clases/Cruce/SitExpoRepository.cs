@@ -23,6 +23,6 @@ namespace Dar_Formato_Archivos_Edi.Clases.Cruce
         public string Destino { get; set; }
         public DateTime? FechaIngreso { get; set; }
         public string EstatusEnvio { get; set; }
-        public string TipoServicio { get; set; }
+        public string TipoMovimiento { get; set; }
     }
 }
