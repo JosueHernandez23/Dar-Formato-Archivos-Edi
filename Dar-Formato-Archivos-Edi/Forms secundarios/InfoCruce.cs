@@ -38,9 +38,9 @@ namespace Dar_Formato_Archivos_Edi.Forms_secundarios
             DateTime fechaInicio = dtFechaInicioRecibido.Value;
             DateTime fechaFino = dtFechaFinRecibido.Value;
 
-            var infoEnviada = GetInformacionRecibida(fechaInicio, fechaFino, "hgdb_lis");
+            var infoRecibida = GetInformacionRecibida(fechaInicio, fechaFino, "hgdb_lis");
 
-            dtgRecibido.DataSource = infoEnviada;
+            dtgRecibido.DataSource = infoRecibida;
         }
 
         public List<SitExpoRepository> GetInformacionEnviada(DateTime fechaInicio, DateTime fechaFin, string db)
